@@ -20,7 +20,7 @@ namespace B18_Ex02
         public Board(int i_BoardSize)
         {
             this.m_BoardSize = i_BoardSize;
-            this.m_BoardArray = new char[i_BoardSize, 8];
+            //this.m_BoardArray = new char[i_BoardSize, 8];
             this.m_Board = new Coin[i_BoardSize, 8];
             buildCleanBoard();
             
