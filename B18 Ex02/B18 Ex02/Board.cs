@@ -9,8 +9,8 @@ namespace B18_Ex02
     class Board
     {
         private int m_BoardSize;
-        private string m_BoardPicture;
-        private char [,] m_BoardArray;
+        //private string m_BoardPicture;
+        //private char [,] m_BoardArray;
         private Coin [,] m_Board;
 
         //static void Main(string[] args)
@@ -130,6 +130,11 @@ h| X |   | X |   | X |   | X |   |
         private void printBorder()
         {
             Console.WriteLine("=================================");
+        }
+
+        public void moveCoin (string i_Movement, char i_CoinType)
+        {
+
         }
         
     }
