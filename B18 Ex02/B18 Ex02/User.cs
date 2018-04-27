@@ -41,14 +41,10 @@ namespace B18_Ex02
                 this.UserName = value;
             }
         }
-<<<<<<< HEAD
 
         public Coins GetCoins()
         {
             return this.coins;
         }
-
-=======
->>>>>>> David
     }
 }
