@@ -10,11 +10,13 @@ namespace B18_Ex02
     {
         private string m_UserName;
         private char m_CoinType;
+        private Coins coins;
 
-        public User (string i_UserName, char i_CoinType)
+        public User(string i_UserName, char i_CoinType)
         {
             this.m_UserName = i_UserName;
             this.m_CoinType = i_CoinType;
+            this.coins = new Coins(i_CoinType, 12); // TODO: need to use actual board size  
         }
         public char CoinType
         {
@@ -27,5 +29,26 @@ namespace B18_Ex02
                 this.m_CoinType = value;
             }
         }
+
+        public string UserName
+        {
+            get
+            {
+                return this.UserName;
+            }
+            set
+            {
+                this.UserName = value;
+            }
+        }
+<<<<<<< HEAD
+
+        public Coins GetCoins()
+        {
+            return this.coins;
+        }
+
+=======
+>>>>>>> David
     }
 }

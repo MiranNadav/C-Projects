@@ -8,13 +8,32 @@ namespace B18_Ex02
 {
     class Validation
     {
+        String currentMove;
 
-        public static bool LegalMovement (string i_Movement)
+        public Validation(String i_CurrentMove)
+        {
+            this.currentMove = i_CurrentMove;
+
+        }
+        
+        //TODO: check with Nadav about this
+        public bool isValidMove()
+        {
+            return LegalMovement();
+        }
+
+        private bool LegalMovement()
         {
             bool isValidMovement = true;
-            if (i_Movement.Length < 5)
+
+            if (currentMove.Length < 5)
             {
                 isValidMovement = false;
+            }
+            
+            else if (false)
+            {
+
             }
 
             return isValidMovement;

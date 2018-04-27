@@ -11,22 +11,64 @@ namespace B18_Ex02
         private int m_BoardSize;
         //private string m_BoardPicture;
         //private char [,] m_BoardArray;
+<<<<<<< HEAD
+        private Coin[,] m_Board;
+        private string m_BoardPicture;
+        User firstUser;
+        User secondtUser;
+=======
         private Coin [,] m_Board;
+        private string m_BoardPicture;
+>>>>>>> David
 
-        //static void Main(string[] args)
-        //{
-        //}
 
-        public Board(int i_BoardSize)
+        public Board(int i_BoardSize, User i_FirstUser, User i_SecondUser)
         {
             this.m_BoardSize = i_BoardSize;
-            //this.m_BoardArray = new char[i_BoardSize, 8];
-            this.m_Board = new Coin[i_BoardSize, 8];
+<<<<<<< HEAD
+            this.firstUser = i_FirstUser;
+            this.secondtUser = i_SecondUser;
+=======
+>>>>>>> David
+            this.m_Board = new Coin[i_BoardSize, i_BoardSize];
+
             buildCleanBoard();
-            
+
         }
 
+        private void buildEmptyBoard()
+        {
+<<<<<<< HEAD
+            Coins firstUserCoins = this.firstUser.GetCoins();
+            Coins secondUserCoins = this.secondtUser.GetCoins();
+            int numOfCoins = firstUserCoins.getNumOfCoins();
+            int currentCoin = numOfCoins;
+
+
+        }
+
+        private void setFirstUserCoins()
+        {
+=======
+>>>>>>> David
+            for (int row = 0; row < this.m_BoardSize; row++)
+            {
+                for (int col = 0; col < this.m_BoardSize; col++)
+                {
+<<<<<<< HEAD
+                    this.m_Board[row, col] = firstUserCoins.GetCoin(numOfCoins - currentCoin);
+                }
+            }
+
+        }
+        private void buildCleanBoard()
+=======
+                    this.m_Board[row,col]
+                }
+            }
+        }
         private void buildCleanBoard ()
+>>>>>>> David
         {
 
             this.m_Board[0, 1] = new Coin('a', 'B', 'O');
@@ -114,9 +156,9 @@ h| X |   | X |   | X |   | X |   |
                 Console.Write((char)(i + 97) + "|");
                 for (int j = 0; j < m_Board.GetLength(1); j++)
                 {
-                    if (m_Board[i,j] != null)
+                    if (m_Board[i, j] != null)
                     {
-                        Console.Write(" " + m_Board[i, j].Type +" |");
+                        Console.Write(" " + m_Board[i, j].Type + " |");
                     }
                     else
                     {
@@ -132,10 +174,20 @@ h| X |   | X |   | X |   | X |   |
             Console.WriteLine("=================================");
         }
 
-        public void moveCoin (string i_Movement, char i_CoinType)
+        public void moveCoin(string i_Movement, char i_CoinType)
         {
 
+        } 
+
+        public bool gameStatus()
+        {
+            return false;
         }
-        
+
+        public bool gameStatus()
+        {
+            return false;
+        }
+
     }
 }
