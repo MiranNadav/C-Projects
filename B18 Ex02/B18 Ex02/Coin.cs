@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
 
 namespace B18_Ex02
 {
@@ -84,6 +86,11 @@ namespace B18_Ex02
             {
                 this.m_isKing = value;
             }
+        }
+
+        public string getCurrentSquare()
+        {
+            return this.currentSquare;
         }
 
         private void parseRowLocation(int i_indexOfRow)
