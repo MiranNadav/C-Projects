@@ -7,3 +7,12 @@ C:\Users\nmiran\Documents\Repositories\C#\B18 Ex02\B18 Ex02\obj\Debug\B18 Ex02.c
 C:\Users\nmiran\Documents\Repositories\C#\B18 Ex02\B18 Ex02\obj\Debug\B18 Ex02.csproj.CopyComplete
 C:\Users\nmiran\Documents\Repositories\C#\B18 Ex02\B18 Ex02\obj\Debug\B18 Ex02.exe
 C:\Users\nmiran\Documents\Repositories\C#\B18 Ex02\B18 Ex02\obj\Debug\B18 Ex02.pdb
+C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex02\B18 Ex02\bin\Debug\B18 Ex02.exe.config
+C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex02\B18 Ex02\bin\Debug\B18 Ex02.exe
+C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex02\B18 Ex02\bin\Debug\B18 Ex02.pdb
+C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex02\B18 Ex02\bin\Debug\Ex02.ConsoleUtils.dll
+C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex02\B18 Ex02\obj\Debug\B18 Ex02.csprojResolveAssemblyReference.cache
+C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex02\B18 Ex02\obj\Debug\B18 Ex02.csproj.CoreCompileInputs.cache
+C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex02\B18 Ex02\obj\Debug\B18 Ex02.csproj.CopyComplete
+C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex02\B18 Ex02\obj\Debug\B18 Ex02.exe
+C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex02\B18 Ex02\obj\Debug\B18 Ex02.pdb

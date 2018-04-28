@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
 
 namespace B18_Ex02
 {
@@ -35,8 +37,6 @@ namespace B18_Ex02
             parseColumnLocation(i_Column);
             this.m_Type = i_Type;
         }
-
-
 
         public char Row
         {
@@ -83,6 +83,18 @@ namespace B18_Ex02
             set
             {
                 this.m_isKing = value;
+            }
+        }
+
+        public string Square
+        {
+            get
+            {
+                return this.currentSquare;
+            }
+            set
+            {
+                this.currentSquare = value;
             }
         }
 
