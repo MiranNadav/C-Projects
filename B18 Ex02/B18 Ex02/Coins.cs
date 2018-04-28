@@ -12,7 +12,11 @@ namespace B18_Ex02
         private Coin[] m_Coins;
         private int m_NumOfCoins = 0;
 
+<<<<<<< HEAD
         public Coins(char i_coinType, int i_NumOfCoins)
+=======
+        public Coins(char i_coinType)
+>>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
         {
             this.m_NumOfCoins = i_NumOfCoins;
             this.m_Coins = new Coin[i_NumOfCoins]; // TODO: Use boardSize
@@ -21,6 +25,7 @@ namespace B18_Ex02
 
         private void createCoinsArray(char i_CoinType)
         {
+<<<<<<< HEAD
             if (i_CoinType.Equals('O'))
             {
                 createCoinsArrayForO(i_CoinType);
@@ -54,6 +59,35 @@ namespace B18_Ex02
                     m_Coins[i] = new Coin(row, column, i_CoinType);
                     column++;
                     row--;
+=======
+            char row;
+            char colm;
+            int currentColumn = 0;
+
+            if (i_CoinType.Equals('O'))
+            {
+                row = 'b';
+                colm = 'A';
+                // TODO: use board size
+                for (int i = 0; i < coins.Length - 1; i++)
+                {
+
+                    if (colm % 2 == 1)
+                    {
+                        coins[i] = new Coin(row, colm, i_CoinType);
+                        colm++;
+                    }
+                    else
+                    {
+                        row--;
+                        coins[i] = new Coin(row, colm, i_CoinType);
+                        row = (char)(row + 2);
+                        i++;
+                        coins[i] = new Coin(row, colm, i_CoinType);
+                        colm++;
+                        row--;
+                    }
+>>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
                 }
             }
         }
@@ -63,7 +97,15 @@ namespace B18_Ex02
             char column = 'H';
             for (int i = m_Coins.Length - 1; i >= 0; i--)
             {
+<<<<<<< HEAD
                 if (column % 2 == 1)
+=======
+                Console.WriteLine("Im here");
+
+                row = 'g';
+                colm = 'A';
+                for (int i = 0; i < coins.Length; i++)
+>>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
                 {
                     row++;
                     m_Coins[i] = new Coin(row, column, i_CoinType);

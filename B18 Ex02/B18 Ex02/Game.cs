@@ -10,52 +10,38 @@ namespace B18_Ex02
 {
     class Game
     {
-        //private User m_FirstUser;
-        //private User m_SecondUser;
-        //private bool m_WinnerFound = false;
-        //private Board m_PlayingBoard;
+        private User m_FirstUser;
+        private User m_SecondUser;
+        private bool m_WinnerFound = false;
+        private Board m_PlayingBoard;
 
         public static void Main(String[] args)
         {
-            playMatch();
-        }
-        private static void playMatch()
-        {
-            string firstUserName;
             string boardSize;
-            int intBoardSize;
             Board PlayingBoard;
+            string firstUserName;
             User firstUser;
             User Computer;
 
             Console.WriteLine("Please enter your name:");
             //TODO: validate the input of the user
             firstUserName = Console.ReadLine();
+            firstUser = new User(firstUserName, 'O');
 
-            /*
-             * Board size
-             */
+
+            for (int i = 0; i < firstUser.GetCoins().getNumOfCoins(); i++)
+            {
+                Console.WriteLine(firstUser.GetCoins().GetCoin(i).getCurrentSquare());
+            }
+
             Console.WriteLine("Please enter a valid board size (6,8,10):");
             boardSize = Console.ReadLine();
-            while (!Validation.ValidateBoardSizeInput(boardSize))
-            {
-                Console.WriteLine("Invalid board size. Please enter one of the following 6/8/10!");
-                boardSize = Console.ReadLine();
-            }
-            intBoardSize = int.Parse(boardSize);
+            //TODO: validate the input of the user (tryParse)
 
-            /*
-             * Create users (computer or second user)
-             */
-            firstUser = new User(firstUserName, 'O', intBoardSize);
             Console.WriteLine("Write 1 if you want to play against another player, 2 if you want to play vs the computer:");
             Console.ReadLine();
-            Computer = new User("Comp", 'X', intBoardSize);
-            
-            /*
-             * create a clean board for match
-             */
-            PlayingBoard = new Board(int.Parse(boardSize));
+            Computer = new User("Comp", 'X');
+            PlayingBoard = new Board(int.Parse(boardSize), firstUser, Computer);
 
             matchManager(PlayingBoard, firstUser, Computer);
 
@@ -63,7 +49,8 @@ namespace B18_Ex02
             Console.WriteLine("Press enter to close terminal");
             Console.ReadLine();
         }
-        private static void matchManager(Board i_PlayingBoard, User i_FirstUser, User i_SecondUser)
+
+        private static void matchManager(Board i_PlayingBoard, User i_FirstUser, User i_secondUser)
         {
             i_PlayingBoard.printBoard();
             Board currentBoard = i_PlayingBoard;
@@ -75,13 +62,11 @@ namespace B18_Ex02
             {
                 if (isFirstUserTurn)
                 {
-                    parseUserInput(currentBoard, i_FirstUser);
-                    isFirstUserTurn = false;
+                    currentBoard = parseUserInput(currentBoard, i_FirstUser);
                 }
                 else
                 {
-                    parseUserInput(currentBoard, i_SecondUser); //TODO: need to add another player
-                    isFirstUserTurn = true;
+                    currentBoard = parseUserInput(currentBoard, i_secondUser); //TODO: need to add another player
                 }
 
                 Ex02.ConsoleUtils.Screen.Clear();
@@ -97,50 +82,40 @@ namespace B18_Ex02
             Console.ReadLine();
         }
 
-        private static void parseUserInput(Board i_Board, User i_CurrentUser)
+        private static Board parseUserInput(Board i_CurrentBoard, User i_FirstUser)
         {
-            bool isValidMove = false;
-            bool moveIsJump = false;
-            char currentUserCoinType = i_CurrentUser.CoinType;
-            Coins currentUserCoins = i_Board.GetUserCoins(currentUserCoinType);
-            Coins otherUserCoins = i_Board.GetOtherUserCoins(currentUserCoinType);
+            bool isValidMove;
             string currentMove;
-            
-            Console.WriteLine(i_CurrentUser.UserName + ", it's your turn. Please enter your move");
+
+            Console.WriteLine(i_FirstUser.UserName + ", it's your turn. Please enter your move");
             currentMove = Console.ReadLine();
-            isValidMove = Validation.LegalMovement(currentMove, i_CurrentUser, i_Board);
-           
+            isValidMove = Validation.LegalMovement(currentMove, i_FirstUser);
+
             while (!(isValidMove))
             {
                 Console.WriteLine("The move you entered is illegal. Please enter a different move.");
                 currentMove = Console.ReadLine();
-                isValidMove = Validation.LegalMovement(currentMove, i_CurrentUser, i_Board);
+                isValidMove = Validation.LegalMovement(currentMove, i_FirstUser);
             }
 
-            i_Board.MoveCoinInBoard(currentMove, i_CurrentUser);
-            moveIsJump = Validation.IsTryingToJump(currentMove, i_CurrentUser.CoinType);
+            //i_CurrentBoard.moveCoin(currentMove, i_FirstUser.CoinType);
 
-            if (moveIsJump)
-            {
-                otherUserCoins.EatCoin(currentMove);
-            }
-            Console.WriteLine(otherUserCoins.ToString());
-
+            return i_CurrentBoard;
         }
 
-        //private User createUsers(string i_UserName, char i_CoinType)
-        //{
-        //    User user;
+        private User createUsers(string i_UserName, char i_CoinType)
+        {
+            User user;
 
-        //    user = new User(i_UserName, i_CoinType);
+            user = new User(i_UserName, i_CoinType);
 
-        //    return user;
-        //}
+            return user;
+        }
 
-        //public Game(string i_FirstUserName)
-        //{
-        //    this.m_FirstUser = new User(i_FirstUserName, 'O');
-        //}
+        public Game(string i_FirstUserName)
+        {
+            this.m_FirstUser = new User(i_FirstUserName, 'O');
+        }
 
         //private void moveCoin(string i_Movement, User i_CurrentUser)
         //{

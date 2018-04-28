@@ -9,12 +9,17 @@ namespace B18_Ex02
 {
     class Validation
     {
+<<<<<<< HEAD
         String i_CurrentMove;
+=======
+        String currentMove;
+>>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
         Board currentBoard;
         User currentUser;
 
         public Validation(String i_CurrentMove, Board i_currentBoard, User i_currentUser)
         {
+<<<<<<< HEAD
             this.i_CurrentMove = i_CurrentMove;
             currentBoard = i_currentBoard;
             currentUser = i_currentUser;
@@ -40,6 +45,14 @@ namespace B18_Ex02
         }
 
         public static bool LegalMovement(String i_CurrentMove, User i_CurrentUser, Board i_Board)
+=======
+            currentMove = i_CurrentMove;
+            currentBoard = i_currentBoard;
+            currentUser = i_currentUser;
+        }
+
+        public static bool LegalMovement(String i_CurrentMove, User i_CurrentUser)
+>>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
         {
             bool isValidMovement = true;
             string sourceSquare = i_CurrentMove.Substring(0, 2);
@@ -49,11 +62,15 @@ namespace B18_Ex02
             Coins secondCoinsArray = i_Board.GetOtherUserCoins(currentUserCoinType);
             bool tryingToJump = IsTryingToJump(i_CurrentMove, i_CurrentUser.CoinType);
 
+<<<<<<< HEAD
             // checks format of input [A-Z][a-z]>[A-Z][a-z]
+=======
+>>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
             if (!inputFormatIsValid(i_CurrentMove))
             {
                 isValidMovement = false;
             }
+<<<<<<< HEAD
             // Check if the user's square to move from has a coin
             else if (currentCoinsArray.GetCoinIndex(sourceSquare) == -1)
             {
@@ -78,7 +95,18 @@ namespace B18_Ex02
             else if (!isDiagonal(i_CurrentMove, i_CurrentUser.CoinType))
             {
                 isValidMovement = false;
+=======
+            //// Check if the user's square to move from has a coin
+            else if (!(i_CurrentUser.squareHasCoin(i_CurrentMove)))
+            {
+                isValidMovement = false;
+>>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
             }
+            //// Check if the move is diagonal
+            //else if (!isDiagonal())
+            //{
+            //    isValidMovement = false;
+            //}
 
 
             return isValidMovement;
@@ -96,6 +124,7 @@ namespace B18_Ex02
             }
 
             return formatIsValid;
+<<<<<<< HEAD
         }
 
         private static bool movementInputInRange(string i_CurrentMove, int i_BoardSize)
@@ -131,10 +160,37 @@ namespace B18_Ex02
             else
             {
                 isDiagonal = ((nextCol == currentCol + 1 || nextCol == currentCol - 1) && nextRow == currentRow - 1);
+=======
+
+        }
+
+        private bool isDiagonal()
+        {
+            char currentCol = currentMove[0];
+            char currentRow = currentMove[1];
+            char nextCol = currentMove[3];
+            char nextRow = currentMove[4];
+            bool isDiagonal = true;
+
+            if (currentUser.CoinType.Equals('O'))
+            {
+                if (currentCol != nextCol + 1 || currentRow != nextRow + 1)
+                {
+                    isDiagonal = false;
+                }
+            }
+            else
+            {
+                if (currentCol != nextCol - 1 || currentRow != nextRow - 1)
+                {
+                    isDiagonal = false;
+                }
+>>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
             }
 
             return isDiagonal;
         }
+<<<<<<< HEAD
 
         private static bool isValidJump(string i_CurrentMove, char i_CoinType, Coins i_CurrentUserCoins, Coins i_OtherUserCoins)
         {
@@ -187,5 +243,7 @@ namespace B18_Ex02
 
             return isJumpByTwoSquares;
         }
+=======
+>>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
     }
 }
