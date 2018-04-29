@@ -10,71 +10,90 @@ namespace B18_Ex02
 {
     class Game
     {
-        private User m_FirstUser;
-        private User m_SecondUser;
+        private Player m_FirstPlayer;
+        private Player m_SecondPlayer;
         private bool m_WinnerFound = false;
         private Board m_PlayingBoard;
 
         public static void Main(String[] args)
         {
+            initializeMatch();
+        }
+
+        public Game(Player i_FirstPlayer, Player i_SecondPlayer)
+        {
+            this.m_FirstPlayer = i_FirstPlayer;
+            this.m_SecondPlayer = i_SecondPlayer;
+        }
+
+
+
+        private static void initializeMatch()
+        {
+
             string boardSize;
             Board PlayingBoard;
             string firstUserName;
-            User firstUser;
-            User Computer;
+            Player firstPlayer;
+            Player Computer;
 
             Console.WriteLine("Please enter your name:");
             //TODO: validate the input of the user
             firstUserName = Console.ReadLine();
-            firstUser = new User(firstUserName, 'O');
-
-
-            for (int i = 0; i < firstUser.GetCoins().getNumOfCoins(); i++)
-            {
-                Console.WriteLine(firstUser.GetCoins().GetCoin(i).getCurrentSquare());
-            }
 
             Console.WriteLine("Please enter a valid board size (6,8,10):");
             boardSize = Console.ReadLine();
-            //TODO: validate the input of the user (tryParse)
+            while (!Validation.ValidateBoardSizeInput(boardSize))
+            {
+                Console.WriteLine("Board size is invalid. Please enter one of the following: 6/8/10");
+                boardSize = Console.ReadLine();
+            }
 
+            //TODO: validate this input
             Console.WriteLine("Write 1 if you want to play against another player, 2 if you want to play vs the computer:");
             Console.ReadLine();
-            Computer = new User("Comp", 'X');
-            PlayingBoard = new Board(int.Parse(boardSize), firstUser, Computer);
+            firstPlayer = new Player(firstUserName, 'O', int.Parse(boardSize));
+            Computer = new Player("Comp", 'X', int.Parse(boardSize));
+            PlayingBoard = new Board(int.Parse(boardSize), firstPlayer.GetCoins(), Computer.GetCoins());
 
-            matchManager(PlayingBoard, firstUser, Computer);
+            matchManager(PlayingBoard, firstPlayer, Computer);
 
             //TODO: remove this 
             Console.WriteLine("Press enter to close terminal");
             Console.ReadLine();
         }
 
-        private static void matchManager(Board i_PlayingBoard, User i_FirstUser, User i_secondUser)
+        private static void matchManager(Board i_PlayingBoard, Player i_FirstPlayer, Player i_SecondPlayer)
         {
             i_PlayingBoard.printBoard();
             Board currentBoard = i_PlayingBoard;
-            bool gameIsOver;
-            gameIsOver = false;
+            int boardSize = i_PlayingBoard.GetBoardSize();
+            bool gameIsOver = false;
             bool isFirstUserTurn = true;
+            Coins firstUserCoins = i_FirstPlayer.GetCoins();
+            Coins secondUserCoins = i_SecondPlayer.GetCoins();
 
             while (!gameIsOver)
             {
                 if (isFirstUserTurn)
                 {
-                    currentBoard = parseUserInput(currentBoard, i_FirstUser);
+                    gameIsOver = parseUserInput(currentBoard, i_FirstPlayer, i_SecondPlayer);
+                    isFirstUserTurn = false;
                 }
                 else
                 {
-                    currentBoard = parseUserInput(currentBoard, i_secondUser); //TODO: need to add another player
+                    gameIsOver = parseUserInput(currentBoard, i_SecondPlayer, i_FirstPlayer);
+                    isFirstUserTurn = true;
                 }
 
+                currentBoard = new Board(boardSize, firstUserCoins, secondUserCoins);
                 Ex02.ConsoleUtils.Screen.Clear();
-                currentBoard.printBoard();
-                gameIsOver = currentBoard.gameStatus();
+                if (!gameIsOver)
+                {
+                    currentBoard.printBoard();
+                }
+                // gameIsOver = currentBoard.gameStatus();
             }
-
-
             //TODO: add end game lines 
             //TODO: remove this 
 
@@ -82,47 +101,89 @@ namespace B18_Ex02
             Console.ReadLine();
         }
 
-        private static Board parseUserInput(Board i_CurrentBoard, User i_FirstUser)
+        private static bool parseUserInput(Board i_CurrentBoard, Player i_CurrentPlayer, Player i_OtherPlayer)
         {
             bool isValidMove;
+            //TODO: should be changed to new move?
             string currentMove;
+            string playerAnswer;
+            PlayerMove parseMove;
+            bool currentMoveIsJump = false;
+            bool gameIsOver = false;
+            bool tryingToQuit = false;
+            char currentUserCoinType = i_CurrentPlayer.CoinType;
+            Coins currentUserCoins = i_CurrentBoard.GetUserCoins(currentUserCoinType);
+            Coins otherUserCoins = i_CurrentBoard.GetOtherUserCoins(currentUserCoinType);
 
-            Console.WriteLine(i_FirstUser.UserName + ", it's your turn. Please enter your move");
+
+            Console.WriteLine(i_CurrentPlayer.Name + ", it's your turn. Please enter your move");
             currentMove = Console.ReadLine();
-            isValidMove = Validation.LegalMovement(currentMove, i_FirstUser);
+            //currentMove = new PlayerMove(currentMove);
+            //isValidMove = Validation.LegalMovement(currentMove, i_CurrentUser, i_CurrentBoard);
+            isValidMove = Validation.LegalMovement(currentMove, i_CurrentPlayer, i_OtherPlayer, i_CurrentBoard);
+            tryingToQuit = currentMove.Equals("Q") ? true : false;
 
-            while (!(isValidMove))
+            while (!(isValidMove) || (isValidMove && tryingToQuit))
             {
-                Console.WriteLine("The move you entered is illegal. Please enter a different move.");
-                currentMove = Console.ReadLine();
-                isValidMove = Validation.LegalMovement(currentMove, i_FirstUser);
+                if (!isValidMove)
+                {
+                    currentMove = Console.ReadLine();
+                    isValidMove = Validation.LegalMovement(currentMove, i_CurrentPlayer, i_OtherPlayer, i_CurrentBoard);
+                    tryingToQuit = currentMove.Equals("Q") ? true : false;
+                }
+                else
+                {
+                    isValidMove = quiteHandler(i_CurrentPlayer.Name);
+                    if (isValidMove)
+                    {
+                        gameIsOver = true;
+                    }
+
+                    tryingToQuit = false;
+                }
             }
 
-            //i_CurrentBoard.moveCoin(currentMove, i_FirstUser.CoinType);
 
-            return i_CurrentBoard;
+            if (!gameIsOver)
+            {
+                parseMove = new PlayerMove(currentMove);
+                currentMoveIsJump = Validation.IsTryingToJump(parseMove, currentUserCoinType);
+                i_CurrentBoard.MoveCoinInBoard(currentMove, i_CurrentPlayer);
+
+                if (currentMoveIsJump)
+                {
+                    otherUserCoins.EatCoin(currentMove);
+                    i_OtherPlayer.CalcUserPoints();
+                }
+            }
+
+            return gameIsOver;
         }
 
-        private User createUsers(string i_UserName, char i_CoinType)
+        private static bool quiteHandler(string i_PlayerName)
         {
-            User user;
+            string playerAnswer;
+            bool playerWantsToQuit = false;
 
-            user = new User(i_UserName, i_CoinType);
+            Console.WriteLine(i_PlayerName + ", Do You really want to quit? Y/N");
+            playerAnswer = Console.ReadLine();
 
-            return user;
+            while (!playerAnswer.Equals("Y") && !playerAnswer.Equals("N"))
+            {
+                Console.WriteLine("Invalid answer. Please type Y or N");
+                playerAnswer = Console.ReadLine();
+            }
+
+            if (playerAnswer.Equals("Y"))
+            {
+                playerWantsToQuit = true;
+            }
+            else
+            {
+                Console.WriteLine(i_PlayerName + ", We are happy to see you are not a loser. Please enter your move");
+            }
+
+            return playerWantsToQuit;
         }
-
-        public Game(string i_FirstUserName)
-        {
-            this.m_FirstUser = new User(i_FirstUserName, 'O');
-        }
-
-        //private void moveCoin(string i_Movement, User i_CurrentUser)
-        //{
-        //    if (Validation.LegalMovement(i_Movement))
-        //    {
-        //        this.m_PlayingBoard.moveCoin(i_Movement, i_CurrentUser.CoinType);
-        //    }
-        //}
     }
 }

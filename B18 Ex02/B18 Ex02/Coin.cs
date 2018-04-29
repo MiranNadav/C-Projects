@@ -86,7 +86,6 @@ namespace B18_Ex02
             }
         }
 
-<<<<<<< HEAD
         public string Square
         {
             get
@@ -97,11 +96,10 @@ namespace B18_Ex02
             {
                 this.currentSquare = value;
             }
-=======
+        }
         public string getCurrentSquare()
         {
             return this.currentSquare;
->>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
         }
 
         private void parseRowLocation(int i_indexOfRow)

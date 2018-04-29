@@ -12,20 +12,15 @@ namespace B18_Ex02
         private Coin[] m_Coins;
         private int m_NumOfCoins = 0;
 
-<<<<<<< HEAD
         public Coins(char i_coinType, int i_NumOfCoins)
-=======
-        public Coins(char i_coinType)
->>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
         {
             this.m_NumOfCoins = i_NumOfCoins;
-            this.m_Coins = new Coin[i_NumOfCoins]; // TODO: Use boardSize
+            this.m_Coins = new Coin[i_NumOfCoins];
             createCoinsArray(i_coinType);
         }
 
         private void createCoinsArray(char i_CoinType)
         {
-<<<<<<< HEAD
             if (i_CoinType.Equals('O'))
             {
                 createCoinsArrayForO(i_CoinType);
@@ -59,35 +54,7 @@ namespace B18_Ex02
                     m_Coins[i] = new Coin(row, column, i_CoinType);
                     column++;
                     row--;
-=======
-            char row;
-            char colm;
-            int currentColumn = 0;
 
-            if (i_CoinType.Equals('O'))
-            {
-                row = 'b';
-                colm = 'A';
-                // TODO: use board size
-                for (int i = 0; i < coins.Length - 1; i++)
-                {
-
-                    if (colm % 2 == 1)
-                    {
-                        coins[i] = new Coin(row, colm, i_CoinType);
-                        colm++;
-                    }
-                    else
-                    {
-                        row--;
-                        coins[i] = new Coin(row, colm, i_CoinType);
-                        row = (char)(row + 2);
-                        i++;
-                        coins[i] = new Coin(row, colm, i_CoinType);
-                        colm++;
-                        row--;
-                    }
->>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
                 }
             }
         }
@@ -97,15 +64,7 @@ namespace B18_Ex02
             char column = 'H';
             for (int i = m_Coins.Length - 1; i >= 0; i--)
             {
-<<<<<<< HEAD
                 if (column % 2 == 1)
-=======
-                Console.WriteLine("Im here");
-
-                row = 'g';
-                colm = 'A';
-                for (int i = 0; i < coins.Length; i++)
->>>>>>> cd205ade1e9955260d5e72297b636838ea8a8ed6
                 {
                     row++;
                     m_Coins[i] = new Coin(row, column, i_CoinType);
@@ -137,10 +96,13 @@ namespace B18_Ex02
             for (int i = 0; i < this.m_NumOfCoins; i++)
             {
                 currentCoin = this.GetCoin(i);
-                if (currentCoin.Square.Equals(i_Square))
+                if (currentCoin != null)
                 {
-                    index = i;
-                    break;
+                    if (currentCoin.Square.Equals(i_Square))
+                    {
+                        index = i;
+                        break;
+                    }
                 }
             }
 
@@ -165,12 +127,12 @@ namespace B18_Ex02
         {
             string squareToRemoveCoinFrom;
             int coinToEatIndex;
-            Coin coinToEat;
 
             squareToRemoveCoinFrom = calculateMiddleSquare(i_CurrentMove);
-            coinToEatIndex= this.GetCoinIndex(squareToRemoveCoinFrom);
-            coinToEat = this.GetCoin(coinToEatIndex);
-            coinToEat = null;
+            coinToEatIndex = this.GetCoinIndex(squareToRemoveCoinFrom);
+            this.ToString();
+            this.m_Coins[coinToEatIndex] = null;
+            this.ToString();
         }
 
         private string calculateMiddleSquare(string i_CurrentMove)
@@ -188,7 +150,7 @@ namespace B18_Ex02
         }
 
         override
-        public string ToString ()
+        public string ToString()
         {
             StringBuilder s = new StringBuilder();
             for (int i = 0; i < this.getNumOfCoins(); i++)
