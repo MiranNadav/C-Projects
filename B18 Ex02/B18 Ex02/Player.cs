@@ -19,18 +19,8 @@ namespace B18_Ex02
         {
             this.m_Name = i_UserName;
             this.m_CoinType = i_CoinType;
-            if (i_BoardSize == 6)
-            {
-                this.m_NumOfCoins = 6; // TODO: need to use actual board size  
-            }
-            else if (i_BoardSize == 8)
-            {
-                this.m_NumOfCoins = 12;
-            }
-            else
-            {
-                this.m_NumOfCoins = 20;
-            }
+
+            this.m_NumOfCoins = (i_BoardSize * i_BoardSize - 2 * i_BoardSize) / 4;
 
             this.m_Coins = new Coins(i_CoinType, m_NumOfCoins); // TODO: need to use actual board size   
             CalcUserPoints();

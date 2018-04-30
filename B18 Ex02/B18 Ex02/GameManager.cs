@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace B18_Ex02
 {
-    class Game
+    class GameManager
     {
         private Player m_FirstPlayer;
         private Player m_SecondPlayer;
@@ -20,7 +20,7 @@ namespace B18_Ex02
             initializeMatch();
         }
 
-        public Game(Player i_FirstPlayer, Player i_SecondPlayer)
+        public GameManager(Player i_FirstPlayer, Player i_SecondPlayer)
         {
             this.m_FirstPlayer = i_FirstPlayer;
             this.m_SecondPlayer = i_SecondPlayer;
@@ -103,10 +103,9 @@ namespace B18_Ex02
 
         private static bool parseUserInput(Board i_CurrentBoard, Player i_CurrentPlayer, Player i_OtherPlayer)
         {
-            bool isValidMove;
+            bool isValidMove = false;
             //TODO: should be changed to new move?
-            string currentMove;
-            string playerAnswer;
+            string inputMove;
             PlayerMove parseMove;
             bool currentMoveIsJump = false;
             bool gameIsOver = false;
@@ -117,42 +116,51 @@ namespace B18_Ex02
 
 
             Console.WriteLine(i_CurrentPlayer.Name + ", it's your turn. Please enter your move");
-            currentMove = Console.ReadLine();
-            //currentMove = new PlayerMove(currentMove);
-            //isValidMove = Validation.LegalMovement(currentMove, i_CurrentUser, i_CurrentBoard);
-            isValidMove = Validation.LegalMovement(currentMove, i_CurrentPlayer, i_OtherPlayer, i_CurrentBoard);
-            tryingToQuit = currentMove.Equals("Q") ? true : false;
+            inputMove = Console.ReadLine();
 
-            while (!(isValidMove) || (isValidMove && tryingToQuit))
+
+            while (!gameIsOver && (!isValidMove || (isValidMove && tryingToQuit)))
             {
-                if (!isValidMove)
+                tryingToQuit = InputValidation.IsTryingToQuit(inputMove);
+                if (tryingToQuit)
                 {
-                    currentMove = Console.ReadLine();
-                    isValidMove = Validation.LegalMovement(currentMove, i_CurrentPlayer, i_OtherPlayer, i_CurrentBoard);
-                    tryingToQuit = currentMove.Equals("Q") ? true : false;
-                }
-                else
-                {
-                    isValidMove = quiteHandler(i_CurrentPlayer.Name);
-                    if (isValidMove)
+                    //isValidMove = quitHandler(i_CurrentPlayer.Name);
+                    if (quitHandler(i_CurrentPlayer.Name))
                     {
                         gameIsOver = true;
                     }
+                    else
+                    {
+                        tryingToQuit = false;
+                        inputMove = Console.ReadLine();
+                    }
+                }
+                //Not Trying To QUIT
+                else
+                {
+                    isValidMove = InputValidation.inputFormatIsValid(inputMove);
+                    if (isValidMove)
+                    {
+                        isValidMove = Validation.IsLegalMovement(new PlayerMove(inputMove), i_CurrentPlayer, i_OtherPlayer, i_CurrentBoard);
+                    }
+                    else
+                    {
 
-                    tryingToQuit = false;
+                        Validation.printErrorMessage("The format of the move you entered is invalid. Please try entering a move in the following format: COLrow>COLrow");
+                        inputMove = Console.ReadLine();
+                    }
                 }
             }
 
-
             if (!gameIsOver)
             {
-                parseMove = new PlayerMove(currentMove);
+                parseMove = new PlayerMove(inputMove);
                 currentMoveIsJump = Validation.IsTryingToJump(parseMove, currentUserCoinType);
-                i_CurrentBoard.MoveCoinInBoard(currentMove, i_CurrentPlayer);
+                i_CurrentBoard.MoveCoinInBoard(inputMove, i_CurrentPlayer);
 
                 if (currentMoveIsJump)
                 {
-                    otherUserCoins.EatCoin(currentMove);
+                    otherUserCoins.EatCoin(inputMove);
                     i_OtherPlayer.CalcUserPoints();
                 }
             }
@@ -160,7 +168,7 @@ namespace B18_Ex02
             return gameIsOver;
         }
 
-        private static bool quiteHandler(string i_PlayerName)
+        private static bool quitHandler(string i_PlayerName)
         {
             string playerAnswer;
             bool playerWantsToQuit = false;

@@ -20,7 +20,7 @@ namespace B18_Ex02
         private const string invalidQuitMessage = "The number of your points is not lower then your opponent. You cannot quit. Please, enter a move";
 
 
-        private static void printErrorMessage(string i_ErrorMessage)
+        public static void printErrorMessage(string i_ErrorMessage)
         {
             Console.WriteLine(i_ErrorMessage);
         }
@@ -49,11 +49,10 @@ namespace B18_Ex02
             return boardSizeIsValid;
         }
 
-        public static bool LegalMovement(string currentMove, Player i_CurrentPlayer, Player i_OtherPlayer, Board i_Borad)
+        public static bool IsLegalMovement(PlayerMove currentMove, Player i_CurrentPlayer, Player i_OtherPlayer, Board i_Board)
         {
-            PlayerMove i_ParseMove;
+            //PlayerMove currentMove;
             bool isValidMovement = true;
-            bool isTryingToQuit = false;
             string sourceSquare;
             string destinationSquare;
             char currentUserCoinType;
@@ -61,86 +60,65 @@ namespace B18_Ex02
             Coins secondCoinsArray;
             bool tryingToJump;
 
-            if (currentMove.Equals("Q"))
+            //i_ParseMove = new PlayerMove(currentMove.GetFullMove());
+
+            currentUserCoinType = i_CurrentPlayer.CoinType;
+            currentCoinsArray = i_Board.GetUserCoins(currentUserCoinType);
+            secondCoinsArray = i_Board.GetOtherUserCoins(currentUserCoinType);
+            tryingToJump = IsTryingToJump(currentMove, i_CurrentPlayer.CoinType);
+            sourceSquare = currentMove.CurrentSquare;
+            destinationSquare = currentMove.NextSquare;
+
+            //checks whether the input is within the board bounds
+            if (!movementInputInRange(currentMove, i_Board.GetBoardSize()))
             {
-                isValidMovement = tryingToQuit(i_CurrentPlayer, i_OtherPlayer);
-                isTryingToQuit = true;
+                isValidMovement = false;
+                ErrorPrinter.OutOfBoundMessage();
+                goto endValidation;
             }
-            if (!isTryingToQuit)
+
+            // Check if the user's square to move from has a coin
+            else if (currentCoinsArray.GetCoinIndex(sourceSquare) == -1)
             {
-                if (isValidMovement)
-                {
+                isValidMovement = false;
+                ErrorPrinter.NoCoinToMoveMessage();
+                goto endValidation;
+            }
 
-                    if (!inputFormatIsValid(currentMove))
-                    {
-                        isValidMovement = false;
-                        printErrorMessage(formatErrorMessage);
-                        goto endValidation;
-                    }
+            // Checks if the jump is valid 
+            if (tryingToJump == true)
+            {
+                isValidMovement = isValidJump(currentMove, i_CurrentPlayer.CoinType, currentCoinsArray, secondCoinsArray);
+                ErrorPrinter.InvalidJumpMessage();
+                goto endValidation;
+            }
 
-                    if (isValidMovement)
-                    {
-                        i_ParseMove = new PlayerMove(currentMove);
-                        currentUserCoinType = i_CurrentPlayer.CoinType;
-                        currentCoinsArray = i_Borad.GetUserCoins(currentUserCoinType);
-                        secondCoinsArray = i_Borad.GetOtherUserCoins(currentUserCoinType);
-                        tryingToJump = IsTryingToJump(i_ParseMove, i_CurrentPlayer.CoinType);
-                        sourceSquare = i_ParseMove.CurrentSquare;
-                        destinationSquare = i_ParseMove.NextSquare;
-
-                        //checks whether the input is within the board bounds
-                        if (!movementInputInRange(i_ParseMove, i_Borad.GetBoardSize()))
-                        {
-                            isValidMovement = false;
-                            printErrorMessage(outOfBoundsMessage);
-                            goto endValidation;
-                        }
-
-                        // Check if the user's square to move from has a coin
-                        else if (currentCoinsArray.GetCoinIndex(sourceSquare) == -1)
-                        {
-                            isValidMovement = false;
-                            printErrorMessage(noCoinToMoveMessage);
-                            goto endValidation;
-                        }
-
-                        // Checks if the jump is valid 
-                        if (tryingToJump == true)
-                        {
-                            isValidMovement = isValidJump(i_ParseMove, i_CurrentPlayer.CoinType, currentCoinsArray, secondCoinsArray);
-                            printErrorMessage(invalidJumpMessage);
-                            goto endValidation;
-                        }
-
-                        // Checks whether an opponents coin appear in the toSquare
-                        else if (secondCoinsArray.GetCoinIndex(destinationSquare) != -1)
-                        {
-                            isValidMovement = false;
-                            printErrorMessage(squareIsBlockedMessage);
-                            goto endValidation;
-                        }
-                        // Check if the move is diagonal
-                        else if (!isDiagonal(i_ParseMove, i_CurrentPlayer.CoinType))
-                        {
-                            isValidMovement = false;
-                            printErrorMessage(notDiagonalMessage);
-                            goto endValidation;
-                        }
-
-                    }
-                }
+            // Checks whether an opponents coin appear in the toSquare
+            else if (secondCoinsArray.GetCoinIndex(destinationSquare) != -1)
+            {
+                isValidMovement = false;
+                ErrorPrinter.SquareIsBlockedMessage();
+                goto endValidation;
+            }
+            // Check if the move is diagonal
+            else if (!isDiagonal(currentMove, i_CurrentPlayer.CoinType))
+            {
+                isValidMovement = false;
+                ErrorPrinter.NotDiagonalMessage();
+                goto endValidation;
             }
 
             endValidation:
             return isValidMovement;
         }
 
-        private static bool tryingToQuit(Player i_CurrentPlayer, Player i_OtherPlayer)
+
+
+        public static bool tryingToQuit(Player i_CurrentPlayer, Player i_OtherPlayer)
         {
             bool quitIsValid = false;
             int currentPlayerPoints = i_CurrentPlayer.Points;
             int otherPlayerPoints = i_OtherPlayer.Points;
-            string playerAnswer;
 
             quitIsValid = currentPlayerPoints < otherPlayerPoints ? true : false;
 
@@ -150,20 +128,6 @@ namespace B18_Ex02
             }
 
             return quitIsValid;
-        }
-
-        private static bool inputFormatIsValid(string i_CurrentMove)
-        {
-            bool formatIsValid = true;
-            Regex regex = new Regex(@"^[A-Z][a-z]>[A-Z][a-z]$");
-            Match match = regex.Match(i_CurrentMove);
-
-            if (!(match.Success))
-            {
-                formatIsValid = false;
-            }
-
-            return formatIsValid;
         }
 
         private static bool movementInputInRange(PlayerMove i_ParseMove, int i_BoardSize)

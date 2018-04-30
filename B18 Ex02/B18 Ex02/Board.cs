@@ -11,30 +11,16 @@ namespace B18_Ex02
     {
         private int m_BoardSize;
         private Coin[,] m_Board;
-        private Coins m_FirstUserCoins;
-        private Coins m_SecondUserCoins;
+        private Coins m_FirstPlayerCoins;
+        private Coins m_SecondPlayerCoins;
         private bool m_HasJump = false;
 
 
         public Board(int i_BoardSize, Coins i_FirstUserCoins, Coins i_SecondUserCoins)
         {
-            int numOfCoins = 0;
-            if (i_BoardSize == 6)
-            {
-                numOfCoins = 6;
-            }
-            else if (i_BoardSize == 8)
-            {
-                numOfCoins = 12;
-            }
-            else
-            {
-                numOfCoins = 20;
-            }
-
             this.m_BoardSize = i_BoardSize;
-            this.m_FirstUserCoins = i_FirstUserCoins;
-            this.m_SecondUserCoins = i_SecondUserCoins;
+            this.m_FirstPlayerCoins = i_FirstUserCoins;
+            this.m_SecondPlayerCoins = i_SecondUserCoins;
             //this.m_FirstUserCoins = new Coins('O', numOfCoins);
             //this.m_SecondUserCoins = new Coins('X', numOfCoins);
             this.m_Board = new Coin[i_BoardSize, i_BoardSize];
@@ -51,12 +37,12 @@ namespace B18_Ex02
 
         public Coins GetUserCoins(char i_CoinType)
         {
-            return i_CoinType == 'O' ? m_FirstUserCoins : m_SecondUserCoins;
+            return i_CoinType == 'O' ? m_FirstPlayerCoins : m_SecondPlayerCoins;
         }
 
         public Coins GetOtherUserCoins(char i_CoinType)
         {
-            return i_CoinType == 'O' ? m_SecondUserCoins : m_FirstUserCoins;
+            return i_CoinType == 'O' ? m_SecondPlayerCoins : m_FirstPlayerCoins;
         }
 
 
@@ -67,12 +53,43 @@ namespace B18_Ex02
 
         private void buildBoard()
         {
-            int numOfCoins = this.m_FirstUserCoins.getNumOfCoins();
+            char coinType;
+            int numOfCoins = this.m_FirstPlayerCoins.getNumOfCoins();
             this.m_Board = new Coin[this.m_BoardSize, this.m_BoardSize];
-            setUserCoins(this.m_FirstUserCoins, numOfCoins);
-            setUserCoins(this.m_SecondUserCoins, numOfCoins);
+            //setUserCoins(this.m_FirstPlayerCoins, numOfCoins);
+            //setUserCoins(this.m_SecondPlayerCoins, numOfCoins);
+
+            for (int i = 0; i < m_BoardSize; i++)
+            {
+                for (int j = 0; j < m_BoardSize; j++)
+                {
+                    if (!(i == m_BoardSize / 2 || i == (m_BoardSize / 2) - 1))
+                        if (i % 2 == 0 && j % 2 == 1)
+                        {
+                            setCoinInBoard(i, j);
+                        }
+                        else if (i % 2 == 1 && j % 2 == 0)
+                        {
+                            setCoinInBoard(i, j);
+                        }
+                }
+            }
         }
 
+        private void setCoinInBoard(int i_RowIndex, int i_ColumnIndex)
+        {
+            char coinType;
+            if (i_RowIndex < m_BoardSize / 2)
+            {
+                coinType = 'O';
+            }
+            else
+            {
+                coinType = 'X';
+            }
+            m_Board[i_RowIndex, i_ColumnIndex] = new Coin(PlaceIndexConvertor.GetSmallCharByIndex(i_RowIndex),
+                                                        PlaceIndexConvertor.GetCapitalCharByIndex(i_ColumnIndex), coinType);
+        }
 
         private void setUserCoins(Coins i_UsersCoins, int i_NumOfCoins)
         {
@@ -135,31 +152,33 @@ namespace B18_Ex02
             }
         }
 
+
         public void printBoard()
         {
             string newLine = Environment.NewLine;
             char rowCharIndicator;
             char coinType;
             StringBuilder board = new StringBuilder();
-            int numOfRows = m_Board.GetLength(0);
-            int numOfColumns = m_Board.GetLength(1);
+            //int numOfRows = m_Board.GetLength(0);
+            //int numOfColumns = m_Board.GetLength(1);
 
-            board.Append("   A   B   C   D   E   F   G   H " + newLine);
-            board.Append(getStringBorder() + newLine);
-            for (int row = 0; row < numOfRows; row++)
+            for (int i = 0; i < m_BoardSize; i++)
             {
-                rowCharIndicator = (char)(row + 97);
+                board.Append("   " + PlaceIndexConvertor.GetCapitalCharByIndex(i));
+            }
+            board.Append(newLine);
+            board.Append(getStringBorder() + newLine);
+            for (int row = 0; row < m_BoardSize; row++)
+            {
+                rowCharIndicator = PlaceIndexConvertor.GetSmallCharByIndex(row);
                 board.Append(rowCharIndicator + "|");
-                for (int column = 0; column < numOfColumns; column++)
+                for (int column = 0; column < m_BoardSize; column++)
                 {
                     if (m_Board[row, column] != null)
                     {
-                        if (m_Board[row, column].Square != "zz")
-                        {
-
-                            coinType = m_Board[row, column].Type;
-                            board.Append(" " + coinType + " |");
-                        }
+                        //if (m_Board[row, column].Square != "zz")
+                        coinType = m_Board[row, column].Type;
+                        board.Append(" " + coinType + " |");
                     }
                     else
                     {
@@ -170,7 +189,6 @@ namespace B18_Ex02
                 board.Append(newLine);
                 board.Append(getStringBorder());
                 board.Append(newLine);
-
             }
 
             Console.WriteLine(board.ToString());
@@ -178,7 +196,13 @@ namespace B18_Ex02
 
         private string getStringBorder()
         {
-            return " =================================";
+            StringBuilder border = new StringBuilder(" ");
+            for (int i = 0; i < m_BoardSize; i++)
+            {
+                border.Append("====");
+            }
+
+            return border.ToString();
         }
 
         public void MoveCoinInBoard(string i_Movement, Player i_CurrentUser)
@@ -188,11 +212,11 @@ namespace B18_Ex02
 
             if (i_CurrentUser.CoinType == 'O')
             {
-                this.m_FirstUserCoins.moveCoin(squareBegin, squareEnd);
+                this.m_FirstPlayerCoins.moveCoin(squareBegin, squareEnd);
             }
             else
             {
-                this.m_SecondUserCoins.moveCoin(squareBegin, squareEnd);
+                this.m_SecondPlayerCoins.moveCoin(squareBegin, squareEnd);
             }
 
             buildBoard();

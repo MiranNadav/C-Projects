@@ -9,31 +9,20 @@ namespace B18_Ex02
 
     class PlayerMove
     {
-        private char m_CurrentColumn;
-        private char m_CurrentRow;
-        private char m_NextColumn;
-        private char m_NextRow;
-        private string m_CurrentSquare;
-        private string m_NextSquare;
-        //TODO: is this a good name?
-        private string m_FullMove;
+        private Square m_CurrentSquare;
+        private Square m_NextSquare;
 
         public PlayerMove(string i_CurrentMove)
         {
-            this.m_CurrentColumn = i_CurrentMove[0];
-            this.m_CurrentRow = i_CurrentMove[1];
-            this.m_NextColumn = i_CurrentMove[3];
-            this.m_NextRow = i_CurrentMove[4];
-            this.m_CurrentSquare = String.Empty + m_CurrentColumn + m_CurrentRow;
-            this.m_NextSquare = String.Empty + m_NextColumn + m_NextRow;
-            this.m_FullMove = i_CurrentMove;
+            m_CurrentSquare = new Square(i_CurrentMove[0], i_CurrentMove[1]);
+            m_NextSquare = new Square(i_CurrentMove[3], i_CurrentMove[4]);
         }
 
         public char CurrentRow
         {
             get
             {
-                return this.m_CurrentRow;
+                return this.m_CurrentSquare.Row;
             }
         }
 
@@ -41,7 +30,7 @@ namespace B18_Ex02
         {
             get
             {
-                return this.m_CurrentColumn;
+                return this.m_CurrentSquare.Column;
             }
         }
 
@@ -49,7 +38,7 @@ namespace B18_Ex02
         {
             get
             {
-                return this.m_NextRow;
+                return this.m_NextSquare.Row;
             }
         }
 
@@ -58,7 +47,7 @@ namespace B18_Ex02
         {
             get
             {
-                return this.m_NextColumn;
+                return this.m_NextSquare.Column;
             }
         }
 
@@ -67,7 +56,7 @@ namespace B18_Ex02
         {
             get
             {
-                return this.m_CurrentSquare;
+                return this.m_CurrentSquare.getSquare();
             }
         }
 
@@ -75,16 +64,13 @@ namespace B18_Ex02
         {
             get
             {
-                return this.m_NextSquare;
+                return this.m_NextSquare.getSquare();
             }
         }
 
-        public string FullMove
+        public string GetFullMove ()
         {
-            get
-            {
-                return this.m_FullMove;
-            }
+            return m_CurrentSquare.getSquare() + ">" + m_NextSquare.getSquare();
         }
     }
 }
