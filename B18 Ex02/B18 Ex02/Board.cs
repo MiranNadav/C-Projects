@@ -53,11 +53,12 @@ namespace B18_Ex02
 
         private void buildBoard()
         {
+
             char coinType;
             int numOfCoins = this.m_FirstPlayerCoins.getNumOfCoins();
             this.m_Board = new Coin[this.m_BoardSize, this.m_BoardSize];
-            //setUserCoins(this.m_FirstPlayerCoins, numOfCoins);
-            //setUserCoins(this.m_SecondPlayerCoins, numOfCoins);
+            setUserCoins(this.m_FirstPlayerCoins, numOfCoins);
+            setUserCoins(this.m_SecondPlayerCoins, numOfCoins);
 
             for (int i = 0; i < m_BoardSize; i++)
             {
@@ -159,8 +160,12 @@ namespace B18_Ex02
             char rowCharIndicator;
             char coinType;
             StringBuilder board = new StringBuilder();
+            Coin currentCoin;
             //int numOfRows = m_Board.GetLength(0);
             //int numOfColumns = m_Board.GetLength(1);
+
+            //TODO: check if this needs to be here
+
 
             for (int i = 0; i < m_BoardSize; i++)
             {
@@ -176,7 +181,7 @@ namespace B18_Ex02
                 {
                     if (m_Board[row, column] != null)
                     {
-                        //if (m_Board[row, column].Square != "zz")
+                        currentCoin = m_Board[row, column];
                         coinType = m_Board[row, column].Type;
                         board.Append(" " + coinType + " |");
                     }
@@ -205,21 +210,18 @@ namespace B18_Ex02
             return border.ToString();
         }
 
-        public void MoveCoinInBoard(string i_Movement, Player i_CurrentUser)
+        public void MoveCoinInBoard(PlayerMove i_CurrentMove)
         {
-            string squareBegin = i_Movement.Substring(0, 2);
-            string squareEnd = i_Movement.Substring(3, 2);
+            int currentRowToInt = PlaceIndexConvertor.GetIndexOfSmallLetter(i_CurrentMove.CurrentRow);
+            int currentcolumnToInt = PlaceIndexConvertor.GetIndexOfSmallLetter(i_CurrentMove.CurrentColumn);
+            int nextRowToInt = PlaceIndexConvertor.GetIndexOfSmallLetter(i_CurrentMove.NextRow);
+            int nextColumnToInt = PlaceIndexConvertor.GetIndexOfSmallLetter(i_CurrentMove.NextColumn);
+            Coin movingCoin;
 
-            if (i_CurrentUser.CoinType == 'O')
-            {
-                this.m_FirstPlayerCoins.moveCoin(squareBegin, squareEnd);
-            }
-            else
-            {
-                this.m_SecondPlayerCoins.moveCoin(squareBegin, squareEnd);
-            }
+            movingCoin = this.m_Board[currentRowToInt, currentcolumnToInt];
+            this.m_Board[currentRowToInt, currentcolumnToInt] = null;
+            this.m_Board[nextRowToInt, nextColumnToInt] = movingCoin;
 
-            buildBoard();
         }
 
         public bool gameStatus()

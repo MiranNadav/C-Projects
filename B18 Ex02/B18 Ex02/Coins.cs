@@ -16,7 +16,7 @@ namespace B18_Ex02
         {
             this.m_NumOfCoins = i_NumOfCoins;
             this.m_Coins = new Coin[i_NumOfCoins];
-            //createCoinsArray(i_coinType);
+            createCoinsArray(i_coinType);
         }
 
         private void createCoinsArray(char i_CoinType)

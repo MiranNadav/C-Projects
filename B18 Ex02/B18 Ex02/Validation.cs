@@ -9,16 +9,6 @@ namespace B18_Ex02
 {
     class Validation
     {
-        private const string boardSizeErrorMesege = "Board size is invalid.Please enter one of the following: 6/8/10";
-        private const string formatErrorMessage = "The format of the move you entered is invalid. Please try entering a move in the following format: COLrow>COLrow";
-        private const string noCoinToMoveMessage = "The square you want to move from doesn't contains a coin. Please try a different move.";
-        private const string outOfBoundsMessage = "The Square you are trying to move to is out of the bounds of the board. Please try a different move";
-        //TODO: add why the jump is invalid
-        private const string invalidJumpMessage = "Invalid jump. Please try a different move";
-        private const string squareIsBlockedMessage = "The square you are trying to jump to is blocked. Please try a different move";
-        private const string notDiagonalMessage = "You are trying to move a coin not in a diagonal way. Please try a different move";
-        private const string invalidQuitMessage = "The number of your points is not lower then your opponent. You cannot quit. Please, enter a move";
-
 
         public static void printErrorMessage(string i_ErrorMessage)
         {
@@ -41,10 +31,10 @@ namespace B18_Ex02
                 }
             }
 
-            if (!boardSizeIsValid)
-            {
-                printErrorMessage(boardSizeErrorMesege);
-            }
+            //if (!boardSizeIsValid)
+            //{
+            //    printErrorMessage(boardSizeErrorMesege);
+            //}
 
             return boardSizeIsValid;
         }
@@ -64,6 +54,7 @@ namespace B18_Ex02
 
             currentUserCoinType = i_CurrentPlayer.CoinType;
             currentCoinsArray = i_Board.GetUserCoins(currentUserCoinType);
+            Console.WriteLine(currentCoinsArray.GetCoin(0).Square);
             secondCoinsArray = i_Board.GetOtherUserCoins(currentUserCoinType);
             tryingToJump = IsTryingToJump(currentMove, i_CurrentPlayer.CoinType);
             sourceSquare = currentMove.CurrentSquare;
@@ -122,10 +113,10 @@ namespace B18_Ex02
 
             quitIsValid = currentPlayerPoints < otherPlayerPoints ? true : false;
 
-            if (!quitIsValid)
-            {
-                printErrorMessage(invalidQuitMessage);
-            }
+            //if (!quitIsValid)
+            //{
+            //    printErrorMessage(invalidQuitMessage);
+            //}
 
             return quitIsValid;
         }

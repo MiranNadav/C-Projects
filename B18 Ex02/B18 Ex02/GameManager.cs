@@ -86,7 +86,7 @@ namespace B18_Ex02
                     isFirstUserTurn = true;
                 }
 
-                currentBoard = new Board(boardSize, firstUserCoins, secondUserCoins);
+                //currentBoard = new Board(boardSize, firstUserCoins, secondUserCoins);
                 Ex02.ConsoleUtils.Screen.Clear();
                 if (!gameIsOver)
                 {
@@ -156,7 +156,7 @@ namespace B18_Ex02
             {
                 parseMove = new PlayerMove(inputMove);
                 currentMoveIsJump = Validation.IsTryingToJump(parseMove, currentUserCoinType);
-                i_CurrentBoard.MoveCoinInBoard(inputMove, i_CurrentPlayer);
+                i_CurrentBoard.MoveCoinInBoard(parseMove);
 
                 if (currentMoveIsJump)
                 {
