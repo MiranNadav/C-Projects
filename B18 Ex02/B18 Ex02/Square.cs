@@ -17,6 +17,12 @@ namespace B18_Ex02
             this.m_Row = i_Row;
         }
 
+        public Square(int i_Column, int i_Row)
+        {
+            this.m_Column = PlaceIndexConvertor.GetCapitalCharByIndex(i_Column);
+            this.m_Row = PlaceIndexConvertor.GetSmallCharByIndex(i_Row);
+        }
+
         public char Row
         {
             get
@@ -42,6 +48,22 @@ namespace B18_Ex02
             }
 
         }
+
+        public int RowIndex
+        {
+            get
+            {
+                return PlaceIndexConvertor.GetIndexOfLetter(this.Row);
+            }
+        }
+        public int ColumnIndex
+        {
+            get
+            {
+                return PlaceIndexConvertor.GetIndexOfLetter(this.Column);
+            }
+        }
+
 
         public string getSquare()
         {

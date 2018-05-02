@@ -18,6 +18,36 @@ namespace B18_Ex02
             m_NextSquare = new Square(i_CurrentMove[3], i_CurrentMove[4]);
         }
 
+        public int CurrentRowIndex
+        {
+            get
+            {
+                return this.m_CurrentSquare.RowIndex;
+            }
+        }
+        public int CurrentColIndex
+        {
+            get
+            {
+                return this.m_CurrentSquare.ColumnIndex;
+            }
+        }
+
+        public int NextRowIndex
+        {
+            get
+            {
+                return this.m_NextSquare.RowIndex;
+            }
+        }
+        public int NextColIndex
+        {
+            get
+            {
+                return this.m_NextSquare.ColumnIndex;
+            }
+        }
+
         public char CurrentRow
         {
             get
@@ -26,7 +56,7 @@ namespace B18_Ex02
             }
         }
 
-        public char CurrentColumn
+        public char CurrentCol
         {
             get
             {
@@ -43,7 +73,7 @@ namespace B18_Ex02
         }
 
 
-        public char NextColumn
+        public char NextCol
         {
             get
             {
@@ -52,22 +82,27 @@ namespace B18_Ex02
         }
 
 
-        public string CurrentSquare
+        public Square CurrentSquare
         {
             get
             {
-                return this.m_CurrentSquare.getSquare();
+                return this.m_CurrentSquare;
             }
         }
 
-        public string NextSquare
+        public Square NextSquare
         {
             get
             {
-                return this.m_NextSquare.getSquare();
+                return this.m_NextSquare;
             }
         }
-
+        public Square calculateMiddleSquare()
+        {
+            int middleSquareCol = (this.CurrentColIndex + this.NextColIndex) / 2;
+            int middleSquareRow = (this.CurrentRowIndex + this.NextRowIndex) / 2;
+            return new Square(middleSquareCol, middleSquareRow);
+        }
         public string GetFullMove ()
         {
             return m_CurrentSquare.getSquare() + ">" + m_NextSquare.getSquare();

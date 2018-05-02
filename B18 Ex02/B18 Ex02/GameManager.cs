@@ -27,7 +27,6 @@ namespace B18_Ex02
         }
 
 
-
         private static void initializeMatch()
         {
 
@@ -54,7 +53,7 @@ namespace B18_Ex02
             Console.ReadLine();
             firstPlayer = new Player(firstUserName, 'O', int.Parse(boardSize));
             Computer = new Player("Comp", 'X', int.Parse(boardSize));
-            PlayingBoard = new Board(int.Parse(boardSize), firstPlayer.GetCoins(), Computer.GetCoins());
+            PlayingBoard = new Board(int.Parse(boardSize));
 
             matchManager(PlayingBoard, firstPlayer, Computer);
 
@@ -111,13 +110,13 @@ namespace B18_Ex02
             bool gameIsOver = false;
             bool tryingToQuit = false;
             char currentUserCoinType = i_CurrentPlayer.CoinType;
-            Coins currentUserCoins = i_CurrentBoard.GetUserCoins(currentUserCoinType);
-            Coins otherUserCoins = i_CurrentBoard.GetOtherUserCoins(currentUserCoinType);
+            //Coins currentUserCoins = i_CurrentBoard.GetUserCoins(currentUserCoinType);
+            //Coins otherUserCoins = i_CurrentBoard.GetOtherUserCoins(currentUserCoinType);
 
 
             Console.WriteLine(i_CurrentPlayer.Name + ", it's your turn. Please enter your move");
-            inputMove = Console.ReadLine();
 
+            inputMove = Console.ReadLine();
 
             while (!gameIsOver && (!isValidMove || (isValidMove && tryingToQuit)))
             {
@@ -142,11 +141,15 @@ namespace B18_Ex02
                     if (isValidMove)
                     {
                         isValidMove = Validation.IsLegalMovement(new PlayerMove(inputMove), i_CurrentPlayer, i_OtherPlayer, i_CurrentBoard);
+                        if (!isValidMove)
+                        {
+                            inputMove = Console.ReadLine();
+                        }
                     }
                     else
                     {
-
-                        Validation.printErrorMessage("The format of the move you entered is invalid. Please try entering a move in the following format: COLrow>COLrow");
+                        //Validation.printErrorMessage("The format of the move you entered is invalid. Please try entering a move in the following format: COLrow>COLrow");
+                        ErrorPrinter.FormatErrorMessage();                    
                         inputMove = Console.ReadLine();
                     }
                 }
@@ -160,7 +163,7 @@ namespace B18_Ex02
 
                 if (currentMoveIsJump)
                 {
-                    otherUserCoins.EatCoin(inputMove);
+                    i_CurrentBoard.EatCoin(parseMove);
                     i_OtherPlayer.CalcUserPoints();
                 }
             }

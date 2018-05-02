@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayList.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Coins.cs" />
     <Compile Include="GameManager.cs" />

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,16 +11,16 @@ namespace B18_Ex02
     {
         private int m_BoardSize;
         private Coin[,] m_Board;
-        private Coins m_FirstPlayerCoins;
-        private Coins m_SecondPlayerCoins;
+        //private Coins m_FirstPlayerCoins;
+        //private Coins m_SecondPlayerCoins;
         private bool m_HasJump = false;
 
 
-        public Board(int i_BoardSize, Coins i_FirstUserCoins, Coins i_SecondUserCoins)
+        public Board(int i_BoardSize)//, Coins i_FirstUserCoins, Coins i_SecondUserCoins)
         {
             this.m_BoardSize = i_BoardSize;
-            this.m_FirstPlayerCoins = i_FirstUserCoins;
-            this.m_SecondPlayerCoins = i_SecondUserCoins;
+            //this.m_FirstPlayerCoins = i_FirstUserCoins;
+            //this.m_SecondPlayerCoins = i_SecondUserCoins;
             //this.m_FirstUserCoins = new Coins('O', numOfCoins);
             //this.m_SecondUserCoins = new Coins('X', numOfCoins);
             this.m_Board = new Coin[i_BoardSize, i_BoardSize];
@@ -35,15 +35,29 @@ namespace B18_Ex02
             }
         }
 
-        public Coins GetUserCoins(char i_CoinType)
+        public ArrayList GetUserCoins(char i_CoinType)
         {
-            return i_CoinType == 'O' ? m_FirstPlayerCoins : m_SecondPlayerCoins;
+            //return i_CoinType == 'O' ? m_FirstPlayerCoins : m_SecondPlayerCoins;
+            ArrayList coins = new ArrayList();
+            Coin currentCoin;
+            for (int i = 0; i < m_BoardSize; i++)
+            {
+                for (int j = 0; j < m_BoardSize; j++)
+                {
+                    currentCoin = m_Board[i, j];
+                    if (currentCoin != null && currentCoin.Type.Equals(i_CoinType))
+                    {
+                        coins.Add(currentCoin);
+                    }
+                }
+            }
+            return coins;
         }
 
-        public Coins GetOtherUserCoins(char i_CoinType)
-        {
-            return i_CoinType == 'O' ? m_SecondPlayerCoins : m_FirstPlayerCoins;
-        }
+        //public Coins GetOtherUserCoins(char i_CoinType)
+        //{
+        //    return i_CoinType == 'O' ? m_SecondPlayerCoins : m_FirstPlayerCoins;
+        //}
 
 
         public int GetBoardSize()
@@ -54,11 +68,11 @@ namespace B18_Ex02
         private void buildBoard()
         {
 
-            char coinType;
-            int numOfCoins = this.m_FirstPlayerCoins.getNumOfCoins();
+            //char coinType;
+            //int numOfCoins = this.m_FirstPlayerCoins.getNumOfCoins();
             this.m_Board = new Coin[this.m_BoardSize, this.m_BoardSize];
-            setUserCoins(this.m_FirstPlayerCoins, numOfCoins);
-            setUserCoins(this.m_SecondPlayerCoins, numOfCoins);
+            //setUserCoins(this.m_FirstPlayerCoins, numOfCoins);
+            //setUserCoins(this.m_SecondPlayerCoins, numOfCoins);
 
             for (int i = 0; i < m_BoardSize; i++)
             {
@@ -90,6 +104,16 @@ namespace B18_Ex02
             }
             m_Board[i_RowIndex, i_ColumnIndex] = new Coin(PlaceIndexConvertor.GetSmallCharByIndex(i_RowIndex),
                                                         PlaceIndexConvertor.GetCapitalCharByIndex(i_ColumnIndex), coinType);
+        }
+
+        public bool IsEmptyAtSquare (Square i_Square)
+        {
+            return m_Board[i_Square.RowIndex, i_Square.ColumnIndex] == null;
+        }
+
+        public bool IsEmptyAtSquare (Square i_Square, char i_CoinType)
+        {
+            return !IsEmptyAtSquare(i_Square) && m_Board[i_Square.RowIndex, i_Square.ColumnIndex].Type.Equals(i_CoinType);
         }
 
         private void setUserCoins(Coins i_UsersCoins, int i_NumOfCoins)
@@ -212,10 +236,10 @@ namespace B18_Ex02
 
         public void MoveCoinInBoard(PlayerMove i_CurrentMove)
         {
-            int currentRowToInt = PlaceIndexConvertor.GetIndexOfSmallLetter(i_CurrentMove.CurrentRow);
-            int currentcolumnToInt = PlaceIndexConvertor.GetIndexOfSmallLetter(i_CurrentMove.CurrentColumn);
-            int nextRowToInt = PlaceIndexConvertor.GetIndexOfSmallLetter(i_CurrentMove.NextRow);
-            int nextColumnToInt = PlaceIndexConvertor.GetIndexOfSmallLetter(i_CurrentMove.NextColumn);
+            int currentRowToInt = i_CurrentMove.CurrentRowIndex;
+            int currentcolumnToInt = i_CurrentMove.CurrentColIndex;
+            int nextRowToInt = i_CurrentMove.NextRowIndex;
+            int nextColumnToInt = i_CurrentMove.NextColIndex;
             Coin movingCoin;
 
             movingCoin = this.m_Board[currentRowToInt, currentcolumnToInt];
@@ -223,6 +247,15 @@ namespace B18_Ex02
             this.m_Board[nextRowToInt, nextColumnToInt] = movingCoin;
 
         }
+
+        public void EatCoin (PlayerMove i_CurrentMove)
+        { 
+            Square squareToRemoveCoinFrom = i_CurrentMove.calculateMiddleSquare();
+            m_Board[squareToRemoveCoinFrom.RowIndex, squareToRemoveCoinFrom.ColumnIndex] = null;
+        }
+
+
+
 
         public bool gameStatus()
         {
