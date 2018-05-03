@@ -12,7 +12,7 @@ namespace B18_Ex02
     {
         private char m_Row;
         private char m_Column;
-        private string currentSquare;
+        private Square currentSquare;
         private char m_Type;
         private bool m_isKing;
 
@@ -26,7 +26,7 @@ namespace B18_Ex02
         {
             this.m_Row = i_Row;
             this.m_Column = i_Column;
-            this.currentSquare = String.Empty + i_Column + i_Row;
+            this.currentSquare = new Square(i_Column, i_Row);
             this.m_Type = i_Type;
             this.m_isKing = false;
         }
@@ -86,7 +86,7 @@ namespace B18_Ex02
             }
         }
 
-        public string Square
+        public Square Square
         {
             get
             {
@@ -97,10 +97,7 @@ namespace B18_Ex02
                 this.currentSquare = value;
             }
         }
-        public string getCurrentSquare()
-        {
-            return this.currentSquare;
-        }
+      
 
         private void parseRowLocation(int i_indexOfRow)
         {

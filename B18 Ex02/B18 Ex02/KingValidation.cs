@@ -17,22 +17,22 @@ namespace B18_Ex02
             return moveIsValid;
         }
 
-        private static bool isDiagonal_King(PlayerMove currentMove)
+        public static bool isDiagonal_King(PlayerMove currentMove)
         {
             bool moveIsValid = true;
 
             //By checking if the move is diagonal for both coin types we check is it is diagonal for both front and back move.
-            moveIsValid = Validation.isDiagonal(currentMove, 'O');
+            moveIsValid = Validation.IsDiagonal(currentMove, 'O');
             if (!moveIsValid)
             {
 
-                moveIsValid = Validation.isDiagonal(currentMove, 'X');
+                moveIsValid = Validation.IsDiagonal(currentMove, 'X');
             }
 
             return moveIsValid;
         }
 
-        private static bool isTryingToJump_King(PlayerMove i_CurrentMove)
+        public static bool isTryingToJump_King(PlayerMove i_CurrentMove)
         {
             bool isTryingToJump = true;
 

@@ -109,7 +109,8 @@ namespace B18_Ex02
             bool currentMoveIsJump = false;
             bool gameIsOver = false;
             bool tryingToQuit = false;
-            char currentUserCoinType = i_CurrentPlayer.CoinType;
+            Coin currentCoin;
+
             //Coins currentUserCoins = i_CurrentBoard.GetUserCoins(currentUserCoinType);
             //Coins otherUserCoins = i_CurrentBoard.GetOtherUserCoins(currentUserCoinType);
 
@@ -148,8 +149,7 @@ namespace B18_Ex02
                     }
                     else
                     {
-                        //Validation.printErrorMessage("The format of the move you entered is invalid. Please try entering a move in the following format: COLrow>COLrow");
-                        ErrorPrinter.FormatErrorMessage();                    
+                        ErrorPrinter.FormatErrorMessage();
                         inputMove = Console.ReadLine();
                     }
                 }
@@ -158,9 +158,16 @@ namespace B18_Ex02
             if (!gameIsOver)
             {
                 parseMove = new PlayerMove(inputMove);
-                currentMoveIsJump = Validation.IsTryingToJump(parseMove, currentUserCoinType);
+                Coin[,] boardArray = i_CurrentBoard.BoardArray;
+                char currentUserCoinType = boardArray[parseMove.CurrentRowIndex, parseMove.CurrentColIndex].Type;
+                currentCoin = i_CurrentBoard.BoardArray[parseMove.CurrentRowIndex, parseMove.CurrentColIndex];
                 i_CurrentBoard.MoveCoinInBoard(parseMove);
+                if (shouldBeKinged(parseMove, i_CurrentBoard, currentUserCoinType))
+                {
+                    currentCoin.IsKing = true;
+                }
 
+                currentMoveIsJump = currentCoin.IsKing == false ? Validation.IsTryingToJump(parseMove, currentUserCoinType) : KingValidation.isTryingToJump_King(parseMove);
                 if (currentMoveIsJump)
                 {
                     i_CurrentBoard.EatCoin(parseMove);
@@ -195,6 +202,35 @@ namespace B18_Ex02
             }
 
             return playerWantsToQuit;
+        }
+
+        private static bool shouldBeKinged(PlayerMove i_CurrentMove, Board i_CurrentBoard, char i_CurrentCoinType)
+
+
+
+        {
+            bool turnToKing = false;
+            Coin[,] boardArray = i_CurrentBoard.BoardArray;
+            Coin currentCoin = boardArray[i_CurrentMove.NextRowIndex, i_CurrentMove.NextColIndex];
+
+            if (currentCoin.IsKing)
+            {
+                turnToKing = false;
+            }
+            else
+            {
+                if (i_CurrentCoinType.Equals('X'))
+                {
+                    turnToKing = i_CurrentMove.NextRowIndex == 0 ? true : false;
+                }
+                else
+                {
+                    turnToKing = i_CurrentMove.NextRowIndex == i_CurrentBoard.GetBoardSize() - 1 ? true : false;
+                }
+            }
+
+            return turnToKing;
+
         }
     }
 }

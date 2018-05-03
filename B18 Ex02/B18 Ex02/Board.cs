@@ -106,12 +106,12 @@ namespace B18_Ex02
                                                         PlaceIndexConvertor.GetCapitalCharByIndex(i_ColumnIndex), coinType);
         }
 
-        public bool IsEmptyAtSquare (Square i_Square)
+        public bool IsEmptyAtSquare(Square i_Square)
         {
             return m_Board[i_Square.RowIndex, i_Square.ColumnIndex] == null;
         }
 
-        public bool IsEmptyAtSquare (Square i_Square, char i_CoinType)
+        public bool IsEmptyAtSquare(Square i_Square, char i_CoinType)
         {
             return !IsEmptyAtSquare(i_Square) && m_Board[i_Square.RowIndex, i_Square.ColumnIndex].Type.Equals(i_CoinType);
         }
@@ -206,8 +206,16 @@ namespace B18_Ex02
                     if (m_Board[row, column] != null)
                     {
                         currentCoin = m_Board[row, column];
-                        coinType = m_Board[row, column].Type;
-                        board.Append(" " + coinType + " |");
+                        if (currentCoin.IsKing)
+                        {
+                            coinType = m_Board[row, column].Type.Equals('O') ? 'U' : 'K';
+                            board.Append(" " + coinType + " |");
+                        }
+                        else
+                        {
+                            coinType = m_Board[row, column].Type;
+                            board.Append(" " + coinType + " |");
+                        }
                     }
                     else
                     {
@@ -243,13 +251,14 @@ namespace B18_Ex02
             Coin movingCoin;
 
             movingCoin = this.m_Board[currentRowToInt, currentcolumnToInt];
+            movingCoin.Square = i_CurrentMove.NextSquare;
             this.m_Board[currentRowToInt, currentcolumnToInt] = null;
             this.m_Board[nextRowToInt, nextColumnToInt] = movingCoin;
 
         }
 
-        public void EatCoin (PlayerMove i_CurrentMove)
-        { 
+        public void EatCoin(PlayerMove i_CurrentMove)
+        {
             Square squareToRemoveCoinFrom = i_CurrentMove.calculateMiddleSquare();
             m_Board[squareToRemoveCoinFrom.RowIndex, squareToRemoveCoinFrom.ColumnIndex] = null;
         }
@@ -262,5 +271,12 @@ namespace B18_Ex02
             return false;
         }
 
+        public Coin[,] BoardArray
+        {
+            get
+            {
+                return this.m_Board;
+            }
+        }
     }
 }
