@@ -70,6 +70,8 @@ namespace B18_Ex02
             bool gameIsOver = false;
             bool isFirstUserTurn = true;
 
+            Console.WriteLine(i_FirstPlayer.Name + "'s turn:");
+
             while (!gameIsOver)
             {
                 if (isFirstUserTurn)
@@ -83,17 +85,15 @@ namespace B18_Ex02
                     isFirstUserTurn = true;
                 }
 
-                Ex02.ConsoleUtils.Screen.Clear();
-                if (!gameIsOver)
-                {
-                    i_PlayingBoard.printBoard();
-                }
+                //    Ex02.ConsoleUtils.Screen.Clear();
+                //    if (!gameIsOver)
+                //    {
+                //        i_PlayingBoard.printBoard();
+                //    }
+                //}
+                //TODO: add end game lines 
+                //TODO: remove this 
             }
-            //TODO: add end game lines 
-            //TODO: remove this 
-
-            Console.WriteLine("The game is over");
-            Console.ReadLine();
         }
 
         private static bool parseUserInput(Board i_CurrentBoard, Player i_CurrentPlayer, Player i_OtherPlayer)
@@ -106,7 +106,6 @@ namespace B18_Ex02
             bool tryingToQuit = false;
             Coin currentCoin;
 
-            Console.WriteLine(i_CurrentPlayer.Name + ", it's your turn. Please enter your move");
             inputMove = Console.ReadLine();
             currentMove = new PlayerMove(inputMove);
             while (!gameIsOver && (!isValidMove || (isValidMove && tryingToQuit)))
@@ -163,6 +162,14 @@ namespace B18_Ex02
                     i_CurrentBoard.EatCoin(currentMove);
                     i_OtherPlayer.CalcUserPoints();
                 }
+            }
+
+            Ex02.ConsoleUtils.Screen.Clear();
+            if (!gameIsOver)
+            {
+                i_CurrentBoard.printBoard();
+                Console.WriteLine(i_CurrentPlayer.Name + "'s move was: " + currentMove.GetFullMove());
+                Console.WriteLine(i_OtherPlayer.Name + "'s Turn (" + i_OtherPlayer.CoinType + ") :");
             }
 
             return gameIsOver;
