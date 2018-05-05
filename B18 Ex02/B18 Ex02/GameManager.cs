@@ -17,7 +17,7 @@ namespace B18_Ex02
         private bool m_WinnerFound = false;
         private Board m_PlayingBoard;
         private PossibleMoves m_PossibleMoves;
-
+        private bool m_StartNewMatch = false;
 
         public void initializeMatch()
         {
@@ -84,7 +84,14 @@ namespace B18_Ex02
             Console.ReadLine();
             Console.WriteLine("Press enter to close terminal");
         }
-
+        private void startNewMatch()
+        {
+            int boardSize = m_PlayingBoard.BoardSize;
+            m_PlayingBoard = new Board(boardSize);
+            m_PlayingBoard.printBoard();
+            m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
+            matchManager(m_PlayingBoard);
+        }
         private string getInputNameFromUser()
         {
             Console.WriteLine("Please enter your name:");
@@ -92,7 +99,7 @@ namespace B18_Ex02
             while (!InputValidation.IsInputNameValid(inputName))
             {
                 Console.WriteLine("Your name is invalid! Please tell us your name.");
-                inputName= Console.ReadLine();
+                inputName = Console.ReadLine();
             }
             return inputName;
         }
@@ -121,6 +128,10 @@ namespace B18_Ex02
                     isFirstUserTurn = true;
                 }
             }
+            if (m_StartNewMatch)
+            {
+                startNewMatch();
+            }
         }
 
         private bool parseUserInput(Player i_CurrentPlayer, Player i_OtherPlayer)
@@ -133,10 +144,12 @@ namespace B18_Ex02
             bool tryingToQuit = false;
             Coin currentCoin;
             ArrayList allPossibleJumps;
+            PointsCalculator pointsCalculator;
 
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
 
-            if (!i_CurrentPlayer.IsComputer) { 
+            if (!i_CurrentPlayer.IsComputer)
+            {
                 inputMove = Console.ReadLine();
 
                 while (!gameIsOver && (!isValidMove || (isValidMove && tryingToQuit)))
@@ -144,7 +157,8 @@ namespace B18_Ex02
                     tryingToQuit = InputValidation.IsTryingToQuit(inputMove);
                     if (tryingToQuit)
                     {
-                        if (quitHandler(i_CurrentPlayer.Name))
+                        pointsCalculator = new PointsCalculator(this.m_FirstPlayer, this.m_SecondPlayer, this.m_PlayingBoard);
+                        if (quitHandler(i_CurrentPlayer.Name, pointsCalculator))
                         {
                             gameIsOver = true;
                         }
@@ -210,8 +224,7 @@ namespace B18_Ex02
                 if (currentMoveIsJump)
                 {
                     m_PlayingBoard.EatCoin(currentMove);
-                    calcUserPoints(i_OtherPlayer);
-
+                    //calcUserPoints(i_OtherPlayer);
 
                     m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
                     allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(currentMove, currentUserCoinType);
@@ -246,32 +259,40 @@ namespace B18_Ex02
                         }
 
                         m_PlayingBoard.EatCoin(currentMove);
-                        calcUserPoints(i_OtherPlayer);
+                        //calcUserPoints(i_OtherPlayer);
                         m_PlayingBoard.MoveCoinInBoard(currentMove);
                         allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(currentMove, currentUserCoinType);
                     }
                 }
             }
 
-
             Ex02.ConsoleUtils.Screen.Clear();
             if (!gameIsOver)
             {
-                m_PlayingBoard.printBoard();
-                Console.WriteLine(i_CurrentPlayer.Name + "'s move was: " + currentMove.GetFullMove());
-                Console.WriteLine(i_OtherPlayer.Name + "'s Turn (" + i_OtherPlayer.CoinType + ") :");
+                pointsCalculator = new PointsCalculator(this.m_FirstPlayer, this.m_SecondPlayer, m_PlayingBoard);
+                gameIsOver = pointsCalculator.IsWinnerFound();
+                if (gameIsOver)
+                {
+                    startNewGame(pointsCalculator);
+                }
+                else
+                {
+                    m_PlayingBoard.printBoard();
+                    Console.WriteLine(i_CurrentPlayer.Name + "'s move was: " + currentMove.GetFullMove());
+                    Console.WriteLine(i_OtherPlayer.Name + "'s Turn (" + i_OtherPlayer.CoinType + ") :");
+                }
             }
 
             return gameIsOver;
         }
 
 
-        private bool isGameOverDueToQuit(string i_InputMove)
-        {
-            return InputValidation.IsTryingToQuit(i_InputMove) && quitHandler(m_CurrentPlayer.Name);
+        //private bool isGameOverDueToQuit(string i_InputMove)
+        //{
+        //    return InputValidation.IsTryingToQuit(i_InputMove) && quitHandler(m_CurrentPlayer.Name);
 
-        }
-        private static bool quitHandler(string i_PlayerName)
+        //}
+        private bool quitHandler(string i_PlayerName, PointsCalculator i_PointsCalculator)
         {
             string playerAnswer;
             bool playerWantsToQuit = false;
@@ -288,6 +309,7 @@ namespace B18_Ex02
             if (playerAnswer.Equals("Y"))
             {
                 playerWantsToQuit = true;
+                startNewGame(i_PointsCalculator);
             }
             else
             {
@@ -322,16 +344,44 @@ namespace B18_Ex02
             return turnToKing;
         }
 
-        private void calcUserPoints(Player i_CurrentPlayer)
+        private void startNewGame(PointsCalculator i_PointsCalculator)
         {
-            int totalPoints = 0;
-            ArrayList firstUserCoins = m_PlayingBoard.GetUserCoins(i_CurrentPlayer.CoinType);
-            foreach (Coin coin in firstUserCoins)
+            bool startNewMatch;
+            string userInput;
+            if (i_PointsCalculator.IsWinnerFound())
             {
-                totalPoints += coin.IsKing ? 4 : 1;
+                Console.WriteLine(i_PointsCalculator.MatchWinner.Name + ", you won the match!");
+            }
+            else
+            {
+                Console.WriteLine("The match ended in a draw");
+            }
+            Console.WriteLine(this.m_FirstPlayer.Name + "number of total points is: " + i_PointsCalculator.FirstPlayerTotalPoints);
+            Console.WriteLine(this.m_SecondPlayer.Name + "number of total points is: " + i_PointsCalculator.SecondPlayerTotalPoints);
+            Console.WriteLine("Would you like to start a new match? please answer with Y/N");
+            userInput = InputValidation.ValidYesOrNo();
+            if (userInput.Equals("Y"))
+            {
+                startNewMatch = true;
+            }
+            else
+            {
+                startNewMatch = false;
             }
 
-            i_CurrentPlayer.Points = totalPoints;
+            this.m_StartNewMatch = startNewMatch;
         }
+
+        //private void calcUserPoints(Player i_CurrentPlayer)
+        //{
+        //    int totalPoints = 0;
+        //    ArrayList firstUserCoins = m_PlayingBoard.GetUserCoins(i_CurrentPlayer.CoinType);
+        //    foreach (Coin coin in firstUserCoins)
+        //    {
+        //        totalPoints += coin.IsKing ? 4 : 1;
+        //    }
+
+        //    i_CurrentPlayer.Points = totalPoints;
+        //}
     }
 }

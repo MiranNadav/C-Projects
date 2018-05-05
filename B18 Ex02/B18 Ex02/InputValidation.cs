@@ -54,5 +54,17 @@ namespace B18_Ex02
 
             return boardSizeIsValid;
         }
+
+        public static string ValidYesOrNo()
+        {
+            String playerAnswer = Console.ReadLine();
+
+            while (!playerAnswer.Equals("Y") && !playerAnswer.Equals("N"))
+            {
+                Console.WriteLine("Invalid answer. Please type Y or N");
+                playerAnswer = Console.ReadLine();
+            }
+            return playerAnswer;
+        }
     }
 }

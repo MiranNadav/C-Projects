@@ -37,7 +37,6 @@ namespace B18_Ex02
 
         public ArrayList GetUserCoins(char i_CoinType)
         {
-            //return i_CoinType == 'O' ? m_FirstPlayerCoins : m_SecondPlayerCoins;
             ArrayList coins = new ArrayList();
             Coin currentCoin;
             for (int i = 0; i < m_BoardSize; i++)
@@ -53,11 +52,6 @@ namespace B18_Ex02
             }
             return coins;
         }
-
-        //public Coins GetOtherUserCoins(char i_CoinType)
-        //{
-        //    return i_CoinType == 'O' ? m_SecondPlayerCoins : m_FirstPlayerCoins;
-        //}  
 
         private void buildBoard()
         {
@@ -107,73 +101,6 @@ namespace B18_Ex02
             return !IsEmptyAtSquare(i_Square) && m_Board[i_Square.RowIndex, i_Square.ColumnIndex].Type.Equals(i_CoinType);
         }
 
-        public char getCoinTypeInBoard (Square i_Square)
-        {
-            return m_Board[i_Square.RowIndex, i_Square.RowIndex].Type;
-        }
-
-        private void setUserCoins(Coins i_UsersCoins, int i_NumOfCoins)
-        {
-            int row;
-            int col;
-            Coin currentCoin;
-
-            for (int i = 0; i < i_NumOfCoins; i++)
-            {
-                currentCoin = i_UsersCoins.GetCoin(i);
-                if (currentCoin != null)
-                {
-                    row = currentCoin.Row - 97;
-                    col = currentCoin.Column - 65;
-                    this.m_Board[row, col] = currentCoin;
-                }
-            }
-        }
-
-        private void hasJump()
-        {
-            bool hasJump = false;
-            Coin currentCoin;
-            Coin firstCandidateForJump;
-            Coin secondCandidateForJump;
-            Coin firstPossiboleBlock;
-            Coin secondPossiboleBlock;
-
-            for (int row = 0; row < this.m_BoardSize; row++)
-            {
-                for (int col = 0; col < this.m_BoardSize; col++)
-                {
-                    currentCoin = m_Board[row, col];
-
-                    if (currentCoin != null)
-                    {
-                        // Jumps for 'X'
-                        firstCandidateForJump = m_Board[row - 1, col + 1];
-                        secondCandidateForJump = m_Board[row - 1, col - 1];
-                        if ((firstCandidateForJump != null && firstCandidateForJump.Type != currentCoin.Type))
-                        {
-                            firstPossiboleBlock = m_Board[row - 2, col + 2];
-                            if (firstPossiboleBlock == null)
-                            {
-                                hasJump = true;
-                            }
-                        }
-                        else if ((secondCandidateForJump != null && secondCandidateForJump.Type != currentCoin.Type))
-                        {
-                            secondPossiboleBlock = m_Board[row - 2, col - 2];
-                            if (secondPossiboleBlock == null)
-                            {
-                                hasJump = true;
-                            }
-                        }
-                    }
-                }
-
-                this.m_HasJump = hasJump;
-            }
-        }
-
-
         public void printBoard()
         {
             string newLine = Environment.NewLine;
@@ -181,11 +108,6 @@ namespace B18_Ex02
             char coinType;
             StringBuilder board = new StringBuilder();
             Coin currentCoin;
-            //int numOfRows = m_Board.GetLength(0);
-            //int numOfColumns = m_Board.GetLength(1);
-
-            //TODO: check if this needs to be here
-
 
             for (int i = 0; i < m_BoardSize; i++)
             {
