@@ -118,7 +118,7 @@ namespace B18_Ex02
             return inputIsValid;
         }
 
-        private static bool isDiagonal(PlayerMove i_ParseMove, char i_CoinType)
+        public static bool isDiagonal(PlayerMove i_ParseMove, char i_CoinType)
         {
             bool isDiagonal = true;
 
