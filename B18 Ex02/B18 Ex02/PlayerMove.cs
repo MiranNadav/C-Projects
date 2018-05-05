@@ -11,19 +11,16 @@ namespace B18_Ex02
     {
         private Square m_CurrentSquare;
         private Square m_NextSquare;
-        private bool m_IsQuit = false;
 
         public PlayerMove(string i_CurrentMove)
         {
-            if (i_CurrentMove.Equals("Q"))
-            {
-                m_IsQuit = true;
-            }
-            else
-            {
-                m_CurrentSquare = new Square(i_CurrentMove[0], i_CurrentMove[1]);
-                m_NextSquare = new Square(i_CurrentMove[3], i_CurrentMove[4]);
-            }
+            m_CurrentSquare = new Square(i_CurrentMove[0], i_CurrentMove[1]);
+            m_NextSquare = new Square(i_CurrentMove[3], i_CurrentMove[4]);
+        }
+        public PlayerMove(Square i_CurrentSquare, Square i_NextSquare)
+        {
+            m_CurrentSquare = i_CurrentSquare;
+            m_NextSquare = i_NextSquare;
         }
 
         public int CurrentRowIndex
@@ -105,22 +102,13 @@ namespace B18_Ex02
                 return this.m_NextSquare;
             }
         }
-
-        public bool IsQuit
-        {
-
-            get
-            {
-                return this.m_IsQuit;
-            }
-        }
         public Square calculateMiddleSquare()
         {
             int middleSquareCol = (this.CurrentColIndex + this.NextColIndex) / 2;
             int middleSquareRow = (this.CurrentRowIndex + this.NextRowIndex) / 2;
             return new Square(middleSquareCol, middleSquareRow);
         }
-        public string GetFullMove()
+        public string GetFullMove ()
         {
             return m_CurrentSquare.getSquare() + ">" + m_NextSquare.getSquare();
         }

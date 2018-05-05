@@ -9,18 +9,21 @@ namespace B18_Ex02
 {
     class InputValidation
     {
-
-        public static bool IsTryingToQuit(PlayerMove i_InputMove)
+        
+        public static bool IsTryingToQuit (string i_InputMove)
         {
-            return i_InputMove.IsQuit;
+            return i_InputMove.Equals("Q");
         }
-
-
-        public static bool inputFormatIsValid(PlayerMove i_CurrentMove)
+  
+        public static bool IsEmptyInput ()
+        {
+            return false;
+        }
+        public static bool inputFormatIsValid(string i_CurrentMove)
         {
             bool formatIsValid = true;
             Regex regex = new Regex(@"^[A-Z][a-z]>[A-Z][a-z]$");
-            Match match = regex.Match(i_CurrentMove.GetFullMove());
+            Match match = regex.Match(i_CurrentMove);
 
             if (!(match.Success))
             {

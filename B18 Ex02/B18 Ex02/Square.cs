@@ -70,5 +70,13 @@ namespace B18_Ex02
             return string.Empty + m_Column + m_Row;
         }
 
+        public override bool Equals (Object i_Object)
+        {
+            Square otherSquare = (Square) i_Object;
+            return this.RowIndex == otherSquare.RowIndex && this.ColumnIndex == otherSquare.ColumnIndex;
+        }
+
+
     }
+
 }

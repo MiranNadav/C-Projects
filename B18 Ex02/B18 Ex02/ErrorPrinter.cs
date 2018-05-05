@@ -23,44 +23,44 @@ namespace B18_Ex02
             Console.WriteLine(i_ErrorMessage);
         }
 
-        public static void BoardSizeErrorMessage()
+        public static string BoardSizeErrorMessage()
         {
-            printErrorMessage(boardSizeErrorMessage);
+            return (boardSizeErrorMessage);
         }
 
-        public static void FormatErrorMessage()
+        public static string FormatErrorMessage()
         {
-            printErrorMessage(formatErrorMessage);
+            return  (formatErrorMessage);
         }
 
-        public static void NoCoinToMoveMessage()
+        public static string NoCoinToMoveMessage()
         {
-            printErrorMessage(noCoinToMoveMessage);
+            return (noCoinToMoveMessage);
         }
 
-        public static void OutOfBoundMessage()
+        public static string OutOfBoundMessage()
         {
-            printErrorMessage(outOfBoundsMessage);
+            return (outOfBoundsMessage);
         }
 
-        public static void InvalidJumpMessage()
+        public static string InvalidJumpMessage()
         {
-            printErrorMessage(invalidJumpMessage);
+            return (invalidJumpMessage);
         }
 
-        public static void SquareIsBlockedMessage()
+        public static string SquareIsBlockedMessage()
         {
-            printErrorMessage(squareIsBlockedMessage);
+            return (squareIsBlockedMessage);
         }
 
-        public static void NotDiagonalMessage()
+        public static string NotDiagonalMessage()
         {
-            printErrorMessage(notDiagonalMessage);
+            return (notDiagonalMessage);
         }
 
-        public static void InvalidQuitMessage()
+        public static string InvalidQuitMessage()
         {
-            printErrorMessage(invalidQuitMessage);
+            return (invalidQuitMessage);
         }
 
 

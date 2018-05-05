@@ -11,27 +11,27 @@ namespace B18_Ex02
     {
         private int m_BoardSize;
         private Coin[,] m_Board;
-        //private Coins m_FirstPlayerCoins;
-        //private Coins m_SecondPlayerCoins;
         private bool m_HasJump = false;
-
 
         public Board(int i_BoardSize)//, Coins i_FirstUserCoins, Coins i_SecondUserCoins)
         {
             this.m_BoardSize = i_BoardSize;
-            //this.m_FirstPlayerCoins = i_FirstUserCoins;
-            //this.m_SecondPlayerCoins = i_SecondUserCoins;
-            //this.m_FirstUserCoins = new Coins('O', numOfCoins);
-            //this.m_SecondUserCoins = new Coins('X', numOfCoins);
             this.m_Board = new Coin[i_BoardSize, i_BoardSize];
             buildBoard();
         }
 
-        public Coin[,] currentBoard
+        public Coin[,] BoardArray
         {
             get
             {
                 return this.m_Board;
+            }
+        }
+        public int BoardSize
+        {
+            get
+            {
+                return this.m_BoardSize;
             }
         }
 
@@ -57,22 +57,12 @@ namespace B18_Ex02
         //public Coins GetOtherUserCoins(char i_CoinType)
         //{
         //    return i_CoinType == 'O' ? m_SecondPlayerCoins : m_FirstPlayerCoins;
-        //}
-
-
-        public int GetBoardSize()
-        {
-            return this.m_BoardSize;
-        }
+        //}  
 
         private void buildBoard()
         {
 
-            //char coinType;
-            //int numOfCoins = this.m_FirstPlayerCoins.getNumOfCoins();
             this.m_Board = new Coin[this.m_BoardSize, this.m_BoardSize];
-            //setUserCoins(this.m_FirstPlayerCoins, numOfCoins);
-            //setUserCoins(this.m_SecondPlayerCoins, numOfCoins);
 
             for (int i = 0; i < m_BoardSize; i++)
             {
@@ -106,14 +96,19 @@ namespace B18_Ex02
                                                         PlaceIndexConvertor.GetCapitalCharByIndex(i_ColumnIndex), coinType);
         }
 
-        public bool IsEmptyAtSquare(Square i_Square)
+        public bool IsEmptyAtSquare (Square i_Square)
         {
             return m_Board[i_Square.RowIndex, i_Square.ColumnIndex] == null;
         }
 
-        public bool IsEmptyAtSquare(Square i_Square, char i_CoinType)
+        public bool IsSquareContainCoinByType (Square i_Square, char i_CoinType)
         {
             return !IsEmptyAtSquare(i_Square) && m_Board[i_Square.RowIndex, i_Square.ColumnIndex].Type.Equals(i_CoinType);
+        }
+
+        public char getCoinTypeInBoard (Square i_Square)
+        {
+            return m_Board[i_Square.RowIndex, i_Square.RowIndex].Type;
         }
 
         private void setUserCoins(Coins i_UsersCoins, int i_NumOfCoins)
@@ -251,19 +246,16 @@ namespace B18_Ex02
             Coin movingCoin;
 
             movingCoin = this.m_Board[currentRowToInt, currentcolumnToInt];
-            movingCoin.Square = i_CurrentMove.NextSquare;
             this.m_Board[currentRowToInt, currentcolumnToInt] = null;
             this.m_Board[nextRowToInt, nextColumnToInt] = movingCoin;
 
         }
 
-        public void EatCoin(PlayerMove i_CurrentMove)
-        {
+        public void EatCoin (PlayerMove i_CurrentMove)
+        { 
             Square squareToRemoveCoinFrom = i_CurrentMove.calculateMiddleSquare();
             m_Board[squareToRemoveCoinFrom.RowIndex, squareToRemoveCoinFrom.ColumnIndex] = null;
         }
-
-
 
 
         public bool gameStatus()
@@ -271,12 +263,5 @@ namespace B18_Ex02
             return false;
         }
 
-        public Coin[,] BoardArray
-        {
-            get
-            {
-                return this.m_Board;
-            }
-        }
     }
 }
