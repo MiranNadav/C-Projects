@@ -9,24 +9,7 @@ namespace B18_Ex02
 {
     class Validation
     {
-        public static bool ValidateBoardSizeInput(string i_BoardSize)
-        {
-            bool boardSizeIsValid = true;
 
-            if (!int.TryParse(i_BoardSize, out int integerBoardSize))
-            {
-                boardSizeIsValid = false;
-            }
-            else
-            {
-                if (integerBoardSize != 6 && integerBoardSize != 8 && integerBoardSize != 10)
-                {
-                    boardSizeIsValid = false;
-                }
-            }
-
-            return boardSizeIsValid;
-        }
 
         public static string IsLegalMovement(PlayerMove currentMove, Board i_Board)
         {
@@ -39,9 +22,7 @@ namespace B18_Ex02
             Coin[,] boardArray = i_Board.BoardArray;
             sourceSquare = currentMove.CurrentSquare;
             destinationSquare = currentMove.NextSquare;
-            Coin currentCoin = boardArray[sourceSquare.RowIndex, sourceSquare.ColumnIndex];
             string errorMessage = "";
-
 
 
             //checks whether the input is within the board bounds
@@ -50,72 +31,73 @@ namespace B18_Ex02
                 isValidMovement = false;
                 errorMessage = ErrorMessageGenerator.OutOfBoundMessage();
             }
-            //currentCoin = boardArray[sourceSquare.RowIndex, sourceSquare.ColumnIndex];
+            else
+            { 
             // Check if the user's square to move from has a coin
-            else if (i_Board.IsEmptyAtSquare(sourceSquare))
-            {
-                isValidMovement = false;
-                errorMessage = ErrorMessageGenerator.NoCoinToMoveMessage();
-            }
-
-            currentUserCoinType = currentCoin.Type;
-            otherUserCoinType = currentUserCoinType == 'O' ? 'X' : 'O';
-
-            if (!currentCoin.Type.Equals(currentUserCoinType))
-            {
-                isValidMovement = false;
-                errorMessage = ErrorMessageGenerator.NoCoinToMoveMessage();
-            }
-            else if (currentCoin.IsKing)
-            {
-                tryingToJump = KingValidation.isTryingToJump_King(currentMove);
-                if (tryingToJump)
+                Coin currentCoin = boardArray[sourceSquare.RowIndex, sourceSquare.ColumnIndex];
+                if (i_Board.IsEmptyAtSquare(sourceSquare))
                 {
-                    isValidMovement = IsValidJump(currentMove, otherUserCoinType, i_Board);
-                    if (!isValidMovement)
+                    isValidMovement = false;
+                    errorMessage = ErrorMessageGenerator.NoCoinToMoveMessage();
+                }
+
+                currentUserCoinType = currentCoin.Type;
+                otherUserCoinType = currentUserCoinType == 'O' ? 'X' : 'O';
+
+                if (!currentCoin.Type.Equals(currentUserCoinType))
+                {
+                    isValidMovement = false;
+                    errorMessage = ErrorMessageGenerator.NoCoinToMoveMessage();
+                }
+                else if (currentCoin.IsKing)
+                {
+                    tryingToJump = KingValidation.isTryingToJump_King(currentMove);
+                    if (tryingToJump)
+                    {
+                        isValidMovement = IsValidJump(currentMove, otherUserCoinType, i_Board);
+                        if (!isValidMovement)
+                        {
+                            errorMessage = ErrorMessageGenerator.InvalidJumpMessage();
+                        }
+                    }
+                    else
+                    {
+                        if (!i_Board.IsEmptyAtSquare(destinationSquare))
+                        {
+                            isValidMovement = false;
+                            errorMessage = ErrorMessageGenerator.SquareIsBlockedMessage();
+                        }
+                        else
+                        {
+                            isValidMovement = KingValidation.isDiagonal_King(currentMove);
+                            if (!isValidMovement)
+                            {
+                                errorMessage = ErrorMessageGenerator.NotDiagonalMessage();
+                            }
+                        }
+                    }
+                }
+                // Checks if the jump is valid 
+                else if (IsTryingToJump(currentMove, currentUserCoinType))
+                {
+                    if (!IsValidJump(currentMove, otherUserCoinType, i_Board))
                     {
                         errorMessage = ErrorMessageGenerator.InvalidJumpMessage();
                     }
                 }
-                else
+                // Checks whether an opponents coin appear in the toSquare
+                else if (!i_Board.IsEmptyAtSquare(destinationSquare))
                 {
-                    if (!i_Board.IsEmptyAtSquare(destinationSquare))
-                    {
-                        isValidMovement = false;
-                        errorMessage = ErrorMessageGenerator.SquareIsBlockedMessage();
-                    }
-                    else
-                    {
-                        isValidMovement = KingValidation.isDiagonal_King(currentMove);
-                        if (!isValidMovement)
-                        {
-                            errorMessage = ErrorMessageGenerator.NotDiagonalMessage();
-                        }
-                    }
+                    isValidMovement = false;
+                    errorMessage = ErrorMessageGenerator.SquareIsBlockedMessage();
+                }
+                // Check if the move is diagonal
+                else if (!IsDiagonal(currentMove, currentUserCoinType))
+                {
+                    isValidMovement = false;
+                    errorMessage = ErrorMessageGenerator.NotDiagonalMessage();
                 }
             }
-
-            // Checks if the jump is valid 
-            else if (IsTryingToJump(currentMove, currentUserCoinType))
-            {
-                if (!IsValidJump(currentMove, otherUserCoinType, i_Board))
-                {
-                    errorMessage = ErrorMessageGenerator.InvalidJumpMessage();
-                }
-            }
-            // Checks whether an opponents coin appear in the toSquare
-            else if (!i_Board.IsEmptyAtSquare(destinationSquare))
-            {
-                isValidMovement = false;
-                errorMessage = ErrorMessageGenerator.SquareIsBlockedMessage();
-            }
-            // Check if the move is diagonal
-            else if (!IsDiagonal(currentMove, currentUserCoinType))
-            {
-                isValidMovement = false;
-                errorMessage = ErrorMessageGenerator.NotDiagonalMessage();
-            }
-
             return errorMessage;
         }
 

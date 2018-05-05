@@ -19,7 +19,7 @@ namespace B18_Ex02
         {
             return false;
         }
-        public static bool inputFormatIsValid(string i_CurrentMove)
+        public static bool InputFormatIsValid(string i_CurrentMove)
         {
             bool formatIsValid = true;
             Regex regex = new Regex(@"^[A-Z][a-z]>[A-Z][a-z]$");
@@ -31,6 +31,28 @@ namespace B18_Ex02
             }
 
             return formatIsValid;
+        }
+        public static bool IsInputNameValid(string i_Name)
+        {
+            return (i_Name.Length > 0) && (i_Name.Length <= 20) && (!i_Name.Contains(" "));
+        }
+        public static bool ValidateBoardSizeInput(string i_BoardSize)
+        {
+            bool boardSizeIsValid = true;
+
+            if (!int.TryParse(i_BoardSize, out int integerBoardSize))
+            {
+                boardSizeIsValid = false;
+            }
+            else
+            {
+                if (integerBoardSize != 6 && integerBoardSize != 8 && integerBoardSize != 10)
+                {
+                    boardSizeIsValid = false;
+                }
+            }
+
+            return boardSizeIsValid;
         }
     }
 }

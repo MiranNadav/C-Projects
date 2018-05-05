@@ -27,22 +27,18 @@ namespace B18_Ex02
             //Player firstPlayer;
             //Player Computer;
 
-            Console.WriteLine("Please enter your name:");
-            firstUserName = Console.ReadLine();
-            while (firstUserName.Length == 0)
-            {
-                Console.WriteLine("Your name cannot be blank. Please tell us your name.");
-                firstUserName = Console.ReadLine();
-            }
 
+            firstUserName = getInputNameFromUser();
 
             Console.WriteLine("Please enter a valid board size (6,8,10):");
             boardSize = Console.ReadLine();
-            while (!Validation.ValidateBoardSizeInput(boardSize))
+            while (!InputValidation.ValidateBoardSizeInput(boardSize))
             {
                 Console.WriteLine("Board size is invalid. Please enter one of the following: 6/8/10");
                 boardSize = Console.ReadLine();
             }
+
+            m_FirstPlayer = new Player(firstUserName, 'O', int.Parse(boardSize));
 
             Console.WriteLine("Write 1 if you want to play against another player, 2 if you want to play vs the computer:");
             numOfPlayers = Console.ReadLine();
@@ -52,34 +48,53 @@ namespace B18_Ex02
                 numOfPlayers = Console.ReadLine();
             }
 
-            m_FirstPlayer = new Player(firstUserName, 'O', int.Parse(boardSize));
-            m_SecondPlayer = new Player("Comp", 'X', int.Parse(boardSize));
+            if (int.Parse(numOfPlayers) == 1)
+            {
+                m_SecondPlayer = new Player(getInputNameFromUser(), 'X', int.Parse(boardSize));
+            }
+            else
+            {
+                m_SecondPlayer = new Player(int.Parse(boardSize));
+            }
+
             m_CurrentPlayer = m_FirstPlayer;
 
             m_PlayingBoard = new Board(int.Parse(boardSize));
             m_PlayingBoard.printBoard();
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
 
-            // TO DELETE!!!!!!!!!
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Bc>Cd"));
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Ef>Fe"));
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Cd>De"));
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Gf>He"));
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("De>Ef"));
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Fg>Gf"));
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Ef>Fg"));
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Dg>Ef"));
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Cb>Bc"));
-            m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Eh>Dg"));
-            m_PlayingBoard.printBoard();
+            //// TO DELETE!!!!!!!!!
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Bc>Cd"));
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Ef>Fe"));
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Cd>De"));
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Gf>He"));
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("De>Ef"));
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Fg>Gf"));
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Ef>Fg"));
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Dg>Ef"));
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Cb>Bc"));
+            //m_PlayingBoard.MoveCoinInBoard(new PlayerMove("Eh>Dg"));
+            //m_PlayingBoard.printBoard();
+
+            //// TO DELETE!!!!!!!!!
 
             matchManager(m_PlayingBoard);
-            // TO DELETE!!!!!!!!!
-
 
             //TODO: remove this 
-            Console.WriteLine("Press enter to close terminal");
             Console.ReadLine();
+            Console.WriteLine("Press enter to close terminal");
+        }
+
+        private string getInputNameFromUser()
+        {
+            Console.WriteLine("Please enter your name:");
+            string inputName = Console.ReadLine();
+            while (!InputValidation.IsInputNameValid(inputName))
+            {
+                Console.WriteLine("Your name is invalid! Please tell us your name.");
+                inputName= Console.ReadLine();
+            }
+            return inputName;
         }
 
         private void matchManager(Board i_PlayingBoard)
@@ -102,7 +117,7 @@ namespace B18_Ex02
                 }
                 else
                 {
-                    //gameIsOver = parseUserInput(m_SecondPlayer, m_FirstPlayer);
+                    gameIsOver = parseUserInput(m_SecondPlayer, m_FirstPlayer);
                     isFirstUserTurn = true;
                 }
             }
@@ -121,56 +136,67 @@ namespace B18_Ex02
 
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
 
-            
-            inputMove = Console.ReadLine();
+            if (!i_CurrentPlayer.IsComputer) { 
+                inputMove = Console.ReadLine();
 
-            while (!gameIsOver && (!isValidMove || (isValidMove && tryingToQuit)))
-            {
-                tryingToQuit = InputValidation.IsTryingToQuit(inputMove);
-                if (tryingToQuit)
+                while (!gameIsOver && (!isValidMove || (isValidMove && tryingToQuit)))
                 {
-                    //isValidMove = quitHandler(i_CurrentPlayer.Name);
-                    if (quitHandler(i_CurrentPlayer.Name))
+                    tryingToQuit = InputValidation.IsTryingToQuit(inputMove);
+                    if (tryingToQuit)
                     {
-                        gameIsOver = true;
-                    }
-                    else
-                    {
-                        tryingToQuit = false;
-                        inputMove = Console.ReadLine();
-                    }
-                }
-                //Not Trying To QUIT
-                else
-                {
-                    isValidMove = InputValidation.inputFormatIsValid(inputMove);
-                    if (isValidMove)
-                    {
-                        currentMove = new PlayerMove(inputMove);
-                        string errorMessage = Validation.IsLegalMovement(currentMove, m_PlayingBoard);
-                        if (!errorMessage.Equals(String.Empty))
+                        if (quitHandler(i_CurrentPlayer.Name))
                         {
-                            isValidMove = false;
-                            Console.WriteLine(errorMessage);
+                            gameIsOver = true;
                         }
-                        if (!isValidMove)
+                        else
                         {
+                            tryingToQuit = false;
                             inputMove = Console.ReadLine();
                         }
                     }
+                    //Not Trying To QUIT
                     else
                     {
-                        ErrorMessageGenerator.FormatErrorMessage();
-                        inputMove = Console.ReadLine();
+                        isValidMove = InputValidation.InputFormatIsValid(inputMove);
+                        if (isValidMove)
+                        {
+                            currentMove = new PlayerMove(inputMove);
+                            string errorMessage = Validation.IsLegalMovement(currentMove, m_PlayingBoard);
+                            if (!errorMessage.Equals(String.Empty))
+                            {
+                                isValidMove = false;
+                                Console.WriteLine(errorMessage);
+                                inputMove = Console.ReadLine();
+                            }
+                            else
+                            {
+                                currentCoin = m_PlayingBoard.BoardArray[currentMove.CurrentRowIndex, currentMove.CurrentColIndex];
+                                if (!MovementValidation.IsCoinBelongToPlayer(i_CurrentPlayer, currentCoin))
+                                {
+                                    Console.WriteLine("You are trying to move an opponents coin. Please enter a valid input.");
+                                    inputMove = Console.ReadLine();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine(ErrorMessageGenerator.FormatErrorMessage());
+                            inputMove = Console.ReadLine();
+                        }
                     }
                 }
+                currentMove = new PlayerMove(inputMove);
             }
+            else
+            {
+                currentMove = RandomMovementGenerator.getRandomMove(m_PossibleMoves.SecondPlayerPossibleMoves);
+            }
+            Coin[,] boardArray = m_PlayingBoard.BoardArray;
+            currentCoin = m_PlayingBoard.BoardArray[currentMove.CurrentRowIndex, currentMove.CurrentColIndex];
 
-            currentMove = new PlayerMove(inputMove);
+
             if (!gameIsOver)
             {
-                Coin[,] boardArray = m_PlayingBoard.BoardArray;
-                currentCoin = m_PlayingBoard.BoardArray[currentMove.CurrentRowIndex, currentMove.CurrentColIndex];
                 char currentUserCoinType = currentCoin.Type;
 
                 m_PlayingBoard.MoveCoinInBoard(currentMove);
@@ -195,21 +221,28 @@ namespace B18_Ex02
                         Ex02.ConsoleUtils.Screen.Clear();
                         m_PlayingBoard.printBoard();
 
-                        Console.WriteLine(i_CurrentPlayer.Name + ", you can eat more. Please enter another move.");
-                        inputMove = Console.ReadLine();
-                        isValidMove = InputValidation.inputFormatIsValid(inputMove);
-                        while (!isValidMove)
+                        if (!i_CurrentPlayer.IsComputer)
                         {
-                            Console.WriteLine(i_CurrentPlayer.Name + ", the input is invalid. eneter a good move please");
+                            Console.WriteLine(i_CurrentPlayer.Name + ", you can eat more. Please enter another move.");
                             inputMove = Console.ReadLine();
-                            isValidMove = InputValidation.inputFormatIsValid(inputMove);
+                            isValidMove = InputValidation.InputFormatIsValid(inputMove);
+                            while (!isValidMove)
+                            {
+                                Console.WriteLine(i_CurrentPlayer.Name + ", the input is invalid. eneter a good move please");
+                                inputMove = Console.ReadLine();
+                                isValidMove = InputValidation.InputFormatIsValid(inputMove);
+                                currentMove = new PlayerMove(inputMove);
+                            }
                             currentMove = new PlayerMove(inputMove);
+                            if (!PossibleMoves.isJumpPossible(allPossibleJumps, currentMove))
+                            {
+                                Console.WriteLine(i_CurrentPlayer.Name + ", the Move is not a valid jump. eneter a good jump please");
+                                isValidMove = false;
+                            }
                         }
-                        currentMove = new PlayerMove(inputMove);
-                        if (!PossibleMoves.isJumpPossible(allPossibleJumps, currentMove))
+                        else
                         {
-                            Console.WriteLine(i_CurrentPlayer.Name + ", the Move is not a valid jump. eneter a good jump please");
-                            isValidMove = false;
+                            currentMove = RandomMovementGenerator.getRandomMove(allPossibleJumps);
                         }
 
                         m_PlayingBoard.EatCoin(currentMove);

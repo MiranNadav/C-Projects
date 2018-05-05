@@ -30,6 +30,22 @@ namespace B18_Ex02
                 }
             }
         }
+
+        public ArrayList FirstPlayerPossibleMoves
+        {
+            get
+            {
+                return this.m_FirstPlayerPossibleMoves;
+            }
+        }
+        public ArrayList SecondPlayerPossibleMoves
+        {
+            get
+            {
+                return this.m_SecondPlayerPossibleMoves;
+            }
+        }
+
         private void addValidMovesToBothArrays(Coin i_Coin, Square i_Square)
         {
             if (i_Coin.Type.Equals('O'))

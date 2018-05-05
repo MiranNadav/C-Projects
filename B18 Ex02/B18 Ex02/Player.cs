@@ -13,6 +13,7 @@ namespace B18_Ex02
         private char m_CoinType;
         private int m_NumOfCoins = 0;
         private int m_UserPoints = 0;
+        private bool m_IsComputer = false;
 
         public Player(string i_UserName, char i_CoinType, int i_BoardSize)
         {
@@ -21,33 +22,26 @@ namespace B18_Ex02
 
             this.m_NumOfCoins = (i_BoardSize * i_BoardSize - 2 * i_BoardSize) / 4;
             this.m_UserPoints = this.m_NumOfCoins;
+
         }
 
-        //public int CalcUserPoints()
-        //{
-        //    Coin currentCoin;
-        //    int points = 0;
+        public Player(int i_BoardSize)
+        {
+            this.m_Name = "Comp";
+            this.m_CoinType = 'X';
+            this.m_NumOfCoins = (i_BoardSize * i_BoardSize - 2 * i_BoardSize) / 4;
+            this.m_UserPoints = this.m_NumOfCoins;
+            this.m_IsComputer = true;
 
-        //    for (int i = 0; i < this.m_NumOfCoins; i++)
-        //    {
-        //        //currentCoin = this.m_Coins.GetCoin(i);
-        //        if (currentCoin != null)
-        //        {
-        //            if (currentCoin.IsKing)
-        //            {
-        //                points = points + 4;
-        //            }
-        //            else
-        //            {
-        //                points = points + 1;
-        //            }
-        //        }
-        //    }
+        }
 
-        //    this.m_UserPoints = points;
-        //    return points;
-        //}
-
+        public bool IsComputer
+        {
+            get
+            {
+                return this.m_IsComputer;
+            }
+        }
 
         public int Points
         {
