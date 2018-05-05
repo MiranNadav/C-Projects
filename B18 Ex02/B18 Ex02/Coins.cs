@@ -108,15 +108,6 @@ namespace B18_Ex02
 
             return index;
         }
-        public void moveCoin(string i_MoveFrom, string i_MoveTo)
-        {
-            int currentCoinIndex = GetCoinIndex(i_MoveFrom);
-            Coin currentCoin = GetCoin(currentCoinIndex);
-
-            currentCoin.Column = i_MoveTo[0];
-            currentCoin.Row = i_MoveTo[1];
-            currentCoin.Square = i_MoveTo;
-        }
 
         public int getNumOfCoins()
         {

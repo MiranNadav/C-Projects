@@ -94,19 +94,6 @@ namespace B18_Ex02
         {
             return this.m_Coins;
         }
-        public bool squareHasCoin(String square)
-        {
-            bool squareIsOcupid = false;
-
-            for (int i = 0; i < this.m_NumOfCoins; i++)
-            {
-                if (this.m_Coins.GetCoin(i).getCurrentSquare().Equals(square))
-                {
-                    squareIsOcupid = true;
-                    break;
-                }
-            }
-            return squareIsOcupid;
-        }
+      
     }
 }

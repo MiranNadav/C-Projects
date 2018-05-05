@@ -17,25 +17,21 @@ namespace B18_Ex02
         private Board m_PlayingBoard;
 
 
-        //public GameManager(Player i_FirstPlayer, Player i_SecondPlayer)
-        //{
-        //    this.m_FirstPlayer = i_FirstPlayer;
-        //    this.m_SecondPlayer = i_SecondPlayer;
-        //}
-
-
         public void initializeMatch()
         {
-
             string boardSize;
-            Board PlayingBoard;
             string firstUserName;
             //Player firstPlayer;
             //Player Computer;
 
             Console.WriteLine("Please enter your name:");
-            //TODO: validate the input of the user
             firstUserName = Console.ReadLine();
+            while (firstUserName.Length == 0)
+            {
+                Console.WriteLine("Your name cannot be blank. Please tell us your name.");
+                firstUserName = Console.ReadLine();
+            }
+
 
             Console.WriteLine("Please enter a valid board size (6,8,10):");
             boardSize = Console.ReadLine();
@@ -45,14 +41,21 @@ namespace B18_Ex02
                 boardSize = Console.ReadLine();
             }
 
-            //TODO: validate this input
             Console.WriteLine("Write 1 if you want to play against another player, 2 if you want to play vs the computer:");
-            Console.ReadLine();
+            numOfPlayers = Console.ReadLine();
+            while (!int.TryParse(numOfPlayers, out int numOfPlayers_int) || (!(numOfPlayers_int == 1) && !(numOfPlayers_int == 2)))
+            {
+                Console.WriteLine("The number of players can only be 1 or 2. Please enter one of the following");
+                numOfPlayers = Console.ReadLine();
+            }
+
             m_FirstPlayer = new Player(firstUserName, 'O', int.Parse(boardSize));
             m_SecondPlayer = new Player("Comp", 'X', int.Parse(boardSize));
             m_CurrentPlayer = m_FirstPlayer;
 
-            PlayingBoard = new Board(int.Parse(boardSize));
+            playingBoard = new Board(int.Parse(boardSize));
+            playingBoard.printBoard();
+            matchManager(playingBoard, firstPlayer, Computer);
 
             matchManager(PlayingBoard);
 
@@ -97,34 +100,29 @@ namespace B18_Ex02
             }
             //TODO: add end game lines 
             //TODO: remove this 
-
-            Console.WriteLine("The game is over");
-            Console.ReadLine();
+        }
         }
 
         private bool parseUserInput(Board i_CurrentBoard, Player i_CurrentPlayer, Player i_OtherPlayer)
         {
             bool isValidMove = false;
-            //TODO: should be changed to new move?
             string inputMove;
-            PlayerMove parseMove;
+            PlayerMove currentMove;
             bool currentMoveIsJump = false;
             bool gameIsOver = false;
             bool tryingToQuit = false;
-            char currentUserCoinType = i_CurrentPlayer.CoinType;
-            //Coins currentUserCoins = i_CurrentBoard.GetUserCoins(currentUserCoinType);
-            //Coins otherUserCoins = i_CurrentBoard.GetOtherUserCoins(currentUserCoinType);
+            Coin currentCoin;
 
 
             inputMove = Console.ReadLine();
-
+            currentMove = new PlayerMove(inputMove);
             while (!gameIsOver &&  !isValidMove)//|| (isValidMove && tryingToQuit)))
             {
                 gameIsOver = isGameOverDueToQuit(inputMove);
                 if (!gameIsOver)
                 {
                     inputMove = Console.ReadLine();
-                    isValidMove = InputValidation.inputFormatIsValid(inputMove);
+                    isValidMove = InputValidation.inputFormatIsValid(currentMove);
                     if (isValidMove)
                     {
                         inputMove = Console.ReadLine();
@@ -136,7 +134,6 @@ namespace B18_Ex02
                     }
                     else
                     {
-                        //Validation.printErrorMessage("The format of the move you entered is invalid. Please try entering a move in the following format: COLrow>COLrow");
                         ErrorPrinter.FormatErrorMessage();
                         inputMove = Console.ReadLine();
                     }
@@ -145,15 +142,30 @@ namespace B18_Ex02
 
             if (!gameIsOver)
             {
-                parseMove = new PlayerMove(inputMove);
-                currentMoveIsJump = Validation.IsTryingToJump(parseMove, currentUserCoinType);
-                i_CurrentBoard.MoveCoinInBoard(parseMove);
+                Coin[,] boardArray = i_CurrentBoard.BoardArray;
+                char currentUserCoinType = boardArray[currentMove.CurrentRowIndex, currentMove.CurrentColIndex].Type;
+                currentCoin = i_CurrentBoard.BoardArray[currentMove.CurrentRowIndex, currentMove.CurrentColIndex];
+                i_CurrentBoard.MoveCoinInBoard(currentMove);
 
+                if (shouldBeKinged(currentMove, i_CurrentBoard, currentUserCoinType))
+                {
+                    currentCoin.IsKing = true;
+                }
+
+                currentMoveIsJump = currentCoin.IsKing == false ? Validation.IsTryingToJump(currentMove, currentUserCoinType) : KingValidation.isTryingToJump_King(currentMove);
                 if (currentMoveIsJump)
                 {
-                    i_CurrentBoard.EatCoin(parseMove);
+                    i_CurrentBoard.EatCoin(currentMove);
                     i_OtherPlayer.CalcUserPoints();
                 }
+            }
+
+            Ex02.ConsoleUtils.Screen.Clear();
+            if (!gameIsOver)
+            {
+                i_CurrentBoard.printBoard();
+                Console.WriteLine(i_CurrentPlayer.Name + "'s move was: " + currentMove.GetFullMove());
+                Console.WriteLine(i_OtherPlayer.Name + "'s Turn (" + i_OtherPlayer.CoinType + ") :");
             }
 
             return gameIsOver;
@@ -188,6 +200,32 @@ namespace B18_Ex02
             }
 
             return playerWantsToQuit;
+        }
+
+        private static bool shouldBeKinged(PlayerMove i_CurrentMove, Board i_CurrentBoard, char i_CurrentCoinType)
+        {
+            bool turnToKing = false;
+            Coin[,] boardArray = i_CurrentBoard.BoardArray;
+            Coin currentCoin = boardArray[i_CurrentMove.NextRowIndex, i_CurrentMove.NextColIndex];
+
+            if (currentCoin.IsKing)
+            {
+                turnToKing = false;
+    }
+            else
+            {
+                if (i_CurrentCoinType.Equals('X'))
+                {
+                    turnToKing = i_CurrentMove.NextRowIndex == 0 ? true : false;
+}
+                else
+                {
+                    turnToKing = i_CurrentMove.NextRowIndex == i_CurrentBoard.GetBoardSize() - 1 ? true : false;
+                }
+            }
+
+            return turnToKing;
+
         }
     }
 }
