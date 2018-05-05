@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    class ErrorPrinter
+    class ErrorMessageGenerator
     {
         static private string boardSizeErrorMessage = "Board size is invalid.Please enter one of the following: 6/8/10";
         static private string formatErrorMessage = "The format of the move you entered is invalid. Please try entering a move in the following format: COLrow>COLrow";

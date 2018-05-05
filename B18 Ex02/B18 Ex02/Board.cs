@@ -98,6 +98,7 @@ namespace B18_Ex02
 
         public bool IsEmptyAtSquare (Square i_Square)
         {
+            // TODO: Array index out of bounds. probably because invalid number (generated to bad char in "PlaceConverter" class
             return m_Board[i_Square.RowIndex, i_Square.ColumnIndex] == null;
         }
 

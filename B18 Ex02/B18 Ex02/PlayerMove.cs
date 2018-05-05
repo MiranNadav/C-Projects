@@ -112,5 +112,11 @@ namespace B18_Ex02
         {
             return m_CurrentSquare.getSquare() + ">" + m_NextSquare.getSquare();
         }
+
+        public override bool Equals(Object i_Object)
+        {
+            PlayerMove otherMove = (PlayerMove)i_Object;
+            return this.CurrentSquare.Equals(otherMove.CurrentSquare) && this.NextSquare.Equals(otherMove.NextSquare);
+        }
     }
 }

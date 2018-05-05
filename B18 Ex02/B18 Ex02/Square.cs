@@ -75,8 +75,5 @@ namespace B18_Ex02
             Square otherSquare = (Square) i_Object;
             return this.RowIndex == otherSquare.RowIndex && this.ColumnIndex == otherSquare.ColumnIndex;
         }
-
-
     }
-
 }

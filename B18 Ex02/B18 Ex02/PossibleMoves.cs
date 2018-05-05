@@ -101,5 +101,19 @@ namespace B18_Ex02
 
             return allPossibleJumps;
         }
+
+        public static bool isJumpPossible (ArrayList i_AllPossibleJumps, PlayerMove i_CurrentMove)
+        {
+            bool existsLegalJump = false;
+            foreach (PlayerMove move in i_AllPossibleJumps)
+            {
+                if (i_CurrentMove.Equals(move))
+                {
+                    existsLegalJump = true;
+                }
+            }
+
+            return existsLegalJump;
+        }
     }
 }

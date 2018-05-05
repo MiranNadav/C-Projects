@@ -102,7 +102,7 @@ namespace B18_Ex02
                 }
                 else
                 {
-                    gameIsOver = parseUserInput(m_SecondPlayer, m_FirstPlayer);
+                    //gameIsOver = parseUserInput(m_SecondPlayer, m_FirstPlayer);
                     isFirstUserTurn = true;
                 }
             }
@@ -117,9 +117,11 @@ namespace B18_Ex02
             bool gameIsOver = false;
             bool tryingToQuit = false;
             Coin currentCoin;
+            ArrayList allPossibleJumps;
+
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
 
-
+            
             inputMove = Console.ReadLine();
 
             while (!gameIsOver && (!isValidMove || (isValidMove && tryingToQuit)))
@@ -158,7 +160,7 @@ namespace B18_Ex02
                     }
                     else
                     {
-                        ErrorPrinter.FormatErrorMessage();
+                        ErrorMessageGenerator.FormatErrorMessage();
                         inputMove = Console.ReadLine();
                     }
                 }
@@ -170,6 +172,7 @@ namespace B18_Ex02
                 Coin[,] boardArray = m_PlayingBoard.BoardArray;
                 currentCoin = m_PlayingBoard.BoardArray[currentMove.CurrentRowIndex, currentMove.CurrentColIndex];
                 char currentUserCoinType = currentCoin.Type;
+
                 m_PlayingBoard.MoveCoinInBoard(currentMove);
 
                 if (shouldBeKinged(currentMove, m_PlayingBoard, currentUserCoinType))
@@ -178,17 +181,20 @@ namespace B18_Ex02
                 }
 
                 currentMoveIsJump = currentCoin.IsKing == false ? Validation.IsTryingToJump(currentMove, currentUserCoinType) : KingValidation.isTryingToJump_King(currentMove);
-                //if (currentMoveIsJump)
-                while (currentMoveIsJump)
+                if (currentMoveIsJump)
                 {
-                    Ex02.ConsoleUtils.Screen.Clear();
-                    m_PlayingBoard.printBoard();
                     m_PlayingBoard.EatCoin(currentMove);
                     calcUserPoints(i_OtherPlayer);
+
+
                     m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
-                    ArrayList allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(currentMove, currentUserCoinType);
-                    if (allPossibleJumps.Count != 0)
+                    allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(currentMove, currentUserCoinType);
+
+                    while (allPossibleJumps.Count != 0)
                     {
+                        Ex02.ConsoleUtils.Screen.Clear();
+                        m_PlayingBoard.printBoard();
+
                         Console.WriteLine(i_CurrentPlayer.Name + ", you can eat more. Please enter another move.");
                         inputMove = Console.ReadLine();
                         isValidMove = InputValidation.inputFormatIsValid(inputMove);
@@ -198,15 +204,22 @@ namespace B18_Ex02
                             inputMove = Console.ReadLine();
                             isValidMove = InputValidation.inputFormatIsValid(inputMove);
                             currentMove = new PlayerMove(inputMove);
-                            if (!allPossibleJumps.Contains(currentMove))
-                            {
-                                Console.WriteLine(i_CurrentPlayer.Name + ", the Move is not a valid jump. eneter a good jump please");
-                                isValidMove = false;
-                            }
                         }
+                        currentMove = new PlayerMove(inputMove);
+                        if (!PossibleMoves.isJumpPossible(allPossibleJumps, currentMove))
+                        {
+                            Console.WriteLine(i_CurrentPlayer.Name + ", the Move is not a valid jump. eneter a good jump please");
+                            isValidMove = false;
+                        }
+
+                        m_PlayingBoard.EatCoin(currentMove);
+                        calcUserPoints(i_OtherPlayer);
+                        m_PlayingBoard.MoveCoinInBoard(currentMove);
+                        allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(currentMove, currentUserCoinType);
                     }
                 }
             }
+
 
             Ex02.ConsoleUtils.Screen.Clear();
             if (!gameIsOver)
