@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    class PointsCalculator
+    class MatchInformation
     {
         private int m_FirstPlayerCurrentPoints = 0;
         private int m_SecondPlayerCurrentPoints = 0;
@@ -25,23 +25,23 @@ namespace B18_Ex02
                 return m_MatchWinner;
             }
         }
-        public int FirstPlayerTotalPoints
+        public int FirstPlayerCurrentPoints
         {
             get
             {
-                return m_FirstPlayerTotalPoints;
+                return m_FirstPlayerCurrentPoints;
             }
         }
 
-        public int SecondPlayerTotalPoints
+        public int SecondPlayerCurrentPoints
         {
             get
             {
-                return m_SecondPlayerTotalPoints;
+                return m_SecondPlayerCurrentPoints;
             }
         }
 
-        public PointsCalculator(Player i_FirstPlayer, Player i_SecondPlayer, Board i_PlayingBoard)
+        public MatchInformation(Player i_FirstPlayer, Player i_SecondPlayer, Board i_PlayingBoard)
         {
             this.m_FirstPlayer = i_FirstPlayer;
             this.m_SecondPlayer = i_SecondPlayer;

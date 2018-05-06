@@ -14,6 +14,7 @@ namespace B18_Ex02
         private int m_NumOfCoins = 0;
         private int m_UserPoints = 0;
         private bool m_IsComputer = false;
+        private int m_TotalNumberOfPoints;
 
         public Player(string i_UserName, char i_CoinType, int i_BoardSize)
         {
@@ -33,6 +34,18 @@ namespace B18_Ex02
             this.m_UserPoints = this.m_NumOfCoins;
             this.m_IsComputer = true;
 
+        }
+
+        public int TotalNumberOfPoints
+        {
+            get
+            {
+                return this.m_TotalNumberOfPoints;
+            }
+            set
+            {
+                this.m_TotalNumberOfPoints += value;
+            }
         }
 
         public bool IsComputer
