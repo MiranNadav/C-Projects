@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    class RandomMovementGenerator
+    internal class RandomMovementGenerator
     {
-        public static PlayerMove getRandomMove (ArrayList i_PossibleMoves)
+        public static PlayerMove getRandomMove(ArrayList i_PossibleMoves)
         {
             return (PlayerMove)i_PossibleMoves[new Random().Next(0, i_PossibleMoves.Count)];
         }

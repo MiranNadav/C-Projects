@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    class Square
+    internal class Square
     {
         private char m_Column;
         private char m_Row;
@@ -29,11 +29,11 @@ namespace B18_Ex02
             {
                 return this.m_Row;
             }
+
             set
             {
                 this.m_Row = value;
             }
-
         }
 
         public char Column
@@ -42,11 +42,11 @@ namespace B18_Ex02
             {
                 return this.m_Column;
             }
+
             set
             {
                 this.m_Column = value;
             }
-
         }
 
         public int RowIndex
@@ -56,6 +56,7 @@ namespace B18_Ex02
                 return PlaceIndexConvertor.GetIndexOfLetter(this.Row);
             }
         }
+
         public int ColumnIndex
         {
             get
@@ -64,15 +65,14 @@ namespace B18_Ex02
             }
         }
 
-
         public string getSquare()
         {
             return string.Empty + m_Column + m_Row;
         }
 
-        public override bool Equals (Object i_Object)
+        public override bool Equals(object i_Object)
         {
-            Square otherSquare = (Square) i_Object;
+            Square otherSquare = (Square)i_Object;
             return this.RowIndex == otherSquare.RowIndex && this.ColumnIndex == otherSquare.ColumnIndex;
         }
     }

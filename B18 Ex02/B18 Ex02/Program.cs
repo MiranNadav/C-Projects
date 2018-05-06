@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    class Program
+    internal class Program
     {
-        public static void Main (String [] args)
+        public static void Main()
         {
             new GameManager().initializeMatch();
         }

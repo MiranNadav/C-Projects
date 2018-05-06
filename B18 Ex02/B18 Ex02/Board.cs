@@ -7,13 +7,12 @@ using System.Text.RegularExpressions;
 
 namespace B18_Ex02
 {
-    class Board
+    internal class Board
     {
         private int m_BoardSize;
         private Coin[,] m_Board;
-        private bool m_HasJump = false;
 
-        public Board(int i_BoardSize)//, Coins i_FirstUserCoins, Coins i_SecondUserCoins)
+        public Board(int i_BoardSize)
         {
             this.m_BoardSize = i_BoardSize;
             this.m_Board = new Coin[i_BoardSize, i_BoardSize];
@@ -27,6 +26,7 @@ namespace B18_Ex02
                 return this.m_Board;
             }
         }
+
         public int BoardSize
         {
             get
@@ -50,12 +50,12 @@ namespace B18_Ex02
                     }
                 }
             }
+
             return coins;
         }
 
         private void buildBoard()
         {
-
             this.m_Board = new Coin[this.m_BoardSize, this.m_BoardSize];
 
             for (int i = 0; i < m_BoardSize; i++)
@@ -63,6 +63,7 @@ namespace B18_Ex02
                 for (int j = 0; j < m_BoardSize; j++)
                 {
                     if (!(i == m_BoardSize / 2 || i == (m_BoardSize / 2) - 1))
+                    {
                         if (i % 2 == 0 && j % 2 == 1)
                         {
                             setCoinInBoard(i, j);
@@ -71,6 +72,7 @@ namespace B18_Ex02
                         {
                             setCoinInBoard(i, j);
                         }
+                    }
                 }
             }
         }
@@ -80,23 +82,23 @@ namespace B18_Ex02
             char coinType;
             if (i_RowIndex < m_BoardSize / 2)
             {
-                coinType = 'O';
+                coinType = Constants.k_FirstCoinType;
             }
             else
             {
-                coinType = 'X';
+                coinType = Constants.k_SecondCoinType;
             }
-            m_Board[i_RowIndex, i_ColumnIndex] = new Coin(PlaceIndexConvertor.GetSmallCharByIndex(i_RowIndex),
-                                                        PlaceIndexConvertor.GetCapitalCharByIndex(i_ColumnIndex), coinType);
+
+            m_Board[i_RowIndex, i_ColumnIndex] = new Coin(PlaceIndexConvertor.GetSmallCharByIndex(i_RowIndex), PlaceIndexConvertor.GetCapitalCharByIndex(i_ColumnIndex), coinType);
         }
 
-        public bool IsEmptyAtSquare (Square i_Square)
+        public bool IsEmptyAtSquare(Square i_Square)
         {
             // TODO: Array index out of bounds. probably because invalid number (generated to bad char in "PlaceConverter" class
             return m_Board[i_Square.RowIndex, i_Square.ColumnIndex] == null;
         }
 
-        public bool IsSquareContainCoinByType (Square i_Square, char i_CoinType)
+        public bool IsSquareContainCoinByType(Square i_Square, char i_CoinType)
         {
             return !IsEmptyAtSquare(i_Square) && m_Board[i_Square.RowIndex, i_Square.ColumnIndex].Type.Equals(i_CoinType);
         }
@@ -113,6 +115,7 @@ namespace B18_Ex02
             {
                 board.Append("   " + PlaceIndexConvertor.GetCapitalCharByIndex(i));
             }
+
             board.Append(newLine);
             board.Append(getStringBorder() + newLine);
             for (int row = 0; row < m_BoardSize; row++)
@@ -126,7 +129,7 @@ namespace B18_Ex02
                         currentCoin = m_Board[row, column];
                         if (currentCoin.IsKing)
                         {
-                            coinType = m_Board[row, column].Type.Equals('O') ? 'U' : 'K';
+                            coinType = m_Board[row, column].Type.Equals(Constants.k_FirstCoinType) ? 'U' : 'K';
                             board.Append(" " + coinType + " |");
                         }
                         else
@@ -171,20 +174,12 @@ namespace B18_Ex02
             movingCoin = this.m_Board[currentRowToInt, currentcolumnToInt];
             this.m_Board[currentRowToInt, currentcolumnToInt] = null;
             this.m_Board[nextRowToInt, nextColumnToInt] = movingCoin;
-
         }
 
-        public void EatCoin (PlayerMove i_CurrentMove)
-        { 
+        public void EatCoin(PlayerMove i_CurrentMove)
+        {
             Square squareToRemoveCoinFrom = i_CurrentMove.calculateMiddleSquare();
             m_Board[squareToRemoveCoinFrom.RowIndex, squareToRemoveCoinFrom.ColumnIndex] = null;
         }
-
-
-        public bool gameStatus()
-        {
-            return false;
-        }
-
     }
 }

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    class KingValidation
+    internal class KingValidation
     {
-        public static bool IsValidMove(PlayerMove currentMove, Player i_CurrentPlayer, Player i_OtherPlayer, Board i_Board)
+        public static bool IsValidMove(PlayerMove i_CurrentMove, Player i_CurrentPlayer, Player i_OtherPlayer, Board i_Board)
         {
             bool moveIsValid = true;
 
-            moveIsValid = isDiagonal_King(currentMove);
+            moveIsValid = isDiagonal_King(i_CurrentMove);
 
             return moveIsValid;
         }
@@ -20,13 +20,10 @@ namespace B18_Ex02
         public static bool isDiagonal_King(PlayerMove currentMove)
         {
             bool moveIsValid = true;
-
-            //By checking if the move is diagonal for both coin types we check is it is diagonal for both front and back move.
-            moveIsValid = Validation.IsDiagonal(currentMove, 'O');
+            moveIsValid = MovementValidation.IsDiagonal(currentMove, Constants.k_FirstCoinType);
             if (!moveIsValid)
             {
-
-                moveIsValid = Validation.IsDiagonal(currentMove, 'X');
+                moveIsValid = MovementValidation.IsDiagonal(currentMove, Constants.k_SecondCoinType);
             }
 
             return moveIsValid;
@@ -36,16 +33,13 @@ namespace B18_Ex02
         {
             bool isTryingToJump = true;
 
-            isTryingToJump = Validation.IsTryingToJump(i_CurrentMove, 'O');
+            isTryingToJump = MovementValidation.IsTryingToJump(i_CurrentMove, Constants.k_FirstCoinType);
             if (!isTryingToJump)
             {
-                isTryingToJump = Validation.IsTryingToJump(i_CurrentMove, 'X');
+                isTryingToJump = MovementValidation.IsTryingToJump(i_CurrentMove, Constants.k_SecondCoinType);
             }
 
             return isTryingToJump;
         }
-
-
-
     }
 }

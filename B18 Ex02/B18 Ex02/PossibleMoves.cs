@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    class PossibleMoves
+    internal class PossibleMoves
     {
-        ArrayList m_FirstPlayerPossibleMoves = new ArrayList();
-        ArrayList m_SecondPlayerPossibleMoves = new ArrayList();
-        Board m_Board;
+        private ArrayList m_FirstPlayerPossibleMoves = new ArrayList();
+        private ArrayList m_SecondPlayerPossibleMoves = new ArrayList();
+        private Board m_Board;
+        private MovementValidation m_MovementValidation;
+
         public PossibleMoves(Board i_Board)
         {
+            m_MovementValidation = new MovementValidation();
             this.m_Board = i_Board;
             Coin currentCoin;
             Coin[,] boardArray = m_Board.BoardArray;
@@ -38,6 +41,7 @@ namespace B18_Ex02
                 return this.m_FirstPlayerPossibleMoves;
             }
         }
+
         public ArrayList SecondPlayerPossibleMoves
         {
             get
@@ -48,7 +52,7 @@ namespace B18_Ex02
 
         private void addValidMovesToBothArrays(Coin i_Coin, Square i_Square)
         {
-            if (i_Coin.Type.Equals('O'))
+            if (i_Coin.Type.Equals(Constants.k_FirstCoinType))
             {
                 addValidMovesToFirstArray(i_Square, i_Coin.IsKing);
             }
@@ -57,6 +61,7 @@ namespace B18_Ex02
                 addValidMovesToSecondArray(i_Square, i_Coin.IsKing);
             }
         }
+
         private void addValidMovesToArray(Square i_Square, int i_Sign, ArrayList i_CurrentPlayerPossibleMoves)
         {
             addValidMoveToArray(i_Square, i_Sign * 1, 1, m_Board, i_CurrentPlayerPossibleMoves);
@@ -71,6 +76,7 @@ namespace B18_Ex02
             {
                 addValidMovesToArray(i_Square, -1, m_FirstPlayerPossibleMoves);
             }
+
             addValidMovesToArray(i_Square, 1, m_FirstPlayerPossibleMoves);
         }
 
@@ -80,25 +86,26 @@ namespace B18_Ex02
             {
                 addValidMovesToArray(i_Square, 1, m_SecondPlayerPossibleMoves);
             }
+
             addValidMovesToArray(i_Square, -1, m_SecondPlayerPossibleMoves);
         }
 
         private void addValidMoveToArray(Square i_CurrentSquare, int i_RowToAdd, int i_ColumnToAdd, Board i_Board, ArrayList i_CurrentPlayerMoves)
         {
             PlayerMove currentMove;
-            if (Validation.movementIndexesInRange(i_CurrentSquare.ColumnIndex, i_CurrentSquare.RowIndex, i_CurrentSquare.ColumnIndex + i_ColumnToAdd, i_CurrentSquare.RowIndex + i_RowToAdd, i_Board.BoardSize))
+            if (MovementValidation.movementIndexesInRange(i_CurrentSquare.ColumnIndex, i_CurrentSquare.RowIndex, i_CurrentSquare.ColumnIndex + i_ColumnToAdd, i_CurrentSquare.RowIndex + i_RowToAdd, i_Board.BoardSize))
             {
                 currentMove = new PlayerMove(i_CurrentSquare, new Square(i_CurrentSquare.ColumnIndex + i_ColumnToAdd, i_CurrentSquare.RowIndex + i_RowToAdd));
-                if (Validation.IsLegalMovement(currentMove, i_Board).Equals(String.Empty))
+                if (MovementValidation.IsLegalMovement(currentMove, i_Board).Equals(string.Empty))
                 {
                     i_CurrentPlayerMoves.Add(currentMove);
                 }
             }
         }
 
-        public ArrayList getAllPossibleJumps (PlayerMove i_CurrentMove, char i_CoinType)
+        public ArrayList getAllPossibleJumps(PlayerMove i_CurrentMove, char i_CoinType)
         {
-            return i_CoinType.Equals('O') ? getAllPossibleJumps(i_CurrentMove, m_FirstPlayerPossibleMoves) : getAllPossibleJumps(i_CurrentMove, m_SecondPlayerPossibleMoves);
+            return i_CoinType.Equals(Constants.k_FirstCoinType) ? getAllPossibleJumps(i_CurrentMove, m_FirstPlayerPossibleMoves) : getAllPossibleJumps(i_CurrentMove, m_SecondPlayerPossibleMoves);
         }
 
         private ArrayList getAllPossibleJumps(PlayerMove i_CurrentMove, ArrayList i_CurrentPlayerPossibleMoves)
@@ -108,7 +115,7 @@ namespace B18_Ex02
             {
                 if (i_CurrentMove.NextSquare.Equals(move.CurrentSquare))
                 {
-                   if (Math.Abs(i_CurrentMove.NextColIndex - move.NextColIndex) == 2 && Math.Abs(i_CurrentMove.NextRowIndex- move.NextRowIndex) == 2)
+                    if (Math.Abs(i_CurrentMove.NextColIndex - move.NextColIndex) == 2 && Math.Abs(i_CurrentMove.NextRowIndex - move.NextRowIndex) == 2)
                     {
                         allPossibleJumps.Add(move);
                     }
@@ -118,7 +125,7 @@ namespace B18_Ex02
             return allPossibleJumps;
         }
 
-        public static bool isJumpPossible (ArrayList i_AllPossibleJumps, PlayerMove i_CurrentMove)
+        public static bool isJumpPossible(ArrayList i_AllPossibleJumps, PlayerMove i_CurrentMove)
         {
             bool existsLegalJump = false;
             foreach (PlayerMove move in i_AllPossibleJumps)
