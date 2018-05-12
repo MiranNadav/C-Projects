@@ -13,7 +13,7 @@ namespace B18_Ex03
 
         public Truck (bool i_IsCarryingDangerousMaterials, float i_MaxAllowedWeight)
         {
-            base()
+            //base();
             this.m_IsCarryingDangerousMaterials = i_IsCarryingDangerousMaterials;
             this.m_MaxAllowedWeight = i_MaxAllowedWeight;
         }

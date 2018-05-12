@@ -21,7 +21,8 @@ namespace B18_Ex03
         {
             if (i_AmountOfEnergy < 0 || i_AmountOfEnergy + m_CurrentAmount > m_MaxAmount)
             {
-                throw new ValueOutOfRangeException(0, m_MaxAmount);
+                //TODO: find out what is the min value
+                throw new ValueOutOfRangeException(0, this.m_MaxAmount);
             }
             else
             {

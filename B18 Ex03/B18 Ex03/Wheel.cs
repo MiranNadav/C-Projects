@@ -6,22 +6,43 @@ using System.Threading.Tasks;
 
 namespace B18_Ex03
 {
-    class Wheel
+    //TODO: should  be public?
+    public class Wheel
     {
         private string m_ManufacturerName;
         private float m_CurrentAirPressure;
-        private float m_MaxlimalAirPressure;
+        private eMaxAirPressure m_MaxAirPressure;
+        //TODO: check what is the starter AirPressure
 
-        private enum AirPressure { LowPressure = 28, MediumPressure = 30, HighPressure = 32 };
+        public Wheel(string i_ManufacturerName, int i_MaxAirPressure)
+        {
+            this.m_ManufacturerName = i_ManufacturerName;
+            this.m_CurrentAirPressure = 0F;
+            if (!Enum.IsDefined(typeof(eMaxAirPressure), i_MaxAirPressure))
+            {
+                throw new ArgumentException();
+            }
+
+            this.m_MaxAirPressure = (eMaxAirPressure)i_MaxAirPressure;
+
+        }
+
 
         public void PumpAir(float i_AirToPump)
         {
-            if (i_AirToPump + m_CurrentAirPressure > m_MaxlimalAirPressure)
+            if (i_AirToPump + m_CurrentAirPressure > (int)m_MaxAirPressure)
             {
-                throw new ValueOutOfRangeException(0, m_MaxlimalAirPressure);
+                throw new ValueOutOfRangeException(0, (int)m_MaxAirPressure);
+            }
+            else
+            {
+                this.m_CurrentAirPressure += i_AirToPump;
             }
         }
 
-        
+
+        private enum eMaxAirPressure { LowPressure = 28, MediumPressure = 30, HighPressure = 32 };
+
+
     }
 }
