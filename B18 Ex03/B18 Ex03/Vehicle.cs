@@ -47,7 +47,7 @@ namespace B18_Ex03
             }
         }
 
-        public float EnergeyPercentge
+        public float EnergyPercentge
         {
             get
             {
