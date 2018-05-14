@@ -66,7 +66,7 @@ namespace B18_Ex03
                 wheel.CurrentAirPressure = maxAirPressure;
             }
         }
-]        public List<string> GetLicenseNumberList()
+        public List<string> GetLicenseNumberList()
         {
             List<string> licenseNumbers = new List<string>();
             foreach (KeyValuePair<string, Vehicle> vehicle in this.m_GarageVehicles)
