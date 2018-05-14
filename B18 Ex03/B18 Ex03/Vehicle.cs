@@ -128,5 +128,13 @@ namespace B18_Ex03
                 this.m_VehicleGarageStatus = value;
             }
         }
+
+        public void PumpAllWheelsAirToMaximum()
+        {
+            foreach (Wheel wheel in this.m_Wheels)
+            {
+                wheel.PumpAirToMaximum();
+            }
+        }
     }
 }

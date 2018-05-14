@@ -91,9 +91,17 @@ namespace B18_Ex03
             }
         }
 
+        public void PumpAirToMaximum ()
+        {
+            this.CurrentAirPressure = this.MaximumAirPressure;
+        }
 
         private enum eMaxAirPressure { LowPressure = 28, MediumPressure = 30, HighPressure = 32 };
 
+        public override string ToString()
+        {
+            return "current air pressure is :" + m_CurrentAirPressure + ", maximal air pressure is: " + m_MaxAirPressure ;
+        }
 
     }
 }
