@@ -144,7 +144,7 @@ namespace B18_Ex03
             carFormat.Append("Model name is: " + this.m_ModelName+ Environment.NewLine);
             carFormat.Append("Owner name is: " + this.m_OwnerName + Environment.NewLine);
             carFormat.Append("Car Status is: " + this.m_VehicleGarageStatus + Environment.NewLine);
-            carFormat.Append("Wheels Status is: " + Environment.NewLine + this.m_Wheels[0].ToString() + Environment.NewLine);
+            carFormat.Append("Wheels Status is - " + Environment.NewLine + this.m_Wheels[0].ToString() + Environment.NewLine);
             
             return carFormat.ToString();
         }

@@ -105,7 +105,7 @@ namespace B18_Ex03
             wheelStatus.Append("Current air pressure is: " + m_CurrentAirPressure + Environment.NewLine);
             wheelStatus.Append("Maximum air pressure is: " + m_MaxAirPressure);
             return wheelStatus.ToString();
-
+        }
 
     }
 }
