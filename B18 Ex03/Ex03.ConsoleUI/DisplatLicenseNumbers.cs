@@ -32,7 +32,7 @@ namespace Ex03.ConsoleUI
 
         private void displayAllLicsensePlates()
         {
-            string listOfPlates = m_userInterface.Garage.GetAllLicenseNumberList();
+            List<> = m_userInterface.Garage.GetAllLicenseNumberList();
             if (listOfPlates.Length == 0)
             {
                 Console.WriteLine("There are no vehicles in the garage");
