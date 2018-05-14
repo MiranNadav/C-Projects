@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace B18_Ex03
 {
-    class Garage
+    public class Garage
     {
         private Dictionary<string, Vehicle> m_GarageVehicles;
 
-        public Garage ()
+        public Garage()
         {
             m_GarageVehicles = new Dictionary<string, Vehicle>();
         }
 
-        public bool IsVehicleInGarage (string i_LicenseNumber)
+        public bool IsVehicleInGarage(string i_LicenseNumber)
         {
             if (m_GarageVehicles.ContainsKey(i_LicenseNumber))
             {
@@ -24,17 +24,17 @@ namespace B18_Ex03
             return false;
         }
 
-        public void AddVehicleToGarage (Vehicle i_Vehicle)
+        public void AddVehicleToGarage(Vehicle i_Vehicle)
         {
             if (IsVehicleInGarage(i_Vehicle.LicenseNumber))
             {
                 i_Vehicle.VehicleGarageStatus = Vehicle.eVehicleGarageStatus.BeingFixed;
-                throw new Exception("This vehicle is already in the garage!");
+                throw new Exception("This vehicle is already in the garage! Vehicle status changed to being fixed");
             }
             m_GarageVehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);
         }
 
-        public void ChangeVehicleStatus (string i_LicenseNumber, Vehicle.eVehicleGarageStatus i_VehicleStatus)
+        public void ChangeVehicleStatus(string i_LicenseNumber, Vehicle.eVehicleGarageStatus i_VehicleStatus)
         {
             if (!IsVehicleInGarage(i_LicenseNumber))
             {
@@ -44,7 +44,7 @@ namespace B18_Ex03
             m_GarageVehicles[i_LicenseNumber].VehicleGarageStatus = i_VehicleStatus;
         }
 
-        public void FillAirToMaximum (string i_LicenseNumber)
+        public void FillAirToMaximum(string i_LicenseNumber)
         {
             if (!IsVehicleInGarage(i_LicenseNumber))
             {
@@ -59,9 +59,9 @@ namespace B18_Ex03
             }
         }
 
-        public List<string> GetLicenseNumberList ()
-        {
+        //public List<string> GetLicenseNumberList ()
+        //{
 
-        }
+        //}
     }
 }

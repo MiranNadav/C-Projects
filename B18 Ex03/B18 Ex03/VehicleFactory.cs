@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace B18_Ex03
 {
-    class VehicleFactory
+    public class VehicleFactory
     {
-        public static Vehicle CreateVehicle(eVehicleTypes i_VehicleType )
+        public static Vehicle CreateVehicle(int i_VehicleTypeAsInt)
         {
+            if (!Enum.IsDefined(typeof(eVehicleTypes), i_VehicleTypeAsInt))
+            {
+                throw new ArgumentException("The input is not a valid vehicle type");
+            }
+
+            eVehicleTypes vehicleType = (eVehicleTypes)i_VehicleTypeAsInt;
             Vehicle createdVehicle;
-            switch (i_VehicleType)
+            switch (vehicleType)
             {
                 case eVehicleTypes.GasMotorcycle:
                     createdVehicle = new GasMotorcycle();
@@ -32,8 +38,10 @@ namespace B18_Ex03
                     throw new Exception("This kind of vehicle is not supported in the garage");
 
             }
+
             return createdVehicle;
         }
+
 
         public enum eVehicleTypes
         {
@@ -41,7 +49,7 @@ namespace B18_Ex03
             ElectricMotorcycle,
             GasCar,
             ElectricCar,
-            GasTruck
+            GasTruck,
         }
     }
 }
