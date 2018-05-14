@@ -28,7 +28,7 @@ namespace B18_Ex03
         {
             if (IsVehicleInGarage(i_Vehicle.LicenseNumber))
             {
-                i_Vehicle.VehicleGarageStatus = Vehicle.eVehicleGarageStatus.BeingFixed;
+                i_Vehicle.VehicleGarageStatus = Vehicle.eVehicleGarageStatus.InRepair;
                 throw new Exception("This vehicle is already in the garage! Vehicle status changed to being fixed");
             }
             m_GarageVehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);
@@ -48,7 +48,7 @@ namespace B18_Ex03
         {
             if (!IsVehicleInGarage(i_LicenseNumber))
             {
-                throw new Exception("This vehicle's status cannot be changed, it's not in the garage!");
+                throw new Exception("This vehicle's Wheels cannot be pumped, it's not in the garage!");
             }
 
             List<Wheel> currentVehicleWheels = m_GarageVehicles[i_LicenseNumber].Wheels;
@@ -59,9 +59,49 @@ namespace B18_Ex03
             }
         }
 
-        //public List<string> GetLicenseNumberList ()
-        //{
+        public void RefuelAGasTypeVehicle(string i_LicenseNumber, float i_AmountOfFuelToRefuel)
+        {
+            if (!IsVehicleInGarage(i_LicenseNumber))
+            {
+                throw new Exception("This vehicle cannot be refueled, it's not in the garage!");
+            }
+            else if (!m_GarageVehicles[i_LicenseNumber].EnergySource.Equals(EnergySource.eEnergyTypes.Gas))
+            {
+                throw new Exception("This vehicle cannot be refueled, it's powered by electricity!");
 
-        //}
+            } 
+            else
+            {
+                m_GarageVehicles[i_LicenseNumber];
+            }
+        }
+
+        public string GetAllLicenseNumberList()
+        {
+            StringBuilder allLicsensePlates = new StringBuilder();
+
+            foreach (KeyValuePair<string, Vehicle> entry in m_GarageVehicles)
+            {
+                allLicsensePlates.Append(entry.Key + Environment.NewLine);
+            }
+
+            return allLicsensePlates.ToString();
+        }
+
+        public string GetFilterdLicenseNumberList(Vehicle.eVehicleGarageStatus i_StatusToFilterBy)
+        {
+            StringBuilder allLicsensePlates = new StringBuilder();
+
+            foreach (KeyValuePair<string, Vehicle> entry in m_GarageVehicles)
+            {
+                if (entry.Value.VehicleGarageStatus.Equals(i_StatusToFilterBy))
+                {
+                    allLicsensePlates.Append(entry.Key + Environment.NewLine);
+                }
+            }
+
+            return allLicsensePlates.ToString();
+        }
+
     }
 }

@@ -10,6 +10,7 @@ namespace B18_Ex03
     {
         private float m_CurrentAmount;
         private float m_MaxAmount;
+        private eEnergyTypes m_EnergyType;
 
         public float CurrentEnergyAmount
         {
@@ -47,5 +48,25 @@ namespace B18_Ex03
                 this.m_CurrentAmount += i_AmountOfEnergy;
             }
         }
+
+        public eEnergyTypes EnergyType
+        {
+            get
+            {
+                return this.m_EnergyType;
+            }
+            set
+            {
+                this.m_EnergyType = value;
+            }
+        }
+
+        public enum eEnergyTypes
+        {
+            Gas,
+            Electric
+        }
+
+
     }
 }

@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using B18_Ex03;
 
-namespace Ex03.ConsoleU
+namespace Ex03.ConsoleUI
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("HELLO");
-            Console.ReadLine();
+            UsertInterface usertInterface = new UsertInterface();
+            usertInterface.ServeUser();
         }
     }
 }

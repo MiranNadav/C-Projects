@@ -15,10 +15,12 @@ namespace B18_Ex03
         public Gas(FuelType i_GasType, float i_MaxAmountOfGas) : base(i_MaxAmountOfGas)
         {
             m_GasType = i_GasType;
+            base.EnergyType = eEnergyTypes.Electric;
         }
 
-        public void FillGas(FuelType i_FuelType, float i_AmountOfGas)
-        {
+        public void FillGas(FuelType i_FuelType, float i_AmountOfGas, Vehicle io_VehicleToFuel)
+        { 
+
             if (i_FuelType != m_GasType)
             {
                 throw new ArgumentException();

@@ -13,8 +13,9 @@ namespace B18_Ex03
 
         public Electric(float i_MaxAmountOfHours) : base(i_MaxAmountOfHours)
         {
+            base.EnergyType = eEnergyTypes.Electric;
         }
-        
+
         public void Charge(float i_AmountOfHoursToAdd)
         {
             base.FillEnergy(i_AmountOfHoursToAdd);

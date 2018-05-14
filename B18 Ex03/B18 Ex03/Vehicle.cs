@@ -20,9 +20,9 @@ namespace B18_Ex03
 
         public enum eVehicleGarageStatus
         {
-            BeingFixed,
-            Fixed,
-            Paid
+            InRepair = 1,
+            Repaired = 2,
+            PayedFor = 3
         }
         public Vehicle()
         {
@@ -31,6 +31,7 @@ namespace B18_Ex03
             m_EnergyPercentage = 0;
             m_Wheels = new List<Wheel>();
             m_EnergySource = null;
+            m_VehicleGarageStatus = eVehicleGarageStatus.InRepair;
         }
 
         public string ModelName

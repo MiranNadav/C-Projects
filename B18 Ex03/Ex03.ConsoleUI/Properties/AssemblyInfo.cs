@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ex03.ConsoleU")]
+[assembly: AssemblyTitle("Ex03.ConsoleUI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ex03.ConsoleU")]
+[assembly: AssemblyProduct("Ex03.ConsoleUI")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0091e8f4-c35e-4873-9b75-5272f06db821")]
+[assembly: Guid("08b5ce62-6ff5-405e-a016-d277e8ee3e93")]
 
 // Version information for an assembly consists of the following four values:
 //
