@@ -11,32 +11,38 @@ namespace B18_Ex03
 
         //private eCarColor m_CarColor;
         private eNumberOfDoors m_NumberOfDoors;
-        protected List<string> listOfColors = new List<string>();
-        private string m_Color;
+        private eCarColor m_Color;
+        private const int k_NumberOfWheels = 4;
+        private const int k_MaximumWheelPressure = 32;
+        //protected List<string> listOfColors = new List<string>();
+        //private string m_Color;
 
         public Car()
         {
-            listOfColors.Add("Gray");
-            listOfColors.Add("Blue");
-            listOfColors.Add("White");
-            listOfColors.Add("Black");
-            this.m_Color = String.Empty;
+            base.Wheels = new List<Wheel>(k_NumberOfWheels);
             this.m_NumberOfDoors = 0;
+            for (int i = 0; i < k_NumberOfWheels; i++)
+            {
+                base.Wheels.Add(new Wheel(k_MaximumWheelPressure));
+            }
+            //listOfColors.Add("Gray");
+            //listOfColors.Add("Blue");
+            //listOfColors.Add("White");
+            //listOfColors.Add("Black");
+            //this.m_Color = String.Empty;
         }
 
-        //public enum eCarColor
-        //{
-        //    Undefined,
-        //    Yellow = 1,
-        //    White = 2,
-        //    Black = 3,
-        //    Blue = 4
-        //}
+        public enum eCarColor
+        {
+            Grey = 1,
+            Blue = 2,
+            White = 3,
+            Black = 4
+        }
 
 
         public enum eNumberOfDoors
         {
-            Undefined,
             Two = 1,
             Three = 2,
             Four = 3,
@@ -44,8 +50,7 @@ namespace B18_Ex03
         }
 
 
-
-        public string Color
+        public eCarColor Color
         {
             get
             {

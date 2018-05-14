@@ -11,9 +11,27 @@ namespace B18_Ex03
         private float m_CurrentAmount;
         private float m_MaxAmount;
 
-        protected EnergySource(float i_CurrentAmount, float i_MaxAmount)
+        public float CurrentEnergyAmount
         {
-            this.m_CurrentAmount = i_CurrentAmount;
+            get
+            {
+                return this.m_CurrentAmount;
+            }
+            set
+            {
+                this.m_CurrentAmount += value;
+            }
+        }
+        public float MaxEnergyAmount
+        {
+            get
+            {
+                return this.m_MaxAmount;
+            }
+        }
+        protected EnergySource(float i_MaxAmount)
+        {
+            this.m_CurrentAmount = 0;// i_CurrentAmount;
             this.m_MaxAmount = i_MaxAmount;
         }
 

@@ -8,16 +8,21 @@ namespace B18_Ex03
 {
     public class Gas : EnergySource
     {
-        public enum FuelType { Soler, Octan95, Octan96, Octan98 };
         private FuelType m_GasType;
 
-        public Gas(FuelType i_GasType, float i_CurrentAmountOfGas, float i_MaxAmountOfGas) : base(i_CurrentAmountOfGas, i_MaxAmountOfGas)
+        public enum FuelType { Soler = 1, Octan95 = 2, Octan96 = 3, Octan98 = 4 };
+
+        public Gas(FuelType i_GasType, float i_MaxAmountOfGas) : base(i_MaxAmountOfGas)
         {
-            m_GasType= i_GasType;
+            m_GasType = i_GasType;
         }
 
-        public void FillGas(float i_AmountOfGas)
+        public void FillGas(FuelType i_FuelType, float i_AmountOfGas)
         {
+            if (i_FuelType != m_GasType)
+            {
+                throw new ArgumentException();
+            }
             base.FillEnergy(i_AmountOfGas);
         }
     }

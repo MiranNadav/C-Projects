@@ -14,6 +14,16 @@ namespace B18_Ex03
         private List<Wheel> m_Wheels;
         private EnergySource m_EnergySource;
 
+        private string m_OwnerName;
+        private string m_OwnerPhoneNumber;
+        private eVehicleGarageStatus m_VehicleGarageStatus;
+
+        public enum eVehicleGarageStatus
+        {
+            BeingFixed,
+            Fixed,
+            Paid
+        }
         public Vehicle()
         {
             m_ModelName = String.Empty;
@@ -80,6 +90,42 @@ namespace B18_Ex03
             set
             {
                 this.m_EnergySource = value;
+            }
+        }
+
+        public string OwnerName
+        {
+            get
+            {
+                return this.m_OwnerName;
+            }
+            set
+            {
+                this.m_OwnerName = value;
+            }
+        }
+
+        public string OwnerPhoneNumber
+        {
+            get
+            {
+                return this.m_OwnerPhoneNumber;
+            }
+            set
+            {
+                this.m_OwnerPhoneNumber = value;
+            }
+        }
+
+        public eVehicleGarageStatus VehicleGarageStatus
+        {
+            get
+            {
+                return this.m_VehicleGarageStatus;
+            }
+            set
+            {
+                this.m_VehicleGarageStatus = value;
             }
         }
     }

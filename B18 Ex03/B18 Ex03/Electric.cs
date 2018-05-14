@@ -11,9 +11,10 @@ namespace B18_Ex03
         //private float m_CurrentAmountOfHoursLeft;
         //private float m_MaxAmountOfGas;
 
-        public Electric(float i_CurrentAmountOfHours, float i_MaxAmountOfHours) : base(i_CurrentAmountOfHours, i_MaxAmountOfHours){ }
+        public Electric(float i_MaxAmountOfHours) : base(i_MaxAmountOfHours)
+        {
+        }
         
-
         public void Charge(float i_AmountOfHoursToAdd)
         {
             base.FillEnergy(i_AmountOfHoursToAdd);

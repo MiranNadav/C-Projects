@@ -35,5 +35,11 @@ namespace B18_Ex03
             this.m_MaxValue = i_MaxValue;
         }
 
+        public ValueOutOfRangeException (float i_MinValue, float i_MaxValue, string i_Message) : base (i_Message)
+        {
+            this.m_MinValue = i_MinValue;
+            this.m_MaxValue = i_MaxValue;
+        }
+
     }
 }
