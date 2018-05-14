@@ -129,5 +129,25 @@ namespace B18_Ex03
                 this.m_VehicleGarageStatus = value;
             }
         }
+
+        public void PumpAllWheelsAirToMaximum()
+        {
+            foreach (Wheel wheel in this.m_Wheels)
+            {
+                wheel.PumpAirToMaximum();
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder carFormat = new StringBuilder();
+            carFormat.Append("License number is: " + this.m_LicenseNumber + Environment.NewLine);
+            carFormat.Append("Model name is: " + this.m_ModelName+ Environment.NewLine);
+            carFormat.Append("Owner name is: " + this.m_OwnerName + Environment.NewLine);
+            carFormat.Append("Car Status is: " + this.m_VehicleGarageStatus + Environment.NewLine);
+            carFormat.Append("Wheels Status is - " + Environment.NewLine + this.m_Wheels[0].ToString() + Environment.NewLine);
+            
+            return carFormat.ToString();
+        }
     }
 }

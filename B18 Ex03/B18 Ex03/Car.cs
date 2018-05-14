@@ -14,8 +14,6 @@ namespace B18_Ex03
         private eCarColor m_Color;
         private const int k_NumberOfWheels = 4;
         private const int k_MaximumWheelPressure = 32;
-        //protected List<string> listOfColors = new List<string>();
-        //private string m_Color;
 
         public Car()
         {
@@ -25,11 +23,6 @@ namespace B18_Ex03
             {
                 base.Wheels.Add(new Wheel(k_MaximumWheelPressure));
             }
-            //listOfColors.Add("Gray");
-            //listOfColors.Add("Blue");
-            //listOfColors.Add("White");
-            //listOfColors.Add("Black");
-            //this.m_Color = String.Empty;
         }
 
         public enum eCarColor
@@ -58,7 +51,14 @@ namespace B18_Ex03
             }
             set
             {
-                this.m_Color = value;
+                if (Enum.IsDefined(typeof(eCarColor), value))
+                {
+                    this.m_Color = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Input is not a valid option. Please try again");
+                }
             }
         }
 

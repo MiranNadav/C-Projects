@@ -39,6 +39,7 @@ namespace Ex03.ConsoleUI
             this.m_VehcileType = userTypeChoiseAsInt;
         }
 
+
         private void addVehicleToGarage()
         {
             Vehicle newVehicle;
@@ -63,7 +64,6 @@ namespace Ex03.ConsoleUI
                     Messages.PressAnyKeyToContinue();
                 }
             }
-
         }
     }
 }

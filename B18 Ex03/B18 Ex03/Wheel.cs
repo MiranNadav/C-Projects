@@ -91,9 +91,21 @@ namespace B18_Ex03
             }
         }
 
+        public void PumpAirToMaximum ()
+        {
+            this.CurrentAirPressure = this.MaximumAirPressure;
+        }
 
         private enum eMaxAirPressure { LowPressure = 28, MediumPressure = 30, HighPressure = 32 };
 
+        public override string ToString()
+        {
+            StringBuilder wheelStatus = new StringBuilder();
+            wheelStatus.Append("Manufacturer is: " + m_ManufacturerName + Environment.NewLine);
+            wheelStatus.Append("Current air pressure is: " + m_CurrentAirPressure + Environment.NewLine);
+            wheelStatus.Append("Maximum air pressure is: " + m_MaxAirPressure);
+            return wheelStatus.ToString();
+        }
 
     }
 }
