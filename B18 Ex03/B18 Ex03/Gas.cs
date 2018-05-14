@@ -18,7 +18,7 @@ namespace B18_Ex03
             base.EnergyType = eEnergyTypes.Electric;
         }
 
-        public void FillGas(FuelType i_FuelType, float i_AmountOfGas, Vehicle io_VehicleToFuel)
+        public void FillGas(FuelType i_FuelType, float i_AmountOfGas)
         { 
 
             if (i_FuelType != m_GasType)
