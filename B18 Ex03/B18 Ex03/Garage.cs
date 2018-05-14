@@ -24,6 +24,14 @@ namespace B18_Ex03
             return false;
         }
 
+        public void IsVehicleInGarageException(string i_LicenseNumber)
+        {
+            if (!IsVehicleInGarage(i_LicenseNumber))
+            {
+                throw new ArgumentException("This Vehicle is not in the garage!");
+            }
+        }
+
         public void AddVehicleToGarage(Vehicle i_Vehicle)
         {
             if (IsVehicleInGarage(i_Vehicle.LicenseNumber))
@@ -59,9 +67,84 @@ namespace B18_Ex03
             }
         }
 
-        //public List<string> GetLicenseNumberList ()
-        //{
+        public List<string> GetLicenseNumberList()
+        {
+            List<string> licenseNumbers = new List<string>();
+            foreach (KeyValuePair<string,Vehicle> vehicle in this.m_GarageVehicles)
+            {
+                licenseNumbers.Add(vehicle.Key);
+            }
 
-        //}
+            return licenseNumbers;
+        }
+        public List<string> GetLicenseNumberList(int i_VehicleStatus)
+        {
+            if (!Enum.IsDefined(typeof(Vehicle.eVehicleGarageStatus), i_VehicleStatus))
+            {
+                throw new ArgumentException();
+            }
+
+            List<string> licenseNumbers = new List<string>();
+            Vehicle.eVehicleGarageStatus vehicleStatus = (Vehicle.eVehicleGarageStatus)i_VehicleStatus;
+            foreach (KeyValuePair<string, Vehicle> vehicle in this.m_GarageVehicles)
+            {
+                if (vehicle.Value.VehicleGarageStatus == vehicleStatus)
+                {
+                    licenseNumbers.Add(vehicle.Key);
+                }
+            }
+
+            return licenseNumbers;
+        }
+
+        public void PumpAirToMaximum (string i_LicenseNumber)
+        {
+            if (!IsVehicleInGarage(i_LicenseNumber))
+            {
+                throw new Exception("This vehicle's air cannot be filled, since it's not in the garage!");
+            }
+
+            Vehicle vehicle = this.m_GarageVehicles[i_LicenseNumber];
+            vehicle.PumpAllWheelsAirToMaximum();
+        }
+
+        public void RefuelGasVehicle(string i_LicenseNumber, int i_GasType, float i_AmountOfGasToFill)
+        {
+            IsVehicleInGarageException(i_LicenseNumber);
+            if (!Enum.IsDefined(typeof(Gas.FuelType), i_GasType))
+            {
+                throw new ArgumentException("Given gas type does not exist!");
+            }
+            Vehicle vehicle = this.m_GarageVehicles[i_LicenseNumber];
+            Gas.FuelType fuelType = (Gas.FuelType)i_GasType;
+
+            if (!(vehicle.EnergySource is Gas))
+            {
+                throw new Exception("The given car is not working on gas!");
+            }
+
+            Gas gasEngine = (Gas)vehicle.EnergySource;
+            gasEngine.FillGas(fuelType, i_AmountOfGasToFill);
+
+        }
+
+        public void RechargeElectricVehicle (string i_LicenseNumber, int i_MinutesToRecharge)
+        {
+            IsVehicleInGarageException(i_LicenseNumber);
+            Vehicle vehicle = this.m_GarageVehicles[i_LicenseNumber];
+            if (!(vehicle.EnergySource is Electric))
+            {
+                throw new Exception("The given car is not electric!");
+            }
+
+            Electric electricEngine = (Electric)vehicle.EnergySource;
+            electricEngine.Charge((float)i_MinutesToRecharge/60);
+        }
+
+        public string GetFullVehicleDetails (string i_LicenseNumber)
+        {
+            IsVehicleInGarageException(i_LicenseNumber);
+            return this.m_GarageVehicles[i_LicenseNumber].ToString();
+        }
     }
 }

@@ -100,8 +100,12 @@ namespace B18_Ex03
 
         public override string ToString()
         {
-            return "current air pressure is :" + m_CurrentAirPressure + ", maximal air pressure is: " + m_MaxAirPressure ;
-        }
+            StringBuilder wheelStatus = new StringBuilder();
+            wheelStatus.Append("Manufacturer is: " + m_ManufacturerName + Environment.NewLine);
+            wheelStatus.Append("Current air pressure is: " + m_CurrentAirPressure + Environment.NewLine);
+            wheelStatus.Append("Maximum air pressure is: " + m_MaxAirPressure);
+            return wheelStatus.ToString();
+
 
     }
 }
