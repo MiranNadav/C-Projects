@@ -34,6 +34,7 @@ namespace B18_Ex03
                 case eVehicleTypes.GasTruck:
                     createdVehicle = new GasTruck();
                     break;
+                // TODO: choose only one of the exception in the class.
                 default:
                     throw new Exception("This kind of vehicle is not supported in the garage");
 
@@ -45,11 +46,11 @@ namespace B18_Ex03
 
         public enum eVehicleTypes
         {
-            GasMotorcycle,
-            ElectricMotorcycle,
-            GasCar,
-            ElectricCar,
-            GasTruck,
+            GasMotorcycle = 1,
+            ElectricMotorcycle = 2,
+            GasCar = 3,
+            ElectricCar = 4,
+            GasTruck = 5
         }
     }
 }
