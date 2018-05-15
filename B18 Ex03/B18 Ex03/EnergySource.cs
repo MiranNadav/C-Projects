@@ -23,6 +23,7 @@ namespace B18_Ex03
                 this.m_CurrentAmount += value;
             }
         }
+
         public float MaxEnergyAmount
         {
             get
@@ -30,6 +31,7 @@ namespace B18_Ex03
                 return this.m_MaxAmount;
             }
         }
+
         protected EnergySource(float i_MaxAmount)
         {
             this.m_CurrentAmount = 0;// i_CurrentAmount;

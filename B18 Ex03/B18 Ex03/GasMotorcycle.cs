@@ -16,10 +16,10 @@ namespace B18_Ex03
             base.EnergySource = new Gas(k_FuelType, k_MaximumFuelCapacity);
         }
 
-        public void Refuel(Gas.FuelType i_FuelType, float i_AmountToRefuel)
-        {
-            ((Gas)EnergySource).FillGas(i_FuelType, i_AmountToRefuel);
-            EnergyPercentge = (EnergySource.CurrentEnergyAmount / k_MaximumFuelCapacity) * 100;
-        }
+        //public void Refuel(Gas.FuelType i_FuelType, float i_AmountToRefuel)
+        //{
+        //    ((Gas)EnergySource).FillGas(i_FuelType, i_AmountToRefuel);
+        //    EnergyPercentge = (EnergySource.CurrentEnergyAmount / k_MaximumFuelCapacity) * 100;
+        //}
     }
 }

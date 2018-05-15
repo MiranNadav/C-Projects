@@ -83,7 +83,7 @@ namespace B18_Ex03
         {
             if (i_AirToPump + m_CurrentAirPressure > (int)m_MaxAirPressure)
             {
-                throw new ValueOutOfRangeException(0, (int)m_MaxAirPressure, "Cannot fill air above maximum allowed.");
+                throw new ValueOutOfRangeException(0, (int)m_MaxAirPressure);//"Cannot fill air above maximum allowed.");
             }
             else
             {

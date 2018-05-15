@@ -16,15 +16,17 @@ namespace Ex03.ConsoleUI
 
         public AddVehicle(UsertInterface i_UserInterface)
         {
+            this.m_UsertInterface = i_UserInterface;
             Console.Clear();
             Console.WriteLine("You have chosen to add a new vehicle");
-            this.m_UsertInterface = i_UserInterface;
-            getLicensePlateNumber();
+
             getVehicleTypeAndCreateVhicle();
-            m_CreatedVhicle.LicenseNumber = m_LicensePlate;
+            getLicensePlateNumber();
             getCarModle();
-            m_CreatedVhicle.EnergyPercentge = 100f;
+            setCurrentAmountOfEnergy();
+            setEnergyPercentage();
             addWheelsManufacturer();
+            setWheelsCurrentAirPressure();
             getUsersName();
             getUsersPhoneNumber();
 
@@ -51,6 +53,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(Messages.k_EnterLicenseNumberMessage);
             string licenseNumber = ValidatUserInput.ValidateInputInNotEmpty();
             this.m_LicensePlate = licenseNumber;
+            m_CreatedVhicle.LicenseNumber = m_LicensePlate;
         }
 
         private void getVehicleTypeAndCreateVhicle()
@@ -69,6 +72,11 @@ namespace Ex03.ConsoleUI
             m_CreatedVhicle.ModelName = carModleName;
         }
 
+        private void setEnergyPercentage()
+        {
+            m_CreatedVhicle.SetEnergyPercentge();
+        }
+
         private void addWheelsManufacturer()
         {
             Console.WriteLine("Please enter Wheels Manufacturer name");
@@ -77,6 +85,25 @@ namespace Ex03.ConsoleUI
             foreach (Wheel wheel in m_CreatedVhicle.Wheels)
             {
                 wheel.Manufacturer = ManufacturerOfWheels;
+            }
+        }
+
+        private void setWheelsCurrentAirPressure()
+        {
+            Console.WriteLine("Please enter the current air pressure of the wheels");
+            float currentAirPressure = ValidatUserInput.ParseInputToFloat();
+            try
+            {
+                foreach (Wheel wheel in m_CreatedVhicle.Wheels)
+                {
+                    wheel.PumpAir(currentAirPressure);
+                }
+            }
+            catch (Exception exeption)
+            {
+                Console.WriteLine(exeption.Message);
+                Console.WriteLine("Please try again");
+                setWheelsCurrentAirPressure();
             }
         }
 
@@ -92,6 +119,31 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please tell us your phone number");
             string OwnersPhoneNumber = ValidatUserInput.ValidateInputInNotEmpty();
             m_CreatedVhicle.OwnerPhoneNumber = OwnersPhoneNumber;
+        }
+
+        private void setCurrentAmountOfEnergy()
+        {
+            if (m_CreatedVhicle.EnergySource.EnergyType.Equals(EnergySource.eEnergyTypes.Gas))
+            {
+                Console.WriteLine("Please enter current amount of fuel in liters");
+            }
+            else
+            {
+                Console.WriteLine("Please enter remaining time of engine operation in hours");
+            }
+
+            float amountOfEnergy = ValidatUserInput.ParseInputToFloat();
+
+            try
+            {
+                m_CreatedVhicle.EnergySource.FillEnergy(amountOfEnergy);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                Console.WriteLine("Please try again");
+                setCurrentAmountOfEnergy();
+            }
         }
 
         private void addVehicleToGarage()

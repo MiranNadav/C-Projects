@@ -128,7 +128,7 @@ namespace B18_Ex03
 
         }
 
-        public void RechargeElectricVehicle(string i_LicenseNumber, int i_MinutesToRecharge)
+        public void RechargeElectricVehicle(string i_LicenseNumber, float i_MinutesToRecharge)
         {
             IsVehicleInGarageException(i_LicenseNumber);
             Vehicle vehicle = this.m_GarageVehicles[i_LicenseNumber];

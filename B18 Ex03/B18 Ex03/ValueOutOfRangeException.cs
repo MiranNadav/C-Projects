@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex03
 {
-    class ValueOutOfRangeException : Exception
+    public class ValueOutOfRangeException : Exception
     {
         private float m_MinValue;
         public float MinValue

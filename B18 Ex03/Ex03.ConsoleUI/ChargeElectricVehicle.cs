@@ -7,32 +7,27 @@ using B18_Ex03;
 
 namespace Ex03.ConsoleUI
 {
-
-    class Refuel
+    class ChargeElectricVehicle
     {
-
         private UsertInterface m_UsertInterface;
-        public Refuel(UsertInterface i_UserInterface)
+        public ChargeElectricVehicle(UsertInterface i_UserInterface)
         {
             this.m_UsertInterface = i_UserInterface;
             Console.Clear();
-            Console.WriteLine("You have chosen to refuel a gas type vehicle");
-            getDetaildAndRefuel();
+            Console.WriteLine("You have chosen to recharge an Electric type vehicle");
+            getDetailsAndChargeVehicle();
         }
 
-        private void getDetaildAndRefuel()
+        private void getDetailsAndChargeVehicle()
         {
             Console.WriteLine("Please enter the license number of the vehicle you would like to refuel");
             string LicenseNumber = ValidatUserInput.ValidateInputInNotEmpty();
-            Console.WriteLine("Please enter the type of fuel of the vehicle you would like to refuel");
-            Console.WriteLine(Messages.getEnumAsString(typeof(Gas.FuelType)));
-            Gas.FuelType fuelType = (Gas.FuelType)ValidatUserInput.InputIsInRangeOfEnum(typeof(Gas.FuelType));
-            Console.WriteLine("Please enter the amount of fuel you would like to refuel");
-            float amountOfFuel = ValidatUserInput.ParseInputToFloat();
+            Console.WriteLine("Please enter the number of minutes to charge");
+            float amountOfTimeToCharge = ValidatUserInput.ParseInputToFloat();
 
             try
             {
-                m_UsertInterface.Garage.RefuelGasVehicle(LicenseNumber, fuelType, amountOfFuel);
+                m_UsertInterface.Garage.RechargeElectricVehicle(LicenseNumber, amountOfTimeToCharge);
             }
             catch (Exception exeption)
             {
@@ -41,7 +36,7 @@ namespace Ex03.ConsoleUI
                 if (exeption is ValueOutOfRangeException)
                 {
                     Console.WriteLine("Please try again");
-                    getDetaildAndRefuel();
+                    getDetailsAndChargeVehicle();
                 }
                 else
                 {

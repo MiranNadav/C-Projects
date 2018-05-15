@@ -33,7 +33,7 @@ namespace Ex03.ConsoleUI
                 {
                     DisplatLicenseNumbers displatLicenseNumbers = new DisplatLicenseNumbers(this);
                 }
-                else if (userChoise == 6)
+                else if (userChoise == 3)
                 {
                     ChangeStatus changeStatus = new ChangeStatus(this);
                 }
@@ -41,7 +41,23 @@ namespace Ex03.ConsoleUI
                 {
                     Refuel refuel = new Refuel(this);
                 }
+                else if (userChoise == 5)
+                {
+                    ChargeElectricVehicle chargeElectricVehicle = new ChargeElectricVehicle(this);
+                }
+                else if (userChoise == 6)
+                {
+                    InflateTires inflateTires = new InflateTires(this);
+                }
+                else if (userChoise == 7)
+                {
+                    //should be vehicle details
+                }
             }
+
+            Console.WriteLine("Good bye! Please come again");
+            Console.WriteLine("Press any key to close the terminal");
+            Console.ReadLine();
         }
 
 

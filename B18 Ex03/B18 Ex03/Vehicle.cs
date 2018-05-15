@@ -64,10 +64,11 @@ namespace B18_Ex03
             {
                 return this.m_EnergyPercentage;
             }
-            set
-            {
-                this.m_EnergyPercentage = value;
-            }
+        }
+
+        public void SetEnergyPercentge()
+        {
+            m_EnergyPercentage = m_EnergySource.CurrentEnergyAmount / m_EnergySource.CurrentEnergyAmount;
         }
 
         public List<Wheel> Wheels
@@ -142,11 +143,11 @@ namespace B18_Ex03
         {
             StringBuilder carFormat = new StringBuilder();
             carFormat.Append("License number is: " + this.m_LicenseNumber + Environment.NewLine);
-            carFormat.Append("Model name is: " + this.m_ModelName+ Environment.NewLine);
+            carFormat.Append("Model name is: " + this.m_ModelName + Environment.NewLine);
             carFormat.Append("Owner name is: " + this.m_OwnerName + Environment.NewLine);
             carFormat.Append("Car Status is: " + this.m_VehicleGarageStatus + Environment.NewLine);
             carFormat.Append("Wheels Status is - " + Environment.NewLine + this.m_Wheels[0].ToString() + Environment.NewLine);
-            
+
             return carFormat.ToString();
         }
     }
