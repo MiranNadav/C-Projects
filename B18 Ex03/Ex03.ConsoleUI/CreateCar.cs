@@ -14,24 +14,23 @@ namespace Ex03.ConsoleUI
         {
             this.m_NewCar = (Car)i_NewVehicle;
             Console.Clear();
+            paintCar();
+            Console.Clear();
+            installDoors();
         }
 
-        private Car.eCarColor getColorFromUser()
+        private void paintCar()
         {
             Console.WriteLine("Please choose car color: ");
             Console.WriteLine(Messages.getEnumAsString(typeof(Car.eCarColor)));
-            int userColorAsInt = ValidatUserInput.ParseInputToInt();
-            try
-            {
-                m_NewCar.Color = userColorAsInt;
-            }
-            catch
-            {
-
-            }
+            m_NewCar.Color = (Car.eCarColor)ValidatUserInput.InputIsInRangeOfEnum(typeof(Car.eCarColor));
         }
 
+        private void installDoors()
+        {
+            Console.WriteLine("Please choose the number of Doors: ");
+            Console.WriteLine(Messages.getEnumAsString(typeof(Car.eNumberOfDoors)));
+            m_NewCar.NumberOfDoors = (Car.eNumberOfDoors)ValidatUserInput.InputIsInRangeOfEnum(typeof(Car.eNumberOfDoors));
+        }
     }
-
-}
 }

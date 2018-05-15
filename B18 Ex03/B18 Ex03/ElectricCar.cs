@@ -8,22 +8,10 @@ namespace B18_Ex03
         private float m_TimeLeftOnBattary;
         private const float k_MaximumChargeTimeOfBattery = 3.2f;
 
-        public ElectricCar()/*string i_ModleName, string i_LicenseNumber, List<Wheel> i_Wheels, EnergySource i_EnergySource, string i_Color, int i_NumberOfDoors)*/
+        public ElectricCar()
         {
+            this.m_TimeLeftOnBattary = 100f;
             base.EnergySource = new Electric(k_MaximumChargeTimeOfBattery);
-            //base.EnergyPercentge = 100.0F;
-            //base.ModelName = i_ModleName;
-            //base.LicenseNumber = i_LicenseNumber;
-            //base.Wheels = i_Wheels;
-            //base.EnergySource = i_EnergySource;
-            //if (!Enum.IsDefined(typeof(eNumberOfDoors), i_NumberOfDoors) || !listOfColors.Contains(i_Color))
-            //{
-            //    throw new ArgumentException();
-            //}
-
-            //this.Color = i_Color;
-            //this.NumberOfDoors = (eNumberOfDoors)i_NumberOfDoors;
-            //this.m_TimeLeftOnBattary = k_MaximumChargeTimeOfBattery * (EnergyPercentge / 100);
         }
 
         public void ChargeBattery(float i_NumberOfHoursToAdd)

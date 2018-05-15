@@ -44,14 +44,29 @@ namespace Ex03.ConsoleUI
 
             while (!int.TryParse(userInput, out userInputToInt))
             {
-                Console.WriteLine("Input is not a number. Please try again");
+                Console.WriteLine("Input is not a of valid type. Please try again");
                 userInput = Console.ReadLine();
             }
 
             return userInputToInt;
         }
 
-        public static string validateYesOrNo()
+        //TODO: change this!
+        public static float ParseInputToFloat()
+        {
+            string userInput = Console.ReadLine();
+            float userInputTofloat;
+
+            while (!float.TryParse(userInput, out userInputTofloat))
+            {
+                Console.WriteLine("Input is not a of valid type. Please try again");
+                userInput = Console.ReadLine();
+            }
+
+            return userInputTofloat;
+        }
+
+        public static bool validateYesOrNo()
         {
             string userInput = Console.ReadLine();
             while (!userInput.Equals("Y") && !userInput.Equals("N"))
@@ -60,23 +75,16 @@ namespace Ex03.ConsoleUI
                 userInput = Console.ReadLine();
             }
 
-            return userInput;
+            return userInput.Equals("Y") ? true : false;
         }
 
         public static Vehicle.eVehicleGarageStatus GetStateFromUser()
         {
             Console.WriteLine("Please chose one of the following vehicle statuses:");
             Console.WriteLine(Messages.getEnumAsString(typeof(Vehicle.eVehicleGarageStatus)));
-            int userStatusChoiseAsInt = ValidatUserInput.ParseInputToInt();
-            while (!Enum.IsDefined(typeof(Vehicle.eVehicleGarageStatus), userStatusChoiseAsInt))
-            {
-                Console.WriteLine("The input is not a valid option. Please try again");
-                userStatusChoiseAsInt = ValidatUserInput.ParseInputToInt();
-            }
+            Vehicle.eVehicleGarageStatus vhicleStatus = (Vehicle.eVehicleGarageStatus)InputIsInRangeOfEnum(typeof(Vehicle.eVehicleGarageStatus));
 
-            Vehicle.eVehicleGarageStatus typeToFilterBy = (Vehicle.eVehicleGarageStatus)userStatusChoiseAsInt;
-
-            return typeToFilterBy;
+            return vhicleStatus;
         }
 
         public static string GetLicensePlateFromUser()
@@ -87,5 +95,19 @@ namespace Ex03.ConsoleUI
 
             return licenseNumber;
         }
+
+        public static int InputIsInRangeOfEnum(Type i_EnumType)
+        {
+            int userInput = ParseInputToInt();
+
+            while (!Enum.IsDefined(i_EnumType, userInput))
+            {
+                Console.WriteLine("Input is not in the valid range. Please enter a option in the valid range");
+                userInput = ParseInputToInt();
+            }
+
+            return userInput;
+        }
+
     }
 }

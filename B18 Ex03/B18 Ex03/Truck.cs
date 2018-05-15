@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex03
 {
-    class Truck : Vehicle
+    public abstract class Truck : Vehicle
     {
         private bool m_IsCarryingDangerousMaterials;
         private float m_MaxAllowedWeight;

@@ -17,14 +17,14 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("You have chosen to Display the license numbers of the vehicles whom are currently in the garage");
             Console.WriteLine("Would you like to filter according to the status of each vehicle? Press Y for 'Yes' or 'N' For 'No'");
             this.m_userInterface = i_UserInterface;
-            string userAnswer = ValidatUserInput.validateYesOrNo();
-            if (userAnswer.Equals("N"))
+            bool userWantsToFilter = ValidatUserInput.validateYesOrNo();
+            if (userWantsToFilter)
             {
-                displayAllLicsensePlates();
+                displayFilterdLicsensePlates();
             }
             else
             {
-                displayFilterdLicsensePlates();
+                displayAllLicsensePlates();
             }
 
             Console.ReadLine();
@@ -32,32 +32,35 @@ namespace Ex03.ConsoleUI
 
         private void displayAllLicsensePlates()
         {
-            List<> = m_userInterface.Garage.GetAllLicenseNumberList();
-            if (listOfPlates.Length == 0)
-            {
-                Console.WriteLine("There are no vehicles in the garage");
-            }
-            else
-            {
-                Console.WriteLine("The license plates of all the vehicles whom are currently in the garage: ");
-                Console.WriteLine(m_userInterface.Garage.GetAllLicenseNumberList());
-            }
+            List<string> licenseNumbers = m_userInterface.Garage.GetLicenseNumberList();
+            //TODO: better with string builder?
+            printList(licenseNumbers);
+
         }
 
         private void displayFilterdLicsensePlates()
         {
             Vehicle.eVehicleGarageStatus typeToFilterBy = ValidatUserInput.GetStateFromUser();
-            string listOfFilterdPlates = m_userInterface.Garage.GetFilterdLicenseNumberList(typeToFilterBy);
+            List<string> licenseNumbersFilterd = m_userInterface.Garage.GetLicenseNumberList(typeToFilterBy);
 
-            if (listOfFilterdPlates.Length == 0)
+            if (licenseNumbersFilterd.Count == 0)
             {
                 Console.WriteLine("There are no vehicles with the current status in the garage");
             }
             else
             {
-                Console.WriteLine("The license plates of the vehicles whom are currently in the garage with the chosen status: ");
-                Console.WriteLine(listOfFilterdPlates);
+                printList(licenseNumbersFilterd);
+            }
+
+        }
+
+        public void printList<T>(List<T> list)
+        {
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
             }
         }
     }
 }
+

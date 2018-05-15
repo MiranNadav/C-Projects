@@ -51,14 +51,7 @@ namespace B18_Ex03
             }
             set
             {
-                if (Enum.IsDefined(typeof(eCarColor), value))
-                {
-                    this.m_Color = value;
-                }
-                else
-                {
-                    throw new ArgumentException("Input is not a valid option. Please try again");
-                }
+                this.m_Color = value;
             }
         }
 

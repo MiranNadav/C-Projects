@@ -33,13 +33,13 @@ namespace Ex03.ConsoleUI
                 {
                     DisplatLicenseNumbers displatLicenseNumbers = new DisplatLicenseNumbers(this);
                 }
-                else if (userChoise == 3)
+                else if (userChoise == 6)
                 {
                     ChangeStatus changeStatus = new ChangeStatus(this);
                 }
-                else
+                else if (userChoise == 4)
                 {
-                    InflateTires inflateTires = new InflateTires(this);
+                    Refuel refuel = new Refuel(this);
                 }
             }
         }

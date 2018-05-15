@@ -8,13 +8,8 @@ namespace B18_Ex03
 {
     public class VehicleFactory
     {
-        public static Vehicle CreateVehicle(int i_VehicleTypeAsInt)
+        public static Vehicle CreateVehicle(eVehicleTypes i_VehicleTypeAsInt)
         {
-            if (!Enum.IsDefined(typeof(eVehicleTypes), i_VehicleTypeAsInt))
-            {
-                throw new ArgumentException("The input is not a valid vehicle type");
-            }
-
             eVehicleTypes vehicleType = (eVehicleTypes)i_VehicleTypeAsInt;
             Vehicle createdVehicle;
             switch (vehicleType)

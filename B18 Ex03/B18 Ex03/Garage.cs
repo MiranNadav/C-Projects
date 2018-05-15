@@ -76,15 +76,15 @@ namespace B18_Ex03
 
             return licenseNumbers;
         }
-        public List<string> GetLicenseNumberList(int i_VehicleStatus)
+        public List<string> GetLicenseNumberList(Vehicle.eVehicleGarageStatus i_VehicleStatus)
         {
-            if (!Enum.IsDefined(typeof(Vehicle.eVehicleGarageStatus), i_VehicleStatus))
-            {
-                throw new ArgumentException();
-            }
+            //if (!Enum.IsDefined(typeof(Vehicle.eVehicleGarageStatus), i_VehicleStatus))
+            //{
+            //    throw new ArgumentException();
+            //}
 
             List<string> licenseNumbers = new List<string>();
-            Vehicle.eVehicleGarageStatus vehicleStatus = (Vehicle.eVehicleGarageStatus)i_VehicleStatus;
+            Vehicle.eVehicleGarageStatus vehicleStatus = i_VehicleStatus;
             foreach (KeyValuePair<string, Vehicle> vehicle in this.m_GarageVehicles)
             {
                 if (vehicle.Value.VehicleGarageStatus == vehicleStatus)
@@ -107,15 +107,16 @@ namespace B18_Ex03
             vehicle.PumpAllWheelsAirToMaximum();
         }
 
-        public void RefuelGasVehicle(string i_LicenseNumber, int i_GasType, float i_AmountOfGasToFill)
+        public void RefuelGasVehicle(string i_LicenseNumber, Gas.FuelType i_GasType, float i_AmountOfGasToFill)
         {
             IsVehicleInGarageException(i_LicenseNumber);
-            if (!Enum.IsDefined(typeof(Gas.FuelType), i_GasType))
-            {
-                throw new ArgumentException("Given gas type does not exist!");
-            }
+            //if (!Enum.IsDefined(typeof(Gas.FuelType), i_GasType))
+            //{
+            //    throw new ArgumentException("Given gas type does not exist!");
+            //}
+
             Vehicle vehicle = this.m_GarageVehicles[i_LicenseNumber];
-            Gas.FuelType fuelType = (Gas.FuelType)i_GasType;
+            Gas.FuelType fuelType = i_GasType;
 
             if (!(vehicle.EnergySource is Gas))
             {
