@@ -21,11 +21,13 @@ namespace Ex03.ConsoleUI
             try
             {
                 m_UsertInterface.Garage.FillAirToMaximum(licensePlate);
+                Console.Clear();
                 Console.WriteLine(String.Format("{0} Wheels pumped to Maximum!", licensePlate));
                 Messages.PressAnyKeyToContinue();
             }
             catch (Exception exepetion)
             {
+                Console.Clear();
                 Console.WriteLine(exepetion.Message);
                 Messages.PressAnyKeyToContinue();
             }

@@ -22,6 +22,7 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Please enter the license number of the vehicle you would like to refuel");
             string LicenseNumber = ValidatUserInput.ValidateInputInNotEmpty();
+            Console.Clear();
             Console.WriteLine("Please enter the number of minutes to charge");
             float amountOfTimeToCharge = ValidatUserInput.ParseInputToFloat();
 
@@ -31,6 +32,7 @@ namespace Ex03.ConsoleUI
             }
             catch (Exception exeption)
             {
+                Console.Clear();
                 Console.WriteLine(exeption.Message);
 
                 if (exeption is ValueOutOfRangeException)

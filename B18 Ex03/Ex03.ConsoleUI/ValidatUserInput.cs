@@ -81,7 +81,6 @@ namespace Ex03.ConsoleUI
         public static Vehicle.eVehicleGarageStatus GetStateFromUser()
         {
             Console.WriteLine("Please chose one of the following vehicle statuses:");
-            Console.WriteLine(Messages.getEnumAsString(typeof(Vehicle.eVehicleGarageStatus)));
             Vehicle.eVehicleGarageStatus vhicleStatus = (Vehicle.eVehicleGarageStatus)InputIsInRangeOfEnum(typeof(Vehicle.eVehicleGarageStatus));
 
             return vhicleStatus;
@@ -98,11 +97,15 @@ namespace Ex03.ConsoleUI
 
         public static int InputIsInRangeOfEnum(Type i_EnumType)
         {
+            Console.WriteLine(Messages.getEnumAsString(i_EnumType));
+
             int userInput = ParseInputToInt();
 
             while (!Enum.IsDefined(i_EnumType, userInput))
             {
+                Console.Clear();
                 Console.WriteLine("Input is not in the valid range. Please enter a option in the valid range");
+                Console.WriteLine(Messages.getEnumAsString(i_EnumType));
                 userInput = ParseInputToInt();
             }
 

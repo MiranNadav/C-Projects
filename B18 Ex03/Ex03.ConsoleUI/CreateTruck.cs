@@ -13,7 +13,6 @@ namespace Ex03.ConsoleUI
         public CreateTruck(Vehicle i_NewVehicle)
         {
             this.m_NewTruck = (Truck)i_NewVehicle;
-            Console.Clear();
             setIfCarryingDangerousMaterials();
             Console.Clear();
             setMaxCarray();

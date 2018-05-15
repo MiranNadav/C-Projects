@@ -23,11 +23,13 @@ namespace Ex03.ConsoleUI
             try
             {
                 m_UsertInterface.Garage.ChangeVehicleStatus(licenseNumber, statusToChangeTo);
+                Console.Clear();
                 Console.WriteLine("Vehicle status changed!");
                 Messages.PressAnyKeyToContinue();
             }
             catch (Exception exeption)
             {
+                Console.Clear();
                 Console.WriteLine(exeption.Message);
                 Messages.PressAnyKeyToContinue();
             }

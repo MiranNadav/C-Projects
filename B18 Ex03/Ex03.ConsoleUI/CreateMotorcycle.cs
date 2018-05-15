@@ -13,7 +13,6 @@ namespace Ex03.ConsoleUI
         public CreateMotorcycle(Vehicle i_NewVehicle)
         {
             this.m_NewMotorcycle = (Motorcycle)i_NewVehicle;
-            Console.Clear();
             assignLicenseType();
             Console.Clear();
             setEngineVolume();
@@ -22,7 +21,6 @@ namespace Ex03.ConsoleUI
         private void assignLicenseType()
         {
             Console.WriteLine("Please choose  Motorcycle LicenseType: ");
-            Console.WriteLine(Messages.getEnumAsString(typeof(Motorcycle.eLicenseType)));
             m_NewMotorcycle.LicenseType = (Motorcycle.eLicenseType)ValidatUserInput.InputIsInRangeOfEnum(typeof(Motorcycle.eLicenseType));
         }
 

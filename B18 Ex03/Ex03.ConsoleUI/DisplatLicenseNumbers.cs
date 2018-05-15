@@ -33,8 +33,8 @@ namespace Ex03.ConsoleUI
         private void displayAllLicsensePlates()
         {
             List<string> licenseNumbers = m_userInterface.Garage.GetLicenseNumberList();
-            //TODO: better with string builder?
-            printList(licenseNumbers);
+            Console.Clear();
+            displayAccordingToSize(licenseNumbers);
 
         }
 
@@ -42,23 +42,28 @@ namespace Ex03.ConsoleUI
         {
             Vehicle.eVehicleGarageStatus typeToFilterBy = ValidatUserInput.GetStateFromUser();
             List<string> licenseNumbersFilterd = m_userInterface.Garage.GetLicenseNumberList(typeToFilterBy);
+            Console.Clear();
+            displayAccordingToSize(licenseNumbersFilterd);
+        }
 
-            if (licenseNumbersFilterd.Count == 0)
+        private void printList<T>(List<T> list)
+        {
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        private void displayAccordingToSize<T>(List<T> list)
+        {
+            if (list.Count == 0)
             {
                 Console.WriteLine("There are no vehicles with the current status in the garage");
             }
             else
             {
-                printList(licenseNumbersFilterd);
-            }
-
-        }
-
-        public void printList<T>(List<T> list)
-        {
-            foreach (var item in list)
-            {
-                Console.WriteLine(item);
+                Console.WriteLine("The list of plates that you requested: ");
+                printList(list);
             }
         }
     }

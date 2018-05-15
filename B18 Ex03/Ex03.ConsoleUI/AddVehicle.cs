@@ -13,6 +13,7 @@ namespace Ex03.ConsoleUI
         private string m_LicensePlate;
         private VehicleFactory.eVehicleTypes m_VehcileType;
         private Vehicle m_CreatedVhicle;
+        private bool m_VehicleIsAllReadyInTheGarage = false;
 
         public AddVehicle(UsertInterface i_UserInterface)
         {
@@ -21,30 +22,47 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("You have chosen to add a new vehicle");
 
             getVehicleTypeAndCreateVhicle();
+            Console.Clear();
             getLicensePlateNumber();
-            getCarModle();
-            setCurrentAmountOfEnergy();
-            setEnergyPercentage();
-            addWheelsManufacturer();
-            setWheelsCurrentAirPressure();
-            getUsersName();
-            getUsersPhoneNumber();
-
-            if (m_VehcileType.Equals(VehicleFactory.eVehicleTypes.ElectricCar) || m_VehcileType.Equals(VehicleFactory.eVehicleTypes.GasCar))
-            {
-                CreateCar createCar = new CreateCar(m_CreatedVhicle);
-            }
-            else if (m_VehcileType.Equals(VehicleFactory.eVehicleTypes.ElectricMotorcycle) || m_VehcileType.Equals(VehicleFactory.eVehicleTypes.GasMotorcycle))
-            {
-                CreateMotorcycle createMotorcycle = new CreateMotorcycle(m_CreatedVhicle);
-            }
-            else
-            {
-                CreateTruck createTruck = new CreateTruck(m_CreatedVhicle);
-
-            }
-
+            Console.Clear();
             addVehicleToGarage();
+
+            if (!m_VehicleIsAllReadyInTheGarage)
+            {
+                Console.Clear();
+                getCarModle();
+                Console.Clear();
+                setCurrentAmountOfEnergy();
+                Console.Clear();
+                setEnergyPercentage();
+                Console.Clear();
+                addWheelsManufacturer();
+                Console.Clear();
+                setWheelsCurrentAirPressure();
+                Console.Clear();
+                getUsersName();
+                Console.Clear();
+                getUsersPhoneNumber();
+                Console.Clear();
+
+                if (m_VehcileType.Equals(VehicleFactory.eVehicleTypes.ElectricCar) || m_VehcileType.Equals(VehicleFactory.eVehicleTypes.GasCar))
+                {
+                    CreateCar createCar = new CreateCar(m_CreatedVhicle);
+                }
+                else if (m_VehcileType.Equals(VehicleFactory.eVehicleTypes.ElectricMotorcycle) || m_VehcileType.Equals(VehicleFactory.eVehicleTypes.GasMotorcycle))
+                {
+                    CreateMotorcycle createMotorcycle = new CreateMotorcycle(m_CreatedVhicle);
+                }
+                else
+                {
+                    CreateTruck createTruck = new CreateTruck(m_CreatedVhicle);
+
+                }
+
+                Console.Clear();
+                Console.WriteLine("Vehicle added to garage");
+                Messages.PressAnyKeyToContinue();
+            }
         }
 
 
@@ -58,8 +76,7 @@ namespace Ex03.ConsoleUI
 
         private void getVehicleTypeAndCreateVhicle()
         {
-            Console.WriteLine("Please chose one of the following vehicle types:");
-            Console.WriteLine(Messages.getEnumAsString(typeof(VehicleFactory.eVehicleTypes)));
+            Console.WriteLine("Please choose one of the following vehicle types:");
             VehicleFactory.eVehicleTypes usersVehicleTypeChoise = (VehicleFactory.eVehicleTypes)ValidatUserInput.InputIsInRangeOfEnum(typeof(VehicleFactory.eVehicleTypes));
             m_VehcileType = usersVehicleTypeChoise;
             m_CreatedVhicle = VehicleFactory.CreateVehicle(usersVehicleTypeChoise);
@@ -101,6 +118,7 @@ namespace Ex03.ConsoleUI
             }
             catch (Exception exeption)
             {
+                Console.Clear();
                 Console.WriteLine(exeption.Message);
                 Console.WriteLine("Please try again");
                 setWheelsCurrentAirPressure();
@@ -140,6 +158,7 @@ namespace Ex03.ConsoleUI
             }
             catch (Exception exception)
             {
+                Console.Clear();
                 Console.WriteLine(exception.Message);
                 Console.WriteLine("Please try again");
                 setCurrentAmountOfEnergy();
@@ -151,12 +170,12 @@ namespace Ex03.ConsoleUI
             try
             {
                 m_UsertInterface.Garage.AddVehicleToGarage(m_CreatedVhicle);
-                Console.WriteLine("Vehicle added to garage");
-                Messages.PressAnyKeyToContinue();
             }
 
             catch (Exception exeption)
             {
+                m_VehicleIsAllReadyInTheGarage = true;
+                Console.Clear();
                 Console.WriteLine(exeption.Message);
                 Messages.PressAnyKeyToContinue();
             }

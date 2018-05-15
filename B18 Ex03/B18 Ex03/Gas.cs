@@ -24,7 +24,7 @@ namespace B18_Ex03
 
             if (i_FuelType != m_GasType)
             {
-                throw new ArgumentException();
+                throw new ArgumentException(String.Format("The gas type dose not match the car vehicle gas type. chosen vehicle gas type is: {0}", m_GasType));
             }
 
             base.FillEnergy(i_AmountOfGas);
