@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace B18_Ex03
 {
@@ -10,7 +11,7 @@ namespace B18_Ex03
 
         public ElectricCar()
         {
-            this.m_TimeLeftOnBattary = 100f;
+            this.m_TimeLeftOnBattary = 0f;
             base.EnergySource = new Electric(k_MaximumChargeTimeOfBattery);
         }
 
@@ -27,5 +28,12 @@ namespace B18_Ex03
 
         //    base.EnergyPercentge = (EnergySource.CurrentEnergyAmount / k_MaximumChargeTimeOfBattery) * 100;
         //}
+        public override string ToString()
+        {
+            return string.Format(
+@"Vehicle type is: Electric Car
+{0}",
+base.ToString());
+        }
     }
 }

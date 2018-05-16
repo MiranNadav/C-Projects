@@ -9,7 +9,6 @@ namespace B18_Ex03
     public abstract class Car : Vehicle
     {
 
-        //private eCarColor m_CarColor;
         private eNumberOfDoors m_NumberOfDoors;
         private eCarColor m_Color;
         private const int k_NumberOfWheels = 4;
@@ -68,6 +67,12 @@ namespace B18_Ex03
             }
         }
 
-
+        public override string ToString()
+        {
+            return string.Format(
+@"{0}
+Number of doors is: {1}
+Car color is: {2}", base.ToString(), this.m_NumberOfDoors, this.m_Color);
+        }
     }
 }

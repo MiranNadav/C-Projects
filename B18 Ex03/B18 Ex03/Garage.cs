@@ -15,6 +15,11 @@ namespace B18_Ex03
             m_GarageVehicles = new Dictionary<string, Vehicle>();
         }
 
+        public Vehicle GetVehicleByLicenseNumber(string i_LicenseNumber)
+        {
+            IsVehicleInGarageException(i_LicenseNumber);
+            return m_GarageVehicles[i_LicenseNumber];
+        }
         public bool IsVehicleInGarage(string i_LicenseNumber)
         {
             if (m_GarageVehicles.ContainsKey(i_LicenseNumber))
@@ -36,7 +41,7 @@ namespace B18_Ex03
         {
             if (IsVehicleInGarage(i_Vehicle.LicenseNumber))
             {
-                i_Vehicle.VehicleGarageStatus = Vehicle.eVehicleGarageStatus.InRepair;
+                m_GarageVehicles[i_Vehicle.LicenseNumber].VehicleGarageStatus = Vehicle.eVehicleGarageStatus.InRepair;
                 throw new Exception("This vehicle is already in the garage! Vehicle status changed to being fixed");
             }
             m_GarageVehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);

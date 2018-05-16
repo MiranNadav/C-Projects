@@ -16,34 +16,11 @@ namespace B18_Ex03
             base.EnergySource = new Gas(k_FuelType, k_MaximumFuelCapacity);
         }
 
-        //public void Refuel(Gas.FuelType i_FuelType, float i_AmountToRefuel)
-        //{
-        //    ((Gas)EnergySource).FillGas(i_FuelType, i_AmountToRefuel);
-        //    EnergyPercentge = (EnergySource.CurrentEnergyAmount / k_MaximumFuelCapacity) * 100;
-        //}
-
         public override string ToString()
         {
-            return string.Format("{0}{1}", base.ToString(), (Gas)EnergySource);
+            return string.Format(
+@"Vehicle type is: Gas Car 
+{0}", base.ToString());
         }
-
-        //public float CurrentAmountOfFuel
-        //{
-        //    get
-        //    {
-        //        return m_currentAmountOfGas;
-        //    }
-        //    set
-        //    {
-        //        if (value > k_MaximumFuelCapacity)
-        //        {
-        //            throw new ValueOutOfRangeException(value, k_MaximumFuelCapacity);
-        //        }
-        //        else
-        //        {
-        //            m_currentAmountOfGas = value;
-        //        }
-        //    }
-        //}
     }
 }

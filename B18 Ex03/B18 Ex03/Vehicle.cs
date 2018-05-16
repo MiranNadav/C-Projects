@@ -141,14 +141,14 @@ namespace B18_Ex03
 
         public override string ToString()
         {
-            StringBuilder carFormat = new StringBuilder();
-            carFormat.Append("License number is: " + this.m_LicenseNumber + Environment.NewLine);
-            carFormat.Append("Model name is: " + this.m_ModelName + Environment.NewLine);
-            carFormat.Append("Owner name is: " + this.m_OwnerName + Environment.NewLine);
-            carFormat.Append("Car Status is: " + this.m_VehicleGarageStatus + Environment.NewLine);
-            carFormat.Append("Wheels Status is - " + Environment.NewLine + this.m_Wheels[0].ToString() + Environment.NewLine);
-
-            return carFormat.ToString();
+            return string.Format(
+@"License number is: {0}
+Model name is: {1}
+Owner name is: {2}
+Current state in garage: {3}
+{4}
+{5}",
+this.m_LicenseNumber, this.m_ModelName, this.OwnerName, this.m_VehicleGarageStatus, this.m_Wheels[0].ToString(), this.m_EnergySource.ToString());
         }
     }
 }
