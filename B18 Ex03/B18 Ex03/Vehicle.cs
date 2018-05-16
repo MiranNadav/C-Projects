@@ -68,7 +68,7 @@ namespace B18_Ex03
 
         public void SetEnergyPercentge()
         {
-            m_EnergyPercentage = m_EnergySource.CurrentEnergyAmount / m_EnergySource.CurrentEnergyAmount;
+            m_EnergyPercentage = (m_EnergySource.CurrentEnergyAmount / m_EnergySource.MaxEnergyAmount) * 100;
         }
 
         public List<Wheel> Wheels
@@ -147,8 +147,9 @@ Model name is: {1}
 Owner name is: {2}
 Current state in garage: {3}
 {4}
-{5}",
-this.m_LicenseNumber, this.m_ModelName, this.OwnerName, this.m_VehicleGarageStatus, this.m_Wheels[0].ToString(), this.m_EnergySource.ToString());
+Current energy percentage is: {5}%
+{6}",
+this.m_LicenseNumber, m_ModelName, m_OwnerName, m_VehicleGarageStatus, m_Wheels[0].ToString(), m_EnergyPercentage, m_EnergySource.ToString());
         }
     }
 }
