@@ -81,7 +81,7 @@ namespace B18_Ex03
 
         public void PumpAir(float i_AirToPump)
         {
-            if (i_AirToPump + m_CurrentAirPressure > (int)m_MaxAirPressure)
+            if (i_AirToPump + m_CurrentAirPressure > (int)m_MaxAirPressure || i_AirToPump < 0)
             {
                 throw new ValueOutOfRangeException(0, (int)m_MaxAirPressure);//"Cannot fill air above maximum allowed.");
             }
@@ -100,12 +100,10 @@ namespace B18_Ex03
 
         public override string ToString()
         {
-            StringBuilder wheelStatus = new StringBuilder();
-            wheelStatus.Append("Manufacturer is: " + m_ManufacturerName + Environment.NewLine);
-            wheelStatus.Append("Current air pressure is: " + m_CurrentAirPressure + Environment.NewLine);
-            wheelStatus.Append("Maximum air pressure is: " + m_MaxAirPressure);
-            return wheelStatus.ToString();
+            return string.Format(
+@"Manufacturer is: {0} 
+Current air pressure is: {1}
+Maximum air pressure is: {2}", this.m_ManufacturerName, this.m_CurrentAirPressure, this.m_MaxAirPressure);
         }
-
     }
 }

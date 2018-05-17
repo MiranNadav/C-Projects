@@ -69,6 +69,12 @@ namespace B18_Ex03
             Electric
         }
 
-
+        public override string ToString()
+        {
+            return string.Format(
+@"Engine type is: {0}
+Current amount of energy: {1}
+Maximum amount of energy: {2}", this.m_EnergyType, this.m_CurrentAmount, this.m_MaxAmount);
+        }
     }
 }

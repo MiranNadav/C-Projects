@@ -67,6 +67,12 @@ namespace B18_Ex03
             }
         }
 
-
+        public override string ToString()
+        {
+            return string.Format(
+@"{0}
+Number of doors is: {1}
+Car color is: {2}", base.ToString(), this.m_NumberOfDoors, this.m_Color);
+        }
     }
 }

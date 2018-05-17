@@ -29,5 +29,13 @@ namespace B18_Ex03
 
             base.FillEnergy(i_AmountOfGas);
         }
+
+        public override string ToString()
+        {
+            return string.Format(
+@"Fuel type is: {0}
+Current fuel in liters: {1}
+Maximum fuel in liters: {2}", m_GasType, base.CurrentEnergyAmount, base.MaxEnergyAmount);
+        }
     }
 }

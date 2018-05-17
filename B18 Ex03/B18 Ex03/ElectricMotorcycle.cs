@@ -28,5 +28,13 @@ namespace B18_Ex03
 
         //    base.EnergyPercentge = (EnergySource.CurrentEnergyAmount / k_MaximumChargeTimeOfBattery) * 100;
         //}
+
+        public override string ToString()
+        {
+            return string.Format(
+@"Vehicle type is: Electric Motorcycle
+{0}",
+base.ToString());
+        }
     }
 }
