@@ -8,7 +8,7 @@ namespace B18_Ex03
 {
     class GasMotorcycle : Motorcycle
     {
-        private const Gas.FuelType k_FuelType = Gas.FuelType.Octan96;
+        private const Gas.eFuelType k_FuelType = Gas.eFuelType.Octan96;
         private const float k_MaximumFuelCapacity = 6.0f;
 
         public GasMotorcycle()

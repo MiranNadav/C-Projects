@@ -112,7 +112,7 @@ namespace B18_Ex03
             vehicle.PumpAllWheelsAirToMaximum();
         }
 
-        public void RefuelGasVehicle(string i_LicenseNumber, Gas.FuelType i_GasType, float i_AmountOfGasToFill)
+        public void RefuelGasVehicle(string i_LicenseNumber, Gas.eFuelType i_GasType, float i_AmountOfGasToFill)
         {
             IsVehicleInGarageException(i_LicenseNumber);
             //if (!Enum.IsDefined(typeof(Gas.FuelType), i_GasType))
@@ -121,7 +121,7 @@ namespace B18_Ex03
             //}
 
             Vehicle vehicle = this.m_GarageVehicles[i_LicenseNumber];
-            Gas.FuelType fuelType = i_GasType;
+            Gas.eFuelType fuelType = i_GasType;
 
             if (!(vehicle.EnergySource is Gas))
             {

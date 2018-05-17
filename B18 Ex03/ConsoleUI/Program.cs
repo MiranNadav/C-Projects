@@ -1,17 +1,18 @@
-﻿using System;
+﻿using Ex03.ConsoleUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class Program
     {
         public static void Main()
         {
-            UsertInterface usertInterface = new UsertInterface();
-            usertInterface.ServeUser();
+            UserInterface UserInterface = new UserInterface();
+            UserInterface.ServeUser();
         }
     }
 }

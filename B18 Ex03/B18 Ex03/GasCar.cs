@@ -8,7 +8,7 @@ namespace B18_Ex03
 {
     class GasCar : Car
     {
-        private const Gas.FuelType k_FuelType = Gas.FuelType.Octan98;
+        private const Gas.eFuelType k_FuelType = Gas.eFuelType.Octan98;
         private const float k_MaximumFuelCapacity = 45;
 
         public GasCar()
