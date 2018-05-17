@@ -13,16 +13,13 @@ namespace B18_Ex03
         private const int k_NumberOfWheels = 12;
         private const int k_MaximumWheelPressure = 28;
 
-        public Truck ()
+        public Truck()
         {
-            this.m_IsCarryingDangerousMaterials = false;
-            this.m_MaxAllowedWeight = 0;
             base.Wheels = new List<Wheel>(k_NumberOfWheels);
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
                 base.Wheels.Add(new Wheel(k_MaximumWheelPressure));
             }
-
         }
 
         public bool IsCarryingDangerousMaterials
@@ -47,6 +44,14 @@ namespace B18_Ex03
             {
                 this.m_MaxAllowedWeight = value;
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format(
+@"{0}
+The truck is{1} carrying dangerous materials
+The truck maximum allowed cargo weight is: {2}", base.ToString(), this.m_IsCarryingDangerousMaterials == true ? string.Empty : " not", this.m_MaxAllowedWeight);
         }
     }
 }

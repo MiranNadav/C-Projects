@@ -9,22 +9,22 @@ namespace B18_Ex03
     public class ValueOutOfRangeException : Exception
     {
         private float m_MinValue;
-        public float MinValue
-        {
-            get
-            {
-                return this.m_MinValue;
-            }
-        }
+        //public float MinValue
+        //{
+        //    get
+        //    {
+        //        return this.m_MinValue;
+        //    }
+        //}
 
         private float m_MaxValue;
-        public float MaxValue
-        {
-            get
-            {
-                return this.m_MaxValue;
-            }
-        }
+        //public float MaxValue
+        //{
+        //    get
+        //    {
+        //        return this.m_MaxValue;
+        //    }
+        //}
 
 
         public ValueOutOfRangeException(float i_MinValue, float i_MaxValue)

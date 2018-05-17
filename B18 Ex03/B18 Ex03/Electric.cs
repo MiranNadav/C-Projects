@@ -8,8 +8,6 @@ namespace B18_Ex03
 {
     class Electric : EnergySource
     {
-        //private float m_CurrentAmountOfHoursLeft;
-        //private float m_MaxAmountOfGas;
 
         public Electric(float i_MaxAmountOfHours) : base(i_MaxAmountOfHours)
         {

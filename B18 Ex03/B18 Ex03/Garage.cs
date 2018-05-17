@@ -20,13 +20,17 @@ namespace B18_Ex03
             IsVehicleInGarageException(i_LicenseNumber);
             return m_GarageVehicles[i_LicenseNumber];
         }
+
         public bool IsVehicleInGarage(string i_LicenseNumber)
         {
+            bool vehicleIsInGarage = false;
+
             if (m_GarageVehicles.ContainsKey(i_LicenseNumber))
             {
-                return true;
+                vehicleIsInGarage = true;
             }
-            return false;
+
+            return vehicleIsInGarage;
         }
 
         public void IsVehicleInGarageException(string i_LicenseNumber)
@@ -44,6 +48,7 @@ namespace B18_Ex03
                 m_GarageVehicles[i_Vehicle.LicenseNumber].VehicleGarageStatus = Vehicle.eVehicleGarageStatus.InRepair;
                 throw new Exception("This vehicle is already in the garage! Vehicle status changed to being fixed");
             }
+
             m_GarageVehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);
         }
 
@@ -66,6 +71,7 @@ namespace B18_Ex03
 
             List<Wheel> currentVehicleWheels = m_GarageVehicles[i_LicenseNumber].Wheels;
             float maxAirPressure = currentVehicleWheels[0].MaximumAirPressure;
+
             foreach (Wheel wheel in currentVehicleWheels)
             {
                 wheel.CurrentAirPressure = maxAirPressure;
@@ -73,32 +79,28 @@ namespace B18_Ex03
         }
         public List<string> GetLicenseNumberList()
         {
-            List<string> licenseNumbers = new List<string>();
+            List<string> licenseNumbersList = new List<string>();
             foreach (KeyValuePair<string, Vehicle> vehicle in this.m_GarageVehicles)
             {
-                licenseNumbers.Add(vehicle.Key);
+                licenseNumbersList.Add(vehicle.Key);
             }
 
-            return licenseNumbers;
+            return licenseNumbersList;
         }
         public List<string> GetLicenseNumberList(Vehicle.eVehicleGarageStatus i_VehicleStatus)
         {
-            //if (!Enum.IsDefined(typeof(Vehicle.eVehicleGarageStatus), i_VehicleStatus))
-            //{
-            //    throw new ArgumentException();
-            //}
-
-            List<string> licenseNumbers = new List<string>();
+            List<string> licenseNumbersList = new List<string>();
             Vehicle.eVehicleGarageStatus vehicleStatus = i_VehicleStatus;
+
             foreach (KeyValuePair<string, Vehicle> vehicle in this.m_GarageVehicles)
             {
                 if (vehicle.Value.VehicleGarageStatus == vehicleStatus)
                 {
-                    licenseNumbers.Add(vehicle.Key);
+                    licenseNumbersList.Add(vehicle.Key);
                 }
             }
 
-            return licenseNumbers;
+            return licenseNumbersList;
         }
 
         public void PumpAirToMaximum(string i_LicenseNumber)
@@ -115,11 +117,6 @@ namespace B18_Ex03
         public void RefuelGasVehicle(string i_LicenseNumber, Gas.eFuelType i_GasType, float i_AmountOfGasToFill)
         {
             IsVehicleInGarageException(i_LicenseNumber);
-            //if (!Enum.IsDefined(typeof(Gas.FuelType), i_GasType))
-            //{
-            //    throw new ArgumentException("Given gas type does not exist!");
-            //}
-
             Vehicle vehicle = this.m_GarageVehicles[i_LicenseNumber];
             Gas.eFuelType fuelType = i_GasType;
 
@@ -130,13 +127,13 @@ namespace B18_Ex03
 
             Gas gasEngine = (Gas)vehicle.EnergySource;
             gasEngine.FillGas(fuelType, i_AmountOfGasToFill);
-
         }
 
         public void RechargeElectricVehicle(string i_LicenseNumber, float i_MinutesToRecharge)
         {
             IsVehicleInGarageException(i_LicenseNumber);
             Vehicle vehicle = this.m_GarageVehicles[i_LicenseNumber];
+
             if (!(vehicle.EnergySource is Electric))
             {
                 throw new Exception("The given car is not electric!");
@@ -144,12 +141,6 @@ namespace B18_Ex03
 
             Electric electricEngine = (Electric)vehicle.EnergySource;
             electricEngine.Charge((float)i_MinutesToRecharge / 60);
-        }
-
-        public string GetFullVehicleDetails(string i_LicenseNumber)
-        {
-            IsVehicleInGarageException(i_LicenseNumber);
-            return this.m_GarageVehicles[i_LicenseNumber].ToString();
         }
     }
 }

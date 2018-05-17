@@ -21,7 +21,7 @@ namespace B18_Ex03
             B2 = 4
         }
 
-        public Motorcycle ()
+        public Motorcycle()
         {
             base.Wheels = new List<Wheel>(k_NumberOfWheels);
             for (int i = 0; i < k_NumberOfWheels; i++)
@@ -41,6 +41,7 @@ namespace B18_Ex03
                 this.m_EngineSize = value;
             }
         }
+
         public eLicenseType LicenseType
         {
             get
@@ -51,6 +52,14 @@ namespace B18_Ex03
             {
                 m_LicenseType = value;
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format(
+@"{0}
+The Motorcycle license type is: {1}
+The Motorcycle engine size is: {2}", base.ToString(), this.m_LicenseType, this.m_LicenseType);
         }
     }
 }

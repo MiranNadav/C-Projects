@@ -17,7 +17,6 @@ namespace B18_Ex03
         public Car()
         {
             base.Wheels = new List<Wheel>(k_NumberOfWheels);
-            //this.m_NumberOfDoors = 0;
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
                 base.Wheels.Add(new Wheel(k_MaximumWheelPressure));
