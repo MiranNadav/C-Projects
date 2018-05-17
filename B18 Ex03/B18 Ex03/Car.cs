@@ -9,7 +9,6 @@ namespace B18_Ex03
     public abstract class Car : Vehicle
     {
 
-        //private eCarColor m_CarColor;
         private eNumberOfDoors m_NumberOfDoors;
         private eCarColor m_Color;
         private const int k_NumberOfWheels = 4;
@@ -18,7 +17,7 @@ namespace B18_Ex03
         public Car()
         {
             base.Wheels = new List<Wheel>(k_NumberOfWheels);
-            this.m_NumberOfDoors = 0;
+            //this.m_NumberOfDoors = 0;
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
                 base.Wheels.Add(new Wheel(k_MaximumWheelPressure));
