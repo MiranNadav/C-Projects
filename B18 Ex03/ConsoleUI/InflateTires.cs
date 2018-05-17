@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using B18_Ex03;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class InflateTires
     {
@@ -16,7 +16,8 @@ namespace Ex03.ConsoleUI
             m_UserInterface = i_UserInterface;
             Console.Clear();
             Console.WriteLine("You have chosen to Inflate a vehicle tires to maximum");
-            string licensePlate = ValidateUserInput.GetLicensePlateFromUser("Please enter the license number of the vehicle you want to inflate air to");
+            Console.WriteLine("Please enter the license number of the vehicle you want to inflate air to");
+            string licensePlate = ValidateUserInput.GetLicensePlateFromUser();
 
             try
             {

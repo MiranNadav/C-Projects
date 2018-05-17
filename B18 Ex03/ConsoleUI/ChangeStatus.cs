@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using B18_Ex03;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class ChangeStatus
     {
@@ -17,7 +17,8 @@ namespace Ex03.ConsoleUI
 
             Console.Clear();
             Console.WriteLine("You have chosen to change the status of a vehicle who is in the garage");
-            string licenseNumber = ValidateUserInput.GetLicensePlateFromUser("Please enter the license number of the vehicle whose status you would like to change");
+            Console.WriteLine("Please enter the license number of the vehicle whose status you would like to change");
+            string licenseNumber = ValidateUserInput.GetLicensePlateFromUser();
             Vehicle.eVehicleGarageStatus statusToChangeTo = ValidateUserInput.GetStateFromUser();
 
             try

@@ -5,182 +5,146 @@ using System.Text;
 using System.Threading.Tasks;
 using B18_Ex03;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class AddVehicle
     {
-        private UserInterface m_UserInterface;
-        private string m_LicensePlate;
-        private VehicleFactory.eVehicleTypes m_VehcileType;
-        private Vehicle m_CreatedVehicle;
-        private bool m_VehicleIsAllReadyInTheGarage = false;
-        
-        public AddVehicle(UserInterface i_UserInterface)
+        private UserDisplay m_UserDisplay;
+
+        public AddVehicle ()
         {
-            this.m_UserInterface = i_UserInterface;
-            Console.Clear();
-            Console.WriteLine("You have chosen to add a new vehicle");
+            m_UserDisplay = new UserDisplay();
+        }
+        public Vehicle getVitalDetailsFromUser()
+        {
+            m_UserDisplay.clearAndDisplayMessage("You have chosen to add a new vehicle");
 
-            getVehicleType();
-            createVehicleFromFactory();
-            Console.Clear();
-            getLicensePlateNumber();
-            Console.Clear();
-            addVehicleToGarage();
+            Vehicle m_CreatedVehicle = createVehicleFromFactory(getVehicleType());
+            m_CreatedVehicle.LicenseNumber = getLicensePlateNumber();
+            return m_CreatedVehicle;
+        }
 
-            if (!m_VehicleIsAllReadyInTheGarage)
+        public Vehicle populateVehicleWithDetails(Vehicle vehicle)
+        {
+            vehicle.ModelName = getCarModel();
+            setCurrentAmountOfEnergy(vehicle);
+            vehicle.SetEnergyPercentge();
+            addWheelsManufacturer(vehicle.Wheels);
+            setWheelsCurrentAirPressure(vehicle.Wheels);
+            vehicle.OwnerName = getUsersName();
+            vehicle.OwnerPhoneNumber = getUsersPhoneNumber();
+            vehicle = CreateSpecificTypeOfVehicle(vehicle);
+
+            return vehicle;
+        }
+
+        private Vehicle CreateSpecificTypeOfVehicle(Vehicle vehicle)
+        {
+            if (vehicle is Car)
             {
-                Console.Clear();
-                getCarModel();
-                Console.Clear();
-                setCurrentAmountOfEnergy();
-                Console.Clear();
-                setEnergyPercentage();
-                Console.Clear();
-                addWheelsManufacturer();
-                Console.Clear();
-                setWheelsCurrentAirPressure();
-                Console.Clear();
-                getUsersName();
-                Console.Clear();
-                getUsersPhoneNumber();
-                Console.Clear();
-
-                if (m_CreatedVehicle is Car)
-                {
-                    CreateCar createCar = new CreateCar(m_CreatedVehicle);
-                }
-                else if (m_CreatedVehicle is Motorcycle)
-                {
-                    CreateMotorcycle createMotorcycle = new CreateMotorcycle(m_CreatedVehicle);
-                }
-                else
-                {
-                    CreateTruck createTruck = new CreateTruck(m_CreatedVehicle);
-                }
-
-                Console.Clear();
-                Console.WriteLine("Vehicle added to garage");
-                Messages.PressAnyKeyToContinue();
+                vehicle = new CreateCar().populateCarWithDetails(vehicle);
             }
+            else if (vehicle is Motorcycle)
+            {
+                vehicle = new CreateMotorcycle().populateMotorcycleWithDetails(vehicle);
+            }
+            else
+            {
+                vehicle = new CreateTruck().populateTruckWithDetails(vehicle);
+            }
+
+            return vehicle;
         }
 
-
-        private void getLicensePlateNumber()
+        private string getLicensePlateNumber()
         {
-            m_LicensePlate = ValidateUserInput.GetLicensePlateFromUser("Please enter the license number of the vehicle you want to add");
-            m_CreatedVehicle.LicenseNumber = m_LicensePlate;
+            m_UserDisplay.clearAndDisplayMessage("Please enter the license number of the vehicle you want to add");
+            return ValidateUserInput.GetLicensePlateFromUser();
         }
 
-        private void getVehicleType()
+        private VehicleFactory.eVehicleTypes getVehicleType()
         {
-            Console.WriteLine("Please choose one of the following vehicle types:");
-            m_VehcileType = (VehicleFactory.eVehicleTypes)ValidateUserInput.InputIsInRangeOfEnum(typeof(VehicleFactory.eVehicleTypes));
+            m_UserDisplay.displayMessage("Please choose one of the following vehicle types:");
+            return (VehicleFactory.eVehicleTypes)ValidateUserInput.InputIsInRangeOfEnum(typeof(VehicleFactory.eVehicleTypes));
         }
 
-        private void createVehicleFromFactory ()
+        private Vehicle createVehicleFromFactory(VehicleFactory.eVehicleTypes i_VehcileType)
         {
-            m_CreatedVehicle = VehicleFactory.CreateVehicle(m_VehcileType);
+            return VehicleFactory.CreateVehicle(i_VehcileType);
         }
 
-        private void getCarModel()
+        private string getCarModel()
         {
-            Console.WriteLine("Please enter the vehicle model name");
+            m_UserDisplay.clearAndDisplayMessage("Please enter the vehicle model name");
             string carModelName = ValidateUserInput.ValidateInputInNotEmpty();
-            m_CreatedVehicle.ModelName = carModelName;
+            return carModelName;
         }
 
-        private void setEnergyPercentage()
+        private void addWheelsManufacturer(List<Wheel> wheels)
         {
-            m_CreatedVehicle.SetEnergyPercentge();
-        }
-
-        private void addWheelsManufacturer()
-        {
-            Console.WriteLine("Please enter Wheels Manufacturer name");
+            m_UserDisplay.clearAndDisplayMessage("Please enter Wheels Manufacturer name");
+            m_UserDisplay.displayEmpty();
             string ManufacturerOfWheels = ValidateUserInput.ValidateInputInNotEmpty();
 
-            foreach (Wheel wheel in m_CreatedVehicle.Wheels)
+            foreach (Wheel wheel in wheels)
             {
                 wheel.Manufacturer = ManufacturerOfWheels;
             }
         }
 
-        private void setWheelsCurrentAirPressure()
+        private void setWheelsCurrentAirPressure(List<Wheel> wheels)
         {
-            Console.WriteLine("Please enter the current air pressure of the wheels");
+            m_UserDisplay.clearAndDisplayMessage("Please enter the current air pressure of the wheels");
+            
             float currentAirPressure = ValidateUserInput.ParseInputToFloat();
 
             try
             {
-                foreach (Wheel wheel in m_CreatedVehicle.Wheels)
+                foreach (Wheel wheel in wheels)
                 {
                     wheel.PumpAir(currentAirPressure);
                 }
             }
             catch (Exception exception)
             {
-                Console.Clear();
-                Console.WriteLine(exception.Message);
-                Console.WriteLine("Please try again");
-                setWheelsCurrentAirPressure();
+                m_UserDisplay.displayExceptionMessage(exception);
+                setWheelsCurrentAirPressure(wheels);
             }
         }
 
-        private void getUsersName()
+        private string getUsersName()
         {
-            Console.WriteLine("Please tell us your name");
-            string OwnersName = ValidateUserInput.ValidateInputInNotEmpty();
-            m_CreatedVehicle.OwnerName = OwnersName;
+            m_UserDisplay.clearAndDisplayMessage("Please tell us your name");
+            return ValidateUserInput.ValidateInputInNotEmpty();
         }
 
-        private void getUsersPhoneNumber()
+        private string getUsersPhoneNumber()
         {
-            Console.WriteLine("Please tell us your phone number");
-            string OwnersPhoneNumber = ValidateUserInput.ValidateInputInNotEmpty();
-            m_CreatedVehicle.OwnerPhoneNumber = OwnersPhoneNumber;
+            m_UserDisplay.clearAndDisplayMessage("Please tell us your phone number");
+            return ValidateUserInput.ValidateInputInNotEmpty();
         }
 
-        private void setCurrentAmountOfEnergy()
+        private void setCurrentAmountOfEnergy(Vehicle vehicle)
         {
-            //if (m_CreatedVehicle.EnergySource.EnergyType.Equals(EnergySource.eEnergyTypes.Gas))
-            if (m_CreatedVehicle.EnergySource is Gas)
+            if (vehicle.EnergySource is Gas)
             {
-                Console.WriteLine("Please enter current amount of fuel in liters");
+                m_UserDisplay.clearAndDisplayMessage("Please enter current amount of fuel in liters");
             }
             else
             {
-                Console.WriteLine("Please enter remaining time of engine operation in hours");
+                m_UserDisplay.clearAndDisplayMessage("Please enter remaining time of engine operation in hours");
             }
 
             float amountOfEnergy = ValidateUserInput.ParseInputToFloat();
 
             try
             {
-                m_CreatedVehicle.EnergySource.FillEnergy(amountOfEnergy);
+                vehicle.EnergySource.FillEnergy(amountOfEnergy);
             }
             catch (Exception exception)
             {
-                Console.Clear();
-                Console.WriteLine(exception.Message);
-                Console.WriteLine("Please try again");
-                setCurrentAmountOfEnergy();
-            }
-        }
-
-        private void addVehicleToGarage()
-        {
-            try
-            {
-                m_UserInterface.Garage.AddVehicleToGarage(m_CreatedVehicle);
-            }
-
-            catch (Exception exception)
-            {
-                m_VehicleIsAllReadyInTheGarage = true;
-                Console.Clear();
-                Console.WriteLine(exception.Message);
-                Messages.PressAnyKeyToContinue();
+                m_UserDisplay.displayExceptionMessage(exception);
+                setCurrentAmountOfEnergy(vehicle);
             }
         }
     }

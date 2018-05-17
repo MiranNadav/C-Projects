@@ -59,7 +59,7 @@ namespace B18_Ex03
             return string.Format(
 @"{0}
 The Motorcycle license type is: {1}
-The Motorcycle engine size is: {2}", base.ToString(), this.m_LicenseType, this.m_LicenseType);
+The Motorcycle engine size is: {2}", base.ToString(), this.m_LicenseType, this.m_EngineSize);
         }
     }
 }

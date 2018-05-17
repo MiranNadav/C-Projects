@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using B18_Ex03;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class ValidateUserInput
     {
@@ -88,11 +88,9 @@ namespace Ex03.ConsoleUI
             return vehicleStatus;
         }
 
-        public static string GetLicensePlateFromUser(string i_Message)
+        public static string GetLicensePlateFromUser()
         {
-            Console.WriteLine(i_Message);
             string licenseNumber = ValidateUserInput.ValidateInputInNotEmpty();
-
             return licenseNumber;
         }
 

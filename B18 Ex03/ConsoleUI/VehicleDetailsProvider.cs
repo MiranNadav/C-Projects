@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class VehicleDetailsProvider
     {
@@ -17,7 +17,8 @@ namespace Ex03.ConsoleUI
             this.m_Garage = i_Garage;
             Console.Clear();
             Console.WriteLine("You have chosen to get a vehicle details");
-            this.m_LicenseNumber = ValidateUserInput.GetLicensePlateFromUser("Please enter the license number of the vehicle to show its details");
+            Console.WriteLine("Please enter the license number of the vehicle to show its details");
+            this.m_LicenseNumber = ValidateUserInput.GetLicensePlateFromUser();
             Console.Clear();
             getVehicleDetails();
 

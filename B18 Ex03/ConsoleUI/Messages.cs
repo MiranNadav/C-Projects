@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class Messages
     {
@@ -50,8 +50,11 @@ namespace Ex03.ConsoleUI
 
             foreach (Enum enumValue in Enum.GetValues(i_EnumType))
             {
-                enumToString.Append(counter + ". " + enumValue + Environment.NewLine);
-                counter++;
+                if (!enumValue.ToString().Equals("Undefined"))
+                {
+                    enumToString.Append(counter + ". " + enumValue + Environment.NewLine);
+                    counter++;
+                }
             }
 
             return enumToString.ToString();

@@ -5,31 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 using B18_Ex03;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class CreateTruck
     {
-        private Truck m_NewTruck;
-        public CreateTruck(Vehicle i_NewVehicle)
+        private UserDisplay m_UserDisplay;
+
+        public CreateTruck()
         {
-            this.m_NewTruck = (Truck)i_NewVehicle;
-            setIfCarryingDangerousMaterials();
-            Console.Clear();
-            setMaxCarray();
+            m_UserDisplay = new UserDisplay();
         }
 
-        private void setIfCarryingDangerousMaterials()
+        public Truck populateTruckWithDetails (Vehicle i_Vehicle)
         {
-            Console.WriteLine("Please choose whether the truck will carry dangerous materials chose Y to 'Yes' and N to 'No'");
-            bool IsCarryingDangerousMaterials = ValidateUserInput.validateYesOrNo();
-            m_NewTruck.IsCarryingDangerousMaterials = IsCarryingDangerousMaterials;
+            Truck truck = (Truck)i_Vehicle;
+            truck.IsCarryingDangerousMaterials = setIfCarryingDangerousMaterials();
+            truck.MaxAllowedWeight = setMaxCarrey();
+            return truck;
         }
 
-        private void setMaxCarray()
+        private bool setIfCarryingDangerousMaterials()
         {
-            Console.WriteLine("Please choose the truck maximum volume of cargo");
-            float maximumVolumeOfCargo = ValidateUserInput.ParseInputToFloat();
-            m_NewTruck.MaxAllowedWeight = maximumVolumeOfCargo;
+            m_UserDisplay.clearAndDisplayMessage("Please choose whether the truck will carry dangerous materials chose Y to 'Yes' and N to 'No'");
+            return ValidateUserInput.validateYesOrNo();
+        }
+
+        private float setMaxCarrey()
+        {
+            m_UserDisplay.clearAndDisplayMessage("Please choose the truck maximum volume of cargo");
+            return ValidateUserInput.ParseInputToFloat();
         }
     }
 }

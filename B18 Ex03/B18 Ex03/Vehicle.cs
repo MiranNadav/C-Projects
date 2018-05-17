@@ -20,9 +20,10 @@ namespace B18_Ex03
 
         public enum eVehicleGarageStatus
         {
+            Undefined = 0,
             InRepair = 1,
             Repaired = 2,
-            PayedFor = 3
+            PayedFor = 3,
         }
         public Vehicle()
         {
