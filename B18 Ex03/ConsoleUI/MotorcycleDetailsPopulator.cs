@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using B18_Ex03;
+using GarageLogic;
 
 namespace ConsoleUI
 {
-    class MotorcycleDetailsPopulator
+    internal class MotorcycleDetailsPopulator
     {
-        UserDisplay m_UserDisplay;
+        private UserDisplay m_UserDisplay;
 
         public MotorcycleDetailsPopulator()
         {

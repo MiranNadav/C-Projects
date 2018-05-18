@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B18_Ex03
+namespace GarageLogic
 {
     public class Wheel
     {
@@ -73,13 +73,6 @@ namespace B18_Ex03
         public void PumpAirToMaximum()
         {
             this.CurrentAirPressure = this.MaximumAirPressure;
-        }
-
-        private enum eMaxAirPressure
-        {
-            LowPressure = 28,
-            MediumPressure = 30,
-            HighPressure = 32
         }
 
         public override string ToString()

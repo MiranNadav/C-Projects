@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B18_Ex03
+namespace GarageLogic
 {
     public abstract class Car : Vehicle
     {

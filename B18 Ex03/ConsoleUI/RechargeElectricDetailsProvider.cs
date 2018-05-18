@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using B18_Ex03;
+using GarageLogic;
 
 namespace ConsoleUI
 {
-    public class ElectricVehicleDetailsProvider
+    internal class RechargeElectricDetailsProvider
     {
         private UserDisplay m_UserDisplay;
 
-        public ElectricVehicleDetailsProvider()
+        public RechargeElectricDetailsProvider()
         {
             m_UserDisplay = new UserDisplay();
         }

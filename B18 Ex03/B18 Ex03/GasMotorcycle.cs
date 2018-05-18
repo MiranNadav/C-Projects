@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B18_Ex03
+namespace GarageLogic
 {
     class GasMotorcycle : Motorcycle
     {
-        private const Gas.eFuelType k_FuelType = Gas.eFuelType.Octan96;
+        private const Gas.eGasType k_FuelType = Gas.eGasType.Octan96;
         private const float k_MaximumFuelCapacity = 6.0f;
 
         public GasMotorcycle()

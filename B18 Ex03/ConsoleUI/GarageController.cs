@@ -1,30 +1,30 @@
-﻿using B18_Ex03;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GarageLogic;
 
 namespace ConsoleUI
 {
-    class GarageController
+    internal class GarageController
     {
         private Garage m_Garage;
-        private AddVehicle m_VehicleAdder;
+        private VehicleAdder m_VehicleAdder;
         private UserDisplay m_UserDisplay;
         private VehicleStatusFilterProvider m_LicenseNumberFilter;
-        private ChangeStatus m_ChangeStatus;
-        private ElectricVehicleDetailsProvider m_ChargeElectricVehicle;
+        private ChangeStatusDetailsProvider m_ChangeStatus;
+        private RechargeElectricDetailsProvider m_ChargeElectricVehicle;
         private RefuelGasDetailsProvider m_RefuelGasVehicle;
 
-        public GarageController (Garage i_Garage)
+        public GarageController(Garage i_Garage)
         {
             m_Garage = i_Garage;
-            this.m_VehicleAdder = new AddVehicle();
+            this.m_VehicleAdder = new VehicleAdder();
             this.m_UserDisplay = new UserDisplay();
             this.m_LicenseNumberFilter = new VehicleStatusFilterProvider();
-            this.m_ChangeStatus = new ChangeStatus();
-            this.m_ChargeElectricVehicle = new ElectricVehicleDetailsProvider();
+            this.m_ChangeStatus = new ChangeStatusDetailsProvider();
+            this.m_ChargeElectricVehicle = new RechargeElectricDetailsProvider();
             this.m_RefuelGasVehicle = new RefuelGasDetailsProvider();
         }
 
@@ -37,7 +37,7 @@ namespace ConsoleUI
             try
             {
                 m_Garage.RechargeElectricVehicle(licenseNumber, amountOfTimeToCharge);
-                m_UserDisplay.ClearAndDisplayMessage(String.Format("Vehicle with license number: {0}, with amount: {1} successfuly!", licenseNumber, amountOfTimeToCharge));
+                m_UserDisplay.ClearAndDisplayMessage(string.Format("Vehicle with license number: {0}, with amount: {1} successfuly!", licenseNumber, amountOfTimeToCharge));
                 m_UserDisplay.PressAnyKeyToContinue();
             }
             catch (Exception exception)
@@ -46,7 +46,7 @@ namespace ConsoleUI
 
                 if (exception is ValueOutOfRangeException)
                 {
-                    m_UserDisplay.DisplayMessage("Please try again");
+                    m_UserDisplay.DisplayMessage(Messages.k_PleaseTryAgainMessage);
                     chargeElectricVehicle();
                 }
                 else
@@ -109,6 +109,7 @@ namespace ConsoleUI
             {
                 licenseNumbers = m_Garage.GetLicenseNumberList(vehicleStatus);
             }
+
             m_UserDisplay.Clear();
             m_UserDisplay.DisplayAccordingToSize(licenseNumbers, "There are no vehicles for your choice in the garage", "The list of plates that you requested: ");
             Console.ReadLine();
@@ -123,7 +124,6 @@ namespace ConsoleUI
                 vehicle = this.m_VehicleAdder.populateVehicleWithDetails(vehicle);
                 m_UserDisplay.ClearAndDisplayMessage("Vehicle added to garage");
             }
-
             catch (Exception exception)
             {
                 m_UserDisplay.ClearAndDisplayMessage(exception.Message);
@@ -134,17 +134,8 @@ namespace ConsoleUI
             }
         }
 
-        public Garage Garage
-        {
-            get
-            {
-                return this.m_Garage;
-            }
-        }
-
         public void InflateTires()
         {
-
             m_UserDisplay.ClearAndDisplayMessage("You have chosen to Inflate a vehicle tires to maximum");
             m_UserDisplay.DisplayMessage("Please enter the license number of the vehicle you want to inflate air to");
             string licensePlate = ValidateUserInput.GetLicensePlateFromUser();
@@ -152,7 +143,7 @@ namespace ConsoleUI
             try
             {
                 m_Garage.FillAirToMaximum(licensePlate);
-                m_UserDisplay.ClearAndDisplayMessage(String.Format("{0} Wheels pumped to Maximum!", licensePlate));
+                m_UserDisplay.ClearAndDisplayMessage(string.Format("{0} Wheels pumped to Maximum!", licensePlate));
             }
             catch (Exception exception)
             {
@@ -167,13 +158,13 @@ namespace ConsoleUI
         public void refuelGasVehicle()
         {
             string licenseNumber = m_RefuelGasVehicle.GetLicenseNumberForRefuel();
-            Gas.eFuelType fuelType = m_RefuelGasVehicle.GetFuelTypeForRefuel();
+            Gas.eGasType fuelType = m_RefuelGasVehicle.GetFuelTypeForRefuel();
             float amountOfFuel = m_RefuelGasVehicle.GetAmountOfLitersToFuel();
 
             try
             {
                 m_Garage.RefuelGasVehicle(licenseNumber, fuelType, amountOfFuel);
-                m_UserDisplay.ClearAndDisplayMessage(String.Format("Vehicle with license number: {0}, was refueled with gas type: {1}, and amount: {2} successfuly!", licenseNumber, fuelType, amountOfFuel));
+                m_UserDisplay.ClearAndDisplayMessage(string.Format("Vehicle with license number: {0}, was refueled with gas type: {1}, and amount: {2} successfuly!", licenseNumber, fuelType, amountOfFuel));
                 m_UserDisplay.PressAnyKeyToContinue();
             }
             catch (Exception exception)
@@ -182,7 +173,8 @@ namespace ConsoleUI
 
                 if (exception is ValueOutOfRangeException)
                 {
-                    m_UserDisplay.DisplayMessage("Please try again");
+                    m_UserDisplay.DisplayMessage(Messages.k_PleaseTryAgainMessage);
+                    m_UserDisplay.ReadLine();
                     refuelGasVehicle();
                 }
                 else
@@ -191,6 +183,5 @@ namespace ConsoleUI
                 }
             }
         }
-
     }
 }

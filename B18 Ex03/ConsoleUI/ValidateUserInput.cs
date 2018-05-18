@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using B18_Ex03;
+using GarageLogic;
 
 namespace ConsoleUI
 {
-    public static class ValidateUserInput
+    internal static class ValidateUserInput
     {
         private static UserDisplay m_UserDisplay = new UserDisplay();
         
@@ -15,7 +15,7 @@ namespace ConsoleUI
         {
             int userChoise = ParseInputToInt();
 
-            while (!(Enum.IsDefined(typeof(Messages.eMainMenuOptions), userChoise)))
+            while (!Enum.IsDefined(typeof(Messages.eMainMenuOptions), userChoise))
             {
                 m_UserDisplay.ClearAndDisplayMessage("Input is not a valid options. Please enter a valid option");
                 m_UserDisplay.displayEmpty();
@@ -53,7 +53,6 @@ namespace ConsoleUI
             return userInputToInt;
         }
 
-        //TODO: change this!
         public static float ParseInputToFloat()
         {
             string userInput = Console.ReadLine();

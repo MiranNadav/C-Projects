@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B18_Ex03
+namespace GarageLogic
 {
     public class Gas : EnergySource
     {
-        private eFuelType m_GasType;
+        private eGasType m_GasType;
 
-        public enum eFuelType
+        public enum eGasType
         {
             Soler = 1,
             Octan95 = 2,
@@ -18,14 +18,14 @@ namespace B18_Ex03
             Octan98 = 4
         }
 
-        public Gas(eFuelType i_GasType, float i_MaxAmountOfGas) : base(i_MaxAmountOfGas)
+        public Gas(eGasType i_GasType, float i_MaxAmountOfGas) : base(i_MaxAmountOfGas)
         {
             m_GasType = i_GasType;
         }
 
-        public void FillGas(eFuelType i_FuelType, float i_AmountOfGas)
+        public void FillGas(eGasType i_GasType, float i_AmountOfGas)
         {
-            if (i_FuelType != m_GasType)
+            if (i_GasType != m_GasType)
             {
                 throw new ArgumentException(string.Format("The gas type dose not match the car vehicle gas type. chosen vehicle gas type is: {0}", m_GasType));
             }

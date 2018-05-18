@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleUI
 {
-    class Messages
+    internal class Messages
     {
-
         public const string k_WelcomeUserMessage = "Welcome to Miran&Shemian Co. Garage management tool. How may we serve you today?";
         public const string k_EnterLicenseNumberMessage = "Please enter license plate number";
+        public const string k_PleaseTryAgainMessage = "Please try again";
         public const string k_EnterAmountToAddMessage = "Please enter amount to add";
         public const string k_GoodByeMessage = "Thank you for using the best garage managment program, Bye Bye!";
         public const string k_GarageIsEmptyMessage = "No vehicles to display, garage is still empty";
@@ -43,7 +43,6 @@ namespace ConsoleUI
             Exit = 8,
         }
 
-
         public static string getEnumAsString(Type i_EnumType)
         {
             int counter = 1;
@@ -60,9 +59,5 @@ namespace ConsoleUI
 
             return enumToString.ToString();
         }
-       
-
-
-
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using B18_Ex03;
+using GarageLogic;
 
 namespace ConsoleUI
 {
-    class UserMenu
+    internal class UserMenu
     {
         private GarageController m_GarageController;
         private UserDisplay m_UserDisplay;

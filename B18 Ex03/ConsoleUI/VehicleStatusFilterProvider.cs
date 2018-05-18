@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using B18_Ex03;
+using GarageLogic;
 
 namespace ConsoleUI
 {
-    public class VehicleStatusFilterProvider
+    internal class VehicleStatusFilterProvider
     {
         private UserDisplay m_UserDisplay;
 
@@ -36,4 +36,3 @@ namespace ConsoleUI
         }
     }
 }
-

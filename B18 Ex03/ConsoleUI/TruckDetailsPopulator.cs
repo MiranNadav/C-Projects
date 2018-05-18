@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using B18_Ex03;
+using GarageLogic;
 
 namespace ConsoleUI
 {
-    class TruckDetailsPopulator
+    internal class TruckDetailsPopulator
     {
         private UserDisplay m_UserDisplay;
 
@@ -16,7 +16,7 @@ namespace ConsoleUI
             m_UserDisplay = new UserDisplay();
         }
 
-        public Truck populateTruckWithDetails (Vehicle i_Vehicle)
+        public Truck populateTruckWithDetails(Vehicle i_Vehicle)
         {
             Truck truck = (Truck)i_Vehicle;
             truck.IsCarryingDangerousMaterials = setIfCarryingDangerousMaterials();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B18_Ex03
+namespace GarageLogic
 {
     public class Garage
     {
@@ -116,11 +116,11 @@ namespace B18_Ex03
             vehicle.PumpAllWheelsAirToMaximum();
         }
 
-        public void RefuelGasVehicle(string i_LicenseNumber, Gas.eFuelType i_GasType, float i_AmountOfGasToFill)
+        public void RefuelGasVehicle(string i_LicenseNumber, Gas.eGasType i_GasType, float i_AmountOfGasToFill)
         {
             IsVehicleInGarageException(i_LicenseNumber);
             Vehicle vehicle = this.m_GarageVehicles[i_LicenseNumber];
-            Gas.eFuelType fuelType = i_GasType;
+            Gas.eGasType fuelType = i_GasType;
 
             if (!(vehicle.EnergySource is Gas))
             {

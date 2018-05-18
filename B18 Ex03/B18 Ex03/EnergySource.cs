@@ -4,24 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B18_Ex03
+namespace GarageLogic
 {
     public abstract class EnergySource
     {
-        private float m_CurrentAmount;
-        private float m_MaxAmount;
+        private float m_CurrentAmountOfEnergy;
+        private float m_MaxAmountOfEnergy;
         private eEnergyTypes m_EnergyType;
 
         public float CurrentEnergyAmount
         {
             get
             {
-                return this.m_CurrentAmount;
+                return this.m_CurrentAmountOfEnergy;
             }
 
             set
             {
-                this.m_CurrentAmount += value;
+                if (this.m_CurrentAmountOfEnergy + value > m_MaxAmountOfEnergy)
+                {
+                    throw new ValueOutOfRangeException(0, m_MaxAmountOfEnergy);
+                }
+                this.m_CurrentAmountOfEnergy += value;
             }
         }
 
@@ -29,25 +33,25 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_MaxAmount;
+                return this.m_MaxAmountOfEnergy;
             }
         }
 
         protected EnergySource(float i_MaxAmount)
         {
-            this.m_CurrentAmount = 0;
-            this.m_MaxAmount = i_MaxAmount;
+            this.m_CurrentAmountOfEnergy = 0;
+            this.m_MaxAmountOfEnergy = i_MaxAmount;
         }
 
         public void FillEnergy(float i_AmountOfEnergy)
         {
-            if (i_AmountOfEnergy < 0 || i_AmountOfEnergy + m_CurrentAmount > m_MaxAmount)
+            if (i_AmountOfEnergy < 0 || i_AmountOfEnergy + m_CurrentAmountOfEnergy > m_MaxAmountOfEnergy)
             {
-                throw new ValueOutOfRangeException(0, m_MaxAmount - m_CurrentAmount);
+                throw new ValueOutOfRangeException(0, m_MaxAmountOfEnergy - m_CurrentAmountOfEnergy);
             }
             else
             {
-                this.m_CurrentAmount += i_AmountOfEnergy;
+                this.m_CurrentAmountOfEnergy += i_AmountOfEnergy;
             }
         }
 
@@ -77,8 +81,8 @@ namespace B18_Ex03
 Current amount of energy: {1}
 Maximum amount of energy: {2}",
 m_EnergyType,
-m_CurrentAmount,
-m_MaxAmount);
+m_CurrentAmountOfEnergy,
+m_MaxAmountOfEnergy);
         }
     }
 }

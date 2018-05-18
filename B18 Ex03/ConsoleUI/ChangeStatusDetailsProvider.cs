@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using B18_Ex03;
+using GarageLogic;
 
 namespace ConsoleUI
 {
-    class ChangeStatus
+    internal class ChangeStatusDetailsProvider
     {
-
         private UserDisplay m_UserDisplay;
 
-        public ChangeStatus()
+        public ChangeStatusDetailsProvider()
         {
             m_UserDisplay = new UserDisplay();
         }
@@ -23,7 +22,7 @@ namespace ConsoleUI
             return ValidateUserInput.GetLicensePlateFromUser();
         }
 
-        public Vehicle.eVehicleGarageStatus GetGarageStatus ()
+        public Vehicle.eVehicleGarageStatus GetGarageStatus()
         {
             return ValidateUserInput.GetStateFromUser();
         }

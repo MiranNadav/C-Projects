@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using B18_Ex03;
+using GarageLogic;
 
 namespace ConsoleUI
 {
-    class AddVehicle
+    internal class VehicleAdder
     {
         private UserDisplay m_UserDisplay;
 
-        public AddVehicle ()
+        public VehicleAdder()
         {
             m_UserDisplay = new UserDisplay();
         }
+
         public Vehicle getVitalDetailsFromUser()
         {
             m_UserDisplay.ClearAndDisplayMessage("You have chosen to add a new vehicle");
@@ -68,9 +69,9 @@ namespace ConsoleUI
             return (VehicleFactory.eVehicleTypes)ValidateUserInput.InputIsInRangeOfEnum(typeof(VehicleFactory.eVehicleTypes));
         }
 
-        private Vehicle createVehicleFromFactory(VehicleFactory.eVehicleTypes i_VehcileType)
+        private Vehicle createVehicleFromFactory(VehicleFactory.eVehicleTypes i_VehicleType)
         {
-            return VehicleFactory.CreateVehicle(i_VehcileType);
+            return VehicleFactory.CreateVehicle(i_VehicleType);
         }
 
         private string getCarModel()
@@ -83,7 +84,6 @@ namespace ConsoleUI
         private void addWheelsManufacturer(List<Wheel> wheels)
         {
             m_UserDisplay.ClearAndDisplayMessage("Please enter Wheels Manufacturer name");
-            m_UserDisplay.displayEmpty();
             string ManufacturerOfWheels = ValidateUserInput.ValidateInputInNotEmpty();
 
             foreach (Wheel wheel in wheels)
@@ -95,7 +95,7 @@ namespace ConsoleUI
         private void setWheelsCurrentAirPressure(List<Wheel> wheels)
         {
             m_UserDisplay.ClearAndDisplayMessage("Please enter the current air pressure of the wheels");
-            
+
             float currentAirPressure = ValidateUserInput.ParseInputToFloat();
 
             try
@@ -124,9 +124,9 @@ namespace ConsoleUI
             return ValidateUserInput.ValidateInputInNotEmpty();
         }
 
-        private void setCurrentAmountOfEnergy(Vehicle vehicle)
+        private void setCurrentAmountOfEnergy(Vehicle i_Vehicle)
         {
-            if (vehicle.EnergySource is Gas)
+            if (i_Vehicle.EnergySource is Gas)
             {
                 m_UserDisplay.ClearAndDisplayMessage("Please enter current amount of fuel in liters");
             }
@@ -139,14 +139,13 @@ namespace ConsoleUI
 
             try
             {
-                vehicle.EnergySource.FillEnergy(amountOfEnergy);
+                i_Vehicle.EnergySource.FillEnergy(amountOfEnergy);
             }
             catch (Exception exception)
             {
                 m_UserDisplay.displayExceptionMessage(exception);
-                setCurrentAmountOfEnergy(vehicle);
+                setCurrentAmountOfEnergy(i_Vehicle);
             }
         }
     }
-
 }

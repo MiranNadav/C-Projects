@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleUI
 {
-    public class UserDisplay
+    internal class UserDisplay
     {
-        public void DisplayMessage(String msg)
+        public void DisplayMessage(string msg)
         {
             Console.WriteLine(msg);
         }
@@ -17,16 +17,19 @@ namespace ConsoleUI
         {
             Console.ReadLine();
         }
-        public void Clear ()
+
+        public void Clear()
         {
             Console.Clear();
         }
-        public void displayMessageWithClear(String msg)
+
+        public void displayMessageWithClear(string msg)
         {
             DisplayMessage(msg);
             Clear();
         }
-        public void ClearAndDisplayMessage(String msg)
+
+        public void ClearAndDisplayMessage(string msg)
         {
             Clear();
             DisplayMessage(msg);
@@ -39,8 +42,8 @@ namespace ConsoleUI
                 DisplayMessage(item.ToString());
             }
         }
-  
-        public void DisplayAccordingToSize<T>(List<T> list, String sizeZeroMessage, String aboveZeroMessage)
+
+        public void DisplayAccordingToSize<T>(List<T> list, string sizeZeroMessage, string aboveZeroMessage)
         {
             if (list.Count == 0)
             {
@@ -69,7 +72,7 @@ namespace ConsoleUI
         {
             ClearAndDisplayMessage(exception.Message);
             displayEmpty();
-            DisplayMessage("Please try again");
+            DisplayMessage(Messages.k_PleaseTryAgainMessage);
         }
 
         public void GoodByePrinter()

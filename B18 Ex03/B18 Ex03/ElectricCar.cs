@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace B18_Ex03
+namespace GarageLogic
 {
     class ElectricCar : Car
     {
