@@ -28,6 +28,7 @@ namespace ConsoleUI
 7. Display a vehicle's full details
 8. Exit
 ";
+
         public const string k_EmptyInputMessage = "The input you have entered is empty. Please try again";
 
         public enum eMainMenuOptions
@@ -60,18 +61,8 @@ namespace ConsoleUI
             return enumToString.ToString();
         }
        
-        public static void GoodByePrinter()
-        {
-            Console.WriteLine("Good bye! Please come again");
-            Console.WriteLine("Press any key to close the terminal");
-            Console.ReadLine();
-        }
 
-        public static void PressAnyKeyToContinue()
-        {
-            Console.WriteLine();
-            Console.WriteLine("press any key to continue");
-            Console.ReadLine();
-        }
+
+
     }
 }

@@ -127,6 +127,7 @@ namespace B18_Ex03
 
             Gas gasEngine = (Gas)vehicle.EnergySource;
             gasEngine.FillGas(fuelType, i_AmountOfGasToFill);
+            vehicle.SetEnergyPercentge();
         }
 
         public void RechargeElectricVehicle(string i_LicenseNumber, float i_MinutesToRecharge)
@@ -141,6 +142,7 @@ namespace B18_Ex03
 
             Electric electricEngine = (Electric)vehicle.EnergySource;
             electricEngine.Charge((float)i_MinutesToRecharge / 60);
+            vehicle.SetEnergyPercentge();
         }
     }
 }

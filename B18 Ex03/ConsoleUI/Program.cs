@@ -11,8 +11,8 @@ namespace ConsoleUI
     {
         public static void Main()
         {
-            UserInterface UserInterface = new UserInterface();
-            UserInterface.ServeUser();
+            UserMenu userMenu = new UserMenu();
+            userMenu.ServeUser();
         }
     }
 }

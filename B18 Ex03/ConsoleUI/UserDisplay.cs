@@ -8,64 +8,75 @@ namespace ConsoleUI
 {
     public class UserDisplay
     {
-        public void displayMessage(String msg)
+        public void DisplayMessage(String msg)
         {
             Console.WriteLine(msg);
         }
 
+        public void ReadLine()
+        {
+            Console.ReadLine();
+        }
         public void Clear ()
         {
             Console.Clear();
         }
         public void displayMessageWithClear(String msg)
         {
-            displayMessage(msg);
+            DisplayMessage(msg);
             Clear();
         }
-        public void clearAndDisplayMessage(String msg)
+        public void ClearAndDisplayMessage(String msg)
         {
             Clear();
-            displayMessage(msg);
+            DisplayMessage(msg);
         }
 
         public void displayList<T>(List<T> list)
         {
             foreach (var item in list)
             {
-                displayMessage(item.ToString());
+                DisplayMessage(item.ToString());
             }
         }
   
-        public void displayAccordingToSize<T>(List<T> list, String sizeZeroMessage, String aboveZeroMessage)
+        public void DisplayAccordingToSize<T>(List<T> list, String sizeZeroMessage, String aboveZeroMessage)
         {
             if (list.Count == 0)
             {
-                displayMessage(sizeZeroMessage);
+                DisplayMessage(sizeZeroMessage);
             }
             else
             {
-                Console.WriteLine(aboveZeroMessage);
+                DisplayMessage(aboveZeroMessage);
                 displayList(list);
             }
         }
 
         public void displayEmpty()
         {
-            displayMessage(string.Empty);
+            DisplayMessage(string.Empty);
         }
 
         public void PressAnyKeyToContinue()
         {
             displayEmpty();
-            displayMessage("press any key to continue");
-            Console.ReadLine();
+            DisplayMessage("press any key to continue");
+            ReadLine();
         }
 
         public void displayExceptionMessage(Exception exception)
         {
-            clearAndDisplayMessage(exception.Message);
+            ClearAndDisplayMessage(exception.Message);
             displayEmpty();
-            displayMessage("Please try again");
+            DisplayMessage("Please try again");
+        }
+
+        public void GoodByePrinter()
+        {
+            DisplayMessage("Good bye! Please come again");
+            DisplayMessage("Press any key to close the terminal");
+            ReadLine();
         }
     }
 }

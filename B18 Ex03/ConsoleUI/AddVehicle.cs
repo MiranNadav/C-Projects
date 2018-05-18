@@ -17,7 +17,7 @@ namespace ConsoleUI
         }
         public Vehicle getVitalDetailsFromUser()
         {
-            m_UserDisplay.clearAndDisplayMessage("You have chosen to add a new vehicle");
+            m_UserDisplay.ClearAndDisplayMessage("You have chosen to add a new vehicle");
 
             Vehicle m_CreatedVehicle = createVehicleFromFactory(getVehicleType());
             m_CreatedVehicle.LicenseNumber = getLicensePlateNumber();
@@ -42,15 +42,15 @@ namespace ConsoleUI
         {
             if (vehicle is Car)
             {
-                vehicle = new CreateCar().populateCarWithDetails(vehicle);
+                vehicle = new CarDetailsPopulator().populateCarWithDetails(vehicle);
             }
             else if (vehicle is Motorcycle)
             {
-                vehicle = new CreateMotorcycle().populateMotorcycleWithDetails(vehicle);
+                vehicle = new MotorcycleDetailsPopulator().populateMotorcycleWithDetails(vehicle);
             }
             else
             {
-                vehicle = new CreateTruck().populateTruckWithDetails(vehicle);
+                vehicle = new TruckDetailsPopulator().populateTruckWithDetails(vehicle);
             }
 
             return vehicle;
@@ -58,13 +58,13 @@ namespace ConsoleUI
 
         private string getLicensePlateNumber()
         {
-            m_UserDisplay.clearAndDisplayMessage("Please enter the license number of the vehicle you want to add");
+            m_UserDisplay.ClearAndDisplayMessage("Please enter the license number of the vehicle you want to add");
             return ValidateUserInput.GetLicensePlateFromUser();
         }
 
         private VehicleFactory.eVehicleTypes getVehicleType()
         {
-            m_UserDisplay.displayMessage("Please choose one of the following vehicle types:");
+            m_UserDisplay.DisplayMessage("Please choose one of the following vehicle types:");
             return (VehicleFactory.eVehicleTypes)ValidateUserInput.InputIsInRangeOfEnum(typeof(VehicleFactory.eVehicleTypes));
         }
 
@@ -75,14 +75,14 @@ namespace ConsoleUI
 
         private string getCarModel()
         {
-            m_UserDisplay.clearAndDisplayMessage("Please enter the vehicle model name");
+            m_UserDisplay.ClearAndDisplayMessage("Please enter the vehicle model name");
             string carModelName = ValidateUserInput.ValidateInputInNotEmpty();
             return carModelName;
         }
 
         private void addWheelsManufacturer(List<Wheel> wheels)
         {
-            m_UserDisplay.clearAndDisplayMessage("Please enter Wheels Manufacturer name");
+            m_UserDisplay.ClearAndDisplayMessage("Please enter Wheels Manufacturer name");
             m_UserDisplay.displayEmpty();
             string ManufacturerOfWheels = ValidateUserInput.ValidateInputInNotEmpty();
 
@@ -94,7 +94,7 @@ namespace ConsoleUI
 
         private void setWheelsCurrentAirPressure(List<Wheel> wheels)
         {
-            m_UserDisplay.clearAndDisplayMessage("Please enter the current air pressure of the wheels");
+            m_UserDisplay.ClearAndDisplayMessage("Please enter the current air pressure of the wheels");
             
             float currentAirPressure = ValidateUserInput.ParseInputToFloat();
 
@@ -114,13 +114,13 @@ namespace ConsoleUI
 
         private string getUsersName()
         {
-            m_UserDisplay.clearAndDisplayMessage("Please tell us your name");
+            m_UserDisplay.ClearAndDisplayMessage("Please tell us your name");
             return ValidateUserInput.ValidateInputInNotEmpty();
         }
 
         private string getUsersPhoneNumber()
         {
-            m_UserDisplay.clearAndDisplayMessage("Please tell us your phone number");
+            m_UserDisplay.ClearAndDisplayMessage("Please tell us your phone number");
             return ValidateUserInput.ValidateInputInNotEmpty();
         }
 
@@ -128,11 +128,11 @@ namespace ConsoleUI
         {
             if (vehicle.EnergySource is Gas)
             {
-                m_UserDisplay.clearAndDisplayMessage("Please enter current amount of fuel in liters");
+                m_UserDisplay.ClearAndDisplayMessage("Please enter current amount of fuel in liters");
             }
             else
             {
-                m_UserDisplay.clearAndDisplayMessage("Please enter remaining time of engine operation in hours");
+                m_UserDisplay.ClearAndDisplayMessage("Please enter remaining time of engine operation in hours");
             }
 
             float amountOfEnergy = ValidateUserInput.ParseInputToFloat();
