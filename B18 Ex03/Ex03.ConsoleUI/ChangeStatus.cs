@@ -5,32 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using B18_Ex03;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class ChangeStatus
     {
-        private UsertInterface m_UsertInterface;
+        private UserInterface m_UserInterface;
 
-        public ChangeStatus(UsertInterface i_UserInterface)
+        public ChangeStatus(UserInterface i_UserInterface)
         {
-            this.m_UsertInterface = i_UserInterface;
+            m_UserInterface = i_UserInterface;
 
             Console.Clear();
             Console.WriteLine("You have chosen to change the status of a vehicle who is in the garage");
-            string licenseNumber = ValidatUserInput.GetLicensePlateFromUser();
-            Vehicle.eVehicleGarageStatus statusToChangeTo = ValidatUserInput.GetStateFromUser();
+            Console.WriteLine("Please enter the license number of the vehicle whose status you would like to change");
+            string licenseNumber = ValidateUserInput.GetLicensePlateFromUser();
+            Vehicle.eVehicleGarageStatus statusToChangeTo = ValidateUserInput.GetStateFromUser();
 
             try
             {
-                m_UsertInterface.Garage.ChangeVehicleStatus(licenseNumber, statusToChangeTo);
+                m_UserInterface.Garage.ChangeVehicleStatus(licenseNumber, statusToChangeTo);
                 Console.Clear();
                 Console.WriteLine("Vehicle status changed!");
                 Messages.PressAnyKeyToContinue();
             }
-            catch (Exception exeption)
+            catch (Exception exception)
             {
                 Console.Clear();
-                Console.WriteLine(exeption.Message);
+                Console.WriteLine(exception.Message);
                 Messages.PressAnyKeyToContinue();
             }
         }

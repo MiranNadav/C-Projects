@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class Messages
     {
@@ -40,7 +40,6 @@ namespace Ex03.ConsoleUI
             InflateWheels = 6,
             DisplayVehicleDetails = 7,
             Exit = 8,
-            Undefined
         }
 
 
@@ -49,19 +48,28 @@ namespace Ex03.ConsoleUI
             int counter = 1;
             StringBuilder enumToString = new StringBuilder();
 
-            foreach (Enum enum_ in Enum.GetValues(i_EnumType))
+            foreach (Enum enumValue in Enum.GetValues(i_EnumType))
             {
-                enumToString.Append(counter + ". " + enum_ + Environment.NewLine);
-                counter++;
+                if (!enumValue.ToString().Equals("Undefined"))
+                {
+                    enumToString.Append(counter + ". " + enumValue + Environment.NewLine);
+                    counter++;
+                }
             }
 
             return enumToString.ToString();
         }
-
        
+        public static void GoodByePrinter()
+        {
+            Console.WriteLine("Good bye! Please come again");
+            Console.WriteLine("Press any key to close the terminal");
+            Console.ReadLine();
+        }
 
         public static void PressAnyKeyToContinue()
         {
+            Console.WriteLine();
             Console.WriteLine("press any key to continue");
             Console.ReadLine();
         }

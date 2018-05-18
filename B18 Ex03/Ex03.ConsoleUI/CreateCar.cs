@@ -5,29 +5,34 @@ using System.Text;
 using System.Threading.Tasks;
 using B18_Ex03;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class CreateCar
     {
-        private Car m_NewCar;
-        public CreateCar(Vehicle i_NewVehicle)
+        private UserDisplay userDisplay;
+        public CreateCar()
         {
-            this.m_NewCar = (Car)i_NewVehicle;
-            paintCar();
-            Console.Clear();
-            installDoors();
+            userDisplay = new UserDisplay();
         }
 
-        private void paintCar()
+        public Car populateCarWithDetails(Vehicle i_NewVehicle)
         {
-            Console.WriteLine("Please choose car color: ");
-            m_NewCar.Color = (Car.eCarColor)ValidatUserInput.InputIsInRangeOfEnum(typeof(Car.eCarColor));
+            Car car = (Car)i_NewVehicle;
+            car.Color = paintCar();
+            car.NumberOfDoors = installDoors();
+            return car;
         }
 
-        private void installDoors()
+        private Car.eCarColor paintCar()
         {
-            Console.WriteLine("Please choose the number of Doors: ");
-            m_NewCar.NumberOfDoors = (Car.eNumberOfDoors)ValidatUserInput.InputIsInRangeOfEnum(typeof(Car.eNumberOfDoors));
+           userDisplay.clearAndDisplayMessage("Please choose car color: ");
+           return (Car.eCarColor)ValidateUserInput.InputIsInRangeOfEnum(typeof(Car.eCarColor));
+        }
+
+        private Car.eNumberOfDoors installDoors()
+        {
+            userDisplay.clearAndDisplayMessage("Please choose the number of Doors: ");
+            return (Car.eNumberOfDoors)ValidateUserInput.InputIsInRangeOfEnum(typeof(Car.eNumberOfDoors));
         }
     }
 }

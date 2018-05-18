@@ -7,30 +7,31 @@ using B18_Ex03;
 
 namespace Ex03.ConsoleUI
 {
-    class DisplatLicenseNumbers
+    class DisplayLicenseNumbers
     {
-        private UsertInterface m_userInterface;
+        private UserInterface m_userInterface;
 
-        public DisplatLicenseNumbers(UsertInterface i_UserInterface)
+        public DisplayLicenseNumbers(UserInterface i_UserInterface)
         {
+            m_userInterface = i_UserInterface;
             Console.Clear();
             Console.WriteLine("You have chosen to Display the license numbers of the vehicles whom are currently in the garage");
-            Console.WriteLine("Would you like to filter according to the status of each vehicle? Press Y for 'Yes' or 'N' For 'No'");
-            this.m_userInterface = i_UserInterface;
-            bool userWantsToFilter = ValidatUserInput.validateYesOrNo();
+            Console.WriteLine("Would you like to filter according to the status of each vehicle? Press Y for 'Yes' or N For 'No'");
+            bool userWantsToFilter = ValidateUserInput.validateYesOrNo();
+
             if (userWantsToFilter)
             {
-                displayFilterdLicsensePlates();
+                displayFilterdLicensesPlates();
             }
             else
             {
-                displayAllLicsensePlates();
+                displayAllLicensesPlates();
             }
 
             Console.ReadLine();
         }
 
-        private void displayAllLicsensePlates()
+        private void displayAllLicensesPlates()
         {
             List<string> licenseNumbers = m_userInterface.Garage.GetLicenseNumberList();
             Console.Clear();
@@ -38,9 +39,9 @@ namespace Ex03.ConsoleUI
 
         }
 
-        private void displayFilterdLicsensePlates()
+        private void displayFilterdLicensesPlates()
         {
-            Vehicle.eVehicleGarageStatus typeToFilterBy = ValidatUserInput.GetStateFromUser();
+            Vehicle.eVehicleGarageStatus typeToFilterBy = ValidateUserInput.GetStateFromUser();
             List<string> licenseNumbersFilterd = m_userInterface.Garage.GetLicenseNumberList(typeToFilterBy);
             Console.Clear();
             displayAccordingToSize(licenseNumbersFilterd);
@@ -58,7 +59,7 @@ namespace Ex03.ConsoleUI
         {
             if (list.Count == 0)
             {
-                Console.WriteLine("There are no vehicles with the current status in the garage");
+                Console.WriteLine("There are no vehicles for your choice in the garage");
             }
             else
             {

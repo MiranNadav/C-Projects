@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using B18_Ex03;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
-    class ValidatUserInput
+    class ValidateUserInput
     {
-        public static int getUserChoise()
+        public static int getUserChoice()
         {
             int userChoise = ParseInputToInt();
 
@@ -28,6 +28,7 @@ namespace Ex03.ConsoleUI
         public static string ValidateInputInNotEmpty()
         {
             string userInput = Console.ReadLine();
+
             while (userInput.Length == 0)
             {
                 Console.WriteLine(Messages.k_EmptyInputMessage);
@@ -69,6 +70,7 @@ namespace Ex03.ConsoleUI
         public static bool validateYesOrNo()
         {
             string userInput = Console.ReadLine();
+
             while (!userInput.Equals("Y") && !userInput.Equals("N"))
             {
                 Console.WriteLine("The answer is invalid. Please answer With Y or N");
@@ -81,24 +83,20 @@ namespace Ex03.ConsoleUI
         public static Vehicle.eVehicleGarageStatus GetStateFromUser()
         {
             Console.WriteLine("Please chose one of the following vehicle statuses:");
-            Vehicle.eVehicleGarageStatus vhicleStatus = (Vehicle.eVehicleGarageStatus)InputIsInRangeOfEnum(typeof(Vehicle.eVehicleGarageStatus));
+            Vehicle.eVehicleGarageStatus vehicleStatus = (Vehicle.eVehicleGarageStatus)InputIsInRangeOfEnum(typeof(Vehicle.eVehicleGarageStatus));
 
-            return vhicleStatus;
+            return vehicleStatus;
         }
 
         public static string GetLicensePlateFromUser()
         {
-            Console.WriteLine("Please enter the license number of the vehicle whose status you would like to change");
-
-            string licenseNumber = ValidatUserInput.ValidateInputInNotEmpty();
-
+            string licenseNumber = ValidateUserInput.ValidateInputInNotEmpty();
             return licenseNumber;
         }
 
         public static int InputIsInRangeOfEnum(Type i_EnumType)
         {
             Console.WriteLine(Messages.getEnumAsString(i_EnumType));
-
             int userInput = ParseInputToInt();
 
             while (!Enum.IsDefined(i_EnumType, userInput))
@@ -111,6 +109,5 @@ namespace Ex03.ConsoleUI
 
             return userInput;
         }
-
     }
 }

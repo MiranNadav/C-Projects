@@ -5,30 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 using B18_Ex03;
 
-namespace Ex03.ConsoleUI
+namespace ConsoleUI
 {
     class CreateMotorcycle
     {
-        private Motorcycle m_NewMotorcycle;
-        public CreateMotorcycle(Vehicle i_NewVehicle)
+        UserDisplay m_UserDisplay;
+
+        public CreateMotorcycle()
         {
-            this.m_NewMotorcycle = (Motorcycle)i_NewVehicle;
-            assignLicenseType();
-            Console.Clear();
-            setEngineVolume();
+            m_UserDisplay = new UserDisplay();
         }
 
-        private void assignLicenseType()
+        public Motorcycle populateMotorcycleWithDetails(Vehicle i_Vehicle)
         {
-            Console.WriteLine("Please choose  Motorcycle LicenseType: ");
-            m_NewMotorcycle.LicenseType = (Motorcycle.eLicenseType)ValidatUserInput.InputIsInRangeOfEnum(typeof(Motorcycle.eLicenseType));
+            Motorcycle motorcycle = (Motorcycle)i_Vehicle;
+            motorcycle.LicenseType = assignLicenseType();
+            motorcycle.EngineSize = setEngineVolume();
+            return motorcycle;
         }
 
-        private void setEngineVolume()
+        private Motorcycle.eLicenseType assignLicenseType()
         {
-            Console.WriteLine("Please choose the engine volume");
-            int engineVolume = ValidatUserInput.ParseInputToInt();
-            m_NewMotorcycle.EngineSize = engineVolume;
+            m_UserDisplay.clearAndDisplayMessage("Please choose  Motorcycle LicenseType: ");
+            return (Motorcycle.eLicenseType)ValidateUserInput.InputIsInRangeOfEnum(typeof(Motorcycle.eLicenseType));
+        }
+
+        private int setEngineVolume()
+        {
+            m_UserDisplay.clearAndDisplayMessage("Please choose the engine volume: ");
+            return ValidateUserInput.ParseInputToInt();
         }
     }
 }
