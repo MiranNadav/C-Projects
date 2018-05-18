@@ -108,6 +108,7 @@ namespace ConsoleUI
             catch (Exception exception)
             {
                 m_UserDisplay.displayExceptionMessage(exception);
+                m_UserDisplay.ReadLine();
                 setWheelsCurrentAirPressure(wheels);
             }
         }
@@ -144,6 +145,7 @@ namespace ConsoleUI
             catch (Exception exception)
             {
                 m_UserDisplay.displayExceptionMessage(exception);
+                m_UserDisplay.ReadLine();
                 setCurrentAmountOfEnergy(i_Vehicle);
             }
         }
