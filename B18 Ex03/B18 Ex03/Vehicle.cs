@@ -25,10 +25,11 @@ namespace B18_Ex03
             Repaired = 2,
             PayedFor = 3,
         }
+
         public Vehicle()
         {
-            m_ModelName = String.Empty;
-            m_LicenseNumber = String.Empty;
+            m_ModelName = string.Empty;
+            m_LicenseNumber = string.Empty;
             m_EnergyPercentage = 0;
             m_Wheels = new List<Wheel>();
             m_EnergySource = null;
@@ -39,11 +40,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_ModelName;
+                return m_ModelName;
             }
+
             set
             {
-                this.m_ModelName = value;
+                m_ModelName = value;
             }
         }
 
@@ -51,11 +53,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_LicenseNumber;
+                return m_LicenseNumber;
             }
+
             set
             {
-                this.m_LicenseNumber = value;
+                m_LicenseNumber = value;
             }
         }
 
@@ -76,11 +79,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_Wheels;
+                return m_Wheels;
             }
+
             set
             {
-                this.m_Wheels = value;
+                m_Wheels = value;
             }
         }
 
@@ -88,11 +92,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_EnergySource;
+                return m_EnergySource;
             }
+
             set
             {
-                this.m_EnergySource = value;
+                m_EnergySource = value;
             }
         }
 
@@ -100,11 +105,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_OwnerName;
+                return m_OwnerName;
             }
+
             set
             {
-                this.m_OwnerName = value;
+                m_OwnerName = value;
             }
         }
 
@@ -112,11 +118,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_OwnerPhoneNumber;
+                return m_OwnerPhoneNumber;
             }
+
             set
             {
-                this.m_OwnerPhoneNumber = value;
+                m_OwnerPhoneNumber = value;
             }
         }
 
@@ -124,11 +131,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_VehicleGarageStatus;
+                return m_VehicleGarageStatus;
             }
+
             set
             {
-                this.m_VehicleGarageStatus = value;
+                m_VehicleGarageStatus = value;
             }
         }
 
@@ -150,7 +158,13 @@ Current state in garage: {3}
 {4}
 Current energy percentage is: {5}%
 {6}",
-this.m_LicenseNumber, m_ModelName, m_OwnerName, m_VehicleGarageStatus, m_Wheels[0].ToString(), m_EnergyPercentage, m_EnergySource.ToString());
+m_LicenseNumber,
+m_ModelName,
+m_OwnerName,
+m_VehicleGarageStatus,
+m_Wheels[0].ToString(),
+m_EnergyPercentage,
+m_EnergySource.ToString());
         }
     }
 }

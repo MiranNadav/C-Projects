@@ -77,6 +77,7 @@ namespace B18_Ex03
                 wheel.CurrentAirPressure = maxAirPressure;
             }
         }
+
         public List<string> GetLicenseNumberList()
         {
             List<string> licenseNumbersList = new List<string>();
@@ -87,6 +88,7 @@ namespace B18_Ex03
 
             return licenseNumbersList;
         }
+
         public List<string> GetLicenseNumberList(Vehicle.eVehicleGarageStatus i_VehicleStatus)
         {
             List<string> licenseNumbersList = new List<string>();

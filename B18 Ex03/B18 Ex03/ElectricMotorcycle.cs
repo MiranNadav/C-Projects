@@ -12,7 +12,7 @@ namespace B18_Ex03
 
         public ElectricMotorcycle()
         {
-            base.EnergySource = new Electric(k_MaximumChargeTimeOfBattery);
+            EnergySource = new Electric(k_MaximumChargeTimeOfBattery);
         }
 
         public override string ToString()

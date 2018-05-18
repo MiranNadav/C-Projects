@@ -7,11 +7,11 @@ using B18_Ex03;
 
 namespace ConsoleUI
 {
-    class LicenseNumbersFilter
+    public class VehicleStatusFilterProvider
     {
         private UserDisplay m_UserDisplay;
 
-        public LicenseNumbersFilter()
+        public VehicleStatusFilterProvider()
         {
             m_UserDisplay = new UserDisplay();
         }
@@ -36,4 +36,3 @@ namespace ConsoleUI
         }
     }
 }
-

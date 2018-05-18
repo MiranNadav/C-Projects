@@ -18,6 +18,7 @@ namespace B18_Ex03
             {
                 return this.m_CurrentAmount;
             }
+
             set
             {
                 this.m_CurrentAmount += value;
@@ -54,11 +55,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_EnergyType;
+                return m_EnergyType;
             }
+
             set
             {
-                this.m_EnergyType = value;
+                m_EnergyType = value;
             }
         }
 
@@ -73,7 +75,10 @@ namespace B18_Ex03
             return string.Format(
 @"Engine type is: {0}
 Current amount of energy: {1}
-Maximum amount of energy: {2}", this.m_EnergyType, this.m_CurrentAmount, this.m_MaxAmount);
+Maximum amount of energy: {2}",
+m_EnergyType,
+m_CurrentAmount,
+m_MaxAmount);
         }
     }
 }

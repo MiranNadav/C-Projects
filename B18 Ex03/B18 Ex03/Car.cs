@@ -8,18 +8,17 @@ namespace B18_Ex03
 {
     public abstract class Car : Vehicle
     {
-
-        private eNumberOfDoors m_NumberOfDoors;
-        private eCarColor m_Color;
         private const int k_NumberOfWheels = 4;
         private const int k_MaximumWheelPressure = 32;
+        private eNumberOfDoors m_NumberOfDoors;
+        private eCarColor m_Color;
 
         public Car()
         {
-            base.Wheels = new List<Wheel>(k_NumberOfWheels);
+            Wheels = new List<Wheel>(k_NumberOfWheels);
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
-                base.Wheels.Add(new Wheel(k_MaximumWheelPressure));
+                Wheels.Add(new Wheel(k_MaximumWheelPressure));
             }
         }
 
@@ -31,7 +30,6 @@ namespace B18_Ex03
             Black = 4
         }
 
-
         public enum eNumberOfDoors
         {
             Two = 1,
@@ -40,29 +38,29 @@ namespace B18_Ex03
             Five = 4
         }
 
-
         public eCarColor Color
         {
             get
             {
-                return this.m_Color;
+                return m_Color;
             }
+
             set
             {
-                this.m_Color = value;
+                m_Color = value;
             }
         }
-
 
         public eNumberOfDoors NumberOfDoors
         {
             get
             {
-                return this.m_NumberOfDoors;
+                return m_NumberOfDoors;
             }
+
             set
             {
-                this.m_NumberOfDoors = value;
+                m_NumberOfDoors = value;
             }
         }
 
@@ -71,7 +69,10 @@ namespace B18_Ex03
             return string.Format(
 @"{0}
 Number of doors is: {1}
-Car color is: {2}", base.ToString(), this.m_NumberOfDoors, this.m_Color);
+Car color is: {2}",
+base.ToString(),
+m_NumberOfDoors,
+m_Color);
         }
     }
 }

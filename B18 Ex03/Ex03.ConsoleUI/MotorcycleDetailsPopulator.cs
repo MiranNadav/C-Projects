@@ -7,11 +7,11 @@ using B18_Ex03;
 
 namespace ConsoleUI
 {
-    class CreateMotorcycle
+    class MotorcycleDetailsPopulator
     {
         UserDisplay m_UserDisplay;
 
-        public CreateMotorcycle()
+        public MotorcycleDetailsPopulator()
         {
             m_UserDisplay = new UserDisplay();
         }

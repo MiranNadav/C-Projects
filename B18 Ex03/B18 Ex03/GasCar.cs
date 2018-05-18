@@ -13,14 +13,15 @@ namespace B18_Ex03
 
         public GasCar()
         {
-            base.EnergySource = new Gas(k_FuelType, k_MaximumFuelCapacity);
+            EnergySource = new Gas(k_FuelType, k_MaximumFuelCapacity);
         }
 
         public override string ToString()
         {
             return string.Format(
 @"Vehicle type is: Gas Car 
-{0}", base.ToString());
+{0}",
+base.ToString());
         }
     }
 }

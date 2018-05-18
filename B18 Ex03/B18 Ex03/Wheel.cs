@@ -6,52 +6,29 @@ using System.Threading.Tasks;
 
 namespace B18_Ex03
 {
-    //TODO: should  be public?
     public class Wheel
     {
         private string m_ManufacturerName;
         private float m_CurrentAirPressure;
         private float m_MaxAirPressure;
-        //private eMaxAirPressure m_MaxAirPressure;
-        //TODO: check what is the starter AirPressure
-
 
         public Wheel(float i_MaxAirPressure)
         {
-            this.m_ManufacturerName = string.Empty;
-            this.m_CurrentAirPressure = 0f;
-            this.m_MaxAirPressure = i_MaxAirPressure;
-
-            //if (!Enum.IsDefined(typeof(eMaxAirPressure), i_MaxAirPressure))
-            //{
-            //    throw new ArgumentException();
-            //}
-
-            //this.m_MaxAirPressure = (eMaxAirPressure)i_MaxAirPressure
+            m_ManufacturerName = string.Empty;
+            m_CurrentAirPressure = 0f;
+            m_MaxAirPressure = i_MaxAirPressure;
         }
-
-        //public Wheel(string i_ManufacturerName, int i_MaxAirPressure)
-        //{
-        //    this.m_ManufacturerName = i_ManufacturerName;
-        //    this.m_CurrentAirPressure = 0F;
-        //    if (!Enum.IsDefined(typeof(eMaxAirPressure), i_MaxAirPressure))
-        //    {
-        //        throw new ArgumentException();
-        //    }
-
-        //    this.m_MaxAirPressure = (eMaxAirPressure)i_MaxAirPressure;
-
-        //}
 
         public string Manufacturer
         {
             get
             {
-                return this.m_ManufacturerName;
+                return m_ManufacturerName;
             }
+
             set
             {
-                this.m_ManufacturerName = value;
+                m_ManufacturerName = value;
             }
         }
 
@@ -59,11 +36,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_CurrentAirPressure;
+                return m_CurrentAirPressure;
             }
+
             set
             {
-                this.m_CurrentAirPressure = value;
+                m_CurrentAirPressure = value;
             }
         }
 
@@ -71,11 +49,12 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_MaxAirPressure;
+                return m_MaxAirPressure;
             }
+
             set
             {
-                this.m_MaxAirPressure = value;
+                m_MaxAirPressure = value;
             }
         }
 
@@ -83,7 +62,7 @@ namespace B18_Ex03
         {
             if (i_AirToPump + m_CurrentAirPressure > (int)m_MaxAirPressure || i_AirToPump < 0)
             {
-                throw new ValueOutOfRangeException(0, (int)m_MaxAirPressure);//"Cannot fill air above maximum allowed.");
+                throw new ValueOutOfRangeException(0, (int)m_MaxAirPressure);
             }
             else
             {
@@ -91,19 +70,27 @@ namespace B18_Ex03
             }
         }
 
-        public void PumpAirToMaximum ()
+        public void PumpAirToMaximum()
         {
             this.CurrentAirPressure = this.MaximumAirPressure;
         }
 
-        private enum eMaxAirPressure { LowPressure = 28, MediumPressure = 30, HighPressure = 32 };
+        private enum eMaxAirPressure
+        {
+            LowPressure = 28,
+            MediumPressure = 30,
+            HighPressure = 32
+        }
 
         public override string ToString()
         {
             return string.Format(
 @"Manufacturer is: {0} 
 Current air pressure is: {1}
-Maximum air pressure is: {2}", this.m_ManufacturerName, this.m_CurrentAirPressure, this.m_MaxAirPressure);
+Maximum air pressure is: {2}",
+m_ManufacturerName,
+m_CurrentAirPressure,
+m_MaxAirPressure);
         }
     }
 }

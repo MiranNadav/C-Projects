@@ -1,9 +1,9 @@
-﻿using ConsoleUI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleUI;
 
 namespace ConsoleUI
 {
@@ -11,8 +11,8 @@ namespace ConsoleUI
     {
         public static void Main()
         {
-            UserInterface UserInterface = new UserInterface();
-            UserInterface.ServeUser();
+            UserMenu userMenu = new UserMenu();
+            userMenu.ServeUser();
         }
     }
 }

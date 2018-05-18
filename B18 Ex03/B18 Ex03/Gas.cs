@@ -10,14 +10,13 @@ namespace B18_Ex03
     {
         private eFuelType m_GasType;
 
-
         public enum eFuelType
         {
             Soler = 1,
             Octan95 = 2,
             Octan96 = 3,
             Octan98 = 4
-        };
+        }
 
         public Gas(eFuelType i_GasType, float i_MaxAmountOfGas) : base(i_MaxAmountOfGas)
         {
@@ -26,13 +25,12 @@ namespace B18_Ex03
 
         public void FillGas(eFuelType i_FuelType, float i_AmountOfGas)
         {
-
             if (i_FuelType != m_GasType)
             {
-                throw new ArgumentException(String.Format("The gas type dose not match the car vehicle gas type. chosen vehicle gas type is: {0}", m_GasType));
+                throw new ArgumentException(string.Format("The gas type dose not match the car vehicle gas type. chosen vehicle gas type is: {0}", m_GasType));
             }
 
-            base.FillEnergy(i_AmountOfGas);
+            FillEnergy(i_AmountOfGas);
         }
 
         public override string ToString()
@@ -40,7 +38,10 @@ namespace B18_Ex03
             return string.Format(
 @"Fuel type is: {0}
 Current fuel in liters: {1}
-Maximum fuel in liters: {2}", m_GasType, base.CurrentEnergyAmount, base.MaxEnergyAmount);
+Maximum fuel in liters: {2}",
+m_GasType,
+CurrentEnergyAmount,
+MaxEnergyAmount);
         }
     }
 }

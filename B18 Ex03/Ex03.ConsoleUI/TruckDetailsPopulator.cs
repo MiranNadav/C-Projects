@@ -7,16 +7,16 @@ using B18_Ex03;
 
 namespace ConsoleUI
 {
-    class CreateTruck
+    class TruckDetailsPopulator
     {
         private UserDisplay m_UserDisplay;
 
-        public CreateTruck()
+        public TruckDetailsPopulator()
         {
             m_UserDisplay = new UserDisplay();
         }
 
-        public Truck populateTruckWithDetails (Vehicle i_Vehicle)
+        public Truck populateTruckWithDetails(Vehicle i_Vehicle)
         {
             Truck truck = (Truck)i_Vehicle;
             truck.IsCarryingDangerousMaterials = setIfCarryingDangerousMaterials();

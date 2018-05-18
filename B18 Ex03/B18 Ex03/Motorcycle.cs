@@ -8,10 +8,10 @@ namespace B18_Ex03
 {
     public abstract class Motorcycle : Vehicle
     {
-        private eLicenseType m_LicenseType;
-        private int m_EngineSize;
         private const int k_NumberOfWheels = 2;
         private const int k_MaximumWheelPressure = 30;
+        private eLicenseType m_LicenseType;
+        private int m_EngineSize;
 
         public enum eLicenseType
         {
@@ -23,10 +23,10 @@ namespace B18_Ex03
 
         public Motorcycle()
         {
-            base.Wheels = new List<Wheel>(k_NumberOfWheels);
+            Wheels = new List<Wheel>(k_NumberOfWheels);
             for (int i = 0; i < k_NumberOfWheels; i++)
             {
-                base.Wheels.Add(new Wheel(k_MaximumWheelPressure));
+                Wheels.Add(new Wheel(k_MaximumWheelPressure));
             }
         }
 
@@ -36,6 +36,7 @@ namespace B18_Ex03
             {
                 return m_EngineSize;
             }
+
             set
             {
                 this.m_EngineSize = value;
@@ -46,8 +47,9 @@ namespace B18_Ex03
         {
             get
             {
-                return this.m_LicenseType;
+                return m_LicenseType;
             }
+
             set
             {
                 m_LicenseType = value;
@@ -59,7 +61,10 @@ namespace B18_Ex03
             return string.Format(
 @"{0}
 The Motorcycle license type is: {1}
-The Motorcycle engine size is: {2}", base.ToString(), this.m_LicenseType, this.m_EngineSize);
+The Motorcycle engine size is: {2}", 
+base.ToString(),
+m_LicenseType,
+m_EngineSize);
         }
     }
 }

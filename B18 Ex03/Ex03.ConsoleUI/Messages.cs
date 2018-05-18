@@ -8,16 +8,8 @@ namespace ConsoleUI
 {
     class Messages
     {
-
         public const string k_WelcomeUserMessage = "Welcome to Miran&Shemian Co. Garage management tool. How may we serve you today?";
-        public const string k_EnterLicenseNumberMessage = "Please enter license plate number";
-        public const string k_EnterAmountToAddMessage = "Please enter amount to add";
-        public const string k_GoodByeMessage = "Thank you for using the best garage managment program, Bye Bye!";
-        public const string k_GarageIsEmptyMessage = "No vehicles to display, garage is still empty";
-        public const string k_LicensePlateByFilterMessage = "Press the number of the desired filter and then press enter";
-        public const string k_RefuelSuccessMessage = "Refueled your vehicle succesfully. Enjoy.";
-        public const string k_RechargeSuccessMessage = "Recharged your vehicle succesfully. Enjoy.";
-        public const string k_ReInflateToMaxSuccessMessage = "Infalted your wheels to maximum. Enjoy.";
+        public const string k_EmptyInputMessage = "The input you have entered is empty. Please try again";
         public const string k_Menu = @"Press the number of the desired option and then press enter:
 1. Add a new vehicle to the garage
 2. Display all license plates numbers
@@ -28,7 +20,6 @@ namespace ConsoleUI
 7. Display a vehicle's full details
 8. Exit
 ";
-        public const string k_EmptyInputMessage = "The input you have entered is empty. Please try again";
 
         public enum eMainMenuOptions
         {
@@ -41,7 +32,6 @@ namespace ConsoleUI
             DisplayVehicleDetails = 7,
             Exit = 8,
         }
-
 
         public static string getEnumAsString(Type i_EnumType)
         {
@@ -58,20 +48,6 @@ namespace ConsoleUI
             }
 
             return enumToString.ToString();
-        }
-       
-        public static void GoodByePrinter()
-        {
-            Console.WriteLine("Good bye! Please come again");
-            Console.WriteLine("Press any key to close the terminal");
-            Console.ReadLine();
-        }
-
-        public static void PressAnyKeyToContinue()
-        {
-            Console.WriteLine();
-            Console.WriteLine("press any key to continue");
-            Console.ReadLine();
         }
     }
 }

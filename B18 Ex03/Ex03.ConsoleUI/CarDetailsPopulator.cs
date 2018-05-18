@@ -7,12 +7,13 @@ using B18_Ex03;
 
 namespace ConsoleUI
 {
-    class CreateCar
+    class CarDetailsPopulator
     {
-        private UserDisplay m_UserDisplay;
-        public CreateCar()
+        private UserDisplay userDisplay;
+
+        public CarDetailsPopulator()
         {
-            m_UserDisplay = new UserDisplay();
+            userDisplay = new UserDisplay();
         }
 
         public Car populateCarWithDetails(Vehicle i_NewVehicle)
@@ -25,13 +26,13 @@ namespace ConsoleUI
 
         private Car.eCarColor paintCar()
         {
-           m_UserDisplay.ClearAndDisplayMessage("Please choose car color: ");
+           userDisplay.ClearAndDisplayMessage("Please choose car color: ");
            return (Car.eCarColor)ValidateUserInput.InputIsInRangeOfEnum(typeof(Car.eCarColor));
         }
 
         private Car.eNumberOfDoors installDoors()
         {
-            m_UserDisplay.ClearAndDisplayMessage("Please choose the number of Doors: ");
+            userDisplay.ClearAndDisplayMessage("Please choose the number of Doors: ");
             return (Car.eNumberOfDoors)ValidateUserInput.InputIsInRangeOfEnum(typeof(Car.eNumberOfDoors));
         }
     }

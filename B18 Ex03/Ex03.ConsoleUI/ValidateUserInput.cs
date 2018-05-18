@@ -7,18 +7,19 @@ using B18_Ex03;
 
 namespace ConsoleUI
 {
-    class ValidateUserInput
+    public static class ValidateUserInput
     {
+        private static UserDisplay m_UserDisplay = new UserDisplay();
+        
         public static int getUserChoice()
         {
             int userChoise = ParseInputToInt();
 
             while (!(Enum.IsDefined(typeof(Messages.eMainMenuOptions), userChoise)))
             {
-                Console.Clear();
-                Console.WriteLine("Input is not a valid options. Please enter a valid option");
-                Console.WriteLine();
-                Console.WriteLine(Messages.k_Menu);
+                m_UserDisplay.ClearAndDisplayMessage("Input is not a valid options. Please enter a valid option");
+                m_UserDisplay.displayEmpty();
+                m_UserDisplay.DisplayMessage(Messages.k_Menu);
                 userChoise = ParseInputToInt();
             }
 
@@ -31,7 +32,7 @@ namespace ConsoleUI
 
             while (userInput.Length == 0)
             {
-                Console.WriteLine(Messages.k_EmptyInputMessage);
+                m_UserDisplay.DisplayMessage(Messages.k_EmptyInputMessage);
                 userInput = Console.ReadLine();
             }
 
@@ -45,14 +46,13 @@ namespace ConsoleUI
 
             while (!int.TryParse(userInput, out userInputToInt))
             {
-                Console.WriteLine("Input is not a of valid type. Please try again");
+                m_UserDisplay.DisplayMessage("Input is not a of valid type. Please try again");
                 userInput = Console.ReadLine();
             }
 
             return userInputToInt;
         }
 
-        //TODO: change this!
         public static float ParseInputToFloat()
         {
             string userInput = Console.ReadLine();
@@ -60,7 +60,7 @@ namespace ConsoleUI
 
             while (!float.TryParse(userInput, out userInputTofloat))
             {
-                Console.WriteLine("Input is not a of valid type. Please try again");
+                m_UserDisplay.DisplayMessage("Input is not a of valid type. Please try again");
                 userInput = Console.ReadLine();
             }
 
@@ -73,7 +73,7 @@ namespace ConsoleUI
 
             while (!userInput.Equals("Y") && !userInput.Equals("N"))
             {
-                Console.WriteLine("The answer is invalid. Please answer With Y or N");
+                m_UserDisplay.DisplayMessage("The answer is invalid. Please answer With Y or N");
                 userInput = Console.ReadLine();
             }
 
@@ -82,7 +82,7 @@ namespace ConsoleUI
 
         public static Vehicle.eVehicleGarageStatus GetStateFromUser()
         {
-            Console.WriteLine("Please chose one of the following vehicle statuses:");
+            m_UserDisplay.DisplayMessage("Please chose one of the following vehicle statuses:");
             Vehicle.eVehicleGarageStatus vehicleStatus = (Vehicle.eVehicleGarageStatus)InputIsInRangeOfEnum(typeof(Vehicle.eVehicleGarageStatus));
 
             return vehicleStatus;
@@ -96,14 +96,13 @@ namespace ConsoleUI
 
         public static int InputIsInRangeOfEnum(Type i_EnumType)
         {
-            Console.WriteLine(Messages.getEnumAsString(i_EnumType));
+            m_UserDisplay.DisplayMessage(Messages.getEnumAsString(i_EnumType));
             int userInput = ParseInputToInt();
 
             while (!Enum.IsDefined(i_EnumType, userInput))
             {
-                Console.Clear();
-                Console.WriteLine("Input is not in the valid range. Please enter a option in the valid range");
-                Console.WriteLine(Messages.getEnumAsString(i_EnumType));
+                m_UserDisplay.ClearAndDisplayMessage("Input is not in the valid range. Please enter a option in the valid range");
+                m_UserDisplay.DisplayMessage(Messages.getEnumAsString(i_EnumType));
                 userInput = ParseInputToInt();
             }
 

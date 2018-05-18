@@ -10,8 +10,9 @@ namespace B18_Ex03
 
         public ElectricCar()
         {
-            base.EnergySource = new Electric(k_MaximumChargeTimeOfBattery);
+            EnergySource = new Electric(k_MaximumChargeTimeOfBattery);
         }
+
         public override string ToString()
         {
             return string.Format(
