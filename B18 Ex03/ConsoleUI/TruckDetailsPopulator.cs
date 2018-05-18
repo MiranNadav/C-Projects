@@ -7,11 +7,11 @@ using B18_Ex03;
 
 namespace ConsoleUI
 {
-    class CreateTruck
+    class TruckDetailsPopulator
     {
         private UserDisplay m_UserDisplay;
 
-        public CreateTruck()
+        public TruckDetailsPopulator()
         {
             m_UserDisplay = new UserDisplay();
         }
@@ -26,13 +26,13 @@ namespace ConsoleUI
 
         private bool setIfCarryingDangerousMaterials()
         {
-            m_UserDisplay.clearAndDisplayMessage("Please choose whether the truck will carry dangerous materials chose Y to 'Yes' and N to 'No'");
+            m_UserDisplay.ClearAndDisplayMessage("Please choose whether the truck will carry dangerous materials chose Y to 'Yes' and N to 'No'");
             return ValidateUserInput.validateYesOrNo();
         }
 
         private float setMaxCarrey()
         {
-            m_UserDisplay.clearAndDisplayMessage("Please choose the truck maximum volume of cargo");
+            m_UserDisplay.ClearAndDisplayMessage("Please choose the truck maximum volume of cargo");
             return ValidateUserInput.ParseInputToFloat();
         }
     }

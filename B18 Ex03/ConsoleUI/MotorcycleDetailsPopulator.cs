@@ -7,11 +7,11 @@ using B18_Ex03;
 
 namespace ConsoleUI
 {
-    class CreateMotorcycle
+    class MotorcycleDetailsPopulator
     {
         UserDisplay m_UserDisplay;
 
-        public CreateMotorcycle()
+        public MotorcycleDetailsPopulator()
         {
             m_UserDisplay = new UserDisplay();
         }
@@ -26,13 +26,13 @@ namespace ConsoleUI
 
         private Motorcycle.eLicenseType assignLicenseType()
         {
-            m_UserDisplay.clearAndDisplayMessage("Please choose  Motorcycle LicenseType: ");
+            m_UserDisplay.ClearAndDisplayMessage("Please choose  Motorcycle LicenseType: ");
             return (Motorcycle.eLicenseType)ValidateUserInput.InputIsInRangeOfEnum(typeof(Motorcycle.eLicenseType));
         }
 
         private int setEngineVolume()
         {
-            m_UserDisplay.clearAndDisplayMessage("Please choose the engine volume: ");
+            m_UserDisplay.ClearAndDisplayMessage("Please choose the engine volume: ");
             return ValidateUserInput.ParseInputToInt();
         }
     }
