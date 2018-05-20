@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    class Program
+    public class SubMenu : Menu
     {
-        static void Main(string[] args)
+        private const string k_BackMessage = "Back";
+
+        public SubMenu(string i_SubMenuName) : base(i_SubMenuName)
         {
+
         }
     }
 }

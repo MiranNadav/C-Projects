@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    class IExecutable
+    public interface IExecutable
     {
+        void ExecuteChoice();
     }
 }

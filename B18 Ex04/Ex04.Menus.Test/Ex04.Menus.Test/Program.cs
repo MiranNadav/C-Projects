@@ -10,6 +10,8 @@ namespace Ex04.Menus.Test
     {
         static void Main(string[] args)
         {
+            MenuUsingInterface menuUsingInterface = new MenuUsingInterface();
+            menuUsingInterface.StartInterfaceUserMenu();
         }
     }
 }

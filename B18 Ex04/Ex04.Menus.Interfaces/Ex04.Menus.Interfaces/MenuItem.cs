@@ -6,20 +6,27 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    class MenuItem
+    public abstract class MenuItem
     {
-        private string m_ItemTitle;
+        private string m_ItemName;
+        public abstract void ActionWhenChoose();
 
-        public string ItemTitle
+        public string ItemName
         {
             get
             {
-                return this.m_ItemTitle;
+                return m_ItemName;
             }
+
             set
             {
-                this.m_ItemTitle = value;
+                m_ItemName = value;
             }
+        }
+
+        public override string ToString()
+        {
+            return m_ItemName;
         }
     }
 }
