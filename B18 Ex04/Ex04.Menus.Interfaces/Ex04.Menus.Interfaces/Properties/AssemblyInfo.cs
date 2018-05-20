@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ex04.Menus.Test")]
+[assembly: AssemblyTitle("Ex04.Menus.Interfaces")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ex04.Menus.Test")]
+[assembly: AssemblyProduct("Ex04.Menus.Interfaces")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f6ba4ae8-7072-4d03-9e63-a1b44447c4a5")]
+[assembly: Guid("62dc4aff-4db4-4172-bc9d-82961f25ea35")]
 
 // Version information for an assembly consists of the following four values:
 //
