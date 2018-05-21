@@ -8,7 +8,6 @@ namespace Ex04.Menus.Delegates
 {
     public class MainMenu : Menu
     {
-
         private const string k_BackMessage = "Exit";
 
         public MainMenu(string i_SubMenuName)

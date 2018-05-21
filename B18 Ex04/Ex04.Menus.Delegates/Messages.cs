@@ -14,7 +14,6 @@ namespace Ex04.Menus.Delegates
         {
             Console.WriteLine(i_MenuName);
             Console.WriteLine(sr_Line);
-
         }
 
         internal static void dsiplayMenu(Menu i_Menu)
@@ -40,7 +39,6 @@ namespace Ex04.Menus.Delegates
 
         private static void askUserForChoice(int i_MaxValueInRange, string i_ExitOrBack)
         {
-
             Console.WriteLine(string.Format("Please enter your choice (1-{0} or 0 to {1}):", i_MaxValueInRange, i_ExitOrBack));
         }
 
@@ -55,7 +53,6 @@ namespace Ex04.Menus.Delegates
             Console.WriteLine("Thank you for using (APP NAME HERE)");
             Console.WriteLine("Press any key to close terminal");
             Console.ReadLine();
-            //Environment.Exit(0);
         }
 
         internal static void pressAnyKey()

@@ -9,8 +9,9 @@ namespace Ex04.Menus.Delegates
     public abstract class MenuItem
     {
         private string m_ItemName;
-        public abstract void ActionWhenChoose();
         private Menu m_MenuThatItemBelongsTo;
+
+        public abstract void ActionWhenChoose();
 
         public string ItemName
         {
@@ -42,6 +43,5 @@ namespace Ex04.Menus.Delegates
                 m_MenuThatItemBelongsTo = value;
             }
         }
-
     }
 }

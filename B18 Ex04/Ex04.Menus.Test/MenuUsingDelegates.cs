@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using Ex04.Menus.Interfaces;
 using Ex04.Menus.Delegates;
 
 namespace Ex04.Menus.Test
 {
-    class MenuUsingDelegates
+    internal class MenuUsingDelegates
     {
-
         private Menu m_MainMenu;
 
         public void StartDelegatesUserMenu()
@@ -27,7 +25,7 @@ namespace Ex04.Menus.Test
 
             MenuItem showVersion = new LeafItem("Show Version", new TestMenuActions.ShowVersion().ExecuteChoice);
             MenuItem countCapitals = new LeafItem("Count Capitals", new TestMenuActions.CountCapitals().ExecuteChoice);
-            MenuItem showTime= new LeafItem("Show Time", new TestMenuActions.ShowTime().ExecuteChoice);
+            MenuItem showTime = new LeafItem("Show Time", new TestMenuActions.ShowTime().ExecuteChoice);
             MenuItem showDate = new LeafItem("Show Date", new TestMenuActions.ShowDate().ExecuteChoice);
 
             showDataTime.Add(showTime);

@@ -7,9 +7,8 @@ using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
-    class MenuUsingInterface
+    internal class MenuUsingInterface
     {
-
         private Menu m_MainMenu;
 
         public void StartInterfaceUserMenu()

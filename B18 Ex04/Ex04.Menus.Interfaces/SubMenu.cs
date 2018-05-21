@@ -15,10 +15,5 @@ namespace Ex04.Menus.Interfaces
             MenuName = i_SubMenuName;
             MenuItems = i_MenuItems;
         }
-
-        //public override void Show()
-        //{
-        //    Show();
-        //}
     }
 }

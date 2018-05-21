@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
-    class TestMenuActions
+    internal class TestMenuActions
     {
-        public class ShowTime : Interfaces.IExecutable
+        public class ShowTime : IExecutable
         {
             public void ExecuteChoice()
             {
@@ -17,7 +17,7 @@ namespace Ex04.Menus.Test
             }
         }
 
-        public class ShowDate : Interfaces.IExecutable
+        public class ShowDate : IExecutable
         {
             public void ExecuteChoice()
             {
@@ -25,7 +25,7 @@ namespace Ex04.Menus.Test
             }
         }
 
-        public class CountCapitals : Interfaces.IExecutable
+        public class CountCapitals : IExecutable
         {
             public void ExecuteChoice()
             {
@@ -45,7 +45,7 @@ namespace Ex04.Menus.Test
             }
         }
 
-        public class ShowVersion : Interfaces.IExecutable
+        public class ShowVersion : IExecutable
         {
             private string k_CurrentVersion = "App Version: 18.2.4.0";
 

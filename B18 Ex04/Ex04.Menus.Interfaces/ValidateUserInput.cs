@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    class ValidateUserInput
+    public class ValidateUserInput
     {
         public static bool IsInputInRange(int i_userChoiceAsInt, int i_MaxValue)
         {

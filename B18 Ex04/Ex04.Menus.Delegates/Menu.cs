@@ -8,7 +8,7 @@ namespace Ex04.Menus.Delegates
 {
     public abstract class Menu
     {
-        List<MenuItem> m_MenuItemList = new List<MenuItem>();
+        private List<MenuItem> m_MenuItemList = new List<MenuItem>();
         private Menu m_ParentMenu = null;
         private string m_MenuName;
 
@@ -18,6 +18,7 @@ namespace Ex04.Menus.Delegates
             {
                 return m_ParentMenu;
             }
+
             set
             {
                 m_ParentMenu = value;
@@ -43,6 +44,7 @@ namespace Ex04.Menus.Delegates
             {
                 return m_MenuName;
             }
+
             set
             {
                 m_MenuName = value;
@@ -61,7 +63,6 @@ namespace Ex04.Menus.Delegates
 
             if (!(int.TryParse(userChoice, out int userChoiceAsInt) && ValidateUserInput.IsInputInRange(userChoiceAsInt, m_MenuItemList.Count)))
             {
-
                 Messages.displayMessageAndContinue("The input is not one of the available option(s). Please try again");
                 Show();
             }

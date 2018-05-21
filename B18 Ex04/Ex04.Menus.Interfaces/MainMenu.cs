@@ -8,17 +8,11 @@ namespace Ex04.Menus.Interfaces
 {
     public class MainMenu : Menu
     {
-
         private const string k_BackMessage = "Exit";
 
-        public MainMenu(string i_SubMenuName)// : base(i_SubMenuName)
+        public MainMenu(string i_SubMenuName)
         {
             MenuName = i_SubMenuName;
         }
-
-        //public override void Show()
-        //{
-        //    Messages.endSequence();
-        //}
     }
 }
