@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Interfaces
 {
-    class Messages
+    public class Messages
     {
         private static readonly string sr_Line = "==============";
 
@@ -30,6 +30,16 @@ namespace Ex04.Menus.Interfaces
             addBackMessage(i_Menu);
         }
 
+        internal static void displayWhenNumbersIsSet(Menu i_Menu)
+        {
+            foreach (MenuItem menuItem in i_Menu.MenuItems)
+            {
+                Console.WriteLine(menuItem.ToString());
+            }
+
+            addBackMessage(i_Menu);
+        }
+
         internal static void askUserForChoice(int i_MaxValueInRange, Menu i_Menu)
         {
             string backOrExit = i_Menu is MainMenu ? "Exit" : "Back";
@@ -41,6 +51,21 @@ namespace Ex04.Menus.Interfaces
         {
             string backOrExit = i_Menu is MainMenu ? "Exit" : "Back";
             Console.WriteLine("0. " + backOrExit);
+        }
+
+        internal static void endSequence()
+        {
+            Console.Clear();
+            Console.WriteLine("Thank you for using (APP NAME HERE)");
+            Console.WriteLine("Press any key to close terminal");
+            Console.ReadLine();
+            Environment.Exit(0);
+        }
+
+        internal static void pressAnyKey()
+        {
+            Console.WriteLine("Press any key to continue");
+            Console.ReadLine();
         }
     }
 }

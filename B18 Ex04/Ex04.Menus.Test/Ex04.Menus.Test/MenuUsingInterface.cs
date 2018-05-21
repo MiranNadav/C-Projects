@@ -15,19 +15,33 @@ namespace Ex04.Menus.Test
         public void StartInterfaceUserMenu()
         {
             m_MainMenu = new MainMenu("Interface Menu");
-            createMenu();
+            createMainMenu();
             m_MainMenu.Show();
         }
 
-        private void createMenu()
+        private void createMainMenu()
         {
-            SubMenu showDateOrTime_Menu = new SubMenu("Show Date / Time");
+            List<MenuItem> showDataTime = new List<MenuItem>();
+            List<MenuItem> VersionAndCapitals = new List<MenuItem>();
+
             MenuItem showTime = new LeafItem("Show Time", new TestMenuActions.ShowTime());
             MenuItem showDate = new LeafItem("Show Date", new TestMenuActions.ShowDate());
-            MenuItem showDateOrTime_Item = new NodeItem("Show Date / Time", showDateOrTime_Menu);
-            showDateOrTime_Menu.AddMenuItem(showTime);
-            showDateOrTime_Menu.AddMenuItem(showDate);
+
+            MenuItem countCapitals = new LeafItem("Count Capitals", new TestMenuActions.CountCapitals());
+            MenuItem showVersion = new LeafItem("Show Version", new TestMenuActions.ShowVersion());
+
+
+            showDataTime.Add(showTime);
+            showDataTime.Add(showDate);
+
+            VersionAndCapitals.Add(countCapitals);
+            VersionAndCapitals.Add(showVersion);
+
+            MenuItem showDateOrTime_Item = new NodeItem("Show Date/Time", showDataTime);
+            MenuItem VersionAndCapitals_Item = new NodeItem("Version and capitals", VersionAndCapitals);
+
             m_MainMenu.AddMenuItem(showDateOrTime_Item);
+            m_MainMenu.AddMenuItem(VersionAndCapitals_Item);
         }
     }
 }

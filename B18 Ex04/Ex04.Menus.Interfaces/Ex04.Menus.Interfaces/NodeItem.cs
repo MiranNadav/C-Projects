@@ -8,17 +8,26 @@ namespace Ex04.Menus.Interfaces
 {
     public class NodeItem : MenuItem
     {
-        private SubMenu m_SubMenuToShowWhenChoose;
+        private List<MenuItem> m_MenuItemsToShow;
 
-        public NodeItem(string i_ItemName, SubMenu i_SubMenu)
+        public NodeItem(string i_ItemName, List<MenuItem> i_MenuItems)
         {
             ItemName = i_ItemName;
-            m_SubMenuToShowWhenChoose = i_SubMenu;
+            m_MenuItemsToShow = i_MenuItems;
         }
 
         public override void ActionWhenChoose()
         {
-            m_SubMenuToShowWhenChoose.Show();
+            Console.Clear();
+            int indexOfItemInMenu = MenuThatItemBelongsTo.MenuItems.IndexOf(this);
+            string SubMenuName = string.Format("{0}. {1}", indexOfItemInMenu + 1, ItemName);
+
+            SubMenu subMenuToDisplayWhenChoose = new SubMenu(SubMenuName, m_MenuItemsToShow)
+            {
+                ParentMenu = MenuThatItemBelongsTo
+            };
+
+            subMenuToDisplayWhenChoose.Show();
         }
     }
 }

@@ -23,7 +23,11 @@ namespace Ex04.Menus.Interfaces
 
         public override void ActionWhenChoose()
         {
+            Console.Clear();
             m_ExecutableAction.ExecuteChoice();
+            Messages.pressAnyKey();
+            Console.Clear();
+            MenuThatItemBelongsTo.Show();
         }
     }
 }

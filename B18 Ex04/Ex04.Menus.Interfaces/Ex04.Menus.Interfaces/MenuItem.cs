@@ -10,6 +10,7 @@ namespace Ex04.Menus.Interfaces
     {
         private string m_ItemName;
         public abstract void ActionWhenChoose();
+        private Menu m_MenuThatItemBelongsTo;
 
         public string ItemName
         {
@@ -28,5 +29,19 @@ namespace Ex04.Menus.Interfaces
         {
             return m_ItemName;
         }
+
+        public Menu MenuThatItemBelongsTo
+        {
+            get
+            {
+                return m_MenuThatItemBelongsTo;
+            }
+
+            set
+            {
+                m_MenuThatItemBelongsTo = value;
+            }
+        }
+
     }
 }
