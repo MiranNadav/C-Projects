@@ -25,10 +25,10 @@ namespace Ex04.Menus.Test
             List<MenuItem> showDataTime = new List<MenuItem>();
             List<MenuItem> VersionAndCapitals = new List<MenuItem>();
 
-            MenuItem showVersion = new ExecuteItem("Show Version", new TestMenuActions.ShowVersion().ExecuteChoice);
-            MenuItem countCapitals = new ExecuteItem("Count Capitals", new TestMenuActions.CountCapitals().ExecuteChoice);
-            MenuItem showTime= new ExecuteItem("Show Time", new TestMenuActions.ShowTime().ExecuteChoice);
-            MenuItem showDate = new ExecuteItem("Show Date", new TestMenuActions.ShowDate().ExecuteChoice);
+            MenuItem showVersion = new LeafItem("Show Version", new TestMenuActions.ShowVersion().ExecuteChoice);
+            MenuItem countCapitals = new LeafItem("Count Capitals", new TestMenuActions.CountCapitals().ExecuteChoice);
+            MenuItem showTime= new LeafItem("Show Time", new TestMenuActions.ShowTime().ExecuteChoice);
+            MenuItem showDate = new LeafItem("Show Date", new TestMenuActions.ShowDate().ExecuteChoice);
 
             showDataTime.Add(showTime);
             showDataTime.Add(showDate);

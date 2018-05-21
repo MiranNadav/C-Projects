@@ -8,11 +8,11 @@ namespace Ex04.Menus.Delegates
 {
     public delegate void ActionsToExecuteDelegate();
 
-    public class ExecuteItem : MenuItem
+    public class LeafItem : MenuItem
     {
         public event ActionsToExecuteDelegate ActionExecutor;
         
-        public ExecuteItem(string i_Title, ActionsToExecuteDelegate i_ActionToAdd)
+        public LeafItem(string i_Title, ActionsToExecuteDelegate i_ActionToAdd)
         {
             ItemName = i_Title;
             ActionExecutor += i_ActionToAdd;
