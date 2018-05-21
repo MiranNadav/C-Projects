@@ -12,6 +12,8 @@ namespace Ex04.Menus.Test
         {
             MenuUsingInterface menuUsingInterface = new MenuUsingInterface();
             menuUsingInterface.StartInterfaceUserMenu();
+            MenuUsingDelegates menuUsingDelegates = new MenuUsingDelegates();
+            menuUsingDelegates.StartDelegatesUserMenu();
         }
     }
 }

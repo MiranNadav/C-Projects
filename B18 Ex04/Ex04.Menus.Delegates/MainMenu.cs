@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace Ex04.Menus.Delegates
 {
-    class Program
+    public class MainMenu : Menu
     {
-        static void Main(string[] args)
+
+        private const string k_BackMessage = "Exit";
+
+        public MainMenu(string i_SubMenuName)
         {
+            MenuName = i_SubMenuName;
         }
     }
 }
