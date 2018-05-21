@@ -10,9 +10,10 @@ namespace Ex04.Menus.Interfaces
     {
         private const string k_BackMessage = "Back";
 
-        public SubMenu(string i_SubMenuName, List<MenuItem> i_MenuItems) : base(i_SubMenuName, i_MenuItems)
+        public SubMenu(string i_SubMenuName, List<MenuItem> i_MenuItems) //: base(i_SubMenuName, i_MenuItems)
         {
-
+            MenuName = i_SubMenuName;
+            MenuItems = i_MenuItems;
         }
     }
 }

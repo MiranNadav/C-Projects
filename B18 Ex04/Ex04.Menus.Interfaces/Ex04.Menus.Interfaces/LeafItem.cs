@@ -26,7 +26,6 @@ namespace Ex04.Menus.Interfaces
             Console.Clear();
             m_ExecutableAction.ExecuteChoice();
             Messages.pressAnyKey();
-            Console.Clear();
             MenuThatItemBelongsTo.Show();
         }
     }

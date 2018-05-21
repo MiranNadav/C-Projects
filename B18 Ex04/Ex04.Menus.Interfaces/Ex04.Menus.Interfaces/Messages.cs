@@ -10,15 +10,22 @@ namespace Ex04.Menus.Interfaces
     {
         private static readonly string sr_Line = "==============";
 
-        internal static void menuBeginning(string i_MenuName)
+        private static void menuBeginning(string i_MenuName)
         {
             Console.WriteLine(i_MenuName);
             Console.WriteLine(sr_Line);
 
         }
 
-        internal static void dsiplayMenuItems(Menu i_Menu)
+        internal static void dsiplayMenu(Menu i_Menu)
         {
+            Console.Clear();
+
+            string exitOrBack = i_Menu is MainMenu ? "Exit" : "Back";
+            int maxValueInRange = i_Menu.MenuItems.Count;
+
+            menuBeginning(i_Menu.MenuName);
+
             int numberOfCurrentItem = 1;
 
             foreach (MenuItem menuItem in i_Menu.MenuItems)
@@ -27,30 +34,19 @@ namespace Ex04.Menus.Interfaces
                 numberOfCurrentItem++;
             }
 
-            addBackMessage(i_Menu);
+            addBackMessage(exitOrBack);
+            askUserForChoice(maxValueInRange, exitOrBack);
         }
 
-        internal static void displayWhenNumbersIsSet(Menu i_Menu)
+        private static void askUserForChoice(int i_MaxValueInRange, string i_ExitOrBack)
         {
-            foreach (MenuItem menuItem in i_Menu.MenuItems)
-            {
-                Console.WriteLine(menuItem.ToString());
-            }
 
-            addBackMessage(i_Menu);
+            Console.WriteLine(string.Format("Please enter your choice (1-{0} or 0 to {1}):", i_MaxValueInRange, i_ExitOrBack));
         }
 
-        internal static void askUserForChoice(int i_MaxValueInRange, Menu i_Menu)
+        private static void addBackMessage(string i_ExitOrBack)
         {
-            string backOrExit = i_Menu is MainMenu ? "Exit" : "Back";
-            //TODO: Change to string format
-            Console.WriteLine("Please enter your choice (1-" + i_MaxValueInRange + " or 0 to " + backOrExit + "):");
-        }
-
-        internal static void addBackMessage(Menu i_Menu)
-        {
-            string backOrExit = i_Menu is MainMenu ? "Exit" : "Back";
-            Console.WriteLine("0. " + backOrExit);
+            Console.WriteLine("0. " + i_ExitOrBack);
         }
 
         internal static void endSequence()
@@ -66,6 +62,12 @@ namespace Ex04.Menus.Interfaces
         {
             Console.WriteLine("Press any key to continue");
             Console.ReadLine();
+        }
+
+        internal static void displayMessageAndContinue(string i_MessageToDisplay)
+        {
+            Console.WriteLine(i_MessageToDisplay);
+            pressAnyKey();
         }
     }
 }

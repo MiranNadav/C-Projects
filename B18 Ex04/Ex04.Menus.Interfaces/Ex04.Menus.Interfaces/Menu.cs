@@ -12,16 +12,16 @@ namespace Ex04.Menus.Interfaces
         private Menu m_ParentMenu = null;
         private string m_MenuName;
 
-        public Menu(string i_MenuName)
-        {
-            m_MenuName = i_MenuName;
-        }
+        //public Menu(string i_MenuName)
+        //{
+        //    m_MenuName = i_MenuName;
+        //}
 
-        public Menu(string i_MenuName, List<MenuItem> i_MenuItems)
-        {
-            m_MenuName = i_MenuName;
-            m_MenuItemList = i_MenuItems;
-        }
+        //public Menu(string i_MenuName, List<MenuItem> i_MenuItems)
+        //{
+        //    m_MenuName = i_MenuName;
+        //    m_MenuItemList = i_MenuItems;
+        //}
 
         public Menu ParentMenu
         {
@@ -48,6 +48,18 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
+        public string MenuName
+        {
+            get
+            {
+                return m_MenuName;
+            } 
+            set
+            {
+                m_MenuName = value;
+            }
+        }
+
         public void AddMenuItem(MenuItem i_MenuItem)
         {
             m_MenuItemList.Add(i_MenuItem);
@@ -55,10 +67,7 @@ namespace Ex04.Menus.Interfaces
 
         public void Show()
         {
-            Console.Clear();
-            Messages.menuBeginning(m_MenuName);
-            Messages.dsiplayMenuItems(this);
-            Messages.askUserForChoice(m_MenuItemList.Count, this);
+            Messages.dsiplayMenu(this);
             string userChoice = Console.ReadLine();
             bool userWantsToGoBack = false;
 
@@ -66,8 +75,8 @@ namespace Ex04.Menus.Interfaces
             {
                 if (!(int.TryParse(userChoice, out int userChoiceAsInt) && ValidateUserInput.IsInputInRange(userChoiceAsInt, m_MenuItemList.Count)))
                 {
-                    Console.WriteLine("The input is not one of the available option(s). Please try again");
-                    Messages.pressAnyKey();
+
+                    Messages.displayMessageAndContinue("The input is not one of the available option(s). Please try again");
                     Show();
                 }
 
