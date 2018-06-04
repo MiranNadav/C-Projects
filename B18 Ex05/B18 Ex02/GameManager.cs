@@ -20,6 +20,60 @@ namespace B18_Ex02
         private InputValidation m_InputValidation;
         private bool m_StartNewMatch = false;
 
+        public PossibleMoves PossibleMoves
+        {
+            get { return m_PossibleMoves; }
+            set { m_PossibleMoves = value; }
+        }
+
+        public Board Board
+        {
+            get
+            {
+                return m_PlayingBoard;
+            }
+        }
+
+        public GameManager(int i_BoardSize)
+        {
+            m_FirstPlayer = new Player("FirstPlayer", 'O');
+            m_SecondPlayer = new Player("SecondPlayer", 'X');
+            m_PlayingBoard = new Board(i_BoardSize);
+            m_MatchInformation = new MatchInformation(m_FirstPlayer, m_SecondPlayer, m_PlayingBoard);
+            m_CurrentPlayer = m_FirstPlayer;
+            m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
+            m_InputValidation = new InputValidation();
+            //matchManager(m_PlayingBoard);
+
+        }
+
+        public List<PlayerMove> getAllowedMoves (string i_Move)
+        {
+            List<PlayerMove> currentAllowedMoves = new List<PlayerMove>();
+            if (m_CurrentPlayer == m_FirstPlayer)
+            {
+                foreach (PlayerMove playerMove in m_PossibleMoves.FirstPlayerPossibleMoves)
+                {
+                    if (playerMove.CurrentSquare.getSquare() == i_Move)
+                    {
+                        currentAllowedMoves.Add(playerMove);
+                    }
+                }
+            }
+
+            else
+            {
+                foreach (PlayerMove playerMove in m_PossibleMoves.SecondPlayerPossibleMoves)
+                {
+                    if (playerMove.CurrentSquare.getSquare() == i_Move)
+                    {
+                        currentAllowedMoves.Add(playerMove);
+                    }
+                }
+            }
+
+            return currentAllowedMoves;
+        }
 
         public void initializeMatch()
         {
@@ -60,41 +114,39 @@ namespace B18_Ex02
             m_PlayingBoard = new Board(boardSize);
             m_PlayingBoard.printBoard();
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
-            matchManager(m_PlayingBoard);
+            //matchManager(m_PlayingBoard);
         }
 
-        private void matchManager(Board i_PlayingBoard)
+        public void matchManager(Board i_PlayingBoard, string i_Move)
         {
             int boardSize = i_PlayingBoard.BoardSize;
             bool gameIsOver = false;
             bool isFirstUserTurn = true;
 
-            Console.WriteLine(m_CurrentPlayer.Name + "'s turn:");
+            //Console.WriteLine(m_CurrentPlayer.Name + "'s turn:");
 
-            while (!gameIsOver)
-            {
-                if (isFirstUserTurn)
-                {
-                    this.m_CurrentPlayer = m_FirstPlayer;
-                    gameIsOver = parseUserInput(m_FirstPlayer, m_SecondPlayer);
-                    isFirstUserTurn = false;
-                }
-                else
-                {
-                    this.m_CurrentPlayer = m_SecondPlayer;
-                    gameIsOver = parseUserInput(m_SecondPlayer, m_FirstPlayer);
-                    isFirstUserTurn = true;
-                }
-            }
 
-            if (m_StartNewMatch)
+            if (isFirstUserTurn)
             {
-                startAnotherMatch();
+                this.m_CurrentPlayer = m_FirstPlayer;
+                gameIsOver = parseUserInput(m_FirstPlayer, m_SecondPlayer, i_Move);
+                isFirstUserTurn = false;
             }
             else
             {
-                endGameScreen();
+                this.m_CurrentPlayer = m_SecondPlayer;
+                gameIsOver = parseUserInput(m_SecondPlayer, m_FirstPlayer, i_Move);
+                isFirstUserTurn = true;
             }
+
+            //if (m_StartNewMatch)
+            //{
+            //    startAnotherMatch();
+            //}
+            //else
+            //{
+            //    endGameScreen();
+            //}
         }
 
         private void endGameScreen()
@@ -120,7 +172,7 @@ namespace B18_Ex02
             Environment.Exit(0);
         }
 
-        private bool parseUserInput(Player i_CurrentPlayer, Player i_OtherPlayer)
+        private bool parseUserInput(Player i_CurrentPlayer, Player i_OtherPlayer, string i_Move)
         {
             bool isValidMove = false;
             string inputMove;
@@ -134,9 +186,10 @@ namespace B18_Ex02
 
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
 
+            inputMove = i_Move;
+
             if (!this.m_CurrentPlayer.IsComputer)
             {
-                inputMove = Console.ReadLine();
 
                 while (!gameIsOver && (!isValidMove || (isValidMove && tryingToQuit)))
                 {
@@ -156,7 +209,7 @@ namespace B18_Ex02
                         else
                         {
                             tryingToQuit = false;
-                            inputMove = Console.ReadLine();
+                            //inputMove = Console.ReadLine();
                         }
                     }
                     else
@@ -170,7 +223,7 @@ namespace B18_Ex02
                             {
                                 isValidMove = false;
                                 Console.WriteLine(errorMessage);
-                                inputMove = Console.ReadLine();
+                                //inputMove = Console.ReadLine();
                             }
                             else
                             {
@@ -178,14 +231,14 @@ namespace B18_Ex02
                                 if (!MovementValidation.IsCoinBelongToPlayer(this.m_CurrentPlayer, currentCoin))
                                 {
                                     Console.WriteLine(ErrorMessageGenerator.TryingToMoveOpponentsCoin());
-                                    inputMove = Console.ReadLine();
+                                    //inputMove = Console.ReadLine();
                                 }
                             }
                         }
                         else
                         {
                             Console.WriteLine(ErrorMessageGenerator.FormatErrorMessage());
-                            inputMove = Console.ReadLine();
+                            //inputMove = Console.ReadLine();
                         }
                     }
                 }
@@ -228,12 +281,12 @@ namespace B18_Ex02
                         if (!this.m_CurrentPlayer.IsComputer)
                         {
                             Console.WriteLine(this.m_CurrentPlayer.Name + ", you can eat more. Please enter another move.");
-                            inputMove = Console.ReadLine();
+                            //inputMove = Console.ReadLine();
                             isValidMove = m_InputValidation.InputFormatIsValid(inputMove);
                             while (!isValidMove)
                             {
                                 Console.WriteLine(this.m_CurrentPlayer.Name + ", the input is invalid. enter a good move please");
-                                inputMove = Console.ReadLine();
+                                //inputMove = Console.ReadLine();
                                 isValidMove = m_InputValidation.InputFormatIsValid(inputMove);
                                 this.m_CurrentMove = new PlayerMove(inputMove);
                             }

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace B18_Ex02
 {
-    internal class Board
+    public class Board
     {
         private int m_BoardSize;
         private Coin[,] m_Board;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    internal class PossibleMoves
+    public class PossibleMoves
     {
         private ArrayList m_FirstPlayerPossibleMoves = new ArrayList();
         private ArrayList m_SecondPlayerPossibleMoves = new ArrayList();

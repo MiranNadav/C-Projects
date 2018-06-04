@@ -52,24 +52,24 @@ namespace WindowsUI
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
-            this.checkersButton13 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton14 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton15 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton16 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton17 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton18 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton7 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton8 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton9 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton10 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton11 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton12 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton6 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton5 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton4 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton3 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton2 = new CheckersComponents.CheckersCheckBox();
-            this.checkersButton1 = new CheckersComponents.CheckersCheckBox();
+            this.Ef = new CheckersComponents.CheckersCheckBox();
+            this.Cf = new CheckersComponents.CheckersCheckBox();
+            this.Af = new CheckersComponents.CheckersCheckBox();
+            this.Be = new CheckersComponents.CheckersCheckBox();
+            this.De = new CheckersComponents.CheckersCheckBox();
+            this.Fe = new CheckersComponents.CheckersCheckBox();
+            this.Ed = new CheckersComponents.CheckersCheckBox();
+            this.Cd = new CheckersComponents.CheckersCheckBox();
+            this.Ad = new CheckersComponents.CheckersCheckBox();
+            this.Bc = new CheckersComponents.CheckersCheckBox();
+            this.Dc = new CheckersComponents.CheckersCheckBox();
+            this.Fc = new CheckersComponents.CheckersCheckBox();
+            this.Eb = new CheckersComponents.CheckersCheckBox();
+            this.Cb = new CheckersComponents.CheckersCheckBox();
+            this.Ab = new CheckersComponents.CheckersCheckBox();
+            this.Ba = new CheckersComponents.CheckersCheckBox();
+            this.Da = new CheckersComponents.CheckersCheckBox();
+            this.Fa = new CheckersComponents.CheckersCheckBox();
             this.SuspendLayout();
             // 
             // player1Name
@@ -270,203 +270,239 @@ namespace WindowsUI
             this.button19.TabIndex = 57;
             this.button19.UseVisualStyleBackColor = false;
             // 
-            // checkersButton13
+            // Ef
             // 
-            this.checkersButton13.BackColor = System.Drawing.Color.White;
-            this.checkersButton13.Location = new System.Drawing.Point(439, 721);
-            this.checkersButton13.Name = "checkersButton13";
-            this.checkersButton13.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton13.TabIndex = 68;
-            this.checkersButton13.UseVisualStyleBackColor = false;
+            this.Ef.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Ef.BackColor = System.Drawing.Color.White;
+            this.Ef.Location = new System.Drawing.Point(439, 721);
+            this.Ef.Name = "Ef";
+            this.Ef.Size = new System.Drawing.Size(100, 100);
+            this.Ef.Square = null;
+            this.Ef.TabIndex = 68;
+            this.Ef.UseVisualStyleBackColor = false;
             // 
-            // checkersButton14
+            // Cf
             // 
-            this.checkersButton14.BackColor = System.Drawing.Color.White;
-            this.checkersButton14.Location = new System.Drawing.Point(243, 721);
-            this.checkersButton14.Name = "checkersButton14";
-            this.checkersButton14.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton14.TabIndex = 67;
-            this.checkersButton14.UseVisualStyleBackColor = false;
+            this.Cf.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Cf.BackColor = System.Drawing.Color.White;
+            this.Cf.Location = new System.Drawing.Point(243, 721);
+            this.Cf.Name = "Cf";
+            this.Cf.Size = new System.Drawing.Size(100, 100);
+            this.Cf.Square = null;
+            this.Cf.TabIndex = 67;
+            this.Cf.UseVisualStyleBackColor = false;
             // 
-            // checkersButton15
+            // Af
             // 
-            this.checkersButton15.BackColor = System.Drawing.Color.White;
-            this.checkersButton15.Location = new System.Drawing.Point(47, 720);
-            this.checkersButton15.Name = "checkersButton15";
-            this.checkersButton15.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton15.TabIndex = 66;
-            this.checkersButton15.UseVisualStyleBackColor = false;
+            this.Af.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Af.BackColor = System.Drawing.Color.White;
+            this.Af.Location = new System.Drawing.Point(47, 720);
+            this.Af.Name = "Af";
+            this.Af.Size = new System.Drawing.Size(100, 100);
+            this.Af.Square = null;
+            this.Af.TabIndex = 66;
+            this.Af.UseVisualStyleBackColor = false;
             // 
-            // checkersButton16
+            // Be
             // 
-            this.checkersButton16.BackColor = System.Drawing.Color.White;
-            this.checkersButton16.Location = new System.Drawing.Point(146, 615);
-            this.checkersButton16.Name = "checkersButton16";
-            this.checkersButton16.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton16.TabIndex = 65;
-            this.checkersButton16.UseVisualStyleBackColor = false;
+            this.Be.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Be.BackColor = System.Drawing.Color.White;
+            this.Be.Location = new System.Drawing.Point(146, 615);
+            this.Be.Name = "Be";
+            this.Be.Size = new System.Drawing.Size(100, 100);
+            this.Be.Square = null;
+            this.Be.TabIndex = 65;
+            this.Be.UseVisualStyleBackColor = false;
             // 
-            // checkersButton17
+            // De
             // 
-            this.checkersButton17.BackColor = System.Drawing.Color.White;
-            this.checkersButton17.Location = new System.Drawing.Point(342, 615);
-            this.checkersButton17.Name = "checkersButton17";
-            this.checkersButton17.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton17.TabIndex = 64;
-            this.checkersButton17.UseVisualStyleBackColor = false;
+            this.De.Appearance = System.Windows.Forms.Appearance.Button;
+            this.De.BackColor = System.Drawing.Color.White;
+            this.De.Location = new System.Drawing.Point(342, 615);
+            this.De.Name = "De";
+            this.De.Size = new System.Drawing.Size(100, 100);
+            this.De.Square = null;
+            this.De.TabIndex = 64;
+            this.De.UseVisualStyleBackColor = false;
             // 
-            // checkersButton18
+            // Fe
             // 
-            this.checkersButton18.BackColor = System.Drawing.Color.White;
-            this.checkersButton18.Location = new System.Drawing.Point(535, 615);
-            this.checkersButton18.Name = "checkersButton18";
-            this.checkersButton18.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton18.TabIndex = 63;
-            this.checkersButton18.UseVisualStyleBackColor = false;
+            this.Fe.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Fe.BackColor = System.Drawing.Color.White;
+            this.Fe.Location = new System.Drawing.Point(535, 615);
+            this.Fe.Name = "Fe";
+            this.Fe.Size = new System.Drawing.Size(100, 100);
+            this.Fe.Square = null;
+            this.Fe.TabIndex = 63;
+            this.Fe.UseVisualStyleBackColor = false;
             // 
-            // checkersButton7
+            // Ed
             // 
-            this.checkersButton7.BackColor = System.Drawing.Color.White;
-            this.checkersButton7.Location = new System.Drawing.Point(439, 509);
-            this.checkersButton7.Name = "checkersButton7";
-            this.checkersButton7.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton7.TabIndex = 56;
-            this.checkersButton7.UseVisualStyleBackColor = false;
+            this.Ed.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Ed.BackColor = System.Drawing.Color.White;
+            this.Ed.Location = new System.Drawing.Point(439, 509);
+            this.Ed.Name = "Ed";
+            this.Ed.Size = new System.Drawing.Size(100, 100);
+            this.Ed.Square = null;
+            this.Ed.TabIndex = 56;
+            this.Ed.UseVisualStyleBackColor = false;
             // 
-            // checkersButton8
+            // Cd
             // 
-            this.checkersButton8.BackColor = System.Drawing.Color.White;
-            this.checkersButton8.Location = new System.Drawing.Point(243, 508);
-            this.checkersButton8.Name = "checkersButton8";
-            this.checkersButton8.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton8.TabIndex = 55;
-            this.checkersButton8.UseVisualStyleBackColor = false;
+            this.Cd.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Cd.BackColor = System.Drawing.Color.White;
+            this.Cd.Location = new System.Drawing.Point(243, 508);
+            this.Cd.Name = "Cd";
+            this.Cd.Size = new System.Drawing.Size(100, 100);
+            this.Cd.Square = null;
+            this.Cd.TabIndex = 55;
+            this.Cd.UseVisualStyleBackColor = false;
             // 
-            // checkersButton9
+            // Ad
             // 
-            this.checkersButton9.BackColor = System.Drawing.Color.White;
-            this.checkersButton9.Location = new System.Drawing.Point(47, 508);
-            this.checkersButton9.Name = "checkersButton9";
-            this.checkersButton9.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton9.TabIndex = 54;
-            this.checkersButton9.UseVisualStyleBackColor = false;
+            this.Ad.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Ad.BackColor = System.Drawing.Color.White;
+            this.Ad.Location = new System.Drawing.Point(47, 508);
+            this.Ad.Name = "Ad";
+            this.Ad.Size = new System.Drawing.Size(100, 100);
+            this.Ad.Square = null;
+            this.Ad.TabIndex = 54;
+            this.Ad.UseVisualStyleBackColor = false;
             // 
-            // checkersButton10
+            // Bc
             // 
-            this.checkersButton10.BackColor = System.Drawing.Color.White;
-            this.checkersButton10.Location = new System.Drawing.Point(146, 403);
-            this.checkersButton10.Name = "checkersButton10";
-            this.checkersButton10.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton10.TabIndex = 53;
-            this.checkersButton10.UseVisualStyleBackColor = false;
+            this.Bc.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Bc.BackColor = System.Drawing.Color.White;
+            this.Bc.Location = new System.Drawing.Point(146, 403);
+            this.Bc.Name = "Bc";
+            this.Bc.Size = new System.Drawing.Size(100, 100);
+            this.Bc.Square = null;
+            this.Bc.TabIndex = 53;
+            this.Bc.UseVisualStyleBackColor = false;
             // 
-            // checkersButton11
+            // Dc
             // 
-            this.checkersButton11.BackColor = System.Drawing.Color.White;
-            this.checkersButton11.Location = new System.Drawing.Point(342, 403);
-            this.checkersButton11.Name = "checkersButton11";
-            this.checkersButton11.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton11.TabIndex = 52;
-            this.checkersButton11.UseVisualStyleBackColor = false;
+            this.Dc.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Dc.BackColor = System.Drawing.Color.White;
+            this.Dc.Location = new System.Drawing.Point(342, 403);
+            this.Dc.Name = "Dc";
+            this.Dc.Size = new System.Drawing.Size(100, 100);
+            this.Dc.Square = null;
+            this.Dc.TabIndex = 52;
+            this.Dc.UseVisualStyleBackColor = false;
             // 
-            // checkersButton12
+            // Fc
             // 
-            this.checkersButton12.BackColor = System.Drawing.Color.White;
-            this.checkersButton12.Location = new System.Drawing.Point(535, 403);
-            this.checkersButton12.Name = "checkersButton12";
-            this.checkersButton12.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton12.TabIndex = 51;
-            this.checkersButton12.UseVisualStyleBackColor = false;
+            this.Fc.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Fc.BackColor = System.Drawing.Color.White;
+            this.Fc.Location = new System.Drawing.Point(535, 403);
+            this.Fc.Name = "Fc";
+            this.Fc.Size = new System.Drawing.Size(100, 100);
+            this.Fc.Square = null;
+            this.Fc.TabIndex = 51;
+            this.Fc.UseVisualStyleBackColor = false;
             // 
-            // checkersButton6
+            // Eb
             // 
-            this.checkersButton6.BackColor = System.Drawing.Color.White;
-            this.checkersButton6.Location = new System.Drawing.Point(439, 297);
-            this.checkersButton6.Name = "checkersButton6";
-            this.checkersButton6.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton6.TabIndex = 44;
-            this.checkersButton6.UseVisualStyleBackColor = false;
+            this.Eb.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Eb.BackColor = System.Drawing.Color.White;
+            this.Eb.Location = new System.Drawing.Point(439, 297);
+            this.Eb.Name = "Eb";
+            this.Eb.Size = new System.Drawing.Size(100, 100);
+            this.Eb.Square = null;
+            this.Eb.TabIndex = 44;
+            this.Eb.UseVisualStyleBackColor = false;
             // 
-            // checkersButton5
+            // Cb
             // 
-            this.checkersButton5.BackColor = System.Drawing.Color.White;
-            this.checkersButton5.Location = new System.Drawing.Point(243, 297);
-            this.checkersButton5.Name = "checkersButton5";
-            this.checkersButton5.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton5.TabIndex = 43;
-            this.checkersButton5.UseVisualStyleBackColor = false;
+            this.Cb.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Cb.BackColor = System.Drawing.Color.White;
+            this.Cb.Location = new System.Drawing.Point(243, 297);
+            this.Cb.Name = "Cb";
+            this.Cb.Size = new System.Drawing.Size(100, 100);
+            this.Cb.Square = null;
+            this.Cb.TabIndex = 43;
+            this.Cb.UseVisualStyleBackColor = false;
             // 
-            // checkersButton4
+            // Ab
             // 
-            this.checkersButton4.BackColor = System.Drawing.Color.White;
-            this.checkersButton4.Location = new System.Drawing.Point(47, 296);
-            this.checkersButton4.Name = "checkersButton4";
-            this.checkersButton4.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton4.TabIndex = 42;
-            this.checkersButton4.UseVisualStyleBackColor = false;
+            this.Ab.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Ab.BackColor = System.Drawing.Color.White;
+            this.Ab.Location = new System.Drawing.Point(47, 296);
+            this.Ab.Name = "Ab";
+            this.Ab.Size = new System.Drawing.Size(100, 100);
+            this.Ab.Square = null;
+            this.Ab.TabIndex = 42;
+            this.Ab.UseVisualStyleBackColor = false;
             // 
-            // checkersButton3
+            // Ba
             // 
-            this.checkersButton3.BackColor = System.Drawing.Color.White;
-            this.checkersButton3.Location = new System.Drawing.Point(146, 191);
-            this.checkersButton3.Name = "checkersButton3";
-            this.checkersButton3.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton3.TabIndex = 41;
-            this.checkersButton3.UseVisualStyleBackColor = false;
+            this.Ba.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Ba.BackColor = System.Drawing.Color.White;
+            this.Ba.Location = new System.Drawing.Point(146, 191);
+            this.Ba.Name = "Ba";
+            this.Ba.Size = new System.Drawing.Size(100, 100);
+            this.Ba.Square = null;
+            this.Ba.TabIndex = 41;
+            this.Ba.UseVisualStyleBackColor = false;
             // 
-            // checkersButton2
+            // Da
             // 
-            this.checkersButton2.BackColor = System.Drawing.Color.White;
-            this.checkersButton2.Location = new System.Drawing.Point(342, 191);
-            this.checkersButton2.Name = "checkersButton2";
-            this.checkersButton2.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton2.TabIndex = 40;
-            this.checkersButton2.UseVisualStyleBackColor = false;
+            this.Da.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Da.BackColor = System.Drawing.Color.White;
+            this.Da.Location = new System.Drawing.Point(342, 191);
+            this.Da.Name = "Da";
+            this.Da.Size = new System.Drawing.Size(100, 100);
+            this.Da.Square = null;
+            this.Da.TabIndex = 40;
+            this.Da.UseVisualStyleBackColor = false;
             // 
-            // checkersButton1
+            // Fa
             // 
-            this.checkersButton1.BackColor = System.Drawing.Color.White;
-            this.checkersButton1.Location = new System.Drawing.Point(535, 191);
-            this.checkersButton1.Name = "checkersButton1";
-            this.checkersButton1.Size = new System.Drawing.Size(100, 100);
-            this.checkersButton1.TabIndex = 39;
-            this.checkersButton1.UseVisualStyleBackColor = false;
+            this.Fa.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Fa.BackColor = System.Drawing.Color.White;
+            this.Fa.Location = new System.Drawing.Point(535, 191);
+            this.Fa.Name = "Fa";
+            this.Fa.Size = new System.Drawing.Size(100, 100);
+            this.Fa.Square = null;
+            this.Fa.TabIndex = 39;
+            this.Fa.UseVisualStyleBackColor = false;
             // 
             // CheckersBoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(793, 919);
-            this.Controls.Add(this.checkersButton13);
-            this.Controls.Add(this.checkersButton14);
-            this.Controls.Add(this.checkersButton15);
-            this.Controls.Add(this.checkersButton16);
-            this.Controls.Add(this.checkersButton17);
-            this.Controls.Add(this.checkersButton18);
+            this.Controls.Add(this.Ef);
+            this.Controls.Add(this.Cf);
+            this.Controls.Add(this.Af);
+            this.Controls.Add(this.Be);
+            this.Controls.Add(this.De);
+            this.Controls.Add(this.Fe);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button19);
-            this.Controls.Add(this.checkersButton7);
-            this.Controls.Add(this.checkersButton8);
-            this.Controls.Add(this.checkersButton9);
-            this.Controls.Add(this.checkersButton10);
-            this.Controls.Add(this.checkersButton11);
-            this.Controls.Add(this.checkersButton12);
+            this.Controls.Add(this.Ed);
+            this.Controls.Add(this.Cd);
+            this.Controls.Add(this.Ad);
+            this.Controls.Add(this.Bc);
+            this.Controls.Add(this.Dc);
+            this.Controls.Add(this.Fc);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button13);
-            this.Controls.Add(this.checkersButton6);
-            this.Controls.Add(this.checkersButton5);
-            this.Controls.Add(this.checkersButton4);
-            this.Controls.Add(this.checkersButton3);
-            this.Controls.Add(this.checkersButton2);
-            this.Controls.Add(this.checkersButton1);
+            this.Controls.Add(this.Eb);
+            this.Controls.Add(this.Cb);
+            this.Controls.Add(this.Ab);
+            this.Controls.Add(this.Ba);
+            this.Controls.Add(this.Da);
+            this.Controls.Add(this.Fa);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button4);
@@ -494,30 +530,30 @@ namespace WindowsUI
         private Button button9;
         private Button button11;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private CheckersComponents.CheckersCheckBox checkersButton1;
-        private CheckersComponents.CheckersCheckBox checkersButton2;
-        private CheckersComponents.CheckersCheckBox checkersButton3;
-        private CheckersComponents.CheckersCheckBox checkersButton4;
-        private CheckersComponents.CheckersCheckBox checkersButton5;
-        private CheckersComponents.CheckersCheckBox checkersButton6;
-        private CheckersComponents.CheckersCheckBox checkersButton7;
-        private CheckersComponents.CheckersCheckBox checkersButton8;
-        private CheckersComponents.CheckersCheckBox checkersButton9;
-        private CheckersComponents.CheckersCheckBox checkersButton10;
-        private CheckersComponents.CheckersCheckBox checkersButton11;
-        private CheckersComponents.CheckersCheckBox checkersButton12;
+        private CheckersComponents.CheckersCheckBox Fa;
+        private CheckersComponents.CheckersCheckBox Da;
+        private CheckersComponents.CheckersCheckBox Ba;
+        private CheckersComponents.CheckersCheckBox Ab;
+        private CheckersComponents.CheckersCheckBox Cb;
+        private CheckersComponents.CheckersCheckBox Eb;
+        private CheckersComponents.CheckersCheckBox Ed;
+        private CheckersComponents.CheckersCheckBox Cd;
+        private CheckersComponents.CheckersCheckBox Ad;
+        private CheckersComponents.CheckersCheckBox Bc;
+        private CheckersComponents.CheckersCheckBox Dc;
+        private CheckersComponents.CheckersCheckBox Fc;
         private Button button2;
         private Button button5;
         private Button button7;
         private Button button8;
         private Button button10;
         private Button button13;
-        private CheckersComponents.CheckersCheckBox checkersButton13;
-        private CheckersComponents.CheckersCheckBox checkersButton14;
-        private CheckersComponents.CheckersCheckBox checkersButton15;
-        private CheckersComponents.CheckersCheckBox checkersButton16;
-        private CheckersComponents.CheckersCheckBox checkersButton17;
-        private CheckersComponents.CheckersCheckBox checkersButton18;
+        private CheckersComponents.CheckersCheckBox Ef;
+        private CheckersComponents.CheckersCheckBox Cf;
+        private CheckersComponents.CheckersCheckBox Af;
+        private CheckersComponents.CheckersCheckBox Be;
+        private CheckersComponents.CheckersCheckBox De;
+        private CheckersComponents.CheckersCheckBox Fe;
         private Button button14;
         private Button button15;
         private Button button16;

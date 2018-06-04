@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    internal class PlayerMove
+    public class PlayerMove
     {
         private Square m_CurrentSquare;
         private Square m_NextSquare;

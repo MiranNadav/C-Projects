@@ -10,6 +10,20 @@ namespace CheckersComponents
 {
     public class CheckersCheckBox : CheckBox
     {
+        private string m_Square;
+
+        public string Square
+        {
+            get
+            {
+                return m_Square;
+            }
+            set
+            {
+                m_Square = value;
+            }
+
+        }
         public CheckersCheckBox()
         {
             this.Appearance = Appearance.Button;

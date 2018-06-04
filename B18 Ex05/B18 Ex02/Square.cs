@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    internal class Square
+    public class Square
     {
         private char m_Column;
         private char m_Row;

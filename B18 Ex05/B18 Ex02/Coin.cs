@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace B18_Ex02
 {
-    internal class Coin
+    public class Coin
     {
         private Square currentSquare;
         private char m_Type;
