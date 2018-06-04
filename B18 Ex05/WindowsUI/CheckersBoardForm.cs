@@ -80,8 +80,8 @@ namespace WindowsUI
                     m_CurrentCheckBoxChecked.BackColor = Color.White;
                     CheckersCheckBox checkerCheckBox = (sender as CheckersCheckBox);
                     checkerCheckBox.BackColor = Color.White;
-                    m_CurrentCheckBoxChecked = null;
                     m_GameManager.matchManager(m_GameManager.Board, m_CurrentCheckBoxChecked.Name + ">" + checkerCheckBox.Name);
+                    m_CurrentCheckBoxChecked = null;
                     //validatemove();
                 }
             }

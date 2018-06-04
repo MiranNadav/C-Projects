@@ -279,6 +279,8 @@ namespace WindowsUI
             this.Ef.Size = new System.Drawing.Size(100, 100);
             this.Ef.Square = null;
             this.Ef.TabIndex = 68;
+            this.Ef.Text = "X";
+            this.Ef.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Ef.UseVisualStyleBackColor = false;
             // 
             // Cf
@@ -290,6 +292,8 @@ namespace WindowsUI
             this.Cf.Size = new System.Drawing.Size(100, 100);
             this.Cf.Square = null;
             this.Cf.TabIndex = 67;
+            this.Cf.Text = "X";
+            this.Cf.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Cf.UseVisualStyleBackColor = false;
             // 
             // Af
@@ -301,6 +305,8 @@ namespace WindowsUI
             this.Af.Size = new System.Drawing.Size(100, 100);
             this.Af.Square = null;
             this.Af.TabIndex = 66;
+            this.Af.Text = "X";
+            this.Af.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Af.UseVisualStyleBackColor = false;
             // 
             // Be
@@ -312,6 +318,8 @@ namespace WindowsUI
             this.Be.Size = new System.Drawing.Size(100, 100);
             this.Be.Square = null;
             this.Be.TabIndex = 65;
+            this.Be.Text = "X";
+            this.Be.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Be.UseVisualStyleBackColor = false;
             // 
             // De
@@ -323,6 +331,8 @@ namespace WindowsUI
             this.De.Size = new System.Drawing.Size(100, 100);
             this.De.Square = null;
             this.De.TabIndex = 64;
+            this.De.Text = "X";
+            this.De.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.De.UseVisualStyleBackColor = false;
             // 
             // Fe
@@ -334,6 +344,8 @@ namespace WindowsUI
             this.Fe.Size = new System.Drawing.Size(100, 100);
             this.Fe.Square = null;
             this.Fe.TabIndex = 63;
+            this.Fe.Text = "X";
+            this.Fe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Fe.UseVisualStyleBackColor = false;
             // 
             // Ed
@@ -411,6 +423,8 @@ namespace WindowsUI
             this.Eb.Size = new System.Drawing.Size(100, 100);
             this.Eb.Square = null;
             this.Eb.TabIndex = 44;
+            this.Eb.Text = "O";
+            this.Eb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Eb.UseVisualStyleBackColor = false;
             // 
             // Cb
@@ -422,6 +436,8 @@ namespace WindowsUI
             this.Cb.Size = new System.Drawing.Size(100, 100);
             this.Cb.Square = null;
             this.Cb.TabIndex = 43;
+            this.Cb.Text = "O";
+            this.Cb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Cb.UseVisualStyleBackColor = false;
             // 
             // Ab
@@ -433,6 +449,8 @@ namespace WindowsUI
             this.Ab.Size = new System.Drawing.Size(100, 100);
             this.Ab.Square = null;
             this.Ab.TabIndex = 42;
+            this.Ab.Text = "O";
+            this.Ab.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Ab.UseVisualStyleBackColor = false;
             // 
             // Ba
@@ -444,6 +462,8 @@ namespace WindowsUI
             this.Ba.Size = new System.Drawing.Size(100, 100);
             this.Ba.Square = null;
             this.Ba.TabIndex = 41;
+            this.Ba.Text = "O";
+            this.Ba.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Ba.UseVisualStyleBackColor = false;
             // 
             // Da
@@ -455,6 +475,8 @@ namespace WindowsUI
             this.Da.Size = new System.Drawing.Size(100, 100);
             this.Da.Square = null;
             this.Da.TabIndex = 40;
+            this.Da.Text = "O";
+            this.Da.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Da.UseVisualStyleBackColor = false;
             // 
             // Fa
@@ -466,6 +488,8 @@ namespace WindowsUI
             this.Fa.Size = new System.Drawing.Size(100, 100);
             this.Fa.Square = null;
             this.Fa.TabIndex = 39;
+            this.Fa.Text = "O";
+            this.Fa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Fa.UseVisualStyleBackColor = false;
             // 
             // CheckersBoardForm
