@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using B18_Ex02;
 
 namespace CheckersComponents
 {
     public class CheckersCheckBox : CheckBox
     {
-        private string m_Square;
+        private Square m_Square;
 
-        public string Square
+        public Square Square
         {
             get
             {

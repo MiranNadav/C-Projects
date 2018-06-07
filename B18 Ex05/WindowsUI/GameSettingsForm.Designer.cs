@@ -37,8 +37,8 @@ namespace WindowsUI
         {
             this.DoneButton = new System.Windows.Forms.Button();
             this.radio6x6 = new System.Windows.Forms.RadioButton();
-            this.radio8x8 = new System.Windows.Forms.RadioButton();
             this.radio10x10 = new System.Windows.Forms.RadioButton();
+            this.radio8x8 = new System.Windows.Forms.RadioButton();
             this.boardSizeLabel = new System.Windows.Forms.Label();
             this.playersLabel = new System.Windows.Forms.Label();
             this.player1Label = new System.Windows.Forms.Label();
@@ -69,27 +69,27 @@ namespace WindowsUI
             this.radio6x6.Text = "6 x 6";
             this.radio6x6.UseVisualStyleBackColor = true;
             // 
-            // radio8x8
-            // 
-            this.radio8x8.AutoSize = true;
-            this.radio8x8.Location = new System.Drawing.Point(382, 90);
-            this.radio8x8.Name = "radio8x8";
-            this.radio8x8.Size = new System.Drawing.Size(144, 36);
-            this.radio8x8.TabIndex = 2;
-            this.radio8x8.TabStop = true;
-            this.radio8x8.Text = "10 x 10";
-            this.radio8x8.UseVisualStyleBackColor = true;
-            // 
             // radio10x10
             // 
             this.radio10x10.AutoSize = true;
-            this.radio10x10.Location = new System.Drawing.Point(224, 90);
+            this.radio10x10.Location = new System.Drawing.Point(382, 90);
             this.radio10x10.Name = "radio10x10";
-            this.radio10x10.Size = new System.Drawing.Size(112, 36);
-            this.radio10x10.TabIndex = 3;
+            this.radio10x10.Size = new System.Drawing.Size(144, 36);
+            this.radio10x10.TabIndex = 2;
             this.radio10x10.TabStop = true;
-            this.radio10x10.Text = "8 x 8";
+            this.radio10x10.Text = "10 x 10";
             this.radio10x10.UseVisualStyleBackColor = true;
+            // 
+            // radio8x8
+            // 
+            this.radio8x8.AutoSize = true;
+            this.radio8x8.Location = new System.Drawing.Point(224, 90);
+            this.radio8x8.Name = "radio8x8";
+            this.radio8x8.Size = new System.Drawing.Size(112, 36);
+            this.radio8x8.TabIndex = 3;
+            this.radio8x8.TabStop = true;
+            this.radio8x8.Text = "8 x 8";
+            this.radio8x8.UseVisualStyleBackColor = true;
             // 
             // boardSizeLabel
             // 
@@ -165,8 +165,8 @@ namespace WindowsUI
             this.Controls.Add(this.player1Label);
             this.Controls.Add(this.playersLabel);
             this.Controls.Add(this.boardSizeLabel);
-            this.Controls.Add(this.radio10x10);
             this.Controls.Add(this.radio8x8);
+            this.Controls.Add(this.radio10x10);
             this.Controls.Add(this.radio6x6);
             this.Controls.Add(this.DoneButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -182,8 +182,8 @@ namespace WindowsUI
 
         private Button DoneButton;
         private RadioButton radio6x6;
-        private RadioButton radio8x8;
         private RadioButton radio10x10;
+        private RadioButton radio8x8;
         private Label boardSizeLabel;
         private Label playersLabel;
         private Label player1Label;

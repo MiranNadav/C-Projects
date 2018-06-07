@@ -47,5 +47,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\B18 Ex02\B18 Ex02.csproj">
+      <Project>{0e26c57f-ceb7-4ab7-aeeb-273318354205}</Project>
+      <Name>B18 Ex02</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
