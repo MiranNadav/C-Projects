@@ -20,6 +20,7 @@ namespace WindowsUI
         CheckersCheckBox m_CurrentCheckBoxChecked;
         GameManager m_GameManager;
         List<PlayerMove> m_PossibleMoves;
+        List<CheckersCheckBox> m_NextPossibleSquares;
 
         public CheckersBoardForm(string i_FirstPlayerName, string i_SecondPlayerName, int i_BoardSize)
         {
@@ -33,6 +34,8 @@ namespace WindowsUI
             this.player1Name.Text = i_FirstPlayerName;
             this.player2Name.Text = i_SecondPlayerName;
 
+            m_NextPossibleSquares = new List<CheckersCheckBox>();
+
             foreach (Control control in this.Controls)
             {
                 if (control is CheckersCheckBox)
@@ -41,6 +44,9 @@ namespace WindowsUI
                 }
             }
         }
+
+        //TODO: fix bug - checking square twice and disable a green square
+        //Current fix: List of next Possible squares, and check if it is not part of the list. 
 
         private void validateClick(object sender, EventArgs e)
         {
@@ -52,17 +58,19 @@ namespace WindowsUI
                 {
                     foreach (Control control in this.Controls)
                     {
-                        CheckersCheckBox checkerCheckBox = (control as CheckersCheckBox);
-                        if (checkerCheckBox != null)
+                        CheckersCheckBox currentCheckerSquare = (control as CheckersCheckBox);
+                        if (currentCheckerSquare != null)
                         {
-                            if (checkerCheckBox.Name == possibleMove.NextSquare.getSquare())
+                            if (currentCheckerSquare.Name == possibleMove.NextSquare.getSquare())
                             {
-                                checkerCheckBox.BackColor = Color.Green;
-                                checkerCheckBox.Enabled = true;
+                                currentCheckerSquare.BackColor = Color.Green;
+                                currentCheckerSquare.Enabled = true;
+                                m_NextPossibleSquares.Add(currentCheckerSquare);
                             }
-                            else if (checkerCheckBox != m_CurrentCheckBoxChecked)
+                            else if (currentCheckerSquare != m_CurrentCheckBoxChecked && !m_NextPossibleSquares.Contains(currentCheckerSquare))
                             {
-                                checkerCheckBox.Enabled = false;
+                                currentCheckerSquare.Name = currentCheckerSquare.Name;
+                                currentCheckerSquare.Enabled = false;
                             }
                         }
                     }
@@ -80,11 +88,16 @@ namespace WindowsUI
                     m_CurrentCheckBoxChecked.BackColor = Color.White;
                     CheckersCheckBox checkerCheckBox = (sender as CheckersCheckBox);
                     checkerCheckBox.BackColor = Color.White;
-                    m_GameManager.matchManager(m_GameManager.Board, m_CurrentCheckBoxChecked.Name + ">" + checkerCheckBox.Name);
+                    //m_GameManager.matchManager(m_GameManager.Board, m_CurrentCheckBoxChecked.Name + ">" + checkerCheckBox.Name);
                     m_CurrentCheckBoxChecked = null;
                     //validatemove();
                 }
             }
+        }
+
+        private void enableAllButtons()
+        {
+
         }
     }
 }
