@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    internal class MatchInformation
+    public class MatchInformation
     {
         private int m_FirstPlayerCurrentPoints = 0;
         private int m_SecondPlayerCurrentPoints = 0;

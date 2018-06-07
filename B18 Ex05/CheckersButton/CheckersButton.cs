@@ -25,6 +25,7 @@ namespace CheckersComponents
             }
 
         }
+
         public CheckersCheckBox()
         {
             this.Appearance = Appearance.Button;

@@ -75,18 +75,20 @@ namespace WindowsUI
             // player1Name
             // 
             this.player1Name.AutoSize = true;
-            this.player1Name.Location = new System.Drawing.Point(75, 127);
+            this.player1Name.Location = new System.Drawing.Point(28, 53);
+            this.player1Name.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.player1Name.Name = "player1Name";
-            this.player1Name.Size = new System.Drawing.Size(102, 32);
+            this.player1Name.Size = new System.Drawing.Size(39, 13);
             this.player1Name.TabIndex = 0;
             this.player1Name.Text = "Label1";
             // 
             // player2Name
             // 
             this.player2Name.AutoSize = true;
-            this.player2Name.Location = new System.Drawing.Point(388, 127);
+            this.player2Name.Location = new System.Drawing.Point(146, 53);
+            this.player2Name.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.player2Name.Name = "player2Name";
-            this.player2Name.Size = new System.Drawing.Size(102, 32);
+            this.player2Name.Size = new System.Drawing.Size(39, 13);
             this.player2Name.TabIndex = 1;
             this.player2Name.Text = "Label2";
             // 
@@ -94,9 +96,10 @@ namespace WindowsUI
             // 
             this.button1.BackColor = System.Drawing.Color.Black;
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(47, 191);
+            this.button1.Location = new System.Drawing.Point(18, 80);
+            this.button1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 100);
+            this.button1.Size = new System.Drawing.Size(38, 42);
             this.button1.TabIndex = 2;
             this.button1.UseVisualStyleBackColor = false;
             // 
@@ -104,9 +107,10 @@ namespace WindowsUI
             // 
             this.button3.BackColor = System.Drawing.Color.Black;
             this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(243, 191);
+            this.button3.Location = new System.Drawing.Point(91, 80);
+            this.button3.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 100);
+            this.button3.Size = new System.Drawing.Size(38, 42);
             this.button3.TabIndex = 4;
             this.button3.UseVisualStyleBackColor = false;
             // 
@@ -114,9 +118,10 @@ namespace WindowsUI
             // 
             this.button4.BackColor = System.Drawing.Color.Black;
             this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(342, 297);
+            this.button4.Location = new System.Drawing.Point(128, 125);
+            this.button4.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 100);
+            this.button4.Size = new System.Drawing.Size(38, 42);
             this.button4.TabIndex = 7;
             this.button4.UseVisualStyleBackColor = false;
             // 
@@ -124,9 +129,10 @@ namespace WindowsUI
             // 
             this.button6.BackColor = System.Drawing.Color.Black;
             this.button6.Enabled = false;
-            this.button6.Location = new System.Drawing.Point(146, 297);
+            this.button6.Location = new System.Drawing.Point(55, 125);
+            this.button6.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 100);
+            this.button6.Size = new System.Drawing.Size(38, 42);
             this.button6.TabIndex = 5;
             this.button6.UseVisualStyleBackColor = false;
             // 
@@ -134,9 +140,10 @@ namespace WindowsUI
             // 
             this.button9.BackColor = System.Drawing.Color.Black;
             this.button9.Enabled = false;
-            this.button9.Location = new System.Drawing.Point(535, 297);
+            this.button9.Location = new System.Drawing.Point(201, 125);
+            this.button9.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 100);
+            this.button9.Size = new System.Drawing.Size(38, 42);
             this.button9.TabIndex = 8;
             this.button9.UseVisualStyleBackColor = false;
             // 
@@ -144,9 +151,10 @@ namespace WindowsUI
             // 
             this.button11.BackColor = System.Drawing.Color.Black;
             this.button11.Enabled = false;
-            this.button11.Location = new System.Drawing.Point(439, 191);
+            this.button11.Location = new System.Drawing.Point(165, 80);
+            this.button11.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(100, 100);
+            this.button11.Size = new System.Drawing.Size(38, 42);
             this.button11.TabIndex = 12;
             this.button11.UseVisualStyleBackColor = false;
             // 
@@ -154,9 +162,10 @@ namespace WindowsUI
             // 
             this.button2.BackColor = System.Drawing.Color.Black;
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(439, 403);
+            this.button2.Location = new System.Drawing.Point(165, 169);
+            this.button2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 100);
+            this.button2.Size = new System.Drawing.Size(38, 42);
             this.button2.TabIndex = 50;
             this.button2.UseVisualStyleBackColor = false;
             // 
@@ -164,9 +173,10 @@ namespace WindowsUI
             // 
             this.button5.BackColor = System.Drawing.Color.Black;
             this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(535, 509);
+            this.button5.Location = new System.Drawing.Point(201, 213);
+            this.button5.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 100);
+            this.button5.Size = new System.Drawing.Size(38, 42);
             this.button5.TabIndex = 49;
             this.button5.UseVisualStyleBackColor = false;
             // 
@@ -174,9 +184,10 @@ namespace WindowsUI
             // 
             this.button7.BackColor = System.Drawing.Color.Black;
             this.button7.Enabled = false;
-            this.button7.Location = new System.Drawing.Point(342, 509);
+            this.button7.Location = new System.Drawing.Point(128, 213);
+            this.button7.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(100, 100);
+            this.button7.Size = new System.Drawing.Size(38, 42);
             this.button7.TabIndex = 48;
             this.button7.UseVisualStyleBackColor = false;
             // 
@@ -184,9 +195,10 @@ namespace WindowsUI
             // 
             this.button8.BackColor = System.Drawing.Color.Black;
             this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(146, 509);
+            this.button8.Location = new System.Drawing.Point(55, 213);
+            this.button8.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 100);
+            this.button8.Size = new System.Drawing.Size(38, 42);
             this.button8.TabIndex = 47;
             this.button8.UseVisualStyleBackColor = false;
             // 
@@ -194,9 +206,10 @@ namespace WindowsUI
             // 
             this.button10.BackColor = System.Drawing.Color.Black;
             this.button10.Enabled = false;
-            this.button10.Location = new System.Drawing.Point(243, 403);
+            this.button10.Location = new System.Drawing.Point(91, 169);
+            this.button10.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(100, 100);
+            this.button10.Size = new System.Drawing.Size(38, 42);
             this.button10.TabIndex = 46;
             this.button10.UseVisualStyleBackColor = false;
             // 
@@ -204,9 +217,10 @@ namespace WindowsUI
             // 
             this.button13.BackColor = System.Drawing.Color.Black;
             this.button13.Enabled = false;
-            this.button13.Location = new System.Drawing.Point(47, 403);
+            this.button13.Location = new System.Drawing.Point(18, 169);
+            this.button13.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(100, 100);
+            this.button13.Size = new System.Drawing.Size(38, 42);
             this.button13.TabIndex = 45;
             this.button13.UseVisualStyleBackColor = false;
             // 
@@ -214,9 +228,10 @@ namespace WindowsUI
             // 
             this.button14.BackColor = System.Drawing.Color.Black;
             this.button14.Enabled = false;
-            this.button14.Location = new System.Drawing.Point(439, 615);
+            this.button14.Location = new System.Drawing.Point(165, 258);
+            this.button14.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(100, 100);
+            this.button14.Size = new System.Drawing.Size(38, 42);
             this.button14.TabIndex = 62;
             this.button14.UseVisualStyleBackColor = false;
             // 
@@ -224,9 +239,10 @@ namespace WindowsUI
             // 
             this.button15.BackColor = System.Drawing.Color.Black;
             this.button15.Enabled = false;
-            this.button15.Location = new System.Drawing.Point(535, 721);
+            this.button15.Location = new System.Drawing.Point(201, 302);
+            this.button15.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(100, 100);
+            this.button15.Size = new System.Drawing.Size(38, 42);
             this.button15.TabIndex = 61;
             this.button15.UseVisualStyleBackColor = false;
             // 
@@ -234,9 +250,10 @@ namespace WindowsUI
             // 
             this.button16.BackColor = System.Drawing.Color.Black;
             this.button16.Enabled = false;
-            this.button16.Location = new System.Drawing.Point(342, 721);
+            this.button16.Location = new System.Drawing.Point(128, 302);
+            this.button16.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(100, 100);
+            this.button16.Size = new System.Drawing.Size(38, 42);
             this.button16.TabIndex = 60;
             this.button16.UseVisualStyleBackColor = false;
             // 
@@ -244,9 +261,10 @@ namespace WindowsUI
             // 
             this.button17.BackColor = System.Drawing.Color.Black;
             this.button17.Enabled = false;
-            this.button17.Location = new System.Drawing.Point(146, 721);
+            this.button17.Location = new System.Drawing.Point(55, 302);
+            this.button17.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(100, 100);
+            this.button17.Size = new System.Drawing.Size(38, 42);
             this.button17.TabIndex = 59;
             this.button17.UseVisualStyleBackColor = false;
             // 
@@ -254,9 +272,10 @@ namespace WindowsUI
             // 
             this.button18.BackColor = System.Drawing.Color.Black;
             this.button18.Enabled = false;
-            this.button18.Location = new System.Drawing.Point(243, 615);
+            this.button18.Location = new System.Drawing.Point(91, 258);
+            this.button18.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(100, 100);
+            this.button18.Size = new System.Drawing.Size(38, 42);
             this.button18.TabIndex = 58;
             this.button18.UseVisualStyleBackColor = false;
             // 
@@ -264,9 +283,10 @@ namespace WindowsUI
             // 
             this.button19.BackColor = System.Drawing.Color.Black;
             this.button19.Enabled = false;
-            this.button19.Location = new System.Drawing.Point(47, 615);
+            this.button19.Location = new System.Drawing.Point(18, 258);
+            this.button19.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(100, 100);
+            this.button19.Size = new System.Drawing.Size(38, 42);
             this.button19.TabIndex = 57;
             this.button19.UseVisualStyleBackColor = false;
             // 
@@ -274,9 +294,10 @@ namespace WindowsUI
             // 
             this.Ef.Appearance = System.Windows.Forms.Appearance.Button;
             this.Ef.BackColor = System.Drawing.Color.White;
-            this.Ef.Location = new System.Drawing.Point(439, 721);
+            this.Ef.Location = new System.Drawing.Point(165, 302);
+            this.Ef.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Ef.Name = "Ef";
-            this.Ef.Size = new System.Drawing.Size(100, 100);
+            this.Ef.Size = new System.Drawing.Size(38, 42);
             this.Ef.Square = null;
             this.Ef.TabIndex = 68;
             this.Ef.Text = "X";
@@ -287,9 +308,10 @@ namespace WindowsUI
             // 
             this.Cf.Appearance = System.Windows.Forms.Appearance.Button;
             this.Cf.BackColor = System.Drawing.Color.White;
-            this.Cf.Location = new System.Drawing.Point(243, 721);
+            this.Cf.Location = new System.Drawing.Point(91, 302);
+            this.Cf.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Cf.Name = "Cf";
-            this.Cf.Size = new System.Drawing.Size(100, 100);
+            this.Cf.Size = new System.Drawing.Size(38, 42);
             this.Cf.Square = null;
             this.Cf.TabIndex = 67;
             this.Cf.Text = "X";
@@ -300,9 +322,10 @@ namespace WindowsUI
             // 
             this.Af.Appearance = System.Windows.Forms.Appearance.Button;
             this.Af.BackColor = System.Drawing.Color.White;
-            this.Af.Location = new System.Drawing.Point(47, 720);
+            this.Af.Location = new System.Drawing.Point(18, 302);
+            this.Af.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Af.Name = "Af";
-            this.Af.Size = new System.Drawing.Size(100, 100);
+            this.Af.Size = new System.Drawing.Size(38, 42);
             this.Af.Square = null;
             this.Af.TabIndex = 66;
             this.Af.Text = "X";
@@ -313,9 +336,10 @@ namespace WindowsUI
             // 
             this.Be.Appearance = System.Windows.Forms.Appearance.Button;
             this.Be.BackColor = System.Drawing.Color.White;
-            this.Be.Location = new System.Drawing.Point(146, 615);
+            this.Be.Location = new System.Drawing.Point(55, 258);
+            this.Be.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Be.Name = "Be";
-            this.Be.Size = new System.Drawing.Size(100, 100);
+            this.Be.Size = new System.Drawing.Size(38, 42);
             this.Be.Square = null;
             this.Be.TabIndex = 65;
             this.Be.Text = "X";
@@ -326,9 +350,10 @@ namespace WindowsUI
             // 
             this.De.Appearance = System.Windows.Forms.Appearance.Button;
             this.De.BackColor = System.Drawing.Color.White;
-            this.De.Location = new System.Drawing.Point(342, 615);
+            this.De.Location = new System.Drawing.Point(128, 258);
+            this.De.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.De.Name = "De";
-            this.De.Size = new System.Drawing.Size(100, 100);
+            this.De.Size = new System.Drawing.Size(38, 42);
             this.De.Square = null;
             this.De.TabIndex = 64;
             this.De.Text = "X";
@@ -339,9 +364,10 @@ namespace WindowsUI
             // 
             this.Fe.Appearance = System.Windows.Forms.Appearance.Button;
             this.Fe.BackColor = System.Drawing.Color.White;
-            this.Fe.Location = new System.Drawing.Point(535, 615);
+            this.Fe.Location = new System.Drawing.Point(201, 258);
+            this.Fe.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Fe.Name = "Fe";
-            this.Fe.Size = new System.Drawing.Size(100, 100);
+            this.Fe.Size = new System.Drawing.Size(38, 42);
             this.Fe.Square = null;
             this.Fe.TabIndex = 63;
             this.Fe.Text = "X";
@@ -352,9 +378,10 @@ namespace WindowsUI
             // 
             this.Ed.Appearance = System.Windows.Forms.Appearance.Button;
             this.Ed.BackColor = System.Drawing.Color.White;
-            this.Ed.Location = new System.Drawing.Point(439, 509);
+            this.Ed.Location = new System.Drawing.Point(165, 213);
+            this.Ed.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Ed.Name = "Ed";
-            this.Ed.Size = new System.Drawing.Size(100, 100);
+            this.Ed.Size = new System.Drawing.Size(38, 42);
             this.Ed.Square = null;
             this.Ed.TabIndex = 56;
             this.Ed.UseVisualStyleBackColor = false;
@@ -363,9 +390,10 @@ namespace WindowsUI
             // 
             this.Cd.Appearance = System.Windows.Forms.Appearance.Button;
             this.Cd.BackColor = System.Drawing.Color.White;
-            this.Cd.Location = new System.Drawing.Point(243, 508);
+            this.Cd.Location = new System.Drawing.Point(91, 213);
+            this.Cd.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Cd.Name = "Cd";
-            this.Cd.Size = new System.Drawing.Size(100, 100);
+            this.Cd.Size = new System.Drawing.Size(38, 42);
             this.Cd.Square = null;
             this.Cd.TabIndex = 55;
             this.Cd.UseVisualStyleBackColor = false;
@@ -374,9 +402,10 @@ namespace WindowsUI
             // 
             this.Ad.Appearance = System.Windows.Forms.Appearance.Button;
             this.Ad.BackColor = System.Drawing.Color.White;
-            this.Ad.Location = new System.Drawing.Point(47, 508);
+            this.Ad.Location = new System.Drawing.Point(18, 213);
+            this.Ad.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Ad.Name = "Ad";
-            this.Ad.Size = new System.Drawing.Size(100, 100);
+            this.Ad.Size = new System.Drawing.Size(38, 42);
             this.Ad.Square = null;
             this.Ad.TabIndex = 54;
             this.Ad.UseVisualStyleBackColor = false;
@@ -385,9 +414,10 @@ namespace WindowsUI
             // 
             this.Bc.Appearance = System.Windows.Forms.Appearance.Button;
             this.Bc.BackColor = System.Drawing.Color.White;
-            this.Bc.Location = new System.Drawing.Point(146, 403);
+            this.Bc.Location = new System.Drawing.Point(55, 169);
+            this.Bc.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Bc.Name = "Bc";
-            this.Bc.Size = new System.Drawing.Size(100, 100);
+            this.Bc.Size = new System.Drawing.Size(38, 42);
             this.Bc.Square = null;
             this.Bc.TabIndex = 53;
             this.Bc.UseVisualStyleBackColor = false;
@@ -396,9 +426,10 @@ namespace WindowsUI
             // 
             this.Dc.Appearance = System.Windows.Forms.Appearance.Button;
             this.Dc.BackColor = System.Drawing.Color.White;
-            this.Dc.Location = new System.Drawing.Point(342, 403);
+            this.Dc.Location = new System.Drawing.Point(128, 169);
+            this.Dc.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Dc.Name = "Dc";
-            this.Dc.Size = new System.Drawing.Size(100, 100);
+            this.Dc.Size = new System.Drawing.Size(38, 42);
             this.Dc.Square = null;
             this.Dc.TabIndex = 52;
             this.Dc.UseVisualStyleBackColor = false;
@@ -407,9 +438,10 @@ namespace WindowsUI
             // 
             this.Fc.Appearance = System.Windows.Forms.Appearance.Button;
             this.Fc.BackColor = System.Drawing.Color.White;
-            this.Fc.Location = new System.Drawing.Point(535, 403);
+            this.Fc.Location = new System.Drawing.Point(201, 169);
+            this.Fc.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Fc.Name = "Fc";
-            this.Fc.Size = new System.Drawing.Size(100, 100);
+            this.Fc.Size = new System.Drawing.Size(38, 42);
             this.Fc.Square = null;
             this.Fc.TabIndex = 51;
             this.Fc.UseVisualStyleBackColor = false;
@@ -418,9 +450,10 @@ namespace WindowsUI
             // 
             this.Eb.Appearance = System.Windows.Forms.Appearance.Button;
             this.Eb.BackColor = System.Drawing.Color.White;
-            this.Eb.Location = new System.Drawing.Point(439, 297);
+            this.Eb.Location = new System.Drawing.Point(165, 125);
+            this.Eb.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Eb.Name = "Eb";
-            this.Eb.Size = new System.Drawing.Size(100, 100);
+            this.Eb.Size = new System.Drawing.Size(38, 42);
             this.Eb.Square = null;
             this.Eb.TabIndex = 44;
             this.Eb.Text = "O";
@@ -431,9 +464,10 @@ namespace WindowsUI
             // 
             this.Cb.Appearance = System.Windows.Forms.Appearance.Button;
             this.Cb.BackColor = System.Drawing.Color.White;
-            this.Cb.Location = new System.Drawing.Point(243, 297);
+            this.Cb.Location = new System.Drawing.Point(91, 125);
+            this.Cb.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Cb.Name = "Cb";
-            this.Cb.Size = new System.Drawing.Size(100, 100);
+            this.Cb.Size = new System.Drawing.Size(38, 42);
             this.Cb.Square = null;
             this.Cb.TabIndex = 43;
             this.Cb.Text = "O";
@@ -444,9 +478,10 @@ namespace WindowsUI
             // 
             this.Ab.Appearance = System.Windows.Forms.Appearance.Button;
             this.Ab.BackColor = System.Drawing.Color.White;
-            this.Ab.Location = new System.Drawing.Point(47, 296);
+            this.Ab.Location = new System.Drawing.Point(18, 124);
+            this.Ab.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Ab.Name = "Ab";
-            this.Ab.Size = new System.Drawing.Size(100, 100);
+            this.Ab.Size = new System.Drawing.Size(38, 42);
             this.Ab.Square = null;
             this.Ab.TabIndex = 42;
             this.Ab.Text = "O";
@@ -457,9 +492,10 @@ namespace WindowsUI
             // 
             this.Ba.Appearance = System.Windows.Forms.Appearance.Button;
             this.Ba.BackColor = System.Drawing.Color.White;
-            this.Ba.Location = new System.Drawing.Point(146, 191);
+            this.Ba.Location = new System.Drawing.Point(55, 80);
+            this.Ba.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Ba.Name = "Ba";
-            this.Ba.Size = new System.Drawing.Size(100, 100);
+            this.Ba.Size = new System.Drawing.Size(38, 42);
             this.Ba.Square = null;
             this.Ba.TabIndex = 41;
             this.Ba.Text = "O";
@@ -470,9 +506,10 @@ namespace WindowsUI
             // 
             this.Da.Appearance = System.Windows.Forms.Appearance.Button;
             this.Da.BackColor = System.Drawing.Color.White;
-            this.Da.Location = new System.Drawing.Point(342, 191);
+            this.Da.Location = new System.Drawing.Point(128, 80);
+            this.Da.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Da.Name = "Da";
-            this.Da.Size = new System.Drawing.Size(100, 100);
+            this.Da.Size = new System.Drawing.Size(38, 42);
             this.Da.Square = null;
             this.Da.TabIndex = 40;
             this.Da.Text = "O";
@@ -483,9 +520,10 @@ namespace WindowsUI
             // 
             this.Fa.Appearance = System.Windows.Forms.Appearance.Button;
             this.Fa.BackColor = System.Drawing.Color.White;
-            this.Fa.Location = new System.Drawing.Point(535, 191);
+            this.Fa.Location = new System.Drawing.Point(201, 80);
+            this.Fa.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Fa.Name = "Fa";
-            this.Fa.Size = new System.Drawing.Size(100, 100);
+            this.Fa.Size = new System.Drawing.Size(38, 42);
             this.Fa.Square = null;
             this.Fa.TabIndex = 39;
             this.Fa.Text = "O";
@@ -494,9 +532,9 @@ namespace WindowsUI
             // 
             // CheckersBoardForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 919);
+            this.ClientSize = new System.Drawing.Size(297, 385);
             this.Controls.Add(this.Ef);
             this.Controls.Add(this.Cf);
             this.Controls.Add(this.Af);
@@ -535,6 +573,7 @@ namespace WindowsUI
             this.Controls.Add(this.button1);
             this.Controls.Add(this.player2Name);
             this.Controls.Add(this.player1Name);
+            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "CheckersBoardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Damka";

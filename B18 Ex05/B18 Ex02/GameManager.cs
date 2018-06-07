@@ -20,6 +20,10 @@ namespace B18_Ex02
         private InputValidation m_InputValidation;
         private bool m_StartNewMatch = false;
 
+
+        private bool m_ThereAreMoreJumps;
+        private bool m_newKingWasMade;
+
         public PossibleMoves PossibleMoves
         {
             get { return m_PossibleMoves; }
@@ -47,9 +51,11 @@ namespace B18_Ex02
 
         }
 
-        public List<PlayerMove> getAllowedMoves (string i_Move)
+        public List<PlayerMove> getAllowedMoves(string i_Move)
         {
             List<PlayerMove> currentAllowedMoves = new List<PlayerMove>();
+            m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
+
             if (m_CurrentPlayer == m_FirstPlayer)
             {
                 foreach (PlayerMove playerMove in m_PossibleMoves.FirstPlayerPossibleMoves)
@@ -117,26 +123,33 @@ namespace B18_Ex02
             //matchManager(m_PlayingBoard);
         }
 
-        public void matchManager(Board i_PlayingBoard, string i_Move)
+        public void matchManager(string i_Move)
         {
-            int boardSize = i_PlayingBoard.BoardSize;
             bool gameIsOver = false;
-            bool isFirstUserTurn = true;
+            //bool isFirstUserTurn = true;
 
             //Console.WriteLine(m_CurrentPlayer.Name + "'s turn:");
 
-
-            if (isFirstUserTurn)
+            //TODO: Add equals to Player
+            if (m_CurrentPlayer.CoinType == 'O') //(isFirstUserTurn)
             {
                 this.m_CurrentPlayer = m_FirstPlayer;
                 gameIsOver = parseUserInput(m_FirstPlayer, m_SecondPlayer, i_Move);
-                isFirstUserTurn = false;
+                if (!m_ThereAreMoreJumps)
+                {
+                    m_CurrentPlayer = m_SecondPlayer;
+
+                }
             }
             else
             {
                 this.m_CurrentPlayer = m_SecondPlayer;
                 gameIsOver = parseUserInput(m_SecondPlayer, m_FirstPlayer, i_Move);
-                isFirstUserTurn = true;
+                if (!m_ThereAreMoreJumps)
+                {
+                    m_CurrentPlayer = m_FirstPlayer;
+
+                }
             }
 
             //if (m_StartNewMatch)
@@ -263,6 +276,13 @@ namespace B18_Ex02
                 {
                     currentCoin.IsKing = true;
                     newKingWasCreated = true;
+                    m_newKingWasMade = true;
+                }
+
+                //TODO: validate with Nadav
+                else
+                {
+                    m_newKingWasMade = false;
                 }
 
                 currentMoveIsJump = currentCoin.IsKing == false ? MovementValidation.IsTryingToJump(this.m_CurrentMove, currentUserCoinType) : KingValidation.isTryingToJump_King(this.m_CurrentMove);
@@ -273,42 +293,54 @@ namespace B18_Ex02
                     m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
                     allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(this.m_CurrentMove, currentUserCoinType);
 
-                    while (allPossibleJumps.Count != 0 && !newKingWasCreated)
+
+                    // TODO: Approve with Nadav
+                    if (allPossibleJumps.Count != 0 && !newKingWasCreated)
                     {
-                        Ex02.ConsoleUtils.Screen.Clear();
-                        m_PlayingBoard.printBoard();
-
-                        if (!this.m_CurrentPlayer.IsComputer)
-                        {
-                            Console.WriteLine(this.m_CurrentPlayer.Name + ", you can eat more. Please enter another move.");
-                            //inputMove = Console.ReadLine();
-                            isValidMove = m_InputValidation.InputFormatIsValid(inputMove);
-                            while (!isValidMove)
-                            {
-                                Console.WriteLine(this.m_CurrentPlayer.Name + ", the input is invalid. enter a good move please");
-                                //inputMove = Console.ReadLine();
-                                isValidMove = m_InputValidation.InputFormatIsValid(inputMove);
-                                this.m_CurrentMove = new PlayerMove(inputMove);
-                            }
-
-                            this.m_CurrentMove = new PlayerMove(inputMove);
-
-                            if (!PossibleMoves.isJumpPossible(allPossibleJumps, this.m_CurrentMove))
-                            {
-                                Console.WriteLine(this.m_CurrentPlayer.Name + ", the Move is not a valid jump. enter a good jump please");
-                                isValidMove = false;
-                            }
-                        }
-                        else
-                        {
-                            this.m_CurrentMove = RandomMovementGenerator.getRandomMove(allPossibleJumps);
-                        }
-
-                        m_PlayingBoard.EatCoin(this.m_CurrentMove);
-                        m_PlayingBoard.MoveCoinInBoard(this.m_CurrentMove);
-                        m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
-                        allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(this.m_CurrentMove, currentUserCoinType);
+                        m_ThereAreMoreJumps = true;
                     }
+                    else
+                    {
+                        m_ThereAreMoreJumps = false;
+                    }
+
+                    //while (allPossibleJumps.Count != 0 && !newKingWasCreated)
+                    //{
+                    //    Ex02.ConsoleUtils.Screen.Clear();
+                    //    m_PlayingBoard.printBoard();
+
+                    //    if (!this.m_CurrentPlayer.IsComputer)
+                    //    {
+                    //        Console.WriteLine(this.m_CurrentPlayer.Name + ", you can eat more. Please enter another move.");
+                    //        //inputMove = Console.ReadLine();
+
+                    //        isValidMove = m_InputValidation.InputFormatIsValid(inputMove);
+                    //        while (!isValidMove)
+                    //        {
+                    //            Console.WriteLine(this.m_CurrentPlayer.Name + ", the input is invalid. enter a good move please");
+                    //            //inputMove = Console.ReadLine();
+                    //            isValidMove = m_InputValidation.InputFormatIsValid(inputMove);
+                    //            this.m_CurrentMove = new PlayerMove(inputMove);
+                    //        }
+
+                    //        this.m_CurrentMove = new PlayerMove(inputMove);
+
+                    //        if (!PossibleMoves.isJumpPossible(allPossibleJumps, this.m_CurrentMove))
+                    //        {
+                    //            Console.WriteLine(this.m_CurrentPlayer.Name + ", the Move is not a valid jump. enter a good jump please");
+                    //            isValidMove = false;
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        this.m_CurrentMove = RandomMovementGenerator.getRandomMove(allPossibleJumps);
+                    //    }
+
+                    //    m_PlayingBoard.EatCoin(this.m_CurrentMove);
+                    //    m_PlayingBoard.MoveCoinInBoard(this.m_CurrentMove);
+                    //    m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
+                    //    allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(this.m_CurrentMove, currentUserCoinType);
+                    //}
                 }
             }
 
@@ -443,6 +475,35 @@ namespace B18_Ex02
         {
             Console.WriteLine(this.m_FirstPlayer.Name + "'s number of total points is: " + this.m_FirstPlayer.TotalNumberOfPoints);
             Console.WriteLine(this.m_SecondPlayer.Name + "s' number of total points is: " + this.m_SecondPlayer.TotalNumberOfPoints);
+        }
+
+
+        public Player CurrentPlayer
+        {
+            get
+            {
+                return m_CurrentPlayer;
+            }
+            set
+            {
+                m_CurrentPlayer = value;
+            }
+        }
+
+        public bool ThereAreMoreJumps
+        {
+            get
+            {
+                return m_ThereAreMoreJumps;
+            }
+        }
+
+        public bool NewKingWasMade
+        {
+            get
+            {
+                return m_newKingWasMade;
+            }
         }
     }
 }

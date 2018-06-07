@@ -96,16 +96,26 @@ namespace WindowsUI
                 }
             }
 
+            disableAllNonCurrentPlayerSquares();
+
         }
         //TODO: fix bug - checking square twice and disable a green square
         //Current fix: List of next Possible squares, and check if it is not part of the list. 
 
         private void validateClick(object sender, EventArgs e)
         {
+            m_PossibleMoves = m_GameManager.getAllowedMoves((sender as CheckersCheckBox).Name);
+
             if (m_CurrentCheckBoxChecked == null)
             {
                 m_CurrentCheckBoxChecked = sender as CheckersCheckBox;
-                m_PossibleMoves = m_GameManager.getAllowedMoves((sender as CheckersCheckBox).Name);
+
+                //TODO: is it good to seperate this case?
+                if (m_PossibleMoves.Count == 0)
+                {
+                    disableAllButChecked();
+                }
+
                 foreach (PlayerMove possibleMove in m_PossibleMoves)
                 {
                     foreach (Control control in this.Controls)
@@ -133,7 +143,8 @@ namespace WindowsUI
                 if ((sender as CheckersCheckBox) == m_CurrentCheckBoxChecked)
                 {
                     paintAllInWhite();
-                    enableAllButtons();
+                    //enableAllButtons();
+                    disableAllNonCurrentPlayerSquares();
                     m_CurrentCheckBoxChecked = null;
                 }
                 else
@@ -141,21 +152,81 @@ namespace WindowsUI
                     m_CurrentCheckBoxChecked.BackColor = Color.White;
                     CheckersCheckBox checkerCheckBox = (sender as CheckersCheckBox);
                     checkerCheckBox.BackColor = Color.White;
-                    m_GameManager.matchManager(m_GameManager.Board, m_CurrentCheckBoxChecked.Name + ">" + checkerCheckBox.Name);
+                    //TODO: change name so it is clear that this makes the move in the logic 
+
+
+                    PlayerMove currentMove = new PlayerMove(m_CurrentCheckBoxChecked.Name + ">" + checkerCheckBox.Name);
+
+                    if (MovementValidation.IsTryingToJump(currentMove, m_GameManager.CurrentPlayer.CoinType))
+                    {
+                        Square middleSquare = currentMove.calculateMiddleSquare();
+                        clearSquare(middleSquare);
+                    }
+
+                    m_GameManager.matchManager(currentMove.ToString());//(m_CurrentCheckBoxChecked.Name + ">" + checkerCheckBox.Name);
                     moveSoldierInBoard(m_CurrentCheckBoxChecked, checkerCheckBox);
                     paintAllInWhite();
-                    enableAllButtons();
+
+                    //enableAllButtons();
+                    //TODO: what is this name? should be changed (checkerCheckBox)
+                    if (m_GameManager.NewKingWasMade)
+                    {
+                        checkerCheckBox.Text = checkerCheckBox.Text.Equals("O") ? "K" : "U";
+                    }
+                    if (m_GameManager.ThereAreMoreJumps)
+                    {
+                        disableAllButChecked();
+                    }
+                    else
+                    {
+                        disableAllNonCurrentPlayerSquares();
+                    }
+
+
                     m_CurrentCheckBoxChecked = null;
-                    //validatemove();
+                    //unCheckAllSqaures();
+                }
+            }
+        }
+
+        //TODO: check what is the best way to do this
+        private void disableAllNonCurrentPlayerSquares()
+        {
+            foreach (CheckersCheckBox currentSquare in Controls)
+            {
+
+                currentSquare.Checked = false;
+
+                if (m_GameManager.CurrentPlayer.CoinType.Equals('O'))
+                {
+                    if (!currentSquare.Text.Equals("O"))
+                    {
+                        currentSquare.Enabled = false;
+                    }
+                    else
+                    {
+                        currentSquare.Enabled = true;
+                    }
+                }
+                else
+                {
+                    if (!currentSquare.Text.Equals("X"))
+                    {
+                        currentSquare.Enabled = false;
+                    }
+                    else
+                    {
+                        currentSquare.Enabled = true;
+                    }
                 }
             }
         }
 
         private void enableAllButtons()
         {
-            foreach (CheckersCheckBox checkersCheckBox in m_CheckersCheckBoxList)
+            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
             {
-                checkersCheckBox.Enabled = true;
+                currentSquare.Enabled = true;
             }
         }
 
@@ -167,11 +238,12 @@ namespace WindowsUI
             }
         }
 
-        private void moveSoldierInBoard (CheckersCheckBox i_MoveFrom, CheckersCheckBox i_MoveTo)
+        private void moveSoldierInBoard(CheckersCheckBox i_MoveFrom, CheckersCheckBox i_MoveTo)
         {
             i_MoveTo.Text = i_MoveFrom.Text;
             i_MoveFrom.Text = string.Empty;
         }
+
         private void printSoldiers()
         {
 
@@ -184,6 +256,38 @@ namespace WindowsUI
 
                     }
                 }
+            }
+        }
+
+        private void disableAllButChecked()
+        {
+            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            {
+                if (!currentSquare.Checked)
+                {
+                    currentSquare.Enabled = false;
+                }
+
+                currentSquare.Checked = false;
+            }
+        }
+
+        private void clearSquare(Square i_SquareToClear)
+        {
+            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            {
+                if (currentSquare.Name.Equals(i_SquareToClear.getSquare()))
+                {
+                    currentSquare.Text = string.Empty;
+                }
+            }
+        }
+
+        private void unCheckAllSqaures()
+        {
+            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            {
+                currentSquare.Checked = false;
             }
         }
     }

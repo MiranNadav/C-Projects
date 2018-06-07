@@ -88,5 +88,10 @@ namespace B18_Ex02
             PlayerMove otherMove = (PlayerMove)i_Object;
             return this.CurrentSquare.Equals(otherMove.CurrentSquare) && this.NextSquare.Equals(otherMove.NextSquare);
         }
+
+        public override string ToString()
+        {
+            return  m_CurrentSquare.getSquare() + ">" + m_NextSquare.getSquare();
+        }
     }
 }

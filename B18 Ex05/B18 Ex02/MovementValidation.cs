@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace B18_Ex02
 {
-    internal class MovementValidation
+    public class MovementValidation
     {
         public static bool IsCoinBelongToPlayer(Player i_Player, Coin i_Coin)
         {

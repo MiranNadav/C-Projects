@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace B18_Ex02
 {
-    internal class Player
+    public class Player
     {
         private string m_Name;
         private char m_CoinType;
