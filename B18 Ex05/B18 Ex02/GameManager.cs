@@ -20,9 +20,9 @@ namespace B18_Ex02
         private InputValidation m_InputValidation;
         private bool m_StartNewMatch = false;
 
-
+        private bool m_GameIsOver = false;
         private bool m_ThereAreMoreJumps;
-        private bool m_newKingWasMade;
+        private bool m_NewKingWasMade;
 
         public PossibleMoves PossibleMoves
         {
@@ -38,10 +38,10 @@ namespace B18_Ex02
             }
         }
 
-        public GameManager(int i_BoardSize)
+        public GameManager(int i_BoardSize, string i_FirstPlayerName, string i_SecondPlayerName)
         {
-            m_FirstPlayer = new Player("FirstPlayer", 'O');
-            m_SecondPlayer = new Player("SecondPlayer", 'X');
+            m_FirstPlayer = new Player(i_FirstPlayerName, 'O');
+            m_SecondPlayer = new Player(i_SecondPlayerName, 'X');
             m_PlayingBoard = new Board(i_BoardSize);
             m_MatchInformation = new MatchInformation(m_FirstPlayer, m_SecondPlayer, m_PlayingBoard);
             m_CurrentPlayer = m_FirstPlayer;
@@ -51,29 +51,60 @@ namespace B18_Ex02
 
         }
 
-        public List<PlayerMove> getAllowedMoves(string i_Move)
+        public List<PlayerMove> getAllowedMoves(string i_CurrentSquare)
         {
             List<PlayerMove> currentAllowedMoves = new List<PlayerMove>();
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
+            ArrayList allPossibleJumps;
+            Square currentSquare = new Square(i_CurrentSquare[0], i_CurrentSquare[1]);
 
             if (m_CurrentPlayer == m_FirstPlayer)
             {
-                foreach (PlayerMove playerMove in m_PossibleMoves.FirstPlayerPossibleMoves)
+                if (m_ThereAreMoreJumps)
                 {
-                    if (playerMove.CurrentSquare.getSquare() == i_Move)
+                    allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(currentSquare, m_CurrentPlayer.CoinType);
+                    foreach (PlayerMove playerMove in allPossibleJumps)
                     {
-                        currentAllowedMoves.Add(playerMove);
+                        if (playerMove.CurrentSquare.getSquare() == i_CurrentSquare)
+                        {
+                            currentAllowedMoves.Add(playerMove);
+                        }
+                    }
+                }
+
+                else
+                {
+                    foreach (PlayerMove playerMove in m_PossibleMoves.FirstPlayerPossibleMoves)
+                    {
+                        if (playerMove.CurrentSquare.getSquare() == i_CurrentSquare)
+                        {
+                            currentAllowedMoves.Add(playerMove);
+                        }
                     }
                 }
             }
 
             else
             {
-                foreach (PlayerMove playerMove in m_PossibleMoves.SecondPlayerPossibleMoves)
+                if (m_ThereAreMoreJumps)
                 {
-                    if (playerMove.CurrentSquare.getSquare() == i_Move)
+                    allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(currentSquare, m_CurrentPlayer.CoinType);
+                    foreach (PlayerMove playerMove in allPossibleJumps)
                     {
-                        currentAllowedMoves.Add(playerMove);
+                        if (playerMove.CurrentSquare.getSquare() == i_CurrentSquare)
+                        {
+                            currentAllowedMoves.Add(playerMove);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (PlayerMove playerMove in m_PossibleMoves.SecondPlayerPossibleMoves)
+                    {
+                        if (playerMove.CurrentSquare.getSquare() == i_CurrentSquare)
+                        {
+                            currentAllowedMoves.Add(playerMove);
+                        }
                     }
                 }
             }
@@ -116,6 +147,7 @@ namespace B18_Ex02
 
         private void startAnotherMatch()
         {
+            m_GameIsOver = false;
             int boardSize = m_PlayingBoard.BoardSize;
             m_PlayingBoard = new Board(boardSize);
             m_PlayingBoard.printBoard();
@@ -133,9 +165,9 @@ namespace B18_Ex02
             //TODO: Add equals to Player
             if (m_CurrentPlayer.CoinType == 'O') //(isFirstUserTurn)
             {
-                this.m_CurrentPlayer = m_FirstPlayer;
+                m_CurrentPlayer = m_FirstPlayer;
                 gameIsOver = parseUserInput(m_FirstPlayer, m_SecondPlayer, i_Move);
-                if (!m_ThereAreMoreJumps)
+                if (!m_ThereAreMoreJumps && !gameIsOver)
                 {
                     m_CurrentPlayer = m_SecondPlayer;
 
@@ -143,7 +175,7 @@ namespace B18_Ex02
             }
             else
             {
-                this.m_CurrentPlayer = m_SecondPlayer;
+                m_CurrentPlayer = m_SecondPlayer;
                 gameIsOver = parseUserInput(m_SecondPlayer, m_FirstPlayer, i_Move);
                 if (!m_ThereAreMoreJumps)
                 {
@@ -276,16 +308,17 @@ namespace B18_Ex02
                 {
                     currentCoin.IsKing = true;
                     newKingWasCreated = true;
-                    m_newKingWasMade = true;
+                    m_NewKingWasMade = true;
                 }
 
                 //TODO: validate with Nadav
                 else
                 {
-                    m_newKingWasMade = false;
+                    m_NewKingWasMade = false;
                 }
 
-                currentMoveIsJump = currentCoin.IsKing == false ? MovementValidation.IsTryingToJump(this.m_CurrentMove, currentUserCoinType) : KingValidation.isTryingToJump_King(this.m_CurrentMove);
+                currentMoveIsJump = currentCoin.IsKing == false ? MovementValidation.IsTryingToJump(this.m_CurrentMove, Convert.ToString(currentUserCoinType)) : KingValidation.isTryingToJump_King(this.m_CurrentMove);
+
                 if (currentMoveIsJump)
                 {
                     m_PlayingBoard.EatCoin(this.m_CurrentMove);
@@ -357,6 +390,7 @@ namespace B18_Ex02
                 gameIsOver = this.m_MatchInformation.IsWinnerFound();
                 if (gameIsOver)
                 {
+                    m_GameIsOver = true;
                     endMatch();
                 }
                 else
@@ -449,18 +483,19 @@ namespace B18_Ex02
             currentStatePrinter();
             m_CurrentPlayer = m_FirstPlayer;
             Console.WriteLine("Would you like to start a new match? please answer with Y/N");
-            userInput = m_InputValidation.ValidYesOrNo();
+            //userInput = m_InputValidation.ValidYesOrNo();
 
-            if (userInput.Equals(Constants.k_YesAnswer))
-            {
-                startNewMatch = true;
-            }
-            else
-            {
-                startNewMatch = false;
-            }
+            //if (userInput.Equals(Constants.k_YesAnswer))
+            //{
+            //    startNewMatch = true;
+            //}
+            //else
+            //{
+            //    startNewMatch = false;
+            //}
 
-            this.m_StartNewMatch = startNewMatch;
+            //this.m_StartNewMatch = startNewMatch;
+            this.m_StartNewMatch = false;
         }
 
         private void calcTotalPoints()
@@ -477,7 +512,13 @@ namespace B18_Ex02
             Console.WriteLine(this.m_SecondPlayer.Name + "s' number of total points is: " + this.m_SecondPlayer.TotalNumberOfPoints);
         }
 
-
+        public PlayerMove CurrentMove
+        {
+            get
+            {
+                return m_CurrentMove;
+            }
+        }
         public Player CurrentPlayer
         {
             get
@@ -502,7 +543,50 @@ namespace B18_Ex02
         {
             get
             {
-                return m_newKingWasMade;
+                return m_NewKingWasMade;
+            }
+        }
+
+        public Player FirstPlayer
+        {
+            get
+            {
+                return m_FirstPlayer;
+            }
+            set
+            {
+                m_FirstPlayer = value;
+            }
+        }
+        public Player SecondPlayer
+        {
+            get
+            {
+                return m_SecondPlayer;
+            }
+            set
+            {
+                m_SecondPlayer = value;
+            }
+        }
+
+        public bool GameIsOver
+        {
+            get
+            {
+                return m_GameIsOver;
+            }
+            set
+            {
+                m_GameIsOver = value;
+            }
+        }
+
+        public MatchInformation MatchInformation
+        {
+            get
+            {
+                return m_MatchInformation;
             }
         }
     }

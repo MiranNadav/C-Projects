@@ -51,6 +51,12 @@
     <Compile Include="CheckersBoardForm.Designer.cs">
       <DependentUpon>CheckersBoardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EndMatchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EndMatchForm.Designer.cs">
+      <DependentUpon>EndMatchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CheckersBoardForm.resx">
       <DependentUpon>CheckersBoardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EndMatchForm.resx">
+      <DependentUpon>EndMatchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameSettingsForm.resx">
       <DependentUpon>GameSettingsForm.cs</DependentUpon>

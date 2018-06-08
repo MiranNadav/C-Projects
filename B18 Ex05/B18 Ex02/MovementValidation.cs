@@ -78,7 +78,7 @@ namespace B18_Ex02
                             }
                         }
                     }
-                    else if (IsTryingToJump(currentMove, currentUserCoinType))
+                    else if (IsTryingToJump(currentMove, Convert.ToString(currentUserCoinType)))
                     {
                         if (!IsValidJump(currentMove, otherUserCoinType, i_Board))
                         {
@@ -160,17 +160,24 @@ namespace B18_Ex02
             return isValidJump;
         }
 
-        public static bool IsTryingToJump(PlayerMove i_ParseMove, char i_CoinType)
+        public static bool IsTryingToJump(PlayerMove i_ParseMove, string i_CoinType)
         {
+            char coinType = Convert.ToChar(i_CoinType);
             bool isJumpByTwoSquares = true;
-
-            if (i_CoinType.Equals(Constants.k_FirstCoinType))
+            if (coinType.Equals('U') || coinType.Equals('K'))
             {
-                isJumpByTwoSquares = (i_ParseMove.NextRowIndex != i_ParseMove.CurrentRowIndex + 2) ? false : true;
+                isJumpByTwoSquares = KingValidation.isTryingToJump_King(i_ParseMove);
             }
             else
             {
-                isJumpByTwoSquares = (i_ParseMove.NextRowIndex != i_ParseMove.CurrentRowIndex - 2) ? false : true;
+                if (coinType.Equals(Constants.k_FirstCoinType))
+                {
+                    isJumpByTwoSquares = (i_ParseMove.NextRowIndex != i_ParseMove.CurrentRowIndex + 2) ? false : true;
+                }
+                else
+                {
+                    isJumpByTwoSquares = (i_ParseMove.NextRowIndex != i_ParseMove.CurrentRowIndex - 2) ? false : true;
+                }
             }
 
             if (isJumpByTwoSquares)

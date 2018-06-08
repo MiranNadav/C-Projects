@@ -16,12 +16,14 @@ namespace WindowsUI
         public GameSettingsForm()
         {
             InitializeComponent();
+
         }
 
         private void doneButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            CheckersBoardForm checkersBoardForm = new CheckersBoardForm(Player1Name, Player2Name, SelectedBoardSize);
+            bool isComputer = !SecondPlayerNameTextBox.Enabled;
+            CheckersBoardForm checkersBoardForm = new CheckersBoardForm(Player1Name, Player2Name, SelectedBoardSize, isComputer);
             checkersBoardForm.ShowDialog();
 
         }
@@ -29,6 +31,14 @@ namespace WindowsUI
         private void checkBox_Checked(object sender, EventArgs e)
         {
             SecondPlayerNameTextBox.Enabled = (sender as CheckBox).Checked;
+            if (!SecondPlayerNameTextBox.Enabled)
+            {
+                SecondPlayerNameTextBox.Text = "[Computer]";
+            }
+            else
+            {
+                SecondPlayerNameTextBox.Text = string.Empty;
+            }
         }
 
         public TextBox SecondPlayerNameTextBox { get => secondPlayerNameTextBox; }
@@ -63,6 +73,24 @@ namespace WindowsUI
             public CheckersButton() : base()
             {
 
+            }
+        }
+
+        private void firstPlayerNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            DoneButton.Enabled = true;
+            if ((sender as TextBox).Text.Equals(string.Empty))
+            {
+                DoneButton.Enabled = false;
+            }
+        }
+
+        private void secondPlayerNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            DoneButton.Enabled = true;
+            if ((sender as TextBox).Text.Equals(string.Empty))
+            {
+                DoneButton.Enabled = false;
             }
         }
     }

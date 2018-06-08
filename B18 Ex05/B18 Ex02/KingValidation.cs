@@ -33,10 +33,10 @@ namespace B18_Ex02
         {
             bool isTryingToJump = true;
 
-            isTryingToJump = MovementValidation.IsTryingToJump(i_CurrentMove, Constants.k_FirstCoinType);
+            isTryingToJump = MovementValidation.IsTryingToJump(i_CurrentMove, Convert.ToString(Constants.k_FirstCoinType));
             if (!isTryingToJump)
             {
-                isTryingToJump = MovementValidation.IsTryingToJump(i_CurrentMove, Constants.k_SecondCoinType);
+                isTryingToJump = MovementValidation.IsTryingToJump(i_CurrentMove, Convert.ToString(Constants.k_SecondCoinType));
             }
 
             return isTryingToJump;

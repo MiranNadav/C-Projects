@@ -117,6 +117,10 @@ namespace B18_Ex02
             {
                 m_MatchWinner = m_SecondPlayer;
             }
+            else
+            {
+                m_MatchWinner = null;
+            }
         }
 
         public bool IsWinnerFound()

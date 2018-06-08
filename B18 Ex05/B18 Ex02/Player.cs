@@ -12,7 +12,7 @@ namespace B18_Ex02
         private string m_Name;
         private char m_CoinType;
         private bool m_IsComputer = false;
-        private int m_TotalNumberOfPoints;
+        private int m_TotalNumberOfPoints = 0;
 
         public Player(string i_UserName, char i_CoinType)
         {
@@ -45,6 +45,10 @@ namespace B18_Ex02
             get
             {
                 return this.m_IsComputer;
+            }
+            set
+            {
+                m_IsComputer = value;
             }
         }
 

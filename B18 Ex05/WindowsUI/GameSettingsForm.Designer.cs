@@ -50,6 +50,7 @@ namespace WindowsUI
             // 
             // DoneButton
             // 
+            this.DoneButton.Enabled = false;
             this.DoneButton.Location = new System.Drawing.Point(382, 370);
             this.DoneButton.Name = "DoneButton";
             this.DoneButton.Size = new System.Drawing.Size(216, 65);
@@ -143,6 +144,7 @@ namespace WindowsUI
             this.firstPlayerNameTextBox.Name = "firstPlayerNameTextBox";
             this.firstPlayerNameTextBox.Size = new System.Drawing.Size(215, 38);
             this.firstPlayerNameTextBox.TabIndex = 9;
+            this.firstPlayerNameTextBox.TextChanged += new System.EventHandler(this.firstPlayerNameTextBox_TextChanged);
             // 
             // secondPlayerNameTextBox
             // 
@@ -152,6 +154,7 @@ namespace WindowsUI
             this.secondPlayerNameTextBox.Size = new System.Drawing.Size(215, 38);
             this.secondPlayerNameTextBox.TabIndex = 10;
             this.secondPlayerNameTextBox.Text = "[Computer]";
+            this.secondPlayerNameTextBox.TextChanged += new System.EventHandler(this.secondPlayerNameTextBox_TextChanged);
             // 
             // GameSettingsForm
             // 

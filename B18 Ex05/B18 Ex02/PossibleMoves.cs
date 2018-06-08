@@ -125,6 +125,28 @@ namespace B18_Ex02
             return allPossibleJumps;
         }
 
+        public ArrayList getAllPossibleJumps(Square i_CurrentSquare, char i_CoinType)
+        {
+            return i_CoinType.Equals(Constants.k_FirstCoinType) ? getAllPossibleJumps(i_CurrentSquare, m_FirstPlayerPossibleMoves) : getAllPossibleJumps(i_CurrentSquare, m_SecondPlayerPossibleMoves);
+        }
+
+        private ArrayList getAllPossibleJumps(Square i_CurrentSquare, ArrayList i_CurrentPlayerPossibleMoves)
+        {
+            ArrayList allPossibleJumps = new ArrayList();
+            foreach (PlayerMove move in i_CurrentPlayerPossibleMoves)
+            {
+                if (i_CurrentSquare.Equals(move.CurrentSquare))
+                {
+                    if (Math.Abs(i_CurrentSquare.ColumnIndex- move.NextColIndex) == 2 && Math.Abs(i_CurrentSquare.RowIndex - move.NextRowIndex) == 2)
+                    {
+                        allPossibleJumps.Add(move);
+                    }
+                }
+            }
+
+            return allPossibleJumps;
+        }
+
         public static bool isJumpPossible(ArrayList i_AllPossibleJumps, PlayerMove i_CurrentMove)
         {
             bool existsLegalJump = false;
