@@ -36,15 +36,19 @@ namespace WindowsUI
                 m_GameManager.SecondPlayer.IsComputer = true;
             }
             m_CheckersCheckBoxList = new List<CheckersCheckBox>();
+            m_NextPossibleSquares = new List<CheckersCheckBox>();
             initComponents();
-            this.player1Name.Text = m_FirstPlayerName + ": " + m_GameManager.FirstPlayer.TotalNumberOfPoints;
-            this.player2Name.Text = m_SecondPlayerName + ": " + m_GameManager.SecondPlayer.TotalNumberOfPoints;
+
             //List<PlayerMove> possibleMoves = m_GameManager.getAllowedMoves();
             //InitializeComponent();
 
 
-            m_NextPossibleSquares = new List<CheckersCheckBox>();
 
+            //assignCheckersCheckBoxToEvent();
+        }
+
+        private void assignCheckersCheckBoxToEvent()
+        {
             foreach (Control control in this.Controls)
             {
                 if (control is CheckersCheckBox)
@@ -60,6 +64,8 @@ namespace WindowsUI
 
         private void initComponents()
         {
+            this.Controls.Clear();
+
             this.player1Name = new System.Windows.Forms.Label();
             this.player2Name = new System.Windows.Forms.Label();
             // 
@@ -70,7 +76,8 @@ namespace WindowsUI
             this.player1Name.Name = "player1Name";
             this.player1Name.Size = new System.Drawing.Size(102, 32);
             this.player1Name.TabIndex = 0;
-            this.player1Name.Text = "Label1";
+            this.player1Name.Text = m_FirstPlayerName + ": " + m_GameManager.FirstPlayer.TotalNumberOfPoints;
+
             // 
             // player2Name
             // 
@@ -79,7 +86,7 @@ namespace WindowsUI
             this.player2Name.Name = "player2Name";
             this.player2Name.Size = new System.Drawing.Size(102, 32);
             this.player2Name.TabIndex = 1;
-            this.player2Name.Text = "Label2";
+            this.player2Name.Text = m_SecondPlayerName + ": " + m_GameManager.SecondPlayer.TotalNumberOfPoints;
 
             this.Controls.Add(player1Name);
             this.Controls.Add(player2Name);
@@ -121,10 +128,10 @@ namespace WindowsUI
                         checkersCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                         checkersCheckBox.UseVisualStyleBackColor = false;
                         this.Controls.Add(checkersCheckBox);
-
                     }
                 }
             }
+            assignCheckersCheckBoxToEvent();
 
             disableAllNonCurrentPlayerSquares();
 
@@ -245,27 +252,37 @@ namespace WindowsUI
                     {
                         this.player1Name.Text = m_FirstPlayerName + ": " + m_GameManager.FirstPlayer.TotalNumberOfPoints;
                         this.player2Name.Text = m_SecondPlayerName + ": " + m_GameManager.SecondPlayer.TotalNumberOfPoints;
+                        DialogResult shouldStartNewMatch;
+
                         if (m_GameManager.MatchInformation.MatchWinner == null)
                         {
-                            ShowTieMessage();
+                            shouldStartNewMatch = ShowTieMessage();
                         }
                         else
                         {
-                            ShowWinnerMessage();
+                            shouldStartNewMatch = ShowWinnerMessage();
+                        }
+
+                        if (shouldStartNewMatch == DialogResult.Yes)
+                        {
+                            m_GameManager.startAnotherMatch();
+                            initComponents();
+                            this.Show();
                         }
                     }
                 }
             }
         }
 
-        private void ShowWinnerMessage()
+        private DialogResult ShowWinnerMessage()
         {
-            MessageBox.Show(m_GameManager.MatchInformation.MatchWinner.Name + " Won!" + Environment.NewLine + "Another Round?");
+
+            return MessageBox.Show(m_GameManager.MatchInformation.MatchWinner.Name + " Won!" + Environment.NewLine + "Another Round?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
-        private void ShowTieMessage ()
+        private DialogResult ShowTieMessage()
         {
-            MessageBox.Show("Tie!" + Environment.NewLine + "Another Round?");
+            return MessageBox.Show("Tie!" + Environment.NewLine + "Another Round?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
         //TODO: check what is the best way to do this
         private void disableAllNonCurrentPlayerSquares()

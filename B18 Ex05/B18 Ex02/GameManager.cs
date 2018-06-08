@@ -145,12 +145,12 @@ namespace B18_Ex02
 
         }
 
-        private void startAnotherMatch()
+        public void startAnotherMatch()
         {
             m_GameIsOver = false;
             int boardSize = m_PlayingBoard.BoardSize;
             m_PlayingBoard = new Board(boardSize);
-            m_PlayingBoard.printBoard();
+            //m_PlayingBoard.printBoard();
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
             //matchManager(m_PlayingBoard);
         }
