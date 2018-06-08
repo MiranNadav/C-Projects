@@ -93,5 +93,10 @@ namespace WindowsUI
                 DoneButton.Enabled = false;
             }
         }
+
+        private void radio6x6_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

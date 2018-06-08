@@ -51,116 +51,129 @@ namespace WindowsUI
             // DoneButton
             // 
             this.DoneButton.Enabled = false;
-            this.DoneButton.Location = new System.Drawing.Point(382, 370);
+            this.DoneButton.Location = new System.Drawing.Point(215, 239);
+            this.DoneButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DoneButton.Name = "DoneButton";
-            this.DoneButton.Size = new System.Drawing.Size(216, 65);
-            this.DoneButton.TabIndex = 0;
-            this.DoneButton.Text = "Done";
+            this.DoneButton.Size = new System.Drawing.Size(122, 42);
+            this.DoneButton.TabIndex = 10;
+            this.DoneButton.Text = "&Done";
             this.DoneButton.UseVisualStyleBackColor = true;
             this.DoneButton.Click += new System.EventHandler(this.doneButton_Click);
             // 
             // radio6x6
             // 
             this.radio6x6.AutoSize = true;
-            this.radio6x6.Location = new System.Drawing.Point(63, 90);
+            this.radio6x6.Location = new System.Drawing.Point(35, 58);
+            this.radio6x6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radio6x6.Name = "radio6x6";
-            this.radio6x6.Size = new System.Drawing.Size(112, 36);
+            this.radio6x6.Size = new System.Drawing.Size(67, 24);
             this.radio6x6.TabIndex = 1;
             this.radio6x6.TabStop = true;
-            this.radio6x6.Text = "6 x 6";
+            this.radio6x6.Text = "&6 x 6";
             this.radio6x6.UseVisualStyleBackColor = true;
+            this.radio6x6.CheckedChanged += new System.EventHandler(this.radio6x6_CheckedChanged);
             // 
             // radio10x10
             // 
             this.radio10x10.AutoSize = true;
-            this.radio10x10.Location = new System.Drawing.Point(382, 90);
+            this.radio10x10.Location = new System.Drawing.Point(215, 58);
+            this.radio10x10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radio10x10.Name = "radio10x10";
-            this.radio10x10.Size = new System.Drawing.Size(144, 36);
-            this.radio10x10.TabIndex = 2;
+            this.radio10x10.Size = new System.Drawing.Size(85, 24);
+            this.radio10x10.TabIndex = 3;
             this.radio10x10.TabStop = true;
-            this.radio10x10.Text = "10 x 10";
+            this.radio10x10.Text = "1&0 x 10";
             this.radio10x10.UseVisualStyleBackColor = true;
             // 
             // radio8x8
             // 
             this.radio8x8.AutoSize = true;
-            this.radio8x8.Location = new System.Drawing.Point(224, 90);
+            this.radio8x8.Location = new System.Drawing.Point(126, 58);
+            this.radio8x8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radio8x8.Name = "radio8x8";
-            this.radio8x8.Size = new System.Drawing.Size(112, 36);
-            this.radio8x8.TabIndex = 3;
+            this.radio8x8.Size = new System.Drawing.Size(67, 24);
+            this.radio8x8.TabIndex = 2;
             this.radio8x8.TabStop = true;
-            this.radio8x8.Text = "8 x 8";
+            this.radio8x8.Text = "&8 x 8";
             this.radio8x8.UseVisualStyleBackColor = true;
             // 
             // boardSizeLabel
             // 
             this.boardSizeLabel.AutoSize = true;
-            this.boardSizeLabel.Location = new System.Drawing.Point(57, 35);
+            this.boardSizeLabel.Location = new System.Drawing.Point(32, 23);
+            this.boardSizeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.boardSizeLabel.Name = "boardSizeLabel";
-            this.boardSizeLabel.Size = new System.Drawing.Size(162, 32);
-            this.boardSizeLabel.TabIndex = 4;
+            this.boardSizeLabel.Size = new System.Drawing.Size(91, 20);
+            this.boardSizeLabel.TabIndex = 0;
             this.boardSizeLabel.Text = "Board Size:";
             // 
             // playersLabel
             // 
             this.playersLabel.AutoSize = true;
-            this.playersLabel.Location = new System.Drawing.Point(57, 166);
+            this.playersLabel.Location = new System.Drawing.Point(32, 107);
+            this.playersLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.playersLabel.Name = "playersLabel";
-            this.playersLabel.Size = new System.Drawing.Size(118, 32);
-            this.playersLabel.TabIndex = 5;
+            this.playersLabel.Size = new System.Drawing.Size(64, 20);
+            this.playersLabel.TabIndex = 4;
             this.playersLabel.Text = "Players:";
             // 
             // player1Label
             // 
             this.player1Label.AutoSize = true;
-            this.player1Label.Location = new System.Drawing.Point(78, 224);
+            this.player1Label.Location = new System.Drawing.Point(44, 145);
+            this.player1Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.player1Label.Name = "player1Label";
-            this.player1Label.Size = new System.Drawing.Size(127, 32);
-            this.player1Label.TabIndex = 6;
-            this.player1Label.Text = "Player 1:";
+            this.player1Label.Size = new System.Drawing.Size(69, 20);
+            this.player1Label.TabIndex = 5;
+            this.player1Label.Text = "Player &1:";
             // 
             // player2Label
             // 
             this.player2Label.AutoSize = true;
-            this.player2Label.Location = new System.Drawing.Point(124, 284);
+            this.player2Label.Location = new System.Drawing.Point(70, 183);
+            this.player2Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.player2Label.Name = "player2Label";
-            this.player2Label.Size = new System.Drawing.Size(127, 32);
-            this.player2Label.TabIndex = 7;
-            this.player2Label.Text = "Player 2:";
+            this.player2Label.Size = new System.Drawing.Size(65, 20);
+            this.player2Label.TabIndex = 8;
+            this.player2Label.Text = "Player &2";
             // 
             // secondPlayerCheckBox
             // 
             this.secondPlayerCheckBox.AutoSize = true;
-            this.secondPlayerCheckBox.Location = new System.Drawing.Point(84, 284);
+            this.secondPlayerCheckBox.Location = new System.Drawing.Point(47, 183);
+            this.secondPlayerCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.secondPlayerCheckBox.Name = "secondPlayerCheckBox";
-            this.secondPlayerCheckBox.Size = new System.Drawing.Size(34, 33);
-            this.secondPlayerCheckBox.TabIndex = 8;
+            this.secondPlayerCheckBox.Size = new System.Drawing.Size(22, 21);
+            this.secondPlayerCheckBox.TabIndex = 7;
             this.secondPlayerCheckBox.UseVisualStyleBackColor = true;
             this.secondPlayerCheckBox.Click += new System.EventHandler(this.checkBox_Checked);
             // 
             // firstPlayerNameTextBox
             // 
-            this.firstPlayerNameTextBox.Location = new System.Drawing.Point(311, 224);
+            this.firstPlayerNameTextBox.Location = new System.Drawing.Point(175, 145);
+            this.firstPlayerNameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.firstPlayerNameTextBox.Name = "firstPlayerNameTextBox";
-            this.firstPlayerNameTextBox.Size = new System.Drawing.Size(215, 38);
-            this.firstPlayerNameTextBox.TabIndex = 9;
+            this.firstPlayerNameTextBox.Size = new System.Drawing.Size(123, 26);
+            this.firstPlayerNameTextBox.TabIndex = 6;
             this.firstPlayerNameTextBox.TextChanged += new System.EventHandler(this.firstPlayerNameTextBox_TextChanged);
             // 
             // secondPlayerNameTextBox
             // 
             this.secondPlayerNameTextBox.Enabled = false;
-            this.secondPlayerNameTextBox.Location = new System.Drawing.Point(311, 281);
+            this.secondPlayerNameTextBox.Location = new System.Drawing.Point(175, 181);
+            this.secondPlayerNameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.secondPlayerNameTextBox.Name = "secondPlayerNameTextBox";
-            this.secondPlayerNameTextBox.Size = new System.Drawing.Size(215, 38);
-            this.secondPlayerNameTextBox.TabIndex = 10;
+            this.secondPlayerNameTextBox.Size = new System.Drawing.Size(123, 26);
+            this.secondPlayerNameTextBox.TabIndex = 9;
             this.secondPlayerNameTextBox.Text = "[Computer]";
             this.secondPlayerNameTextBox.TextChanged += new System.EventHandler(this.secondPlayerNameTextBox_TextChanged);
             // 
             // GameSettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AcceptButton = this.DoneButton;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 450);
+            this.ClientSize = new System.Drawing.Size(363, 290);
             this.Controls.Add(this.secondPlayerNameTextBox);
             this.Controls.Add(this.firstPlayerNameTextBox);
             this.Controls.Add(this.secondPlayerCheckBox);
@@ -173,6 +186,7 @@ namespace WindowsUI
             this.Controls.Add(this.radio6x6);
             this.Controls.Add(this.DoneButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "GameSettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Game Settings";

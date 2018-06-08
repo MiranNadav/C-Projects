@@ -66,6 +66,10 @@ namespace WindowsUI
         {
             this.Controls.Clear();
 
+            //TODO: this is good for 6 X 6 need to add to other sizes 
+            this.Size = new Size(450, 420);
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
             this.player1Name = new System.Windows.Forms.Label();
             this.player2Name = new System.Windows.Forms.Label();
             // 
@@ -148,7 +152,7 @@ namespace WindowsUI
                 m_CurrentCheckBoxChecked = sender as CheckersCheckBox;
 
                 disableAllButChecked();
-  
+
                 foreach (PlayerMove possibleMove in m_PossibleMoves)
                 {
                     foreach (Control control in this.Controls)
