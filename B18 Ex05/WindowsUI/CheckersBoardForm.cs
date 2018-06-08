@@ -147,12 +147,8 @@ namespace WindowsUI
             {
                 m_CurrentCheckBoxChecked = sender as CheckersCheckBox;
 
-                //TODO: is it good to seperate this case?
-                if (m_PossibleMoves.Count == 0)
-                {
-                    disableAllButChecked();
-                }
-
+                disableAllButChecked();
+  
                 foreach (PlayerMove possibleMove in m_PossibleMoves)
                 {
                     foreach (Control control in this.Controls)

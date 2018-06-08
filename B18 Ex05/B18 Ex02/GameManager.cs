@@ -152,6 +152,9 @@ namespace B18_Ex02
             m_PlayingBoard = new Board(boardSize);
             //m_PlayingBoard.printBoard();
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
+            m_CurrentPlayer = m_FirstPlayer;
+            m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
+            m_InputValidation = new InputValidation();
             //matchManager(m_PlayingBoard);
         }
 
