@@ -106,5 +106,11 @@
       <Name>CheckersComponents</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Graphics\Chip-Black.jpg" />
+    <Content Include="Graphics\Chip-Red-Blue.jpg" />
+    <Content Include="Graphics\Chip-Red.jpg" />
+    <Content Include="Graphics\Chip_Black_Blue.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
