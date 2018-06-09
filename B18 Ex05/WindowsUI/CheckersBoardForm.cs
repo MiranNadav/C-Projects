@@ -380,7 +380,7 @@ namespace WindowsUI
 
         private void moveSoldierInBoard(CheckersCheckBox i_MoveFrom, CheckersCheckBox i_MoveTo)
         {
-            i_MoveFrom.toggleBackgroundImage(null, null);
+            //i_MoveFrom.toggleBackgroundImage(null, null);
             i_MoveTo.Text = i_MoveFrom.Text;
             i_MoveFrom.Text = string.Empty;
             i_MoveTo.CoinType = i_MoveFrom.CoinType;

@@ -16,7 +16,7 @@ namespace B18_Ex02
 
         public enum coinType
         {
-            X, O,
+            X, O
         }
 
         public Coin(char i_Row, char i_Column, char i_Type)
