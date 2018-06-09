@@ -36,6 +36,10 @@ namespace B18_Ex02
             {
                 return m_PlayingBoard;
             }
+            set
+            {
+                m_PlayingBoard = value;
+            }
         }
 
         public GameManager(int i_BoardSize, string i_FirstPlayerName, string i_SecondPlayerName)
@@ -151,7 +155,6 @@ namespace B18_Ex02
             int boardSize = m_PlayingBoard.BoardSize;
             m_PlayingBoard = new Board(boardSize);
             //m_PlayingBoard.printBoard();
-            m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
             m_CurrentPlayer = m_FirstPlayer;
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
             m_InputValidation = new InputValidation();

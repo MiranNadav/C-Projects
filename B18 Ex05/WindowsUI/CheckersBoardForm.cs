@@ -35,8 +35,7 @@ namespace WindowsUI
             {
                 m_GameManager.SecondPlayer.IsComputer = true;
             }
-            m_CheckersCheckBoxList = new List<CheckersCheckBox>();
-            m_NextPossibleSquares = new List<CheckersCheckBox>();
+
             initComponents();
 
             //List<PlayerMove> possibleMoves = m_GameManager.getAllowedMoves();
@@ -64,8 +63,10 @@ namespace WindowsUI
 
         private void initComponents()
         {
-            this.Controls.Clear();
 
+            m_CheckersCheckBoxList = new List<CheckersCheckBox>();
+            m_NextPossibleSquares = new List<CheckersCheckBox>();
+            this.Controls.Clear();
             //TODO: this is good for 6 X 6 need to add to other sizes 
             this.Size = new Size(450, 420);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -153,36 +154,13 @@ namespace WindowsUI
 
                 disableAllButChecked();
 
-                foreach (PlayerMove possibleMove in m_PossibleMoves)
-                {
-                    foreach (Control control in this.Controls)
-                    {
-                        CheckersCheckBox currentCheckerSquare = (control as CheckersCheckBox);
-                        if (currentCheckerSquare != null)
-                        {
-                            if (currentCheckerSquare.Name == possibleMove.NextSquare.getSquare())
-                            {
-                                currentCheckerSquare.BackColor = Color.Green;
-                                currentCheckerSquare.Enabled = true;
-                                m_NextPossibleSquares.Add(currentCheckerSquare);
-                            }
-                            else if (currentCheckerSquare != m_CurrentCheckBoxChecked && !m_NextPossibleSquares.Contains(currentCheckerSquare))
-                            {
-                                currentCheckerSquare.Name = currentCheckerSquare.Name;
-                                currentCheckerSquare.Enabled = false;
-                            }
-                        }
-                    }
-                }
+                showAvailableMoves();
             }
             else
             {
                 if ((sender as CheckersCheckBox) == m_CurrentCheckBoxChecked)
                 {
-                    paintAllInWhite();
-                    //enableAllButtons();
-                    disableAllNonCurrentPlayerSquares();
-                    m_CurrentCheckBoxChecked = null;
+                    cancelClick();
                 }
                 else
                 {
@@ -268,6 +246,40 @@ namespace WindowsUI
                             m_GameManager.startAnotherMatch();
                             initComponents();
                             this.Show();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void cancelClick()
+        {
+            paintAllInWhite();
+            //enableAllButtons();
+            disableAllNonCurrentPlayerSquares();
+            m_CurrentCheckBoxChecked = null;
+        }
+
+        private void showAvailableMoves()
+        {
+            foreach (PlayerMove possibleMove in m_PossibleMoves)
+            {
+                foreach (Control control in this.Controls)
+                {
+                    CheckersCheckBox currentCheckerSquare = (control as CheckersCheckBox);
+                    if (currentCheckerSquare != null)
+                    {
+                        //Change string comparison
+                        if (currentCheckerSquare.Name == possibleMove.NextSquare.getSquare())
+                        {
+                            currentCheckerSquare.BackColor = Color.Green;
+                            currentCheckerSquare.Enabled = true;
+                            m_NextPossibleSquares.Add(currentCheckerSquare);
+                        }
+                        else if (currentCheckerSquare != m_CurrentCheckBoxChecked && !m_NextPossibleSquares.Contains(currentCheckerSquare))
+                        {
+                            currentCheckerSquare.Name = currentCheckerSquare.Name;
+                            currentCheckerSquare.Enabled = false;
                         }
                     }
                 }
