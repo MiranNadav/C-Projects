@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsUI.Properties;
 using B18_Ex02;
 
 namespace WindowsUI
@@ -15,6 +16,7 @@ namespace WindowsUI
     {
         public GameSettingsForm()
         {
+            this.Icon = Resources.IconKing;
             InitializeComponent();
         }
 

@@ -66,6 +66,7 @@ namespace WindowsUI
         private void initComponents()
         {
             this.Text = "Damka";
+            this.Icon = Resources.IconKing;
             m_CheckersCheckBoxList = new List<CheckersCheckBox>();
             m_NextPossibleSquares = new List<CheckersCheckBox>();
             this.Controls.Clear();
