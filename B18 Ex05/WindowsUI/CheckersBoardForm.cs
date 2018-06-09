@@ -63,7 +63,7 @@ namespace WindowsUI
 
         private void initComponents()
         {
-
+            this.Text = "Damka";
             m_CheckersCheckBoxList = new List<CheckersCheckBox>();
             m_NextPossibleSquares = new List<CheckersCheckBox>();
             this.Controls.Clear();
@@ -151,13 +151,12 @@ namespace WindowsUI
         private void validateClick(object sender, EventArgs e)
         {
             m_PossibleMoves = m_GameManager.getAllowedMoves((sender as CheckersCheckBox).Name);
-
+            
             if (m_CurrentCheckBoxChecked == null)
             {
                 m_CurrentCheckBoxChecked = sender as CheckersCheckBox;
 
                 disableAllButChecked();
-
                 showAvailableMoves();
             }
             else
@@ -168,72 +167,76 @@ namespace WindowsUI
                 }
                 else
                 {
-                    m_CurrentCheckBoxChecked.BackColor = Color.White;
-                    CheckersCheckBox squareToMoveTo = (sender as CheckersCheckBox);
-                    squareToMoveTo.BackColor = Color.White;
-                    //TODO: change name so it is clear that this makes the move in the logic 
-
-
-                    PlayerMove currentMove = new PlayerMove(m_CurrentCheckBoxChecked.Name + ">" + squareToMoveTo.Name);
-                    if (MovementValidation.IsTryingToJump(currentMove, m_CurrentCheckBoxChecked.Text))
-                    {
-                        Square middleSquare = currentMove.calculateMiddleSquare();
-                        clearSquare(middleSquare);
-                    }
-
-                    m_GameManager.matchManager(currentMove.ToString());//(m_CurrentCheckBoxChecked.Name + ">" + checkerCheckBox.Name);
-                    moveSoldierInBoard(m_CurrentCheckBoxChecked, squareToMoveTo);
-                    paintAllInWhite();
-
-                    //enableAllButtons();
-                    //TODO: what is this name? should be changed (checkerCheckBox)
-
-
-                    if (m_GameManager.NewKingWasMade)
-                    {
-                        squareToMoveTo.Text = squareToMoveTo.Text.Equals("O") ? "K" : "U";
-                    }
-                    if (m_GameManager.ThereAreMoreJumps)
-                    {
-                        disableAllButChecked();
-                    }
-                    else
-                    {
-                        disableAllNonCurrentPlayerSquares();
-                    }
-                    m_CurrentCheckBoxChecked = null;
-                    //unCheckAllSqaures();
-
-                    playComputerMove();
-                    if (m_GameManager.GameIsOver)
-                    {
-                        this.player1Name.Text = m_FirstPlayerName + ": " + m_GameManager.FirstPlayer.TotalNumberOfPoints;
-                        this.player2Name.Text = m_SecondPlayerName + ": " + m_GameManager.SecondPlayer.TotalNumberOfPoints;
-                        DialogResult shouldStartNewMatch;
-
-                        if (m_GameManager.MatchInformation.MatchWinner == null)
-                        {
-                            shouldStartNewMatch = ShowTieMessage();
-                        }
-                        else
-                        {
-                            shouldStartNewMatch = ShowWinnerMessage();
-                        }
-
-                        if (shouldStartNewMatch == DialogResult.Yes)
-                        {
-                            m_GameManager.startAnotherMatch();
-                            initComponents();
-                            this.Show();
-                        }
-                        else if (shouldStartNewMatch == DialogResult.No)
-                        {
-                            this.Close();
-                            Application.Exit();
-                        }
-
-                    }
+                    makeMoveInBoard(sender);
                 }
+            }
+        }
+
+        private void makeMoveInBoard(object sender)
+        {
+            m_CurrentCheckBoxChecked.BackColor = Color.White;
+            CheckersCheckBox squareToMoveTo = (sender as CheckersCheckBox);
+            squareToMoveTo.BackColor = Color.White;
+            //TODO: change name so it is clear that this makes the move in the logic 
+
+
+            PlayerMove currentMove = new PlayerMove(m_CurrentCheckBoxChecked.Name + ">" + squareToMoveTo.Name);
+            if (MovementValidation.IsTryingToJump(currentMove, m_CurrentCheckBoxChecked.Text))
+            {
+                Square middleSquare = currentMove.calculateMiddleSquare();
+                clearSquare(middleSquare);
+            }
+
+            m_GameManager.matchManager(currentMove.ToString());
+            moveSoldierInBoard(m_CurrentCheckBoxChecked, squareToMoveTo);
+            paintAllInWhite();
+
+            if (m_GameManager.NewKingWasMade)
+            {
+                squareToMoveTo.Text = squareToMoveTo.Text.Equals("O") ? "K" : "U";
+            }
+            if (m_GameManager.ThereAreMoreJumps)
+            {
+                disableAllButChecked();
+            }
+            else
+            {
+                disableAllNonCurrentPlayerSquares();
+            }
+            m_CurrentCheckBoxChecked = null;
+
+            playComputerMove();
+            if (m_GameManager.GameIsOver)
+            {
+                gameOverOperation();
+            }
+        }
+
+        private void gameOverOperation()
+        {
+            this.player1Name.Text = m_FirstPlayerName + ": " + m_GameManager.FirstPlayer.TotalNumberOfPoints;
+            this.player2Name.Text = m_SecondPlayerName + ": " + m_GameManager.SecondPlayer.TotalNumberOfPoints;
+            DialogResult shouldStartNewMatch;
+
+            if (m_GameManager.MatchInformation.MatchWinner == null)
+            {
+                shouldStartNewMatch = ShowTieMessage();
+            }
+            else
+            {
+                shouldStartNewMatch = ShowWinnerMessage();
+            }
+
+            if (shouldStartNewMatch == DialogResult.Yes)
+            {
+                m_GameManager.startAnotherMatch();
+                initComponents();
+                this.Show();
+            }
+            else if (shouldStartNewMatch == DialogResult.No)
+            {
+                this.Close();
+                Application.Exit();
             }
         }
 
@@ -427,11 +430,6 @@ namespace WindowsUI
             {
                 currentSquare.Checked = false;
             }
-        }
-
-        private void player1Name_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

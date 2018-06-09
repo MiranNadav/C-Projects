@@ -155,7 +155,6 @@ namespace WindowsUI
             this.firstPlayerNameTextBox.Name = "firstPlayerNameTextBox";
             this.firstPlayerNameTextBox.Size = new System.Drawing.Size(216, 38);
             this.firstPlayerNameTextBox.TabIndex = 6;
-            this.firstPlayerNameTextBox.Text = "[Computer]";
             this.firstPlayerNameTextBox.TextChanged += new System.EventHandler(this.firstPlayerNameTextBox_TextChanged);
             // 
             // secondPlayerNameTextBox

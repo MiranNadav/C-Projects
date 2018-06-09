@@ -187,39 +187,7 @@ namespace B18_Ex02
 
                 }
             }
-
-            //if (m_StartNewMatch)
-            //{
-            //    startAnotherMatch();
-            //}
-            //else
-            //{
-            //    endGameScreen();
-            //}
         }
-
-        //private void endGameScreen()
-        //{
-        //    string gameWinnerName;
-        //    int firstUserTotalPoints = this.m_FirstPlayer.TotalNumberOfPoints;
-        //    int secondUserTotalPonts = this.m_SecondPlayer.TotalNumberOfPoints;
-        //    currentStatePrinter();
-
-        //    if (firstUserTotalPoints == secondUserTotalPonts)
-        //    {
-        //        Console.WriteLine("The game ended in a DRAW. GOODBYE");
-        //    }
-        //    else
-        //    {
-        //        gameWinnerName = firstUserTotalPoints > secondUserTotalPonts ? this.m_FirstPlayer.Name : this.m_SecondPlayer.Name;
-        //        Console.WriteLine(gameWinnerName + " Has won the game!!! congratulations " + gameWinnerName, "you are the BEST. GOODBYE");
-        //    }
-
-        //    Console.WriteLine();
-        //    Console.WriteLine("Press any key to close terminal");
-        //    Console.ReadLine();
-        //    Environment.Exit(0);
-        //}
 
         private bool parseUserInput(Player i_CurrentPlayer, Player i_OtherPlayer, string i_Move)
         {
