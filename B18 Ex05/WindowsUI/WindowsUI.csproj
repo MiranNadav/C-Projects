@@ -82,6 +82,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -111,6 +112,10 @@
     <Content Include="Graphics\Chip-Red-Blue.jpg" />
     <Content Include="Graphics\Chip-Red.jpg" />
     <Content Include="Graphics\Chip_Black_Blue.jpg" />
+    <None Include="Resources\King-Red.png" />
+    <None Include="Resources\King-Black.png" />
+    <None Include="Resources\Chip-Red.png" />
+    <None Include="Resources\Chip-Black.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
