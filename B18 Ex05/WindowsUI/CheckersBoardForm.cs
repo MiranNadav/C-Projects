@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CheckersComponents;
 using B18_Ex02;
+using WindowsUI.Properties;
 
 namespace WindowsUI
 {
@@ -134,16 +135,16 @@ namespace WindowsUI
 
                         if (m_GameManager.Board.BoardArray[i, j] != null)
                         {
-                            checkersCheckBox.Text = m_GameManager.Board.BoardArray[i, j].Type + "";
+                            //checkersCheckBox.Text = m_GameManager.Board.BoardArray[i, j].Type + "";
                             checkersCheckBox.CoinType = m_GameManager.Board.BoardArray[i, j].CoinType;
 
                             if (checkersCheckBox.CoinType == Coin.coinType.O)
                             {
-                                checkersCheckBox.BackgroundImage = Image.FromFile(@"C:\Users\nmiran\Documents\Repositories\C#\B18 Ex05\Graphics\Chip-Black.png");
+                                checkersCheckBox.BackgroundImage = Resources.Chip_Black;
                             }
                             else
                             {
-                                checkersCheckBox.BackgroundImage = Image.FromFile(@"C:\Users\nmiran\Documents\Repositories\C#\B18 Ex05\Graphics\Chip-Red.png");
+                                checkersCheckBox.BackgroundImage = Resources.Chip_Red;
                             }
 
                             checkersCheckBox.BackgroundImageLayout = ImageLayout.Stretch;
@@ -154,6 +155,7 @@ namespace WindowsUI
                     }
                 }
             }
+
             assignCheckersCheckBoxToEvent();
 
             disableAllNonCurrentPlayerSquares();
@@ -196,7 +198,7 @@ namespace WindowsUI
 
 
             PlayerMove currentMove = new PlayerMove(m_CurrentCheckBoxChecked.Name + ">" + squareToMoveTo.Name);
-            if (MovementValidation.IsTryingToJump(currentMove, m_CurrentCheckBoxChecked.Text))
+            if (MovementValidation.IsTryingToJump(currentMove, m_CurrentCheckBoxChecked.CoinType))
             {
                 Square middleSquare = currentMove.calculateMiddleSquare();
                 clearSquare(middleSquare);
@@ -208,7 +210,16 @@ namespace WindowsUI
 
             if (m_GameManager.NewKingWasMade)
             {
-                squareToMoveTo.Text = squareToMoveTo.Text.Equals("O") ? "K" : "U";
+                squareToMoveTo.CoinType = squareToMoveTo.CoinType.Equals(Coin.coinType.O) ? Coin.coinType.K : Coin.coinType.U;
+                if (squareToMoveTo.CoinType == Coin.coinType.K)
+                {
+                    squareToMoveTo.BackgroundImage = Resources.King_Black;
+                }
+                else
+                {
+                    squareToMoveTo.BackgroundImage = Resources.King_Red;
+
+                }
             }
             if (m_GameManager.ThereAreMoreJumps)
             {
@@ -218,9 +229,11 @@ namespace WindowsUI
             {
                 disableAllNonCurrentPlayerSquares();
             }
+
             m_CurrentCheckBoxChecked = null;
 
             playComputerMove();
+
             if (m_GameManager.GameIsOver)
             {
                 gameOverOperation();
@@ -262,7 +275,8 @@ namespace WindowsUI
                 m_GameManager.matchManager(string.Empty);
                 CheckersCheckBox moveFrom = getCheckersCheckBoxByName(m_GameManager.CurrentMove.CurrentSquare.getSquare());
                 CheckersCheckBox moveTo = getCheckersCheckBoxByName(m_GameManager.CurrentMove.NextSquare.getSquare());
-                if (MovementValidation.IsTryingToJump(m_GameManager.CurrentMove, getCheckersCheckBoxByName(m_GameManager.CurrentMove.CurrentSquare.getSquare()).Text))
+
+                if (MovementValidation.IsTryingToJump(m_GameManager.CurrentMove, getCheckersCheckBoxByName(m_GameManager.CurrentMove.CurrentSquare.getSquare()).CoinType))
                 {
                     Square middleSquare = m_GameManager.CurrentMove.calculateMiddleSquare();
                     clearSquare(middleSquare);
@@ -271,7 +285,16 @@ namespace WindowsUI
 
                 if (m_GameManager.NewKingWasMade)
                 {
-                    moveTo.Text = moveTo.Text.Equals("O") ? "K" : "U";
+                    moveTo.CoinType = moveTo.CoinType.Equals(Coin.coinType.O) ? Coin.coinType.K : Coin.coinType.U;
+                    if (moveTo.CoinType == Coin.coinType.K)
+                    {
+                        moveTo.BackgroundImage = Resources.King_Black;
+                    }
+                    else
+                    {
+                        moveTo.BackgroundImage = Resources.King_Red;
+
+                    }
                 }
                 if (m_GameManager.ThereAreMoreJumps)
                 {
@@ -337,9 +360,9 @@ namespace WindowsUI
 
                 currentSquare.Checked = false;
 
-                if (m_GameManager.CurrentPlayer.CoinType.Equals('O'))
+                if (m_GameManager.CurrentPlayer.Type == Coin.coinType.O)
                 {
-                    if (!currentSquare.Text.Equals("O") && !currentSquare.Text.Equals("K"))
+                    if (!currentSquare.CoinType.Equals(Coin.coinType.O) && !currentSquare.CoinType.Equals(Coin.coinType.K))
                     {
                         currentSquare.Enabled = false;
                     }
@@ -350,7 +373,7 @@ namespace WindowsUI
                 }
                 else
                 {
-                    if (!currentSquare.Text.Equals("X") && !currentSquare.Text.Equals("U"))
+                    if (!currentSquare.CoinType.Equals(Coin.coinType.X) && !currentSquare.CoinType.Equals(Coin.coinType.U))
                     {
                         currentSquare.Enabled = false;
                     }
@@ -381,11 +404,12 @@ namespace WindowsUI
         private void moveSoldierInBoard(CheckersCheckBox i_MoveFrom, CheckersCheckBox i_MoveTo)
         {
             //i_MoveFrom.toggleBackgroundImage(null, null);
-            i_MoveTo.Text = i_MoveFrom.Text;
-            i_MoveFrom.Text = string.Empty;
+            //i_MoveTo.Text = i_MoveFrom.Text;
+            //i_MoveFrom.Text = string.Empty;
             i_MoveTo.CoinType = i_MoveFrom.CoinType;
+            i_MoveFrom.CoinType = null;
 
-            i_MoveTo.BackgroundImage = i_MoveFrom.BackgroundImage; 
+            i_MoveTo.BackgroundImage = i_MoveFrom.BackgroundImage;
             i_MoveTo.BackgroundImageLayout = ImageLayout.Stretch;
             i_MoveFrom.BackgroundImage = null;
         }

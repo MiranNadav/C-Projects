@@ -255,6 +255,7 @@ namespace B18_Ex02
             if (!gameIsOver)
             {
                 char currentUserCoinType = currentCoin.Type;
+                
 
                 m_PlayingBoard.MoveCoinInBoard(this.m_CurrentMove);
 

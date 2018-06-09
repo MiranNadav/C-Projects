@@ -163,6 +163,17 @@ namespace B18_Ex02
         public static bool IsTryingToJump(PlayerMove i_ParseMove, string i_CoinType)
         {
             char coinType = Convert.ToChar(i_CoinType);
+            return isTryingToJump(i_ParseMove, coinType);
+        }
+
+        public static bool IsTryingToJump(PlayerMove i_ParseMove, Coin.coinType? i_CoinType)
+        {
+            char coinType = i_CoinType == Coin.coinType.O ? 'O' : 'X';
+            return isTryingToJump(i_ParseMove, coinType);
+        }
+
+        private static bool isTryingToJump(PlayerMove i_ParseMove, char coinType)
+        {
             bool isJumpByTwoSquares = true;
             if (coinType.Equals('U') || coinType.Equals('K'))
             {

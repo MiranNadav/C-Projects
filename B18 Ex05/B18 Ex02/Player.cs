@@ -13,11 +13,13 @@ namespace B18_Ex02
         private char m_CoinType;
         private bool m_IsComputer = false;
         private int m_TotalNumberOfPoints = 0;
+        private Coin.coinType m_Type;
 
         public Player(string i_UserName, char i_CoinType)
         {
             this.m_Name = i_UserName;
             this.m_CoinType = i_CoinType;
+            this.m_Type = m_CoinType.Equals('O') ? Coin.coinType.O : Coin.coinType.X;
         }
 
         public Player()
@@ -75,6 +77,14 @@ namespace B18_Ex02
             set
             {
                 this.m_Name = value;
+            }
+        }
+
+        public Coin.coinType Type
+        {
+            get
+            {
+                return m_Type;
             }
         }
     }

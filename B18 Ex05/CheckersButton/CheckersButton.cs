@@ -31,7 +31,6 @@ namespace CheckersComponents
         {
             this.Appearance = Appearance.Button;
             base.Click += new EventHandler(toggleBackgroundColor);
-            //base.Click += new EventHandler(toggleBackgroundImage);
         }
 
         private void toggleBackgroundColor(object sender, EventArgs e)
@@ -45,61 +44,6 @@ namespace CheckersComponents
                 BackColor = Color.White;
             }
         }
-
-        public void toggleBackgroundImage(object sender, EventArgs e)
-        {
-            if (m_CoinType == Coin.coinType.O)
-            {
-
-                if (BackColor == Color.Blue)//(BackgroundImage == Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Black.jpg"))
-                {
-                    BackgroundImage = Image.FromFile(@"C:\Users\nmiran\Documents\Repositories\C#\B18 Ex05\Graphics\Chip_Black_Blue.jpg");
-                }
-                else
-                {
-                    BackgroundImage = Image.FromFile(@"C:\Users\nmiran\Documents\Repositories\C#\B18 Ex05\Graphics\Chip-Black.jpg");
-                }
-            }
-            else if(m_CoinType == Coin.coinType.X)
-            {
-                if (BackColor == Color.Blue)//(BackgroundImage == Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Red.jpg"))
-                {
-                    BackgroundImage = Image.FromFile(@"C:\Users\nmiran\Documents\Repositories\C#\B18 Ex05\Graphics\Chip-Red-Blue.jpg");
-                }
-                else
-                {
-                    BackgroundImage = Image.FromFile(@"C:\Users\nmiran\Documents\Repositories\C#\B18 Ex05\Graphics\Chip-Red.jpg");
-                }
-            }
-        }
-
-        //public void toggleBackgroundImage()
-        //{
-        //    if (m_CoinType == Coin.coinType.O)
-        //    {
-
-        //        if (BackColor == Color.Blue)//(BackgroundImage == Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Black.jpg"))
-        //        {
-        //            BackgroundImage = Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip_Black_Blue.jpg");
-        //        }
-        //        else
-        //        {
-        //            BackgroundImage = Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Black.jpg");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (BackColor == Color.Blue)//(BackgroundImage == Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Red.jpg"))
-        //        {
-        //            BackgroundImage = Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Red-Blue.jpg");
-        //        }
-        //        else
-        //        {
-        //            BackgroundImage = Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Red.jpg");
-        //        }
-        //    }
-        //}
-
 
         public Coin.coinType? CoinType
         {
