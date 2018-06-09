@@ -24,6 +24,22 @@ namespace B18_Ex02
             }
         }
 
+        public Player FirstPlayer
+        {
+            set
+            {
+                m_FirstPlayer = value;
+            }
+        }
+
+        public Player SecondPlayer
+        {
+            set
+            {
+                m_SecondPlayer = value;
+            }
+        }
+
         public int FirstPlayerCurrentPoints
         {
             get
@@ -98,8 +114,8 @@ namespace B18_Ex02
         private int calcUserPoints(Player i_CurrentPlayer, Board i_Board)
         {
             int totalPoints = 0;
-            ArrayList firstUserCoins = i_Board.GetUserCoins(i_CurrentPlayer.CoinType);
-            foreach (Coin coin in firstUserCoins)
+            ArrayList currentPlayerCoins = i_Board.GetUserCoins(i_CurrentPlayer.CoinType);
+            foreach (Coin coin in currentPlayerCoins)
             {
                 totalPoints += coin.IsKing ? 4 : 1;
             }

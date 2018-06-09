@@ -16,7 +16,6 @@ namespace WindowsUI
         public GameSettingsForm()
         {
             InitializeComponent();
-
         }
 
         private void doneButton_Click(object sender, EventArgs e)
@@ -25,7 +24,6 @@ namespace WindowsUI
             bool isComputer = !SecondPlayerNameTextBox.Enabled;
             CheckersBoardForm checkersBoardForm = new CheckersBoardForm(Player1Name, Player2Name, SelectedBoardSize, isComputer);
             checkersBoardForm.ShowDialog();
-
         }
 
         private void checkBox_Checked(object sender, EventArgs e)

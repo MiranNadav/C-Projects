@@ -36,7 +36,7 @@ namespace B18_Ex02
 
             set
             {
-                this.m_TotalNumberOfPoints += value;
+                this.m_TotalNumberOfPoints = value;
             }
         }
 
