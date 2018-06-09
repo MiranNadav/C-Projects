@@ -16,12 +16,12 @@ namespace WindowsUI
     {
         string m_FirstPlayerName;
         string m_SecondPlayerName;
-        int m_BoardSize;
         CheckersCheckBox m_CurrentCheckBoxChecked;
         GameManager m_GameManager;
         List<PlayerMove> m_PossibleMoves;
         List<CheckersCheckBox> m_NextPossibleSquares;
         List<CheckersCheckBox> m_CheckersCheckBoxList;
+        int m_BoardSize;
         int m_FirstPlayerScore = 0;
         int m_SecondPlayerScore = 0;
 
@@ -31,6 +31,7 @@ namespace WindowsUI
             m_GameManager = new GameManager(m_BoardSize, i_FirstPlayerName, i_SecondPlayerName);
             m_FirstPlayerName = i_FirstPlayerName;
             m_SecondPlayerName = i_SecondPlayerName;
+
             if (i_IsComputer)
             {
                 m_GameManager.SecondPlayer.IsComputer = true;
@@ -130,9 +131,22 @@ namespace WindowsUI
                         checkersCheckBox.Size = new System.Drawing.Size(50, 50);
                         checkersCheckBox.Square = null;
                         checkersCheckBox.TabIndex = 67;
+
                         if (m_GameManager.Board.BoardArray[i, j] != null)
                         {
                             checkersCheckBox.Text = m_GameManager.Board.BoardArray[i, j].Type + "";
+                            checkersCheckBox.CoinType = m_GameManager.Board.BoardArray[i, j].CoinType;
+
+                            if (checkersCheckBox.CoinType == Coin.coinType.O)
+                            {
+                                checkersCheckBox.BackgroundImage = Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Black.jpg");
+                            }
+                            else
+                            {
+                                checkersCheckBox.BackgroundImage = Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Red.jpg");
+                            }
+
+                            checkersCheckBox.BackgroundImageLayout = ImageLayout.Stretch;
                         }
                         checkersCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                         checkersCheckBox.UseVisualStyleBackColor = false;
@@ -151,7 +165,7 @@ namespace WindowsUI
         private void validateClick(object sender, EventArgs e)
         {
             m_PossibleMoves = m_GameManager.getAllowedMoves((sender as CheckersCheckBox).Name);
-            
+
             if (m_CurrentCheckBoxChecked == null)
             {
                 m_CurrentCheckBoxChecked = sender as CheckersCheckBox;
@@ -175,6 +189,7 @@ namespace WindowsUI
         private void makeMoveInBoard(object sender)
         {
             m_CurrentCheckBoxChecked.BackColor = Color.White;
+            //m_CurrentCheckBoxChecked.toggleBackgroundImage();
             CheckersCheckBox squareToMoveTo = (sender as CheckersCheckBox);
             squareToMoveTo.BackColor = Color.White;
             //TODO: change name so it is clear that this makes the move in the logic 
@@ -365,8 +380,14 @@ namespace WindowsUI
 
         private void moveSoldierInBoard(CheckersCheckBox i_MoveFrom, CheckersCheckBox i_MoveTo)
         {
+            i_MoveFrom.toggleBackgroundImage(null, null);
             i_MoveTo.Text = i_MoveFrom.Text;
             i_MoveFrom.Text = string.Empty;
+            i_MoveTo.CoinType = i_MoveFrom.CoinType;
+
+            i_MoveTo.BackgroundImage = i_MoveFrom.BackgroundImage; 
+            i_MoveTo.BackgroundImageLayout = ImageLayout.Stretch;
+            i_MoveFrom.BackgroundImage = null;
         }
 
         private CheckersCheckBox getCheckersCheckBoxByName(string i_CheckBoxName)
@@ -420,6 +441,7 @@ namespace WindowsUI
                 if (currentSquare.Name.Equals(i_SquareToClear.getSquare()))
                 {
                     currentSquare.Text = string.Empty;
+                    currentSquare.BackgroundImage = null;
                 }
             }
         }
