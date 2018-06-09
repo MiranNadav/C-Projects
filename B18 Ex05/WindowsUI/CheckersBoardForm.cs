@@ -139,11 +139,11 @@ namespace WindowsUI
 
                             if (checkersCheckBox.CoinType == Coin.coinType.O)
                             {
-                                checkersCheckBox.BackgroundImage = Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Black.jpg");
+                                checkersCheckBox.BackgroundImage = Image.FromFile(@"C:\Users\nmiran\Documents\Repositories\C#\B18 Ex05\Graphics\Chip-Black.png");
                             }
                             else
                             {
-                                checkersCheckBox.BackgroundImage = Image.FromFile(@"C:\Users\shuhs\Documents\GitHub\C-Projects\B18 Ex05\Graphics\Chip-Red.jpg");
+                                checkersCheckBox.BackgroundImage = Image.FromFile(@"C:\Users\nmiran\Documents\Repositories\C#\B18 Ex05\Graphics\Chip-Red.png");
                             }
 
                             checkersCheckBox.BackgroundImageLayout = ImageLayout.Stretch;
@@ -380,7 +380,7 @@ namespace WindowsUI
 
         private void moveSoldierInBoard(CheckersCheckBox i_MoveFrom, CheckersCheckBox i_MoveTo)
         {
-            i_MoveFrom.toggleBackgroundImage(null, null);
+            //i_MoveFrom.toggleBackgroundImage(null, null);
             i_MoveTo.Text = i_MoveFrom.Text;
             i_MoveFrom.Text = string.Empty;
             i_MoveTo.CoinType = i_MoveFrom.CoinType;
