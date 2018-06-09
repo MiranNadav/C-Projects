@@ -281,6 +281,7 @@ namespace WindowsUI
                     Square middleSquare = m_GameManager.CurrentMove.calculateMiddleSquare();
                     clearSquare(middleSquare);
                 }
+
                 moveSoldierInBoard(moveFrom, moveTo);
 
                 if (m_GameManager.NewKingWasMade)
@@ -464,8 +465,9 @@ namespace WindowsUI
             {
                 if (currentSquare.Name.Equals(i_SquareToClear.getSquare()))
                 {
-                    currentSquare.Text = string.Empty;
+                    //currentSquare.Text = string.Empty;
                     currentSquare.BackgroundImage = null;
+                    currentSquare.CoinType = null;
                 }
             }
         }
