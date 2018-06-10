@@ -6,7 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 using System.Windows.Forms;
+using WindowsUI.Properties;
+
 
 namespace WindowsUI
 {
@@ -15,6 +18,8 @@ namespace WindowsUI
         public EndMatchForm()
         {
             InitializeComponent();
+            SoundPlayer winningSound = new SoundPlayer(Resources.WinningSound);
+            winningSound.Play();
         }
     }
 }

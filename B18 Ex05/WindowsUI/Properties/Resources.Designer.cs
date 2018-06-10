@@ -71,6 +71,15 @@ namespace WindowsUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream BoardHit {
+            get {
+                return ResourceManager.GetStream("BoardHit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Chip_Black {
@@ -87,6 +96,15 @@ namespace WindowsUI.Properties {
             get {
                 object obj = ResourceManager.GetObject("Chip_Red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream HittingBoard {
+            get {
+                return ResourceManager.GetStream("HittingBoard", resourceCulture);
             }
         }
         
@@ -117,6 +135,33 @@ namespace WindowsUI.Properties {
             get {
                 object obj = ResourceManager.GetObject("King_Red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream KingSound {
+            get {
+                return ResourceManager.GetStream("KingSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream PieceTouchingBoard {
+            get {
+                return ResourceManager.GetStream("PieceTouchingBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream WinningSound {
+            get {
+                return ResourceManager.GetStream("WinningSound", resourceCulture);
             }
         }
     }

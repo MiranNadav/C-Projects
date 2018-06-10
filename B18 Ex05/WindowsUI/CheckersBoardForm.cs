@@ -10,21 +10,25 @@ using System.Windows.Forms;
 using CheckersComponents;
 using B18_Ex02;
 using WindowsUI.Properties;
+using System.Media;
 
 namespace WindowsUI
 {
     public partial class CheckersBoardForm : Form
     {
-        string m_FirstPlayerName;
-        string m_SecondPlayerName;
-        CheckersCheckBox m_CurrentCheckBoxChecked;
-        GameManager m_GameManager;
-        List<PlayerMove> m_PossibleMoves;
-        List<CheckersCheckBox> m_NextPossibleSquares;
-        List<CheckersCheckBox> m_CheckersCheckBoxList;
-        int m_BoardSize;
-        int m_FirstPlayerScore = 0;
-        int m_SecondPlayerScore = 0;
+        private string m_FirstPlayerName;
+        private string m_SecondPlayerName;
+        private CheckersButton m_CurrentCheckBoxChecked;
+        private GameManager m_GameManager;
+        private List<PlayerMove> m_PossibleMoves;
+        private List<CheckersButton> m_NextPossibleSquares;
+        private List<CheckersButton> m_CheckersCheckBoxList;
+        private int m_BoardSize;
+
+        private SoundPlayer m_WinningSound;
+        private SoundPlayer m_PieceMovingSound;
+        private SoundPlayer m_KingSound;
+
 
         public CheckersBoardForm(string i_FirstPlayerName, string i_SecondPlayerName, int i_BoardSize, bool i_IsComputer)
         {
@@ -32,6 +36,9 @@ namespace WindowsUI
             m_GameManager = new GameManager(m_BoardSize, i_FirstPlayerName, i_SecondPlayerName);
             m_FirstPlayerName = i_FirstPlayerName;
             m_SecondPlayerName = i_SecondPlayerName;
+            m_WinningSound = new SoundPlayer(Resources.WinningSound);
+            m_PieceMovingSound = new SoundPlayer(Resources.BoardHit);
+            m_KingSound = new SoundPlayer(Resources.KingSound);
 
             if (i_IsComputer)
             {
@@ -52,12 +59,12 @@ namespace WindowsUI
         {
             foreach (Control control in this.Controls)
             {
-                if (control is CheckersCheckBox)
+                if (control is CheckersButton)
                 {
-                    if ((control as CheckersCheckBox).BackColor == Color.White)
+                    if ((control as CheckersButton).BackColor == Color.White)
                     {
-                        (control as CheckersCheckBox).Click += new EventHandler(validateClick);
-                        m_CheckersCheckBoxList.Add(control as CheckersCheckBox);
+                        (control as CheckersButton).Click += new EventHandler(validateClick);
+                        m_CheckersCheckBoxList.Add(control as CheckersButton);
                     }
                 }
             }
@@ -67,18 +74,15 @@ namespace WindowsUI
         {
             this.Text = "Damka";
             this.Icon = Resources.IconKing;
-            m_CheckersCheckBoxList = new List<CheckersCheckBox>();
-            m_NextPossibleSquares = new List<CheckersCheckBox>();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            m_CheckersCheckBoxList = new List<CheckersButton>();
+            m_NextPossibleSquares = new List<CheckersButton>();
             this.Controls.Clear();
-            //TODO: this is good for 6 X 6 need to add to other sizes 
-            //this.Size = new Size(450, 420);
-            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
-
             this.Size = new Size((m_BoardSize + 2) * 50, (m_BoardSize + 2) * 50);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
-            this.player1Name = new System.Windows.Forms.Label();
-            this.player2Name = new System.Windows.Forms.Label();
+            this.player1Name = new Label();
+            this.player2Name = new Label();
             // 
             // player1Name
             // 
@@ -99,18 +103,25 @@ namespace WindowsUI
             this.player2Name.TabIndex = 1;
             this.player2Name.Text = m_SecondPlayerName + ": " + m_GameManager.SecondPlayer.TotalNumberOfPoints;
 
+            this.muteSounds = new CheckBox();
+            muteSounds.Text = "Mute";
+            muteSounds.Top = player1Name.Top - 4;//new Point(player1Name.Top, player1Name.Left);
+            muteSounds.Left = player1Name.Left - 70;//new Point(player1Name.Top, player1Name.Left);
+
             this.Controls.Add(player1Name);
             this.Controls.Add(player2Name);
+            this.Controls.Add(muteSounds);
 
             for (int i = 0; i < m_BoardSize; i++)
             {
                 for (int j = 0; j < m_BoardSize; j++)
                 {
-                    CheckersCheckBox checkersCheckBox = new CheckersCheckBox();
+                    CheckersButton checkersCheckBox = new CheckersButton();
                     char row = PlaceIndexConvertor.GetSmallCharByIndex(i);
                     char column = PlaceIndexConvertor.GetCapitalCharByIndex(j);
                     checkersCheckBox.Square = new Square(column, row);
                     this.Controls.Add(checkersCheckBox);
+
                     if ((i + j) % 2 == 0)
                     {
                         checkersCheckBox.BackColor = System.Drawing.Color.Black;
@@ -167,18 +178,18 @@ namespace WindowsUI
 
         private void validateClick(object sender, EventArgs e)
         {
-            m_PossibleMoves = m_GameManager.getAllowedMoves((sender as CheckersCheckBox).Name);
+            m_PossibleMoves = m_GameManager.getAllowedMoves((sender as CheckersButton).Name);
 
             if (m_CurrentCheckBoxChecked == null)
             {
-                m_CurrentCheckBoxChecked = sender as CheckersCheckBox;
+                m_CurrentCheckBoxChecked = sender as CheckersButton;
 
                 disableAllButChecked();
                 showAvailableMoves();
             }
             else
             {
-                if ((sender as CheckersCheckBox) == m_CurrentCheckBoxChecked)
+                if ((sender as CheckersButton) == m_CurrentCheckBoxChecked)
                 {
                     cancelClick();
                 }
@@ -193,10 +204,9 @@ namespace WindowsUI
         {
             m_CurrentCheckBoxChecked.BackColor = Color.White;
             //m_CurrentCheckBoxChecked.toggleBackgroundImage();
-            CheckersCheckBox squareToMoveTo = (sender as CheckersCheckBox);
+            CheckersButton squareToMoveTo = (sender as CheckersButton);
             squareToMoveTo.BackColor = Color.White;
             //TODO: change name so it is clear that this makes the move in the logic 
-
 
             PlayerMove currentMove = new PlayerMove(m_CurrentCheckBoxChecked.Name + ">" + squareToMoveTo.Name);
             if (MovementValidation.IsTryingToJump(currentMove, m_CurrentCheckBoxChecked.CoinType))
@@ -219,9 +229,9 @@ namespace WindowsUI
                 else
                 {
                     squareToMoveTo.BackgroundImage = Resources.King_Red;
-
                 }
             }
+
             if (m_GameManager.ThereAreMoreJumps)
             {
                 disableAllButChecked();
@@ -230,6 +240,8 @@ namespace WindowsUI
             {
                 disableAllNonCurrentPlayerSquares();
             }
+
+            playSounds();
 
             m_CurrentCheckBoxChecked = null;
 
@@ -246,6 +258,7 @@ namespace WindowsUI
             this.player1Name.Text = m_FirstPlayerName + ": " + m_GameManager.FirstPlayer.TotalNumberOfPoints;
             this.player2Name.Text = m_SecondPlayerName + ": " + m_GameManager.SecondPlayer.TotalNumberOfPoints;
             DialogResult shouldStartNewMatch;
+            //m_WinningSound.Play();
 
             if (m_GameManager.MatchInformation.MatchWinner == null)
             {
@@ -274,8 +287,8 @@ namespace WindowsUI
             while (m_GameManager.CurrentPlayer.IsComputer)
             {
                 m_GameManager.matchManager(string.Empty);
-                CheckersCheckBox moveFrom = getCheckersCheckBoxByName(m_GameManager.CurrentMove.CurrentSquare.getSquare());
-                CheckersCheckBox moveTo = getCheckersCheckBoxByName(m_GameManager.CurrentMove.NextSquare.getSquare());
+                CheckersButton moveFrom = getCheckersCheckBoxByName(m_GameManager.CurrentMove.CurrentSquare.getSquare());
+                CheckersButton moveTo = getCheckersCheckBoxByName(m_GameManager.CurrentMove.NextSquare.getSquare());
 
                 if (MovementValidation.IsTryingToJump(m_GameManager.CurrentMove, getCheckersCheckBoxByName(m_GameManager.CurrentMove.CurrentSquare.getSquare()).CoinType))
                 {
@@ -295,9 +308,9 @@ namespace WindowsUI
                     else
                     {
                         moveTo.BackgroundImage = Resources.King_Red;
-
                     }
                 }
+
                 if (m_GameManager.ThereAreMoreJumps)
                 {
                     disableAllButChecked();
@@ -324,7 +337,7 @@ namespace WindowsUI
             {
                 foreach (Control control in this.Controls)
                 {
-                    CheckersCheckBox currentCheckerSquare = (control as CheckersCheckBox);
+                    CheckersButton currentCheckerSquare = (control as CheckersButton);
                     if (currentCheckerSquare != null)
                     {
                         //Change string comparison
@@ -357,7 +370,7 @@ namespace WindowsUI
         //TODO: check what is the best way to do this
         private void disableAllNonCurrentPlayerSquares()
         {
-            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            foreach (CheckersButton currentSquare in m_CheckersCheckBoxList)
             {
 
                 currentSquare.Checked = false;
@@ -389,7 +402,7 @@ namespace WindowsUI
 
         private void enableAllButtons()
         {
-            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            foreach (CheckersButton currentSquare in m_CheckersCheckBoxList)
             {
                 currentSquare.Enabled = true;
             }
@@ -397,13 +410,13 @@ namespace WindowsUI
 
         private void paintAllInWhite()
         {
-            foreach (CheckersCheckBox checkersCheckBox in m_CheckersCheckBoxList)
+            foreach (CheckersButton checkersCheckBox in m_CheckersCheckBoxList)
             {
                 checkersCheckBox.BackColor = Color.White;
             }
         }
 
-        private void moveSoldierInBoard(CheckersCheckBox i_MoveFrom, CheckersCheckBox i_MoveTo)
+        private void moveSoldierInBoard(CheckersButton i_MoveFrom, CheckersButton i_MoveTo)
         {
             //i_MoveFrom.toggleBackgroundImage(null, null);
             //i_MoveTo.Text = i_MoveFrom.Text;
@@ -414,13 +427,32 @@ namespace WindowsUI
             i_MoveTo.BackgroundImage = i_MoveFrom.BackgroundImage;
             i_MoveTo.BackgroundImageLayout = ImageLayout.Stretch;
             i_MoveFrom.BackgroundImage = null;
+            //playSounds();
         }
 
-        private CheckersCheckBox getCheckersCheckBoxByName(string i_CheckBoxName)
+        private void playSounds()
         {
-            CheckersCheckBox foundCheckBox = null;
+            if (!this.muteSounds.Checked)
+            {
+                m_PieceMovingSound.Play();
 
-            foreach (CheckersCheckBox currentCheckBox in m_CheckersCheckBoxList)
+                if (m_GameManager.NewKingWasMade)
+                {
+                    m_KingSound.Play();
+                }
+
+                if (m_GameManager.GameIsOver)
+                {
+                    m_WinningSound.Play();
+                }
+            }
+        }
+
+        private CheckersButton getCheckersCheckBoxByName(string i_CheckBoxName)
+        {
+            CheckersButton foundCheckBox = null;
+
+            foreach (CheckersButton currentCheckBox in m_CheckersCheckBoxList)
             {
                 if (currentCheckBox.Name.Equals(i_CheckBoxName))
                 {
@@ -449,7 +481,7 @@ namespace WindowsUI
 
         private void disableAllButChecked()
         {
-            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            foreach (CheckersButton currentSquare in m_CheckersCheckBoxList)
             {
                 if (!currentSquare.Checked)
                 {
@@ -462,7 +494,7 @@ namespace WindowsUI
 
         private void clearSquare(Square i_SquareToClear)
         {
-            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            foreach (CheckersButton currentSquare in m_CheckersCheckBoxList)
             {
                 if (currentSquare.Name.Equals(i_SquareToClear.getSquare()))
                 {
@@ -475,7 +507,7 @@ namespace WindowsUI
 
         private void unCheckAllSqaures()
         {
-            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            foreach (CheckersButton currentSquare in m_CheckersCheckBoxList)
             {
                 currentSquare.Checked = false;
             }
