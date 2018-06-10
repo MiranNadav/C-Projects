@@ -42,7 +42,9 @@ namespace WindowsUI
         }
 
         public TextBox SecondPlayerNameTextBox { get => secondPlayerNameTextBox; }
+
         public string Player1Name { get => firstPlayerNameTextBox.Text; }
+
         public string Player2Name { get => secondPlayerNameTextBox.Text; }
 
         public int SelectedBoardSize

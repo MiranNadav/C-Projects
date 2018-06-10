@@ -51,12 +51,6 @@
     <Compile Include="CheckersBoardForm.Designer.cs">
       <DependentUpon>CheckersBoardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EndMatchForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EndMatchForm.Designer.cs">
-      <DependentUpon>EndMatchForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="GameSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,9 +61,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CheckersBoardForm.resx">
       <DependentUpon>CheckersBoardForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EndMatchForm.resx">
-      <DependentUpon>EndMatchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GameSettingsForm.resx">
       <DependentUpon>GameSettingsForm.cs</DependentUpon>
@@ -108,18 +99,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Graphics\Chip-Black.jpg" />
-    <Content Include="Graphics\Chip-Red-Blue.jpg" />
-    <Content Include="Graphics\Chip-Red.jpg" />
-    <Content Include="Graphics\Chip_Black_Blue.jpg" />
     <None Include="Resources\BoardHit.wav" />
     <None Include="Resources\IconKing.ico" />
-    <None Include="Resources\WinningSound1.wav" />
-    <None Include="Resources\KingSound1.wav" />
-    <None Include="Resources\HittingBoard1.wav" />
     <None Include="Resources\WinningSound.wav" />
     <None Include="Resources\KingSound.wav" />
-    <None Include="Resources\HittingBoard.wav" />
     <None Include="Resources\King-Red.png" />
     <None Include="Resources\King-Black.png" />
     <None Include="Resources\Chip-Red.png" />

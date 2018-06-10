@@ -137,7 +137,7 @@ namespace B18_Ex02
             {
                 if (i_CurrentSquare.Equals(move.CurrentSquare))
                 {
-                    if (Math.Abs(i_CurrentSquare.ColumnIndex- move.NextColIndex) == 2 && Math.Abs(i_CurrentSquare.RowIndex - move.NextRowIndex) == 2)
+                    if (Math.Abs(i_CurrentSquare.ColumnIndex - move.NextColIndex) == 2 && Math.Abs(i_CurrentSquare.RowIndex - move.NextRowIndex) == 2)
                     {
                         allPossibleJumps.Add(move);
                     }

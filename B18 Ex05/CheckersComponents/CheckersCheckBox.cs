@@ -9,10 +9,23 @@ using B18_Ex02;
 
 namespace CheckersComponents
 {
-    public class CheckersCheckBox : CheckBox
+    public class CheckersSquare : CheckBox
     {
         private Square m_Square;
         private Coin.coinType? m_CoinType;
+        private PictureBox m_CoinPicture;
+
+        public PictureBox CoinPicture
+        {
+            get
+            {
+                return m_CoinPicture;
+            }
+            set
+            {
+                m_CoinPicture = value;
+            }
+        }
 
         public Square Square
         {
@@ -27,7 +40,7 @@ namespace CheckersComponents
 
         }
 
-        public CheckersCheckBox()
+        public CheckersSquare()
         {
             this.Appearance = Appearance.Button;
             base.Click += new EventHandler(toggleBackgroundColor);

@@ -48,6 +48,7 @@ namespace B18_Ex02
             {
                 return this.m_IsComputer;
             }
+
             set
             {
                 m_IsComputer = value;

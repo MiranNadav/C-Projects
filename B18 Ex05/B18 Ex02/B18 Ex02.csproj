@@ -54,7 +54,6 @@
     <Compile Include="MovementValidation.cs" />
     <Compile Include="MatchInformation.cs" />
     <Compile Include="PossibleMoves.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="PlaceIndexConvertor.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerMove.cs" />

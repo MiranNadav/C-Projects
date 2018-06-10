@@ -2,9 +2,8 @@
 
 namespace WindowsUI
 {
-    partial class CheckersBoardForm
+    public partial class CheckersBoardForm
     {
-
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -20,6 +19,7 @@ namespace WindowsUI
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -52,24 +52,24 @@ namespace WindowsUI
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
-            this.Ef = new CheckersComponents.CheckersCheckBox();
-            this.Cf = new CheckersComponents.CheckersCheckBox();
-            this.Af = new CheckersComponents.CheckersCheckBox();
-            this.Be = new CheckersComponents.CheckersCheckBox();
-            this.De = new CheckersComponents.CheckersCheckBox();
-            this.Fe = new CheckersComponents.CheckersCheckBox();
-            this.Ed = new CheckersComponents.CheckersCheckBox();
-            this.Cd = new CheckersComponents.CheckersCheckBox();
-            this.Ad = new CheckersComponents.CheckersCheckBox();
-            this.Bc = new CheckersComponents.CheckersCheckBox();
-            this.Dc = new CheckersComponents.CheckersCheckBox();
-            this.Fc = new CheckersComponents.CheckersCheckBox();
-            this.Eb = new CheckersComponents.CheckersCheckBox();
-            this.Cb = new CheckersComponents.CheckersCheckBox();
-            this.Ab = new CheckersComponents.CheckersCheckBox();
-            this.Ba = new CheckersComponents.CheckersCheckBox();
-            this.Da = new CheckersComponents.CheckersCheckBox();
-            this.Fa = new CheckersComponents.CheckersCheckBox();
+            this.Ef = new CheckersComponents.CheckersSquare();
+            this.Cf = new CheckersComponents.CheckersSquare();
+            this.Af = new CheckersComponents.CheckersSquare();
+            this.Be = new CheckersComponents.CheckersSquare();
+            this.De = new CheckersComponents.CheckersSquare();
+            this.Fe = new CheckersComponents.CheckersSquare();
+            this.Ed = new CheckersComponents.CheckersSquare();
+            this.Cd = new CheckersComponents.CheckersSquare();
+            this.Ad = new CheckersComponents.CheckersSquare();
+            this.Bc = new CheckersComponents.CheckersSquare();
+            this.Dc = new CheckersComponents.CheckersSquare();
+            this.Fc = new CheckersComponents.CheckersSquare();
+            this.Eb = new CheckersComponents.CheckersSquare();
+            this.Cb = new CheckersComponents.CheckersSquare();
+            this.Ab = new CheckersComponents.CheckersSquare();
+            this.Ba = new CheckersComponents.CheckersSquare();
+            this.Da = new CheckersComponents.CheckersSquare();
+            this.Fa = new CheckersComponents.CheckersSquare();
             this.SuspendLayout();
             // 
             // player1Name
@@ -592,30 +592,30 @@ namespace WindowsUI
         private Button button9;
         private Button button11;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private CheckersComponents.CheckersCheckBox Fa;
-        private CheckersComponents.CheckersCheckBox Da;
-        private CheckersComponents.CheckersCheckBox Ba;
-        private CheckersComponents.CheckersCheckBox Ab;
-        private CheckersComponents.CheckersCheckBox Cb;
-        private CheckersComponents.CheckersCheckBox Eb;
-        private CheckersComponents.CheckersCheckBox Ed;
-        private CheckersComponents.CheckersCheckBox Cd;
-        private CheckersComponents.CheckersCheckBox Ad;
-        private CheckersComponents.CheckersCheckBox Bc;
-        private CheckersComponents.CheckersCheckBox Dc;
-        private CheckersComponents.CheckersCheckBox Fc;
+        private CheckersComponents.CheckersSquare Fa;
+        private CheckersComponents.CheckersSquare Da;
+        private CheckersComponents.CheckersSquare Ba;
+        private CheckersComponents.CheckersSquare Ab;
+        private CheckersComponents.CheckersSquare Cb;
+        private CheckersComponents.CheckersSquare Eb;
+        private CheckersComponents.CheckersSquare Ed;
+        private CheckersComponents.CheckersSquare Cd;
+        private CheckersComponents.CheckersSquare Ad;
+        private CheckersComponents.CheckersSquare Bc;
+        private CheckersComponents.CheckersSquare Dc;
+        private CheckersComponents.CheckersSquare Fc;
         private Button button2;
         private Button button5;
         private Button button7;
         private Button button8;
         private Button button10;
         private Button button13;
-        private CheckersComponents.CheckersCheckBox Ef;
-        private CheckersComponents.CheckersCheckBox Cf;
-        private CheckersComponents.CheckersCheckBox Af;
-        private CheckersComponents.CheckersCheckBox Be;
-        private CheckersComponents.CheckersCheckBox De;
-        private CheckersComponents.CheckersCheckBox Fe;
+        private CheckersComponents.CheckersSquare Ef;
+        private CheckersComponents.CheckersSquare Cf;
+        private CheckersComponents.CheckersSquare Af;
+        private CheckersComponents.CheckersSquare Be;
+        private CheckersComponents.CheckersSquare De;
+        private CheckersComponents.CheckersSquare Fe;
         private Button button14;
         private Button button15;
         private Button button16;

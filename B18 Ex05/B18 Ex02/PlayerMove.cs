@@ -91,7 +91,7 @@ namespace B18_Ex02
 
         public override string ToString()
         {
-            return  m_CurrentSquare.getSquare() + ">" + m_NextSquare.getSquare();
+            return m_CurrentSquare.getSquare() + ">" + m_NextSquare.getSquare();
         }
     }
 }

@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Forms;
 using System.Drawing;
 
 namespace WindowsUI
 {
-    partial class GameSettingsForm
+    public partial class GameSettingsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -24,6 +23,7 @@ namespace WindowsUI
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -207,9 +207,5 @@ namespace WindowsUI
         private CheckBox secondPlayerCheckBox;
         private TextBox firstPlayerNameTextBox;
         private TextBox secondPlayerNameTextBox;
-
-       
-
     }
 }
-

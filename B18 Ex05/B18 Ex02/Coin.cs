@@ -20,7 +20,6 @@ namespace B18_Ex02
             O = 'O',
             K = 'K',
             U = 'U'
-
         }
 
         public Coin(char i_Row, char i_Column, char i_Type)
@@ -76,6 +75,7 @@ namespace B18_Ex02
             {
                 return m_CoinType;
             }
+
             set
             {
                 m_CoinType = value;

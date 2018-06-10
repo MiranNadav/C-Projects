@@ -7,72 +7,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CheckersComponents;
-using B18_Ex02;
-using WindowsUI.Properties;
 using System.Media;
+using CheckersComponents;
+using WindowsUI.Properties;
+using B18_Ex02;
 
 namespace WindowsUI
 {
     public partial class CheckersBoardForm : Form
     {
-        private string m_FirstPlayerName;
-        private string m_SecondPlayerName;
-        private CheckersCheckBox m_CurrentCheckBoxChecked;
-        private GameManager m_GameManager;
+        private readonly string r_FirstPlayerName;
+        private readonly string r_SecondPlayerName;
+        private readonly int r_BoardSize;
+        private readonly GameManager r_GameManager;
+        private readonly SoundPlayer r_WinningSound;
+        private readonly SoundPlayer r_PieceMovingSound;
+        private readonly SoundPlayer r_KingSound;
+        private CheckersSquare m_CurrentCheckBoxChecked;
         private List<PlayerMove> m_PossibleMoves;
-        private List<CheckersCheckBox> m_NextPossibleSquares;
-        private List<CheckersCheckBox> m_CheckersCheckBoxList;
-        private int m_BoardSize;
-
-        private SoundPlayer m_WinningSound;
-        private SoundPlayer m_PieceMovingSound;
-        private SoundPlayer m_KingSound;
-
-
-        private void Damka_Closing (Object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        private List<CheckersSquare> m_NextPossibleSquares;
+        private List<CheckersSquare> m_CheckersCheckBoxList;
 
         public CheckersBoardForm(string i_FirstPlayerName, string i_SecondPlayerName, int i_BoardSize, bool i_IsComputer)
         {
-            m_BoardSize = i_BoardSize;
-            m_GameManager = new GameManager(m_BoardSize, i_FirstPlayerName, i_SecondPlayerName);
-            m_FirstPlayerName = i_FirstPlayerName;
-            m_SecondPlayerName = i_SecondPlayerName;
-            m_WinningSound = new SoundPlayer(Resources.WinningSound);
-            m_PieceMovingSound = new SoundPlayer(Resources.BoardHit);
-            m_KingSound = new SoundPlayer(Resources.KingSound);
+            r_BoardSize = i_BoardSize;
+            r_GameManager = new GameManager(r_BoardSize, i_FirstPlayerName, i_SecondPlayerName);
+            r_FirstPlayerName = i_FirstPlayerName;
+            r_SecondPlayerName = i_SecondPlayerName;
+            r_WinningSound = new SoundPlayer(Resources.WinningSound);
+            r_PieceMovingSound = new SoundPlayer(Resources.BoardHit);
+            r_KingSound = new SoundPlayer(Resources.KingSound);
 
             if (i_IsComputer)
             {
-                m_GameManager.SecondPlayer.IsComputer = true;
+                r_GameManager.SecondPlayer.IsComputer = true;
             }
 
             initComponents();
-
-            //List<PlayerMove> possibleMoves = m_GameManager.getAllowedMoves();
-            //InitializeComponent();
-
-
-
-            //assignCheckersCheckBoxToEvent();
-        }
-
-        private void assignCheckersCheckBoxToEvent()
-        {
-            foreach (Control control in this.Controls)
-            {
-                if (control is CheckersCheckBox)
-                {
-                    if ((control as CheckersCheckBox).BackColor == Color.White)
-                    {
-                        (control as CheckersCheckBox).Click += new EventHandler(validate_Click);
-                        m_CheckersCheckBoxList.Add(control as CheckersCheckBox);
-                    }
-                }
-            }
         }
 
         private void initComponents()
@@ -81,33 +52,27 @@ namespace WindowsUI
             this.Icon = Resources.IconKing;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += new FormClosingEventHandler(Damka_Closing);
-            m_CheckersCheckBoxList = new List<CheckersCheckBox>();
-            m_NextPossibleSquares = new List<CheckersCheckBox>();
+            m_CheckersCheckBoxList = new List<CheckersSquare>();
+            m_NextPossibleSquares = new List<CheckersSquare>();
             this.Controls.Clear();
-            this.Size = new Size((m_BoardSize + 2) * 50 + 15, (m_BoardSize + 2) * 50);
+            this.Size = new Size(((r_BoardSize + 2) * 50) + 15, (r_BoardSize + 2) * 50);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
             this.player1Name = new Label();
-            this.player2Name = new Label();
-            // 
-            // player1Name
-            // 
             this.player1Name.AutoSize = true;
             this.player1Name.Top = 25;
-            this.player1Name.Left = (int)((m_BoardSize / 2 - (double)m_BoardSize / 4) * 50);
+            this.player1Name.Left = (int)(((r_BoardSize / 2) - ((double)r_BoardSize / 4)) * 50);
             this.player1Name.Name = "player1Name";
             this.player1Name.TabIndex = 0;
-            this.player1Name.Text = m_FirstPlayerName + ": " + m_GameManager.FirstPlayer.TotalNumberOfPoints;
+            this.player1Name.Text = r_FirstPlayerName + ": " + r_GameManager.FirstPlayer.TotalNumberOfPoints;
 
-            // 
-            // player2Name
-            // 
+            this.player2Name = new Label();
             this.player2Name.AutoSize = true;
             this.player2Name.Top = 25;
-            this.player2Name.Left = (int)((m_BoardSize - (double)m_BoardSize / 4) * 50);
+            this.player2Name.Left = (int)((r_BoardSize - ((double)r_BoardSize / 4)) * 50);
             this.player2Name.Name = "player2Name";
             this.player2Name.TabIndex = 1;
-            this.player2Name.Text = m_SecondPlayerName + ": " + m_GameManager.SecondPlayer.TotalNumberOfPoints;
+            this.player2Name.Text = r_SecondPlayerName + ": " + r_GameManager.SecondPlayer.TotalNumberOfPoints;
 
             this.muteSounds = new CheckBox();
             muteSounds.Text = "Mute";
@@ -118,11 +83,11 @@ namespace WindowsUI
             this.Controls.Add(player2Name);
             this.Controls.Add(muteSounds);
 
-            for (int i = 0; i < m_BoardSize; i++)
+            for (int i = 0; i < r_BoardSize; i++)
             {
-                for (int j = 0; j < m_BoardSize; j++)
+                for (int j = 0; j < r_BoardSize; j++)
                 {
-                    CheckersCheckBox checkersCheckBox = new CheckersCheckBox();
+                    CheckersSquare checkersCheckBox = new CheckersSquare();
                     char row = PlaceIndexConvertor.GetSmallCharByIndex(i);
                     char column = PlaceIndexConvertor.GetCapitalCharByIndex(j);
                     checkersCheckBox.Square = new Square(column, row);
@@ -148,9 +113,9 @@ namespace WindowsUI
                         checkersCheckBox.Size = new System.Drawing.Size(50, 50);
                         checkersCheckBox.Square = null;
 
-                        if (m_GameManager.Board.BoardArray[i, j] != null)
+                        if (r_GameManager.Board.BoardArray[i, j] != null)
                         {
-                            checkersCheckBox.CoinType = m_GameManager.Board.BoardArray[i, j].CoinType;
+                            checkersCheckBox.CoinType = r_GameManager.Board.BoardArray[i, j].CoinType;
 
                             if (checkersCheckBox.CoinType == Coin.coinType.O)
                             {
@@ -163,6 +128,7 @@ namespace WindowsUI
 
                             checkersCheckBox.BackgroundImageLayout = ImageLayout.Stretch;
                         }
+
                         checkersCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                         checkersCheckBox.UseVisualStyleBackColor = false;
                     }
@@ -170,25 +136,43 @@ namespace WindowsUI
             }
 
             assignCheckersCheckBoxToEvent();
-
             disableAllNonCurrentPlayerSquares();
+        }
 
+        private void Damka_Closing(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void assignCheckersCheckBoxToEvent()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is CheckersSquare)
+                {
+                    if ((control as CheckersSquare).BackColor == Color.White)
+                    {
+                        (control as CheckersSquare).Click += new EventHandler(validate_Click);
+                        m_CheckersCheckBoxList.Add(control as CheckersSquare);
+                    }
+                }
+            }
         }
 
         private void validate_Click(object sender, EventArgs e)
         {
-            m_PossibleMoves = m_GameManager.getAllowedMoves((sender as CheckersCheckBox).Name);
+            m_PossibleMoves = r_GameManager.getAllowedMoves((sender as CheckersSquare).Name);
 
             if (m_CurrentCheckBoxChecked == null)
             {
-                m_CurrentCheckBoxChecked = sender as CheckersCheckBox;
+                m_CurrentCheckBoxChecked = sender as CheckersSquare;
 
                 disableAllButChecked();
                 showAvailableMoves();
             }
             else
             {
-                if ((sender as CheckersCheckBox) == m_CurrentCheckBoxChecked)
+                if ((sender as CheckersSquare) == m_CurrentCheckBoxChecked)
                 {
                     cancelClick();
                 }
@@ -202,7 +186,7 @@ namespace WindowsUI
         private void makeMoveInBoard(object sender)
         {
             m_CurrentCheckBoxChecked.BackColor = Color.White;
-            CheckersCheckBox moveTo = (sender as CheckersCheckBox);
+            CheckersSquare moveTo = sender as CheckersSquare;
             moveTo.BackColor = Color.White;
 
             PlayerMove currentMove = new PlayerMove(m_CurrentCheckBoxChecked.Name + ">" + moveTo.Name);
@@ -212,16 +196,16 @@ namespace WindowsUI
                 clearSquare(middleSquare);
             }
 
-            m_GameManager.matchManager(currentMove.ToString());
-            moveSoldierInBoard(m_CurrentCheckBoxChecked, moveTo);
+            r_GameManager.matchManager(currentMove.ToString());
+            moveCoinInForm(m_CurrentCheckBoxChecked, moveTo);
             paintAllInWhite();
 
-            if (m_GameManager.NewKingWasMade)
+            if (r_GameManager.NewKingWasMade)
             {
                 changeCoinToKing(moveTo);
             }
 
-            if (m_GameManager.ThereAreMoreJumps)
+            if (r_GameManager.ThereAreMoreJumps)
             {
                 disableAllButChecked();
             }
@@ -236,7 +220,7 @@ namespace WindowsUI
 
             playComputerMove();
 
-            if (m_GameManager.GameIsOver)
+            if (r_GameManager.GameIsOver)
             {
                 gameOverOperation();
             }
@@ -244,26 +228,26 @@ namespace WindowsUI
 
         private void playComputerMove()
         {
-            while (m_GameManager.CurrentPlayer.IsComputer)
+            while (r_GameManager.CurrentPlayer.IsComputer)
             {
-                m_GameManager.matchManager(string.Empty);
-                CheckersCheckBox moveFrom = getCheckersCheckBoxByName(m_GameManager.CurrentMove.CurrentSquare.getSquare());
-                CheckersCheckBox moveTo = getCheckersCheckBoxByName(m_GameManager.CurrentMove.NextSquare.getSquare());
+                r_GameManager.matchManager(string.Empty);
+                CheckersSquare moveFrom = getCheckersCheckBoxByName(r_GameManager.CurrentMove.CurrentSquare.getSquare());
+                CheckersSquare moveTo = getCheckersCheckBoxByName(r_GameManager.CurrentMove.NextSquare.getSquare());
 
-                if (MovementValidation.IsTryingToJump(m_GameManager.CurrentMove, getCheckersCheckBoxByName(m_GameManager.CurrentMove.CurrentSquare.getSquare()).CoinType))
+                if (MovementValidation.IsTryingToJump(r_GameManager.CurrentMove, getCheckersCheckBoxByName(r_GameManager.CurrentMove.CurrentSquare.getSquare()).CoinType))
                 {
-                    Square middleSquare = m_GameManager.CurrentMove.calculateMiddleSquare();
+                    Square middleSquare = r_GameManager.CurrentMove.calculateMiddleSquare();
                     clearSquare(middleSquare);
                 }
 
-                moveSoldierInBoard(moveFrom, moveTo);
+                moveCoinInForm(moveFrom, moveTo);
 
-                if (m_GameManager.NewKingWasMade)
+                if (r_GameManager.NewKingWasMade)
                 {
                     changeCoinToKing(moveTo);
                 }
 
-                if (m_GameManager.ThereAreMoreJumps)
+                if (r_GameManager.ThereAreMoreJumps)
                 {
                     disableAllButChecked();
                 }
@@ -274,7 +258,23 @@ namespace WindowsUI
             }
         }
 
-        private static void changeCoinToKing(CheckersCheckBox squareToMoveTo)
+        private CheckersSquare getCheckersCheckBoxByName(string i_CheckBoxName)
+        {
+            CheckersSquare foundCheckBox = null;
+
+            foreach (CheckersSquare currentCheckBox in m_CheckersCheckBoxList)
+            {
+                if (currentCheckBox.Name.Equals(i_CheckBoxName))
+                {
+                    foundCheckBox = currentCheckBox;
+                    break;
+                }
+            }
+
+            return foundCheckBox;
+        }
+
+        private void changeCoinToKing(CheckersSquare squareToMoveTo)
         {
             squareToMoveTo.CoinType = squareToMoveTo.CoinType.Equals(Coin.coinType.O) ? Coin.coinType.K : Coin.coinType.U;
             if (squareToMoveTo.CoinType == Coin.coinType.K)
@@ -289,11 +289,11 @@ namespace WindowsUI
 
         private void gameOverOperation()
         {
-            this.player1Name.Text = m_FirstPlayerName + ": " + m_GameManager.FirstPlayer.TotalNumberOfPoints;
-            this.player2Name.Text = m_SecondPlayerName + ": " + m_GameManager.SecondPlayer.TotalNumberOfPoints;
+            this.player1Name.Text = r_FirstPlayerName + ": " + r_GameManager.FirstPlayer.TotalNumberOfPoints;
+            this.player2Name.Text = r_SecondPlayerName + ": " + r_GameManager.SecondPlayer.TotalNumberOfPoints;
             DialogResult shouldStartNewMatch;
 
-            if (m_GameManager.MatchInformation.MatchWinner == null)
+            if (r_GameManager.MatchInformation.MatchWinner == null)
             {
                 shouldStartNewMatch = ShowTieMessage();
             }
@@ -304,7 +304,7 @@ namespace WindowsUI
 
             if (shouldStartNewMatch == DialogResult.Yes)
             {
-                m_GameManager.startAnotherMatch();
+                r_GameManager.startAnotherMatch();
                 initComponents();
                 this.Show();
             }
@@ -315,20 +315,13 @@ namespace WindowsUI
             }
         }
 
-        private void cancelClick()
-        {
-            paintAllInWhite();
-            disableAllNonCurrentPlayerSquares();
-            m_CurrentCheckBoxChecked = null;
-        }
-
         private void showAvailableMoves()
         {
             foreach (PlayerMove possibleMove in m_PossibleMoves)
             {
                 foreach (Control control in this.Controls)
                 {
-                    CheckersCheckBox currentCheckerSquare = (control as CheckersCheckBox);
+                    CheckersSquare currentCheckerSquare = control as CheckersSquare;
                     if (currentCheckerSquare != null)
                     {
                         if (currentCheckerSquare.Name == possibleMove.NextSquare.getSquare())
@@ -347,10 +340,16 @@ namespace WindowsUI
             }
         }
 
+        private void cancelClick()
+        {
+            paintAllInWhite();
+            disableAllNonCurrentPlayerSquares();
+            m_CurrentCheckBoxChecked = null;
+        }
+
         private DialogResult ShowWinnerMessage()
         {
-
-            return MessageBox.Show(m_GameManager.MatchInformation.MatchWinner.Name + " Won!" + Environment.NewLine + "Another Round?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return MessageBox.Show(r_GameManager.MatchInformation.MatchWinner.Name + " Won!" + Environment.NewLine + "Another Round?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
         private DialogResult ShowTieMessage()
@@ -360,12 +359,11 @@ namespace WindowsUI
 
         private void disableAllNonCurrentPlayerSquares()
         {
-            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            foreach (CheckersSquare currentSquare in m_CheckersCheckBoxList)
             {
-
                 currentSquare.Checked = false;
 
-                if (m_GameManager.CurrentPlayer.Type == Coin.coinType.O)
+                if (r_GameManager.CurrentPlayer.Type == Coin.coinType.O)
                 {
                     if (!currentSquare.CoinType.Equals(Coin.coinType.O) && !currentSquare.CoinType.Equals(Coin.coinType.K))
                     {
@@ -392,13 +390,13 @@ namespace WindowsUI
 
         private void paintAllInWhite()
         {
-            foreach (CheckersCheckBox checkersCheckBox in m_CheckersCheckBoxList)
+            foreach (CheckersSquare checkersCheckBox in m_CheckersCheckBoxList)
             {
                 checkersCheckBox.BackColor = Color.White;
             }
         }
 
-        private void moveSoldierInBoard(CheckersCheckBox i_MoveFrom, CheckersCheckBox i_MoveTo)
+        private void moveCoinInForm(CheckersSquare i_MoveFrom, CheckersSquare i_MoveTo)
         {
             i_MoveTo.CoinType = i_MoveFrom.CoinType;
             i_MoveFrom.CoinType = null;
@@ -412,39 +410,23 @@ namespace WindowsUI
         {
             if (!this.muteSounds.Checked)
             {
-                m_PieceMovingSound.Play();
+                r_PieceMovingSound.Play();
 
-                if (m_GameManager.NewKingWasMade)
+                if (r_GameManager.NewKingWasMade)
                 {
-                    m_KingSound.Play();
+                    r_KingSound.Play();
                 }
 
-                if (m_GameManager.GameIsOver)
+                if (r_GameManager.GameIsOver)
                 {
-                    m_WinningSound.Play();
-                }
-            }
-        }
-
-        private CheckersCheckBox getCheckersCheckBoxByName(string i_CheckBoxName)
-        {
-            CheckersCheckBox foundCheckBox = null;
-
-            foreach (CheckersCheckBox currentCheckBox in m_CheckersCheckBoxList)
-            {
-                if (currentCheckBox.Name.Equals(i_CheckBoxName))
-                {
-                    foundCheckBox = currentCheckBox;
-                    break;
+                    r_WinningSound.Play();
                 }
             }
-
-            return foundCheckBox;
         }
 
         private void disableAllButChecked()
         {
-            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            foreach (CheckersSquare currentSquare in m_CheckersCheckBoxList)
             {
                 if (!currentSquare.Checked)
                 {
@@ -457,7 +439,7 @@ namespace WindowsUI
 
         private void clearSquare(Square i_SquareToClear)
         {
-            foreach (CheckersCheckBox currentSquare in m_CheckersCheckBoxList)
+            foreach (CheckersSquare currentSquare in m_CheckersCheckBoxList)
             {
                 if (currentSquare.Name.Equals(i_SquareToClear.getSquare()))
                 {

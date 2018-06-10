@@ -36,6 +36,7 @@ namespace B18_Ex02
             {
                 return m_PlayingBoard;
             }
+
             set
             {
                 m_PlayingBoard = value;
@@ -73,7 +74,6 @@ namespace B18_Ex02
                         }
                     }
                 }
-
                 else
                 {
                     foreach (PlayerMove playerMove in m_PossibleMoves.FirstPlayerPossibleMoves)
@@ -85,7 +85,6 @@ namespace B18_Ex02
                     }
                 }
             }
-
             else
             {
                 if (m_ThereAreMoreJumps)
@@ -114,7 +113,6 @@ namespace B18_Ex02
             return currentAllowedMoves;
         }
 
-
         public void startAnotherMatch()
         {
             m_GameIsOver = false;
@@ -135,7 +133,6 @@ namespace B18_Ex02
                 if (!m_ThereAreMoreJumps && !gameIsOver)
                 {
                     m_CurrentPlayer = m_SecondPlayer;
-
                 }
             }
             else
@@ -145,7 +142,6 @@ namespace B18_Ex02
                 if (!m_ThereAreMoreJumps)
                 {
                     m_CurrentPlayer = m_FirstPlayer;
-
                 }
             }
         }
@@ -168,7 +164,6 @@ namespace B18_Ex02
 
             if (!this.m_CurrentPlayer.IsComputer)
             {
-
                 while (!gameIsOver && (!isValidMove || (isValidMove && tryingToQuit)))
                 {
                     tryingToQuit = m_InputValidation.IsTryingToQuit(inputMove);
@@ -223,8 +218,6 @@ namespace B18_Ex02
             if (!gameIsOver)
             {
                 char currentUserCoinType = currentCoin.Type;
-                
-
                 m_PlayingBoard.MoveCoinInBoard(this.m_CurrentMove);
 
                 if (shouldBeKinged())
@@ -289,7 +282,6 @@ namespace B18_Ex02
             return gameIsOver;
         }
 
-
         private bool shouldBeKinged()
         {
             bool turnToKing = false;
@@ -319,8 +311,6 @@ namespace B18_Ex02
         private void endMatch()
         {
             calcTotalPoints();
-            bool startNewMatch;
-            string userInput;
 
             if (this.m_MatchInformation.IsWinnerFound())
             {
@@ -359,12 +349,14 @@ namespace B18_Ex02
                 return m_CurrentMove;
             }
         }
+
         public Player CurrentPlayer
         {
             get
             {
                 return m_CurrentPlayer;
             }
+
             set
             {
                 m_CurrentPlayer = value;
@@ -393,17 +385,20 @@ namespace B18_Ex02
             {
                 return m_FirstPlayer;
             }
+
             set
             {
                 m_FirstPlayer = value;
             }
         }
+
         public Player SecondPlayer
         {
             get
             {
                 return m_SecondPlayer;
             }
+
             set
             {
                 m_SecondPlayer = value;
@@ -416,6 +411,7 @@ namespace B18_Ex02
             {
                 return m_GameIsOver;
             }
+
             set
             {
                 m_GameIsOver = value;
