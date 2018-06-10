@@ -61,16 +61,6 @@ namespace WindowsUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Board1 {
-            get {
-                object obj = ResourceManager.GetObject("Board1", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream BoardHit {
@@ -96,15 +86,6 @@ namespace WindowsUI.Properties {
             get {
                 object obj = ResourceManager.GetObject("Chip_Red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream HittingBoard {
-            get {
-                return ResourceManager.GetStream("HittingBoard", resourceCulture);
             }
         }
         
@@ -144,15 +125,6 @@ namespace WindowsUI.Properties {
         internal static System.IO.UnmanagedMemoryStream KingSound {
             get {
                 return ResourceManager.GetStream("KingSound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream PieceTouchingBoard {
-            get {
-                return ResourceManager.GetStream("PieceTouchingBoard", resourceCulture);
             }
         }
         

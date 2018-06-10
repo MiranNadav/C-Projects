@@ -71,7 +71,6 @@ namespace WindowsUI
             this.radio6x6.TabStop = true;
             this.radio6x6.Text = "&6 x 6";
             this.radio6x6.UseVisualStyleBackColor = true;
-            this.radio6x6.CheckedChanged += new System.EventHandler(this.radio6x6_CheckedChanged);
             // 
             // radio10x10
             // 

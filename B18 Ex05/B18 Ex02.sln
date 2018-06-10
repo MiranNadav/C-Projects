@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B18 Ex02", "B18 Ex02\B18 Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsUI", "WindowsUI\WindowsUI.csproj", "{F95B5E85-A282-4C2B-B89D-30FE6109DFE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckersComponents", "CheckersButton\CheckersComponents.csproj", "{9D6EE6DF-4158-4BAB-9731-E2BEE7A88CF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckersComponents", "CheckersComponents\CheckersComponents.csproj", "{9D6EE6DF-4158-4BAB-9731-E2BEE7A88CF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

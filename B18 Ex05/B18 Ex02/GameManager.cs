@@ -114,60 +114,21 @@ namespace B18_Ex02
             return currentAllowedMoves;
         }
 
-        //public void initializeMatch()
-        //{
-
-
-        //    //string numOfPlayers;
-
-        //    //m_InputValidation = new InputValidation();
-
-        //    //this.m_FirstPlayer = new Player(m_InputValidation.getInputNameFromUser(), Constants.k_FirstCoinType);
-        //    //m_PlayingBoard = new Board(int.Parse(m_InputValidation.GetBoardSizeFromUser()));
-        //    //numOfPlayers = m_InputValidation.GetNumOfPlayersFromUser();
-
-        //    //if (int.Parse(numOfPlayers) == 2)
-        //    //{
-        //    //    m_SecondPlayer = new Player(m_InputValidation.getInputNameFromUser(), Constants.k_SecondCoinType);
-        //    //}
-        //    //else
-        //    //{
-        //    //    m_SecondPlayer = new Player();
-        //    //}
-
-        //    //m_CurrentPlayer = m_FirstPlayer;
-        //    //m_PlayingBoard.printBoard();
-        //    //m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
-        //    //m_MatchInformation = new MatchInformation(m_FirstPlayer, m_SecondPlayer, m_PlayingBoard);
-
-        //    //matchManager(m_PlayingBoard);
-
-        //    //Console.ReadLine();
-        //    //Console.WriteLine("Press enter to close terminal");
-
-        //}
 
         public void startAnotherMatch()
         {
             m_GameIsOver = false;
             int boardSize = m_PlayingBoard.BoardSize;
             m_PlayingBoard = new Board(boardSize);
-            //m_PlayingBoard.printBoard();
             m_CurrentPlayer = m_FirstPlayer;
             m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
             m_InputValidation = new InputValidation();
-            //matchManager(m_PlayingBoard);
         }
 
         public void matchManager(string i_Move)
         {
             bool gameIsOver = false;
-            //bool isFirstUserTurn = true;
-
-            //Console.WriteLine(m_CurrentPlayer.Name + "'s turn:");
-
-            //TODO: Add equals to Player
-            if (m_CurrentPlayer.CoinType == 'O') //(isFirstUserTurn)
+            if (m_CurrentPlayer.CoinType == 'O')
             {
                 m_CurrentPlayer = m_FirstPlayer;
                 gameIsOver = parseUserInput(m_FirstPlayer, m_SecondPlayer, i_Move);
@@ -193,7 +154,7 @@ namespace B18_Ex02
         {
             bool isValidMove = false;
             string inputMove;
-            bool currentMoveIsJump = false;
+            bool currentMoveIsJump = false;     
             bool gameIsOver = false;
             bool tryingToQuit = false;
             bool allowedToQuit = false;
@@ -246,7 +207,14 @@ namespace B18_Ex02
             }
             else
             {
-                this.m_CurrentMove = RandomMovementGenerator.getRandomMove(m_PossibleMoves.SecondPlayerPossibleMoves);
+                if (m_ThereAreMoreJumps)
+                {
+                    this.m_CurrentMove = RandomMovementGenerator.getRandomMove(m_PossibleMoves.getAllPossibleJumps(this.m_CurrentMove, 'X'));
+                }
+                else
+                {
+                    this.m_CurrentMove = RandomMovementGenerator.getRandomMove(m_PossibleMoves.SecondPlayerPossibleMoves);
+                }
             }
 
             Coin[,] boardArray = m_PlayingBoard.BoardArray;
@@ -275,7 +243,7 @@ namespace B18_Ex02
                 if (currentMoveIsJump)
                 {
                     m_PlayingBoard.EatCoin(this.m_CurrentMove);
-
+                    
                     m_PossibleMoves = new PossibleMoves(m_PlayingBoard);
                     allPossibleJumps = m_PossibleMoves.getAllPossibleJumps(this.m_CurrentMove, currentUserCoinType);
 
@@ -287,7 +255,10 @@ namespace B18_Ex02
                     {
                         m_ThereAreMoreJumps = false;
                     }
-
+                }
+                else
+                {
+                    m_ThereAreMoreJumps = false;
                 }
             }
 

@@ -102,7 +102,7 @@
       <Project>{0e26c57f-ceb7-4ab7-aeeb-273318354205}</Project>
       <Name>B18 Ex02</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CheckersButton\CheckersComponents.csproj">
+    <ProjectReference Include="..\CheckersComponents\CheckersComponents.csproj">
       <Project>{9d6ee6df-4158-4bab-9731-e2bee7a88cf5}</Project>
       <Name>CheckersComponents</Name>
     </ProjectReference>
@@ -112,6 +112,14 @@
     <Content Include="Graphics\Chip-Red-Blue.jpg" />
     <Content Include="Graphics\Chip-Red.jpg" />
     <Content Include="Graphics\Chip_Black_Blue.jpg" />
+    <None Include="Resources\BoardHit.wav" />
+    <None Include="Resources\IconKing.ico" />
+    <None Include="Resources\WinningSound1.wav" />
+    <None Include="Resources\KingSound1.wav" />
+    <None Include="Resources\HittingBoard1.wav" />
+    <None Include="Resources\WinningSound.wav" />
+    <None Include="Resources\KingSound.wav" />
+    <None Include="Resources\HittingBoard.wav" />
     <None Include="Resources\King-Red.png" />
     <None Include="Resources\King-Black.png" />
     <None Include="Resources\Chip-Red.png" />
